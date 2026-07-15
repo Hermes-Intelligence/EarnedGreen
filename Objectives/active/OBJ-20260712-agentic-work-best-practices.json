@@ -1,0 +1,311 @@
+{
+  "id": "OBJ-20260712-agentic-work-best-practices",
+  "title": "Production-grade source of truth for Codex and Claude agentic work",
+  "source": {
+    "artifact": "Objectives/active/OBJ-20260712-agentic-work-best-practices-source.md",
+    "captured_at": "2026-07-12T18:00:00+02:00"
+  },
+  "status": "active",
+  "pillars": [
+    {
+      "id": "P01",
+      "title": "Seamless universal adoption",
+      "requirements": [
+        {
+          "id": "REQ-BOOT-001",
+          "statement": "A fresh Codex or Claude session in any repository discovers the stable source of truth without repeated human guidance.",
+          "status": "partial",
+          "acceptance": ["Global bootstrap exists for both platforms", "A fresh-session probe proves which files loaded", "The bootstrap points only to a promoted stable release"],
+          "evidence": ["Global pointer files exist, but currently point at an unversioned working tree"],
+          "notes": "Must be completed by init/doctor and stable promotion semantics."
+        },
+        {
+          "id": "REQ-BOOT-002",
+          "statement": "An idempotent init command installs or merges pointers without destroying repository-specific instructions.",
+          "status": "verified",
+          "acceptance": ["Second run makes no diff", "Existing CLAUDE.md and AGENTS.md content is preserved", "Windows and WSL paths are supported"],
+          "evidence": ["Evals/test-windows-platform.ps1: spaces, UTF-8, CRLF and second-run hash idempotency", "tools/init.ps1: managed-block merge preserves existing repository guidance"]
+        },
+        {
+          "id": "REQ-BOOT-003",
+          "statement": "A doctor command diagnoses discovery, versions, dependencies, trust, permissions, hooks, path and OneDrive issues.",
+          "status": "verified",
+          "acceptance": ["Returns non-zero on a broken setup", "Never prints secrets", "Produces actionable remediation"],
+          "evidence": [
+            "tools/doctor.ps1 emits structured PASS/WARN/FAIL checks and exits 2 when a required file, manifest or target repository is broken.",
+            "Doctor output reports paths, versions and specific remediation context without reading or printing authentication payloads or secret values.",
+            "Evals/test-windows-platform.ps1 and tools/preflight.ps1 exercise doctor behavior under the supported Windows/OneDrive startup path."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "title": "Minimal context and Agentic Knowledge Router",
+      "requirements": [
+        {
+          "id": "REQ-ROUTE-001",
+          "statement": "Every task receives a deterministic task fingerprint using task type, lifecycle, artifacts, paths, domain and risk.",
+          "status": "verified",
+          "acceptance": ["Fingerprint is machine-readable", "Routing is reproducible", "Unknown and low-confidence states are explicit"],
+          "evidence": ["tools/route.ps1: machine-readable fingerprint, explicit risk and confidence", "Evals/run-evals.ps1: deterministic 12-case routing suite"]
+        },
+        {
+          "id": "REQ-ROUTE-002",
+          "statement": "Only the minimal Core and relevant knowledge modules are loaded rather than the full knowledge base.",
+          "status": "verified",
+          "acceptance": ["Context pack lists selected and rejected modules", "A context budget is enforced", "Module selection has an explanation"],
+          "evidence": ["Router/catalog/modules.json: maximum module budget", "tools/route.ps1: selected/rejected modules with reasons", "Evals/tools/new-run.ps1: only routed files copied into benchmark context"]
+        },
+        {
+          "id": "REQ-ROUTE-003",
+          "statement": "Security-critical modules favor recall while routine modules favor precision and unnecessary context is measured.",
+          "status": "in_progress",
+          "acceptance": ["Security required-module miss rate is zero in the routing suite", "False-positive module rate is reported"],
+          "evidence": [
+            "Evals/run-evals.ps1 passes all 12 required-module routing cases.",
+            "Evals/test-runtime-controls.ps1 includes a regression proving that plural credentials, secrets and tokens route to the high-risk security module.",
+            "Aggregate false-positive context cost is not yet reported, so the requirement remains in progress."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P03",
+      "title": "Correctness, generalization and change impact",
+      "requirements": [
+        {
+          "id": "REQ-GEN-001",
+          "statement": "Agents distinguish closed-world constants from open-world discovery and never treat an observed sample as the production universe.",
+          "status": "partial",
+          "acceptance": ["Decision is recorded", "Open-world paths handle unknown values", "Constants cite an authoritative source"],
+          "evidence": ["The current doctrine warns against hardcoding but has no mechanical gate"]
+        },
+        {
+          "id": "REQ-GEN-002",
+          "statement": "Parser, extraction, classification, mapping and regex work is tested on unseen, negative, malformed and adversarial inputs.",
+          "status": "pending",
+          "acceptance": ["Hidden unseen-entity case passes", "Property or metamorphic assertions exist where applicable", "Regex performance and ReDoS risk are checked"],
+          "evidence": []
+        },
+        {
+          "id": "REQ-IMPACT-001",
+          "statement": "Changes to functions, schemas, APIs and contracts trigger repository-wide downstream impact analysis.",
+          "status": "partial",
+          "acceptance": ["Definitions and call sites are enumerated", "Affected consumers and contracts are recorded", "Repo-wide build or equivalent check runs"],
+          "evidence": ["Current contracts mention symbol search but do not record machine-checkable evidence"]
+        },
+        {
+          "id": "REQ-CORR-001",
+          "statement": "Undefined variables, invalid imports, invented APIs and integration bugs are caught before completion.",
+          "status": "partial",
+          "acceptance": ["Typecheck or compile step is selected when available", "Runtime smoke test exercises the changed surface", "Invented APIs are verified against source or installed version"],
+          "evidence": ["Current Definition of Done is advisory only"]
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "title": "Objective integrity and work continuity",
+      "requirements": [
+        {
+          "id": "REQ-OBJ-001",
+          "statement": "Every user requirement is preserved with a stable ID and traced to plan, implementation, verification and evidence.",
+          "status": "in_progress",
+          "acceptance": ["Original request is immutable", "No requirement disappears during normalization", "Coverage checker rejects evidence-free completion"],
+          "evidence": ["This objective ledger created"]
+        },
+        {
+          "id": "REQ-OBJ-002",
+          "statement": "An objective cannot be marked complete while any requirement is pending, partial, in progress or blocked without an explicit accepted exception.",
+          "status": "verified",
+          "acceptance": ["objective-check exits non-zero", "N/A and rejected entries require a reason", "Coverage summary is generated"],
+          "evidence": ["tools/objective-check.ps1 rejects incomplete objectives with non-zero exit", "Final local audit on 2026-07-12 confirmed rejection while requirements remain open"]
+        },
+        {
+          "id": "REQ-SESSION-001",
+          "statement": "Long-running work survives context reset through concise structured state, evidence and an unambiguous next action.",
+          "status": "partial",
+          "acceptance": ["Fresh-session resume mock succeeds", "Raw transcripts are not the primary memory", "Workstream updates are proportional to task risk"],
+          "evidence": ["Current workstream convention exists but is prose-heavy and unconditional"]
+        },
+        {
+          "id": "REQ-LOOP-001",
+          "statement": "Every agentic loop has a verifiable end state, progress signal, budget, kill switch, escalation rule and safe checkpoint.",
+          "status": "partial",
+          "acceptance": ["Loop manifest is machine-readable", "No-progress and repeated-failure stops are tested", "Irreversible actions remain human-gated"],
+          "evidence": ["Platform contracts describe bounded loops but no shared controller exists"]
+        }
+      ]
+    },
+    {
+      "id": "P05",
+      "title": "Evaluation and measurable improvement",
+      "requirements": [
+        {
+          "id": "REQ-EVAL-001",
+          "statement": "Vanilla, minimal-Core, Router and Router-plus-enforcement environments are compared under controlled conditions.",
+          "status": "in_progress",
+          "acceptance": ["Same model, prompt, budget and clean fixture are used", "Multiple trials are supported", "Results include cost, time and final-state correctness"],
+          "evidence": [
+            "Evals/tools/new-benchmark-campaign.ps1 fixes a randomized 2-fixture x 2-provider x 2-arm x 5-trial design and stages spend at 4, 8, 24 and 40 cumulative runs.",
+            "Evals/tools/run-benchmark-stage.ps1 enforces per-stage approval, run/time/turn ceilings, failure/no-progress stops and Evals/local/STOP before provider execution.",
+            "Evals/reports/20260713-135148-subscription-campaign-smoke.json records a clean four-call Codex/Claude smoke with zero overlaps or invalid attempts; its one-trial ceiling is explicitly non-comparative.",
+            "Evals/reports/20260713-151556-calibration-probe-calibration.json records an explicitly model-pinned two-call Codex calibration that stopped at a shared 100 ceiling.",
+            "Evals/reports/20260713-181006-complex-ingestion-screen-complex-screen.json records six paired Codex outcomes with time, token, dimensional quality and final-state grading. Measurement integrity passed, but every pair tied at 95 and the fixture needs alignment review.",
+            "Evals/baselines/real-world-battery-protocol.json and Evals/reports/2026-07-13-real-world-battery-19-fixtures.json define and locally validate six distinct complex task families, 12 public-green negative controls and six 100-point references.",
+            "Evals/reports/20260713-201400-real-world-battery-screen-battery-sentinel.json records exactly six sequential Codex outcomes on three production-style task families with integrity PASS. Vanilla and Core+Router+enforcement tied 90/90, 90/90 and 100/100 with identical critical outcomes; the full arm used 25.2% more median wall time and 36.6% more median observed tokens. The sentinel is NO_ACTIONABLE_SIGNAL, three diversity families remain untested, and minimal-Core/Router-only arms remain pending, so this requirement stays in progress."
+          ]
+        },
+        {
+          "id": "REQ-EVAL-002",
+          "statement": "At least twelve mock cases cover generalization, regexes, change impact, undefined symbols, reward hacking, security, session resume and requirement omission.",
+          "status": "verified",
+          "acceptance": ["Cases validate without an agent", "Hidden graders are isolated", "An agent cannot read the hidden acceptance data"],
+          "evidence": [
+            "Evals/reports/2026-07-13-outcome-harness-12-fixtures.json: 12/12 structures complete; every flawed starter passes public tests and is rejected by its hidden grader; every reference solution passes public and hidden checks.",
+            "Evals/test-wsl-isolation.ps1 plus Evals/local/isolation-proof.json: the legacy WSL mount-namespace control exposes the public workspace while hiding the host repository and central hidden graders.",
+            "Dedicated AgenticBench WSL evidence: unprivileged user, private home, no sudo, disabled Windows interop, C: not mounted, root-owned runner and host-only hidden grading.",
+            "AgenticBench workspace negative control accepts the public fixture, rejects a credential-path symlink and cleans the remote workspace after validation.",
+            "Evals/reports/2026-07-13-real-world-battery-19-fixtures.json: 19/19 fixtures validate; six new complex families add 12 negative controls that pass public tests and fail hidden grading, while all six references score 100."
+          ]
+        },
+        {
+          "id": "REQ-EVAL-003",
+          "statement": "No rule, module, hook or harness complexity is promoted unless evals show benefit or a documented risk reduction.",
+          "status": "pending",
+          "acceptance": ["Candidate includes an impact hypothesis", "A/B result or safety proof is attached", "Regressions block promotion"],
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "P06",
+      "title": "Research, sources and staged promotion",
+      "requirements": [
+        {
+          "id": "REQ-RES-001",
+          "statement": "Research ends in a candidate package and never modifies stable rules, global pointers, commits or pushes directly.",
+          "status": "pending",
+          "acceptance": ["Candidate path is isolated", "Stable files remain byte-identical", "Promotion is a separate explicit command"],
+          "evidence": []
+        },
+        {
+          "id": "REQ-RES-002",
+          "statement": "A durable source registry preserves discovered sources, normalizes URLs and schedules rechecks without repeating discovery from scratch.",
+          "status": "verified",
+          "acceptance": ["Every source has type, tier, status and review dates", "New sources deduplicate by normalized URL", "Stale and retired sources are retained historically"],
+          "evidence": ["Research/sources/registry.json: 21 reviewed sources", "Research/sources/claude-v1-migration.json: 47/47 recovered URLs", "Research/engine/new-candidate.ps1: normalized merged 68-URL snapshot and scheduled rechecks"]
+        },
+        {
+          "id": "REQ-RES-003",
+          "statement": "The research radar covers official docs, changelogs, primary papers, benchmarks, postmortems, YouTube, podcasts and social profiles as tiered evidence lanes.",
+          "status": "pending",
+          "acceptance": ["Social and media inputs remain untrusted leads", "Technical claims prefer primary sources", "Each lane has explicit discovery and recheck rules"],
+          "evidence": []
+        },
+        {
+          "id": "REQ-RES-004",
+          "statement": "Every accepted claim is represented in a claim ledger with source evidence, applicability, confidence, verifier and expiry.",
+          "status": "pending",
+          "acceptance": ["Unsupported claims cannot enter candidate guidance", "Deep dives receive the same verification as topic research", "Coverage failure blocks synthesis"],
+          "evidence": []
+        },
+        {
+          "id": "REQ-RES-005",
+          "statement": "Model and product drift trigger re-evaluation of harness assumptions, rules and hooks.",
+          "status": "pending",
+          "acceptance": ["Model/platform version is recorded per eval", "Stale claims are flagged", "Harness ablation is scheduled after material releases"],
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "P07",
+      "title": "Human outputs and documentation",
+      "requirements": [
+        {
+          "id": "REQ-PDF-001",
+          "statement": "Every research run produces a dated Markdown report and visually verified PDF with clickable hyperlinks to all cited sources.",
+          "status": "in_progress",
+          "acceptance": ["PDF contains URI annotations", "Source appendix includes title and URL", "No clipped, orphaned or duplicate headings remain"],
+          "evidence": ["Renderer and first report exist; visual QA found duplicated and orphaned content"]
+        },
+        {
+          "id": "REQ-SETUP-001",
+          "statement": "Setup contains concise Markdown and PDF guides generated from the same stable source and verified for their promised page count.",
+          "status": "partial",
+          "acceptance": ["Quickstart is one page", "Claude and Codex guides do not drift from manifests", "Links remain clickable"],
+          "evidence": ["Current one-page quickstart renders as three pages"]
+        }
+      ]
+    },
+    {
+      "id": "P08",
+      "title": "Security, governance and platform realism",
+      "requirements": [
+        {
+          "id": "REQ-SEC-001",
+          "statement": "Prompt injection, secrets, egress, destructive actions and supply-chain behavior are controlled by layered, least-privilege enforcement.",
+          "status": "in_progress",
+          "acceptance": ["Untrusted research cannot become policy directly", "Hooks fail safely and are tested", "Sandbox and egress posture is visible"],
+          "evidence": [
+            "Research candidates remain non-authoritative and cannot directly modify Stable.",
+            "Evals/test-security-hooks.ps1 passes 8/8 fail-safe and bypass cases.",
+            "AgenticBench confines provider OAuth to a dedicated empty distro, removes Windows mounts and interop, rejects returned symlinks, special files and credential-shaped content, and grades hidden cases on the host.",
+            "Evals/tools/check-secret-hygiene.ps1 passed 306/306 candidate repository paths without exposing matched content.",
+            "Provider network egress remains enabled for official subscription endpoints; stronger destination allowlisting is not yet evidenced."
+          ]
+        },
+        {
+          "id": "REQ-GOV-001",
+          "statement": "Stable releases are versioned, reviewable, reversible and promoted separately from candidate research.",
+          "status": "pending",
+          "acceptance": ["Promotion manifest records approver and eval result", "Rollback changes one stable pointer", "Research cannot write stable paths"],
+          "evidence": []
+        },
+        {
+          "id": "REQ-WIN-001",
+          "statement": "Windows, PowerShell, WSL, OneDrive, CRLF, path length, file locking and missing Unix tools are tested explicitly.",
+          "status": "partial",
+          "acceptance": ["Doctor detects the platform", "Templates do not assume jq, bash, npx or python3", "OneDrive concurrency case exists"],
+          "evidence": ["Audit found jq, npx and python3 unavailable in the active Windows environment"]
+        },
+        {
+          "id": "REQ-COST-001",
+          "statement": "Agent count, context size, latency, tokens, cost and human review time are measured and complexity is ablated.",
+          "status": "pending",
+          "acceptance": ["Every eval run records cost fields", "Router overhead is reported", "Multi-agent use requires measured lift"],
+          "evidence": []
+        },
+        {
+          "id": "REQ-DOG-001",
+          "statement": "This repository follows and tests its own stable policies before those policies are applied elsewhere.",
+          "status": "pending",
+          "acceptance": ["Self-doctor is green", "Self-eval candidate is recorded", "No objective is declared done without objective-check"],
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "id": "P09",
+      "title": "Capability-based model routing",
+      "requirements": [
+        {
+          "id": "REQ-MODEL-001",
+          "statement": "Tasks select stable capability and effort profiles before resolving a current provider model; stable policy never embeds volatile model IDs.",
+          "status": "in_progress",
+          "acceptance": ["Profiles are provider-independent", "Provider catalogs expire and cite official sources", "Unknown availability never causes an invented model ID"],
+          "evidence": ["Models/profiles.json", "Models/providers.json", "tools/model-route.ps1"]
+        },
+        {
+          "id": "REQ-MODEL-002",
+          "statement": "Automatic model changes are task/session scoped, respect explicit user choices and risk floors, record the resolved model, and require A/B evidence before autonomous enablement.",
+          "status": "in_progress",
+          "acceptance": ["User defaults are never silently persisted", "High-risk work cannot be downgraded below its floor", "Quality, cost and latency are evaluated", "Fallback and actual resolved model are logged"],
+          "evidence": ["Models/README.md", "Models/providers.json"]
+        }
+      ]
+    }
+  ]
+}

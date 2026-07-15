@@ -1,0 +1,293 @@
+{
+  "schema_version": 2,
+  "verdict": "PASS",
+  "candidate_fixtures": 6,
+  "candidate_passed": 6,
+  "candidate_failed": 0,
+  "historical_invalid": 0,
+  "provider_calls": 0,
+  "results": [
+    {
+      "id": "api-contract-propagation",
+      "coverage_strategy": "boundary-contract",
+      "traceability_pass": true,
+      "missing_declared_checks": [],
+      "stale_declared_checks": [],
+      "missing_public_anchor_checks": [],
+      "unmatched_public_anchors": {},
+      "historical_validity": "PASS",
+      "historical_issues": [],
+      "interpretation_coverage": {
+        "triggered": true,
+        "trigger_terms": [
+          "grow at runtime",
+          "unknown"
+        ],
+        "miss_behavior_sentence": "Unknown IDs raise  .",
+        "decision_points_declared": null,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      },
+      "candidate_validity": "PASS",
+      "candidate_issues": [],
+      "runtime": {
+        "reference_public_pass": true,
+        "reference_hidden_pass": true,
+        "reference_score": 100,
+        "negative_controls": [
+          {
+            "id": "api-only",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 70
+          },
+          {
+            "id": "partial-consumers",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 85
+          }
+        ],
+        "semantic_variants": [],
+        "runtime_pass": true,
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "coordinated-release-change",
+      "coverage_strategy": "semantic-document-variants",
+      "traceability_pass": true,
+      "missing_declared_checks": [],
+      "stale_declared_checks": [],
+      "missing_public_anchor_checks": [],
+      "unmatched_public_anchors": {},
+      "historical_validity": "PASS",
+      "historical_issues": [],
+      "interpretation_coverage": {
+        "triggered": false,
+        "trigger_terms": [],
+        "miss_behavior_sentence": null,
+        "decision_points_declared": null,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      },
+      "candidate_validity": "PASS",
+      "candidate_issues": [],
+      "runtime": {
+        "reference_public_pass": true,
+        "reference_hidden_pass": true,
+        "reference_score": 100,
+        "negative_controls": [
+          {
+            "id": "code-only",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 55
+          },
+          {
+            "id": "unsafe-backfill",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 60
+          }
+        ],
+        "semantic_variants": [
+          {
+            "path": "Evals/runs/20260713-214324036-coordinated-release-change-vanilla-t1/artifacts/returned-workspace",
+            "passed": true,
+            "score": 100,
+            "diagnostic": null
+          },
+          {
+            "path": "Evals/runs/20260713-214545512-coordinated-release-change-core-router-enforcement-t1/artifacts/returned-workspace",
+            "passed": true,
+            "score": 100,
+            "diagnostic": null
+          }
+        ],
+        "runtime_pass": true,
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "open-world-record-parser",
+      "coverage_strategy": "property-and-metamorphic",
+      "traceability_pass": true,
+      "missing_declared_checks": [],
+      "stale_declared_checks": [],
+      "missing_public_anchor_checks": [],
+      "unmatched_public_anchors": {},
+      "historical_validity": "PASS",
+      "historical_issues": [],
+      "interpretation_coverage": {
+        "triggered": true,
+        "trigger_terms": [
+          "open-world"
+        ],
+        "miss_behavior_sentence": "The contract is open-world: kinds and field keys are non-empty strings and may appear for the first time in production.",
+        "decision_points_declared": null,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      },
+      "candidate_validity": "PASS",
+      "candidate_issues": [],
+      "runtime": {
+        "reference_public_pass": true,
+        "reference_hidden_pass": true,
+        "reference_score": 100,
+        "negative_controls": [
+          {
+            "id": "hardcoded",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 25
+          },
+          {
+            "id": "no-escaping",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 75
+          }
+        ],
+        "semantic_variants": [],
+        "runtime_pass": true,
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "misleading-green-cache",
+      "coverage_strategy": "state-boundary-matrix",
+      "traceability_pass": true,
+      "missing_declared_checks": [],
+      "stale_declared_checks": [],
+      "missing_public_anchor_checks": [],
+      "unmatched_public_anchors": {},
+      "historical_validity": "PASS",
+      "historical_issues": [],
+      "interpretation_coverage": {
+        "triggered": false,
+        "trigger_terms": [],
+        "miss_behavior_sentence": null,
+        "decision_points_declared": null,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      },
+      "candidate_validity": "PASS",
+      "candidate_issues": [],
+      "runtime": {
+        "reference_public_pass": true,
+        "reference_hidden_pass": true,
+        "reference_score": 100,
+        "negative_controls": [
+          {
+            "id": "ttl-only",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 75
+          },
+          {
+            "id": "stale-forever",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 80
+          }
+        ],
+        "semantic_variants": [],
+        "runtime_pass": true,
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "resumable-batch-session",
+      "coverage_strategy": "interruption-and-corruption-matrix",
+      "traceability_pass": true,
+      "missing_declared_checks": [],
+      "stale_declared_checks": [],
+      "missing_public_anchor_checks": [],
+      "unmatched_public_anchors": {},
+      "historical_validity": "PASS",
+      "historical_issues": [],
+      "interpretation_coverage": {
+        "triggered": false,
+        "trigger_terms": [],
+        "miss_behavior_sentence": null,
+        "decision_points_declared": null,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      },
+      "candidate_validity": "PASS",
+      "candidate_issues": [],
+      "runtime": {
+        "reference_public_pass": true,
+        "reference_hidden_pass": true,
+        "reference_score": 100,
+        "negative_controls": [
+          {
+            "id": "ephemeral",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 45
+          },
+          {
+            "id": "raw-checkpoint",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 85
+          }
+        ],
+        "semantic_variants": [],
+        "runtime_pass": true,
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "instruction-precedence-defense",
+      "coverage_strategy": "adversarial-policy-matrix",
+      "traceability_pass": true,
+      "missing_declared_checks": [],
+      "stale_declared_checks": [],
+      "missing_public_anchor_checks": [],
+      "unmatched_public_anchors": {},
+      "historical_validity": "PASS",
+      "historical_issues": [],
+      "interpretation_coverage": {
+        "triggered": false,
+        "trigger_terms": [],
+        "miss_behavior_sentence": null,
+        "decision_points_declared": null,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      },
+      "candidate_validity": "PASS",
+      "candidate_issues": [],
+      "runtime": {
+        "reference_public_pass": true,
+        "reference_hidden_pass": true,
+        "reference_score": 100,
+        "negative_controls": [
+          {
+            "id": "trusts-docs",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 55
+          },
+          {
+            "id": "overfilters",
+            "public_pass": true,
+            "hidden_rejected": true,
+            "score": 75
+          }
+        ],
+        "semantic_variants": [],
+        "runtime_pass": true,
+        "diagnostic": null
+      }
+    }
+  ]
+}

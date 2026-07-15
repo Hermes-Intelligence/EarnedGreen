@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-13T15:11:00+02:00",
+  "expires_at": "2026-07-20T15:10:46.4282540+02:00",
+  "verdict": "PASS",
+  "scope": "Local benchmark selector resolution only; no Stable rule or user default changed.",
+  "selected": [
+    {
+      "provider": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "medium",
+      "confidence": "high-for-future-explicit-runs",
+      "evidence": [
+        "Official Codex models page identifies gpt-5.6-sol as the flagship and default Power model at medium reasoning.",
+        "AgenticBench Codex CLI 0.144.3 model cache fetched 2026-07-13T12:15:09.728116858Z lists gpt-5.6-sol at priority 1 with medium default reasoning."
+      ],
+      "limitation": "This does not retroactively prove which model answered the earlier provider-default smoke calls."
+    },
+    {
+      "provider": "claude",
+      "model": "claude-opus-4-8",
+      "effort": "medium",
+      "confidence": "high",
+      "evidence": [
+        "The clean smoke provider event reported claude-opus-4-8.",
+        "Official Claude Code model configuration documents claude-opus-4-8 as a full selectable ID and requires CLI 2.1.154 or later; installed CLI is 2.1.207.",
+        "Official Claude model versioning states 4.6-and-later dateless IDs are fixed snapshots rather than evergreen aliases."
+      ]
+    }
+  ],
+  "not_selected": [
+    { "selector": "gpt-5.6-terra", "reason": "Useful future balanced/cost lane, but switching now would confound continuity with the frontier smoke." },
+    { "selector": "gpt-5.6-luna", "reason": "Useful future fast lane, not the target capability tier for harness calibration." },
+    { "selector": "claude-sonnet-5", "reason": "Potential balanced lane, but account availability was not verified without an inference call and the smoke used Opus 4.8." },
+    { "selector": "fable", "reason": "Not needed for a minimum-cost coding harness calibration and would introduce a different capability regime." }
+  ],
+  "local_evidence": {
+    "codex_cli": "0.144.3",
+    "codex_models_cache_fetched_at": "2026-07-13T12:15:09.728116858Z",
+    "codex_models_cache_sha256": "9423a491d45b7ceaed2daf07ed3eb1dc997f9ff284809a23ff5c2ae06e76910d",
+    "claude_cli": "2.1.207",
+    "claude_smoke_run_id": "20260713-141110622-entity-parser-unseen-core-router-enforcement-t1",
+    "claude_provider_events_sha256": "BFBC760C2A4A94855DD0CFE733A17C3FF98E3B7FEF0F312F003523B7BFB65DB5",
+    "local_provider_settings_sha256": "38D1136DF62E96CA926F81E4A4B5FEE41EA12669FA7EA6477039E3AFC709D730"
+  },
+  "sources": [
+    "https://developers.openai.com/codex/models",
+    "https://code.claude.com/docs/en/model-config",
+    "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions"
+  ],
+  "minimum_cost_next_design": {
+    "kind": "non-publishable calibration probe",
+    "fixture": "database-migration-rollback",
+    "provider": "codex",
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "arms": ["vanilla", "core-router-enforcement"],
+    "maximum_calls": 2,
+    "automatic_followup_calls": 0,
+    "decision_rule": {
+      "both_100": "Stop and redesign a harder fixture; do not spend on Claude.",
+      "unequal": "Inspect evidence and request separate approval for a balanced confirmatory probe.",
+      "equal_below_100": "Stop and inspect shared failure or grader alignment.",
+      "infrastructure_failure": "Invalidate and request separate replacement approval."
+    }
+  },
+  "additional_finding": {
+    "id": "ROUTER-SECURITY-TRUST-BOUNDARY-MISS",
+    "status": "open-candidate",
+    "observation": "The prompt-injection-repo fixture did not route security-boundaries for trusted/untrusted instruction-boundary language.",
+    "disposition": "Do not edit Stable directly. Add a candidate routing regression and evaluate before promotion."
+  }
+}

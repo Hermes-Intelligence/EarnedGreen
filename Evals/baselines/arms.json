@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "arms": [
+    { "id": "vanilla", "context": "Provider defaults and fixture repository instructions only", "router": false, "enforcement": false },
+    { "id": "core", "context": "Fixture instructions plus Core/runtime.md", "router": false, "enforcement": false },
+    { "id": "core-router", "context": "Core plus deterministic Context Pack", "router": true, "enforcement": false },
+    { "id": "core-router-enforcement", "context": "Core plus Context Pack plus case-specific tested gates", "router": true, "enforcement": true }
+  ],
+  "controls": {
+    "same_model_version": true,
+    "same_reasoning_effort": true,
+    "same_task_prompt": true,
+    "same_clean_fixture": true,
+    "same_time_and_cost_budget": true,
+    "hidden_graders_unavailable_to_agent": true,
+    "minimum_trials_per_case": 5
+  },
+  "metrics": ["final_state_score", "generalization_score", "regressions", "requirements_omitted", "security_critical_misses", "unnecessary_changes", "tokens", "cost", "wall_time", "human_review_time", "false_done_claim"]
+}

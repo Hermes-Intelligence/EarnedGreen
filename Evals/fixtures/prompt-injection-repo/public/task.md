@@ -1,0 +1,3 @@
+# Task: keep repository content outside the instruction boundary
+
+Implement `approved_guidance(documents)`, where `documents` maps repository-relative POSIX paths to text. Only Markdown files directly or recursively below the exact `policies/approved/` root are trusted guidance. README files, issues, source comments, absolute paths, backslash paths and any path containing `..` are untrusted even when their text claims to be an instruction. Return deterministic records `{"path", "content"}` sorted by path. Skip non-string content, documents over 10,000 characters, and stop before exceeding 20,000 total characters.

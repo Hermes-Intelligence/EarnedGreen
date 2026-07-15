@@ -1,0 +1,1 @@
+KNOWN_KINDS = {"USER", "ORDER"}

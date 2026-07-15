@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "purpose": "Promotion evidence: the stable release-gate infrastructure suite run on the CURRENT repo (candidate package present) that must remain green post-promotion. passed/failed are the check counts in the promote-candidate numeric contract.",
+  "source_tool": "tools/release-gate.ps1 -Mode infrastructure",
+  "run_at": "2026-07-15T16:26:20.2807065+02:00",
+  "passed": 15,
+  "failed": 0,
+  "gate_passed": true,
+  "checks": [
+    {
+      "id": "json-parse",
+      "passed": true,
+      "summary": "472 files, 0 errors"
+    },
+    {
+      "id": "powershell-parse",
+      "passed": true,
+      "summary": "63 files, 0 errors"
+    },
+    {
+      "id": "knowledge-routing",
+      "passed": true,
+      "summary": "12/12"
+    },
+    {
+      "id": "model-routing",
+      "passed": true,
+      "summary": "10/10"
+    },
+    {
+      "id": "runtime-controls",
+      "passed": true,
+      "summary": "5/5"
+    },
+    {
+      "id": "fixture-discrimination",
+      "passed": true,
+      "summary": "19/19"
+    },
+    {
+      "id": "run-lifecycle",
+      "passed": true,
+      "summary": "3/3"
+    },
+    {
+      "id": "real-world-battery-lifecycle",
+      "passed": true,
+      "summary": "9/9"
+    },
+    {
+      "id": "benchmark-safety",
+      "passed": true,
+      "summary": "13/13"
+    },
+    {
+      "id": "security-hooks",
+      "passed": true,
+      "summary": "25/25"
+    },
+    {
+      "id": "windows-platform",
+      "passed": true,
+      "summary": "5/5"
+    },
+    {
+      "id": "wsl-isolation",
+      "passed": true,
+      "summary": "True/"
+    },
+    {
+      "id": "secret-hygiene",
+      "passed": true,
+      "summary": "1228/1228"
+    },
+    {
+      "id": "platform-portability",
+      "passed": true,
+      "summary": "41/41"
+    },
+    {
+      "id": "doctor",
+      "passed": true,
+      "summary": "failures=0, warnings=3"
+    }
+  ],
+  "raw_report": "evidence/stable-release-gate-infrastructure-raw.json"
+}

@@ -1,0 +1,112 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-13T16:02:57.7123283+02:00",
+    "mode":  "full",
+    "passed":  false,
+    "checks_passed":  16,
+    "checks_failed":  1,
+    "checks":  [
+                   {
+                       "id":  "json-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "192 files, 0 errors"
+                   },
+                   {
+                       "id":  "powershell-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "52 files, 0 errors"
+                   },
+                   {
+                       "id":  "knowledge-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "12/12"
+                   },
+                   {
+                       "id":  "model-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "10/10"
+                   },
+                   {
+                       "id":  "runtime-controls",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "5/5"
+                   },
+                   {
+                       "id":  "fixture-discrimination",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "12/12"
+                   },
+                   {
+                       "id":  "run-lifecycle",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "3/3"
+                   },
+                   {
+                       "id":  "benchmark-safety",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "5/5"
+                   },
+                   {
+                       "id":  "security-hooks",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "8/8"
+                   },
+                   {
+                       "id":  "windows-platform",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "5/5"
+                   },
+                   {
+                       "id":  "wsl-isolation",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "True/"
+                   },
+                   {
+                       "id":  "secret-hygiene",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "390/390"
+                   },
+                   {
+                       "id":  "doctor",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "failures=0, warnings=3"
+                   },
+                   {
+                       "id":  "objective-complete",
+                       "passed":  false,
+                       "exit_code":  1,
+                       "summary":  "24 open requirements"
+                   },
+                   {
+                       "id":  "twelve-executable-fixtures",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "12/12 fixtures"
+                   },
+                   {
+                       "id":  "verified-provider-config",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "Codex and Claude authenticated in AgenticBench"
+                   },
+                   {
+                       "id":  "secure-isolation-proof",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "dedicated WSL with Windows drive unmounted"
+                   }
+               ]
+}

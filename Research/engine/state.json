@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "generation": "v1-reference-only",
+  "reference_only_note": "REFERENCE-ONLY. This file and the v1 self-resuming loop are NOT executed by the authoritative candidate-only v2 flow (Research/engine/research-brief.md). A candidate-only run writes ONLY inside Research/candidate-packages/<run-id>/ and never updates this file. Retained for historical topic-coverage reference.",
+  "last_run_date": "2026-07-12",
+  "runs_completed": 1,
+  "topics": {
+    "agentic-loops": {
+      "status": "reviewed-v1",
+      "confidence": "high",
+      "last_reviewed": "2026-07-12"
+    },
+    "hooks": {
+      "status": "reviewed-v1",
+      "confidence": "high",
+      "last_reviewed": "2026-07-12"
+    },
+    "session-management": {
+      "status": "reviewed-v1",
+      "confidence": "high",
+      "last_reviewed": "2026-07-12"
+    },
+    "repo-setup": {
+      "status": "reviewed-v1",
+      "confidence": "high",
+      "last_reviewed": "2026-07-12"
+    },
+    "verification-self-checking": {
+      "status": "reviewed-v1",
+      "confidence": "high",
+      "last_reviewed": "2026-07-12"
+    },
+    "subagent-orchestration": {
+      "status": "reviewed-v1",
+      "confidence": "high",
+      "last_reviewed": "2026-07-12"
+    },
+    "workstream-logging": {
+      "status": "reviewed-v1",
+      "confidence": "high",
+      "last_reviewed": "2026-07-12"
+    },
+    "permissions-security": {
+      "status": "reviewed-v1",
+      "confidence": "high",
+      "last_reviewed": "2026-07-12"
+    }
+  },
+  "backlog": [],
+  "open_questions": [
+    "[agentic-loops] Codex has no documented per-run turn/budget-cap flag analogous to Claude's maxTurns/maxBudgetUsd - it relies on sandbox/approval limits, account usage limits, reasoning_effort, and human review. Is there a supported way to hard-cap a single codex exec run's token/dollar spend from the CLI, or must that be enforced externally (CI timeout / spend circuit breaker)?",
+    "[agentic-loops] Exact Claude Code OTEL metric names (e.g. claude_code.token.usage vs claude_code.cost.usage) and their full attribute sets live in the /monitoring-usage reference, which I did not fetch line-by-line; names should be pinned against that reference before hard-coding dashboards, and trace span names are explicitly beta.",
+    "[agentic-loops] Claude Routines and Codex Automations are both explicitly in research preview / recently shipped (Routines ~2026-04-14, /fire API behind the experimental-cc-routine-2026-04-01 beta header). API shapes, rate limits, and daily-run caps may change; the specific per-account/hourly GitHub-webhook caps are shown in-product rather than documented as fixed numbers.",
+    "[agentic-loops] The 'unrolling the Codex agent loop' framing (each turn ends with an assistant message signaling a termination state) came from search summaries because the OpenAI post returned 403 to direct fetch; the mechanic is corroborated by Codex loop docs but the primary source wasn't read in full.",
+    "[agentic-loops] No official, quantified guidance was found on optimal self-paced /loop intervals or on when a fresh-model condition evaluator (/goal) meaningfully outperforms the working model deciding it's done - this remains heuristic and workflow-dependent.",
+    "[agentic-loops] Cross-platform cost figures (runaway-bill anecdotes, 55-75% savings) come from news/vendor sources, not audited benchmarks, so they justify the direction of the practice but shouldn't be cited as precise expectations.",
+    "[hooks] Exact delivery mechanism and full field schema of Codex CLI's `notify` program payload (argv positional argument vs stdin; whether the `type` value is 'agent-turn-complete' and what other fields like turn-id / input-messages / last-assistant-message are included) \u2014 the official advanced-config page was unreachable at fetch time, so this should be verified against the installed Codex version.",
+    "[hooks] Whether/when Codex CLI will actually execute `type:\"prompt\"` and `type:\"agent\"` hook handlers (currently parsed but skipped), which would enable judgment-based gates portable from Claude Code.",
+    "[hooks] Precise per-version availability of Claude Code's newer/rarer events (Setup, TeammateIdle, TaskCreated/TaskCompleted, WorktreeCreate/Remove, Elicitation/ElicitationResult) \u2014 the docs enumerate ~32 events but real availability depends on the installed CLI build and some are clearly recent additions.",
+    "[hooks] Concrete production benchmarks on the token/latency cost of prompt- and agent-based Stop gates versus deterministic command gates, to guide when the added LLM verification is worth it.",
+    "[hooks] Cross-platform robustness details for Windows hook execution (Git Bash vs command_windows/commandWindows overrides) under real CI, where trust prompts and shell differences most often break hooks.",
+    "[session-management] The exact context-utilization threshold that triggers automatic compaction in Claude Code is not officially published and varies by model and window size (e.g., 200K vs 1M / Sonnet 5); practitioner figures (~70-80%) are unverified against Anthropic docs.",
+    "[session-management] Whether the Codex model_context_window auto-compaction regression (issue #16068) is fixed in the current release, and which exact versions are affected, is unconfirmed from official changelog sources.",
+    "[session-management] No official published cadence exists for proactive /compact vs /clear (e.g., 'every 30-45 min'); such numbers come from third-party blogs, not Anthropic/OpenAI, and are workload-dependent.",
+    "[session-management] How teams using BOTH Claude Code (auto memory in ~/.claude/projects/.../memory/) and API agents (client-side /memories memory tool) should reconcile or share a single source of truth is not documented; auto memory is machine-local with no official cross-machine sync.",
+    "[session-management] Codex's compaction quality/fidelity and its equivalent of Claude's 'what survives compaction' guarantees (e.g., whether AGENTS.md is re-injected post-compaction) are not clearly documented; Codex's exact compaction internals are less transparent than Claude Code's.",
+    "[session-management] The widely cited '7-hour autonomous run' figure for Codex is associated with model marketing and practitioner write-ups rather than a precise, reproducible spec in official docs.",
+    "[repo-setup] Claude Code still does not natively read AGENTS.md as of mid-2026 (requires an @AGENTS.md import or symlink); the team has signaled openness to standardizing once features stabilize, so native support could land and change the recommended unification pattern \u2014 re-verify against code.claude.com/docs/en/memory.",
+    "[repo-setup] Exact model identifiers move fast (Codex docs reference gpt-5.4/gpt-5.5; Claude Code references Opus/Sonnet/Haiku tiers). Treat any pinned model id in config as version-sensitive and confirm the current default before committing it.",
+    "[repo-setup] The 'frontier models reliably follow ~150-200 instructions' budget is a practitioner heuristic (HumanLayer), not an official Anthropic figure; the underlying context-degradation claim IS official, but the specific number should be treated as illustrative.",
+    "[repo-setup] Permission-enforcement is code, not model behavior, and bugs occur: a deny-rule bypass was patched in Claude Code v2.1.90 after a March 2026 source leak (reported by third parties). This argues for keeping the CLI current and not relying on permissions as the sole security layer \u2014 but the specific CVE details come from practitioner reporting rather than an official advisory and should be independently verified.",
+    "[repo-setup] Codex profile storage detail is ambiguous in the docs extraction (per-file $CODEX_HOME/<name>.config.toml vs [profiles.<name>] tables within config.toml); the reliable, confirmed facts are that profiles are selected with --profile <name> and a default is set via the profile key. Verify the exact on-disk form against the current Codex config reference before scripting it.",
+    "[repo-setup] MCP tool-search is on by default in Claude Code and changes how servers are surfaced to the model (ToolSearch/WaitForMcpServers); its defaults and interaction with large MCP tool sets are evolving and worth re-checking for teams wiring many servers.",
+    "[repo-setup] Sandboxing maturity differs by OS (e.g., Codex unified_exec noted as disabled on Windows; Claude Code WebDAV caveat on Windows). Cross-platform teams should validate sandbox behavior on each developer OS rather than assume parity.",
+    "[verification-self-checking] Whether the Codex apply_patch file-writer reliably triggers PreToolUse/PostToolUse hooks on all current versions. Official docs now say hooks fire for apply_patch, but an earlier gap (GitHub issue openai/codex #16732) let the agent edit test files via the patch tool despite Bash-only hook guards \u2014 so test-edit-blocking hooks may not be airtight depending on version.",
+    "[verification-self-checking] How universally the verify skill's 'don't run tests, don't typecheck at the done-gate' stance applies. It is a deliberate, somewhat contrarian Claude Code framing (tests validate infra, not surface behavior); the right split between in-loop tests and runtime-observation gating is still being worked out and is likely task-dependent.",
+    "[verification-self-checking] Best production combination for detecting reward hacking. EvilGenie found held-out tests added little over a strong LLM judge, while other work still recommends held-out/randomized tests plus fail-closed verifiers \u2014 the layered recipe (LLM-judge + test-edit detection + held-out tests + human review) is not yet standardized and each layer has known blind spots.",
+    "[verification-self-checking] There is no portable, cross-tool Definition-of-Done schema. Teams hand-roll it across AGENTS.md, CLAUDE.md, /goal conditions, and ad hoc Prompt.md/PLAN.md files; nothing standardizes the 'Done when' contract or makes it verifiable in the same way across Claude Code and Codex.",
+    "[verification-self-checking] Reward-hacking exploit rates rise with model capability (RL post-training increased exploit rates in several 2025-2026 benchmarks), so environment isolation and verifier hardening are an ongoing arms race rather than a solved problem \u2014 durable mitigations for autonomous production runs are still unsettled.",
+    "[subagent-orchestration] Codex enablement specifics: the official docs describe enabling multi-agents via the `/experimental` toggle and an `[agents]` config section, but the exact `[features] multi_agent = true` key and the default `job_max_runtime_seconds` value (practitioner posts say 1800s; one official extract listed the key without a number) should be confirmed against the current official Codex config.toml reference before relying on them.",
+    "[subagent-orchestration] Asynchronous / steerable orchestration: Anthropic's shipped system is synchronous (the lead blocks on each worker cohort) and they flagged async subagent creation + mid-run steering as future work in 2025 \u2014 the current production state of async orchestration (and whether Claude Code agent teams' live-messaging effectively delivers it) is unclear.",
+    "[subagent-orchestration] Transfer of effort-scaling numbers: Anthropic's fan-out heuristics (1 agent for fact-finding, 2-4 for comparisons, 10+ for complex research; 3-10 tool calls each) are calibrated to open-web research. How well these widths transfer to coding, data, or ops domains is not independently validated.",
+    "[subagent-orchestration] Production-readiness timeline: Claude Code agent teams remain experimental with material limitations (no in-process teammate resume, lagging task status, no nested teams). When/whether they graduate to stable, and whether the primitive converges with Codex's model, is unknown.",
+    "[subagent-orchestration] Reconciling the coding guidance: Anthropic and Cognition both argue against parallel subagents for implementation, yet both vendors ship coding-oriented subagent/team tooling. The empirical boundary \u2014 how disjoint file ownership must be, and at what task size parallel coding actually beats a single linear agent \u2014 lacks a published, quantified answer.",
+    "[workstream-logging] No cross-tool standard for the work-journal itself has emerged as of mid-2026 \u2014 teams roll their own (claude-progress.txt vs NOTES.md vs feature_list.json vs tasks/todo.md), so portability between Claude Code and Codex depends on self-imposed conventions rather than a shared spec.",
+    "[workstream-logging] Codex's official docs are thin on session storage internals and lifecycle commands; the ~/.codex/sessions/YYYY/MM/DD/rollout-*.jsonl path, `codex resume --last/--all`, and `/archive` -> ~/.codex/archived_sessions/ (v0.136.0, ~June 2026) are corroborated across practitioner sources but should be re-verified against the installed CLI version.",
+    "[workstream-logging] Claude Code does not persist a plan-mode plan as a first-class resumable artifact across sessions (only manual save via Ctrl+G); whether a durable, indexed plan/journal store becomes a native feature is unresolved.",
+    "[workstream-logging] The exact current inventory of OpenTelemetry metric and event names \u2014 and their minimum Claude Code versions \u2014 is version-sensitive and was partly read via doc summarization; confirm names against the live monitoring page before building alerts.",
+    "[workstream-logging] Per-event hook JSON input field names (e.g., tool_output, num_tool_calls, last_assistant_message) evolve between releases; scripts that parse them or the raw session JSONL can break on any version bump, so no stable machine-parseable logging contract exists yet beyond /export and the documented script interfaces.",
+    "[permissions-security] Prompt injection is not solved: Anthropic cites ~1% residual attack success and a measured ~17% false-negative rate for auto mode on real overeager actions, so no configuration makes an autonomous agent safe on untrusted input without OS-level containment.",
+    "[permissions-security] Network isolation is only as strong as TLS inspection: Claude's default sandbox proxy allows/denies by client-supplied hostname without terminating TLS, leaving domain-fronting bypasses; `network.tlsTerminate` is experimental (v2.1.199+) and stronger TLS-aware isolation is explicitly 'an active area of development'. Codex enforces network egress via seccomp syscall blocking rather than a domain-inspecting proxy.",
+    "[permissions-security] Version drift: Claude Code's auto-mode default block-list and many settings keys are feature-gated to exact 2.1.x versions (expanded through v2.1.205 as of July 2026), and Codex config keys differ across builds \u2014 always verify against the installed version rather than assuming.",
+    "[permissions-security] Native Windows has no built-in sandbox for either tool (Claude requires WSL2/bubblewrap; Codex Linux path needs WSL2), so Windows-host fleets need containers or WSL2 to get OS-level enforcement.",
+    "[permissions-security] Codex's exact per-domain network-egress allowlist mechanism (proxy/requirements.toml-style config) is less clearly documented in official sources than Claude's `sandbox.network.allowedDomains`, and appears version-dependent \u2014 confirm the current keys before relying on domain allowlisting in Codex.",
+    "[permissions-security] MCP servers are an unaudited trust boundary: neither vendor security-audits third-party MCP servers, so supply-chain risk in the MCP ecosystem is largely pushed onto the operator's allowlisting and vetting discipline."
+  ],
+  "notes": "Coverage map for the self-resuming research engine. Each weekly run reads this, targets the lowest-confidence and oldest-reviewed topics plus anything in backlog/open_questions, then updates it. v1 research initiated 2026-07-12."
+}

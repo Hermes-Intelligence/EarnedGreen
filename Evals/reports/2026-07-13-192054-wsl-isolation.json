@@ -1,0 +1,9 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-13T19:20:54.2644108+02:00",
+    "passed":  true,
+    "exit_code":  0,
+    "evidence":  "workspace_visible=yesnwindows_mount_hidden=yesnhidden_relative_unavailable=yesn\r\n",
+    "type":  "wsl-user-mount-namespace",
+    "windows_mount_hidden":  true
+}

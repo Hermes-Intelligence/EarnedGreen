@@ -1,0 +1,22 @@
+# Candidate project template. Run doctor and hook tests before enabling.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = false
+
+[shell_environment_policy]
+inherit = "core"
+exclude = ["*_TOKEN", "*_KEY", "*_SECRET"]
+
+# Protect only immutable/hidden eval artifacts. Ordinary project tests remain editable.
+[[hooks.PreToolUse]]
+matcher = "^apply_patch$"
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = "powershell -NoProfile -ExecutionPolicy Bypass -File .codex/hooks/protect-eval-files.ps1"
+timeout = 30
+statusMessage = "Protecting immutable evaluation artifacts"
+
+# No generic Stop hook is installed here. init must detect the repository stack and
+# generate a tested, bounded completion gate using the repository's real commands.

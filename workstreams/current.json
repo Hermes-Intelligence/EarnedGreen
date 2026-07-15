@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "objective_id": "OBJ-20260712-agentic-work-best-practices",
+  "task": "Complete the benchmark-ready repository: finish twelve fixtures, validate the full gate, run a real research candidate, then execute the controlled provider-backed pilot.",
+  "status": "in_progress",
+  "updated_at": "2026-07-14T13:05:00+02:00",
+  "requirements": [
+    {
+      "id": "REQ-BOOT-001",
+      "status": "partial",
+      "note": "Persistent setup, global pointers and startup preflight exist; fresh-session behavior still needs outcome evidence."
+    },
+    {
+      "id": "REQ-EVAL-002",
+      "status": "verified",
+      "note": "Nineteen fixtures pass the four-phase outcome harness. Six new real-world families add 12 public-green negative controls scoring 25-85 and six 100-point references; dedicated AgenticBench WSL keeps hidden graders outside the provider-visible workspace."
+    },
+    {
+      "id": "REQ-EVAL-001",
+      "status": "in_progress",
+      "note": "Campaign 20260714-132536-adaptive-mode-ablation completed exactly six calls with execution integrity PASS but comparative verdict INVALID. All five arms scored a masked 9 after the same ambiguous registry-miss interpretation; the fixture now fails closed for SPEC_AMBIGUITY and GRADER_FAILURE. Capability activation remains 14/14 PASS."
+    },
+    {
+      "id": "REQ-SEC-001",
+      "status": "in_progress",
+      "note": "Dedicated WSL, no Windows mount or interop, unprivileged user, secret hygiene and returned-workspace validation are evidenced; provider endpoint egress remains enabled."
+    },
+    {
+      "id": "REQ-MODEL-001",
+      "status": "in_progress",
+      "note": "Capability routing exists and a weekly local provider snapshot now explicitly selects gpt-5.6-sol/medium and claude-opus-4-8/medium from current official and retained provider evidence. Outcome-based routing quality remains unverified."
+    },
+    {
+      "id": "REQ-MODEL-002",
+      "status": "in_progress",
+      "note": "Automatic model switching remains disabled until controlled trials provide quality, cost and latency evidence."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-STARTUP-001",
+      "decision": "A lightweight core preflight runs at the start of substantive sessions; setup is not rerun after a normal reboot."
+    },
+    {
+      "id": "DEC-STARTUP-002",
+      "decision": "Benchmark preflight additionally performs live provider-login and WSL-isolation checks immediately before paid runs."
+    },
+    {
+      "id": "DEC-EVAL-001",
+      "decision": "No 40-run pilot starts until twelve fixtures pass negative-control and reference-solution validation and the benchmark-ready gate is green."
+    },
+    {
+      "id": "DEC-EVAL-002",
+      "decision": "After the universal smoke ceiling, spend is limited to an independently approved, non-publishable two-call Codex calibration on database-migration-rollback. Equal 100 scores stop all further spend and require a harder fixture."
+    },
+    {
+      "id": "DEC-EVAL-003",
+      "decision": "The completed complex screen stops at NO_ACTIONABLE_SIGNAL. Historical runs and their pinned grader remain immutable; confirmation and cross-provider calls are prohibited until a versioned, clarified multi-task fixture suite passes deterministic validation and receives fresh explicit approval."
+    },
+    {
+      "id": "DEC-EVAL-004",
+      "decision": "The independent real-world battery replaces single-fixture escalation. Provider screening is staged at separately approved six-call sentinel and six-call diversity stages; replication is a fresh campaign limited to signaled tasks, and no Claude or automatic promotion follows screening."
+    }
+  ],
+  "evidence": [
+    {
+      "verdict": "PASS",
+      "observation": "setup.ps1 -LoginCodex",
+      "result": "core_ready=true, benchmark_ready=true, failures=0; Codex CLI logged in (0.144.1 at time of this observation; the distro was later upgraded to the currently pinned Codex CLI 0.144.3, matching README.md)."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "WSL isolation self-test",
+      "result": "11/11 infrastructure checks passed; public workspace visible while host paths and central hidden graders are unavailable."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/reports/2026-07-13-outcome-harness-12-fixtures.json",
+      "result": "12/12 fixtures passed: structure complete, public starter pass, hidden starter rejection, public reference pass and hidden reference pass."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/reports/2026-07-13-release-gate-infrastructure.json",
+      "result": "11/11 infrastructure checks passed after fixture expansion; 112 JSON files and 36 PowerShell files parsed without errors."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "AgenticBench isolation and workspace negative control",
+      "result": "Dedicated Debian WSL2 imported without personal data; agenticbench is the only unprivileged group, home mode is 700, sudo and Windows interop are absent, C: is not mounted, host repo is unavailable, and a credential-path symlink is rejected."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/tools/new-benchmark-campaign.ps1 lifecycle dry run",
+      "result": "Exactly 40 randomized runs split 4 smoke, 4 directional, 16 confidence and 16 pilot; an unapproved stage started zero provider calls."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "2026-07-13 infrastructure release gate",
+      "result": "12/12 checks passed, including 133 JSON files, 45 PowerShell files, 12/12 routing, 12/12 fixture discrimination, 8/8 security hooks and 317/317 secret-hygiene paths."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Setup/benchmarking PDF verification",
+      "result": "Handbook rendered as 7 visually inspected pages with 10 unique clickable URI targets; quick reference rendered as one visually inspected page."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Router plural security regression",
+      "result": "Runtime controls pass 5/5 and credentials, secrets and tokens now select high-risk security guidance."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "AgenticBench doctor and benchmark preflight after OAuth",
+      "result": "12/12 AgenticBench checks passed; Codex and Claude authentication are valid, the provider snapshot is current through 2026-07-20, and benchmark preflight reports zero failures and zero warnings."
+    },
+    {
+      "verdict": "INVALIDATED",
+      "observation": "20260713-110010-subscription-campaign diagnostic smoke",
+      "result": "Five provider invocations were retained. Two campaign-linked attempts and one orphan attempt were invalidated after overlapping on the fixed WSL workspace; the campaign is closed-diagnostic-invalid and excluded from comparative scoring."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Post-incident benchmark harness regression suite",
+      "result": "Lifecycle passed 3/3, fixture discrimination 12/12, benchmark safety 4/4, direct campaign/provider lock checks passed with zero provider calls, and the full infrastructure gate passed 13/13 across 146 JSON and 50 PowerShell files."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Setup/benchmarking PDF v0.3 verification",
+      "result": "Handbook rendered as five visually inspected pages with 10 unique clickable URI targets; quick reference rendered as one visually inspected page."
+    },
+    {
+      "verdict": "READY",
+      "observation": "20260713-135148-subscription-campaign",
+      "result": "Fresh schema-v2 campaign contains 40 randomized scheduled runs, five pinned harness hashes and exactly four pending smoke calls. Benchmark preflight passes with zero failures and zero warnings; no call has been approved or started."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "20260713-135148-subscription-campaign smoke",
+      "result": "Exactly four approved provider calls completed sequentially: Claude full, Codex vanilla, Codex full and Claude vanilla. All passed public tests, hidden grading at 100/100 and applicable enforcement; zero overlaps, zero invalid attempts, no fifth call and no post-smoke stage execution. Comparative conclusion remains INCONCLUSIVE."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/reports/20260713-135148-subscription-campaign-smoke.{json,md,pdf}",
+      "result": "Structured evidence and a one-page visually verified human report preserve actual model telemetry, durations, protected-file review, blockers and the still-unapproved next gate."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Post-smoke infrastructure release gate",
+      "result": "13/13 checks passed after report automation and telemetry normalization, including 158 JSON files, 51 PowerShell files, fixture discrimination 12/12, benchmark safety 4/4 and secret hygiene 352/352."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/reports/2026-07-13-explicit-provider-resolution.{json,md,pdf}",
+      "result": "Future selectors are explicit without rewriting historical telemetry: Codex gpt-5.6-sol/medium and Claude claude-opus-4-8/medium. The two-page PDF passed visual inspection, EOF/text checks and contains three clickable official-source links. Stable rules and user defaults were not changed; provider calls remained at zero."
+    },
+    {
+      "verdict": "READY",
+      "observation": "20260713-151556-calibration-probe",
+      "result": "Exactly two randomized pending Codex calls on database-migration-rollback compare vanilla with core-router-enforcement. The campaign is non-publishable, uses explicit gpt-5.6-sol/medium, has no approval or run IDs, and permits no automatic follow-up."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Calibration generator regression and full gate",
+      "result": "A PowerShell case-insensitive parameter/local-variable collision was caught before spend and fixed. Benchmark safety passes 5/5, including exact two-call manifest generation. The post-calibration full gate passes 16/17 checks: 192 JSON files and 52 PowerShell files parse, secret hygiene passes 390/390, and the only red check is 24 objective requirements still requiring evidence."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "20260713-151556-calibration-probe completed",
+      "result": "Exactly two explicitly approved Codex calls ran sequentially on gpt-5.6-sol/medium: vanilla and core-router-enforcement. Both changed only src/migration.py, passed public tests, hidden grading at 100/100 and enforcement, with zero protected-file changes, overlaps, invalid attempts, replacements, Claude calls or follow-up stages. Provider wall times were 77.5 and 138.7 seconds."
+    },
+    {
+      "verdict": "CEILING",
+      "observation": "Evals/reports/20260713-151556-calibration-probe-calibration.{json,md,pdf}",
+      "result": "Both arms produced semantically equivalent idempotent, reversible migrations preserving rows and UNIQUE constraints. The fixture cannot discriminate the environments. The predeclared rule is STOP: spend zero Claude calls and redesign a harder fixture. The one-page PDF passed visual, EOF and required-text QA."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/reports/2026-07-13-outcome-harness-13-fixtures.json",
+      "result": "13/13 fixtures pass starter-public, starter-hidden rejection, reference-public and reference-hidden validation. The composite fixture scores starter/hardcoded 46, secure-but-closed 70, generic-stateless 85 and reference 100, with every variant passing the same public happy path."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Complex benchmark telemetry and lifecycle regressions",
+      "result": "Benchmark safety passes 8/8. Provider-event replay records Codex and Claude token/cache/output usage, provider-reported USD when present and an explicit subscription-cost-unavailable marker otherwise. An 85/100 solution is retained as outcome_valid=true and quality_passed=false instead of being misclassified as infrastructure failure."
+    },
+    {
+      "verdict": "READY",
+      "observation": "20260713-181006-complex-ingestion-screen",
+      "result": "Exactly six unapproved Codex runs pair vanilla and core-router-enforcement across three host-side grader seeds on gpt-5.6-sol/medium. The campaign is non-publishable, has zero run IDs and approvals, permits zero automatic replacements and cannot start a confirmation or Claude stage."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Setup/benchmarking/complex-benchmark-design.{md,pdf}",
+      "result": "The two-page human protocol documents six quality dimensions, the 46/70/85/100 discrimination ladder, time/token/cost semantics and the 6 -> 10 -> 16 separately approved experiment ladder. PDF visual, EOF and required-text QA passed."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Post-composite full release gate",
+      "result": "16/17 checks pass: 221 JSON and 54 PowerShell files parse, fixture discrimination is 13/13, lifecycle 3/3, benchmark safety 8/8 and secret hygiene 430/430. The only red check is the intentionally open objective with 24 requirements awaiting evidence. The earlier zero-call campaign 20260713-175734-complex-ingestion-screen was closed as superseded after harness hash drift; the fresh campaign has current hashes."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "20260713-181006-complex-ingestion-screen execution integrity",
+      "result": "Exactly six explicitly approved Codex calls completed sequentially on gpt-5.6-sol/medium: three vanilla and three core-router-enforcement pairs. Audit found six unique run IDs and provider executions, zero orphans, overlaps, invalid outcomes, Claude calls, replacements or protected-file changes."
+    },
+    {
+      "verdict": "NO_ACTIONABLE_SIGNAL",
+      "observation": "Evals/reports/20260713-181006-complex-ingestion-screen-complex-screen.{json,md,pdf}",
+      "result": "Both arms scored 95/100 in all three pairs with identical dimension scores and no critical-floor difference. At tied quality, the full arm used 253.1 versus 216.5 median wall seconds (+16.9%) and 262,510 versus 215,413 median observed tokens (+21.9%); subscription monetary cost was not reported. All six runs failed only replay-duplicate due an under-specified skipped-record exact-field expectation, so fixture alignment is REVIEW_REQUIRED. The two-page PDF passed visual, EOF and required-text QA."
+    },
+    {
+      "verdict": "EXPECTED_OPEN",
+      "observation": "Evals/reports/2026-07-13-192200-release-gate-full.json",
+      "result": "The post-screen full gate passes 16/17 checks: 243 JSON and 55 PowerShell files parse, routing/model/runtime/security/Windows/WSL checks pass, fixture discrimination is 13/13, benchmark safety is 8/8 and secret hygiene is 454/454. The sole red check is objective-complete with 24 evidence-backed requirements still open."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/reports/2026-07-13-real-world-battery-19-fixtures.json",
+      "result": "The complete harness passes 19/19. Six independent complex fixtures add 12 negative controls that all pass public tests and are rejected by hidden graders; their score ladders end at 75-85 while all six references score 100."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/test-real-world-battery.ps1",
+      "result": "Lifecycle regression passes 9/9: 12 unique task-arm cells staged 6 + 6, six families and two arms, zero-call creation, zero replacements, 13 pinned hashes, fail-closed early diversity approval and approval that starts no provider process."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Setup/benchmarking/real-world-battery.{md,pdf}",
+      "result": "The three-page human guide documents the six families, local discrimination ladders, 6 + 6 cost protocol, decision rules, commands and approval checklist. All pages passed visual review; EOF and required-text extraction checks passed."
+    },
+    {
+      "verdict": "READY",
+      "observation": "20260713-201400-real-world-battery-screen",
+      "result": "The unapproved campaign contains 12 unique Codex cells across six fixtures and two arms, staged six sentinel plus six diversity calls on explicit gpt-5.6-sol/medium. It has zero approvals, zero run IDs, zero replacements and 13 current harness hashes."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/reports/2026-07-13-201856-release-gate-infrastructure.json",
+      "result": "The final infrastructure gate passes 14/14: 19/19 fixture discrimination, 9/9 real-world battery lifecycle, 8/8 benchmark safety, 537/537 secret hygiene and zero parse failures."
+    },
+    {
+      "verdict": "EXPECTED_OPEN",
+      "observation": "Evals/reports/2026-07-13-202008-release-gate-full.json",
+      "result": "The final full gate passes 17/18 across 273 JSON and 57 PowerShell files, 19/19 fixtures, 9/9 battery lifecycle and 547/547 secret-hygiene paths. The sole red check is objective-complete with 24 open requirements."
+    },
+    {
+      "verdict": "NO_ACTIONABLE_SIGNAL",
+      "observation": "Evals/reports/20260713-201400-real-world-battery-screen-battery-sentinel.{json,md,pdf}",
+      "result": "Exactly six approved Codex calls completed sequentially with six unique run IDs, zero orphans, overlaps, invalid outcomes, protected-file changes or later-stage calls. Vanilla and full tied on all three families (90, 90, 100); full used 148.1 versus 118.3 median seconds (+25.2%) and 189,758 versus 138,906 median tokens (+36.6%). The two-page PDF passed visual QA."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Evals/reports/2026-07-13-215716-release-gate-infrastructure.json",
+      "result": "The post-sentinel infrastructure gate passes 14/14 across 284 JSON files, 58 PowerShell files, 19/19 fixtures, 9/9 battery lifecycle checks, 8/8 benchmark safety checks and 561/561 secret-hygiene paths."
+    },
+    {
+      "verdict": "EXPECTED_OPEN",
+      "observation": "Evals/reports/2026-07-13-215821-release-gate-full.json",
+      "result": "The post-sentinel full gate passes 17/18 across 294 JSON and 58 PowerShell files. The only red check remains objective-complete with 24 explicitly open requirements."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/evidence/candidate-eval-summary.json",
+      "result": "Ten of ten zero-provider Candidate gates pass. Fifteen unit tests pass; the behavioral Capability Activation Gate reports 14/14 active capabilities; Stable is unchanged and provider calls are zero."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/evidence/mode-boundary-fixture-validity.json",
+      "result": "The adaptive-contract-evolution fixture has complete public-anchor traceability, public-green controls scoring 50 and 78, and a public/hidden 100-point reference. Ordered separation passes without provider calls."
+    },
+    {
+      "verdict": "PASS",
+      "observation": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/evidence/package-integrity.json",
+      "result": "Candidate integrity passes with 39 hash-locked promotion files, a visually inspected three-page report, 12 unique clickable source links and zero provider calls. Promotion remains awaiting-outcome-eval."
+    }
+  ],
+  "blockers": [
+    "Both the smoke and migration calibration hit a 100/100 ceiling, so comparative lift remains unmeasured.",
+    "The completed complex screen found no actionable quality signal and exposed a shared public-contract/hidden-grader alignment concern; it cannot unlock confirmation or cross-provider spend.",
+    "The completed real-world battery sentinel found no quality lift on its first three families; the three diversity families remain untested and require a separate spend decision.",
+    "The full release gate deliberately remains red while 24 objective requirements lack sufficient evidence.",
+    "The prompt-injection-repo screening task failed to select security-boundaries; this Router change must enter Candidate and evals, never be silently patched into Stable.",
+    "The adaptive-agent-modes-v2 Candidate passes every zero-provider gate but has no valid comparative provider outcome; it stays candidate-only (awaiting-outcome-eval) and must not be promoted to Stable without the human-approved promotion workflow.",
+    "Models/providers.json catalog expires 2026-07-19; a provider-verified refresh (candidate-only) is due before/after expiry — do not fabricate model IDs.",
+    "Automatic model switching must remain disabled until A/B evidence exists."
+  ],
+  "next_action": "Keep provider spend disabled. Version and repair adaptive-contract-evolution: explicitly define registry-miss behavior, isolate every grader check, add a reject-on-miss semantic control and strengthen ambiguity/open-world gates. Run zero-provider validity only; replication, Claude calls, Stable promotion and automatic model switching remain unauthorized.",
+  "changed_paths": [
+    "tools/preflight.ps1",
+    "tools/agentic.ps1",
+    "Codex/BOOTSTRAP.md",
+    "Claude/BOOTSTRAP.md",
+    "README.md",
+    "workstreams/current.json",
+    "workstreams/2026-07-12-staged-architecture-transformation.md",
+    "workstreams/INDEX.md",
+    "Evals/fixtures/catalog.json",
+    "Evals/fixtures/api-compatibility/",
+    "Evals/fixtures/prompt-injection-repo/",
+    "Evals/fixtures/database-migration-rollback/",
+    "Evals/fixtures/session-cold-resume/",
+    "Evals/fixtures/frontend-real-flow/",
+    "Evals/fixtures/weekly-research-candidate/",
+    "Evals/validate-outcome-harness.ps1",
+    "Evals/reports/2026-07-13-outcome-harness-12-fixtures.json",
+    "Evals/reports/2026-07-13-release-gate-infrastructure.json",
+    "Setup/benchmark.ps1",
+    "Setup/bootstrap/provision-agenticbench.sh",
+    "Setup/bootstrap/install-agenticbench-tools.sh",
+    "Setup/bootstrap/doctor-agenticbench.ps1",
+    "Setup/bootstrap/sync-agenticbench-runtime.ps1",
+    "Setup/bootstrap/agenticbench-reset-workspace.sh",
+    "Setup/bootstrap/agenticbench-run-provider.sh",
+    "Setup/bootstrap/agenticbench-validate-workspace.sh",
+    "Evals/adapters/providers/invoke-agenticbench.ps1",
+    "Evals/tools/refresh-local-provider-settings.ps1",
+    "Evals/tools/new-benchmark-campaign.ps1",
+    "Evals/tools/approve-benchmark-stage.ps1",
+    "Evals/tools/run-benchmark-stage.ps1",
+    "Evals/tools/invalidate-overlapping-benchmark-runs.ps1",
+    "Evals/tools/quarantine-orphan-benchmark-run.ps1",
+    "Evals/tools/close-diagnostic-benchmark-campaign.ps1",
+    "Evals/tools/recover-interrupted-benchmark-run.ps1",
+    "Evals/test-benchmark-safety.ps1",
+    "Evals/tools/summarize-benchmark-campaign.ps1",
+    "Evals/tools/new-benchmark-calibration.ps1",
+    "Evals/experiments/20260713-151556-calibration-probe/campaign.json",
+    "Evals/reports/2026-07-13-explicit-provider-resolution.json",
+    "Evals/reports/2026-07-13-explicit-provider-resolution.md",
+    "Evals/reports/2026-07-13-explicit-provider-resolution.pdf",
+    "Evals/reports/20260713-151556-calibration-probe-calibration.json",
+    "Evals/reports/20260713-151556-calibration-probe-calibration.md",
+    "Evals/reports/20260713-151556-calibration-probe-calibration.pdf",
+    "Evals/fixtures/production-ingestion-evolution/",
+    "Evals/fixtures/api-contract-propagation/",
+    "Evals/fixtures/open-world-record-parser/",
+    "Evals/fixtures/misleading-green-cache/",
+    "Evals/fixtures/resumable-batch-session/",
+    "Evals/fixtures/coordinated-release-change/",
+    "Evals/fixtures/instruction-precedence-defense/",
+    "Evals/baselines/production-ingestion-protocol.json",
+    "Evals/reports/2026-07-13-production-ingestion-discrimination.json",
+    "Evals/reports/2026-07-13-outcome-harness-13-fixtures.json",
+    "Evals/tools/read-provider-telemetry.ps1",
+    "Evals/tools/new-complex-benchmark-screen.ps1",
+    "Evals/tools/new-real-world-battery-screen.ps1",
+    "Evals/test-real-world-battery.ps1",
+    "Evals/baselines/real-world-battery-protocol.json",
+    "Evals/reports/2026-07-13-real-world-battery-19-fixtures.json",
+    "Evals/reports/2026-07-13-201856-release-gate-infrastructure.json",
+    "Evals/reports/2026-07-13-202008-release-gate-full.json",
+    "Evals/experiments/20260713-201400-real-world-battery-screen/campaign.json",
+    "Evals/tools/summarize-real-world-battery.ps1",
+    "Evals/reports/20260713-201400-real-world-battery-screen-battery-sentinel.json",
+    "Evals/reports/20260713-201400-real-world-battery-screen-battery-sentinel.md",
+    "Evals/reports/20260713-201400-real-world-battery-screen-battery-sentinel.pdf",
+    "Evals/reports/2026-07-13-215716-release-gate-infrastructure.json",
+    "Evals/reports/2026-07-13-215821-release-gate-full.json",
+    "Evals/tools/summarize-complex-screen.ps1",
+    "Evals/experiments/20260713-175734-complex-ingestion-screen/campaign.json",
+    "Evals/experiments/20260713-181006-complex-ingestion-screen/campaign.json",
+    "Evals/reports/20260713-181006-complex-ingestion-screen-complex-screen.json",
+    "Evals/reports/20260713-181006-complex-ingestion-screen-complex-screen.md",
+    "Evals/reports/20260713-181006-complex-ingestion-screen-complex-screen.pdf",
+    "Evals/reports/2026-07-13-192055-release-gate-infrastructure.json",
+    "Evals/reports/2026-07-13-192200-release-gate-full.json",
+    "Setup/benchmarking/complex-benchmark-design.md",
+    "Setup/benchmarking/complex-benchmark-design.pdf",
+    "Setup/benchmarking/real-world-battery.md",
+    "Setup/benchmarking/real-world-battery.pdf",
+    "Evals/reports/20260713-135148-subscription-campaign-smoke.json",
+    "Evals/reports/20260713-135148-subscription-campaign-smoke.md",
+    "Evals/reports/20260713-135148-subscription-campaign-smoke.pdf",
+    "tools/release-gate.ps1",
+    "Evals/tools/check-secret-hygiene.ps1",
+    "Setup/benchmarking/benchmarking-handbook.md",
+    "Setup/benchmarking/benchmarking-handbook.pdf",
+    "Setup/benchmarking/build-pdfs.py",
+    "Setup/benchmarking/build-result-pdf.py",
+    "Setup/benchmarking/quick-reference.md",
+    "Setup/benchmarking/quick-reference.pdf",
+    "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/"
+  ]
+}

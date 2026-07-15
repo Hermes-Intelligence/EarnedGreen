@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Task Objective Ledger",
+  "type":"object",
+  "required":["schema_version","task_sha256","requirements","ambiguities"],
+  "properties":{
+    "schema_version":{"const":2},
+    "task_sha256":{"type":"string","pattern":"^[A-F0-9]{64}$"},
+    "requirements":{"type":"array","items":{"type":"object","required":["id","statement","source_line","status","evidence_required"],"properties":{"id":{"type":"string"},"statement":{"type":"string"},"source_line":{"type":"integer","minimum":1},"status":{"enum":["pending","verified","not_applicable","blocked"]},"evidence_required":{"type":"array","items":{"type":"string"}},"artifact_hints":{"type":"array","items":{"type":"string"}}}}},
+    "ambiguities":{"type":"array","items":{"type":"object","required":["id","requirement_id","description","material","status"],"properties":{"status":{"enum":["unresolved","resolved","not_material"]}}}}
+  }
+}

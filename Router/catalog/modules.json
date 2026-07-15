@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "context_budget": {
+    "max_modules": 6,
+    "target_characters": 18000,
+    "hard_limit_characters": 28000
+  },
+  "modules": [
+    {
+      "id": "verification-evidence",
+      "title": "Verification and recorded evidence",
+      "path": "Core/knowledge-modules/verification-evidence.md",
+      "always": true,
+      "priority": 100,
+      "risk": "all",
+      "keywords": [],
+      "path_patterns": []
+    },
+    {
+      "id": "generalization-assurance",
+      "title": "Open-world and parser generalization",
+      "path": "Core/policies/generalization-assurance.md",
+      "always": false,
+      "priority": 90,
+      "risk": "medium",
+      "keywords": ["parse", "parser", "extract", "entity", "entities", "discover", "discovery", "classify", "mapping", "regex", "pattern", "provider", "integration", "supported types", "allowlist"],
+      "path_patterns": ["*parser*", "*extract*", "*regex*", "*classifier*", "*mapping*"]
+    },
+    {
+      "id": "change-impact",
+      "title": "Downstream change-impact analysis",
+      "path": "Core/policies/change-impact.md",
+      "always": false,
+      "priority": 85,
+      "risk": "medium",
+      "keywords": ["signature", "schema", "contract", "public api", "rename", "refactor", "migration", "consumer", "downstream", "breaking change", "serialization"],
+      "path_patterns": ["*api*", "*schema*", "*contract*", "*migration*", "*types*"]
+    },
+    {
+      "id": "security-boundaries",
+      "title": "Security and trust boundaries",
+      "path": "Core/knowledge-modules/security-boundaries.md",
+      "always": false,
+      "priority": 100,
+      "risk": "critical",
+      "keywords": ["auth", "authentication", "authorization", "payment", "stripe", "secret", "credential", "api token", "access token", "auth token", "webhook", "upload", "user input", "mcp", "network", "deploy", "prompt injection"],
+      "path_patterns": ["*auth*", "*payment*", "*security*", "*.env*", "*deploy*", "*webhook*"]
+    },
+    {
+      "id": "loop-control",
+      "title": "Bounded autonomous loops",
+      "path": "Core/knowledge-modules/loop-control.md",
+      "always": false,
+      "priority": 80,
+      "risk": "high",
+      "keywords": ["loop", "autonomous", "unattended", "monitor", "poll", "schedule", "weekly", "long-running", "goal"],
+      "path_patterns": ["*automation*", "*workflow*", "*scheduler*"]
+    },
+    {
+      "id": "session-handoff",
+      "title": "Session state and resumable handoff",
+      "path": "Core/knowledge-modules/session-handoff.md",
+      "always": false,
+      "priority": 70,
+      "risk": "medium",
+      "keywords": ["resume", "session", "handoff", "workstream", "compact", "memory", "long-running"],
+      "path_patterns": ["*workstream*", "*progress*", "*handoff*"]
+    },
+    {
+      "id": "database-migration",
+      "title": "Database migration safety",
+      "path": "Core/knowledge-modules/database-migration.md",
+      "always": false,
+      "priority": 90,
+      "risk": "high",
+      "keywords": ["database", "migration", "schema", "sql", "backfill", "column", "record index", "add index", "rollback"],
+      "path_patterns": ["*migration*", "*.sql", "*alembic*", "*prisma*", "*schema*"]
+    },
+    {
+      "id": "frontend-runtime",
+      "title": "Frontend runtime and visual QA",
+      "path": "Core/knowledge-modules/frontend-runtime.md",
+      "always": false,
+      "priority": 60,
+      "risk": "medium",
+      "keywords": ["frontend", "react", "component", "layout", "css", "responsive", "accessibility", "browser", "visual", "ui", "ux"],
+      "path_patterns": ["*.tsx", "*.jsx", "*.css", "*components*", "*frontend*"]
+    },
+    {
+      "id": "research-candidate",
+      "title": "Research candidate and source governance",
+      "path": "Core/knowledge-modules/research-candidate.md",
+      "always": false,
+      "priority": 95,
+      "risk": "high",
+      "keywords": ["research", "paper", "youtube", "podcast", "social", "best practice", "changelog", "candidate", "promote"],
+      "path_patterns": ["Research/*", "*sources*", "*candidate*"]
+    }
+  ]
+}

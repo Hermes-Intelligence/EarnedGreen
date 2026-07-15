@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "purpose": "Second hidden reference authored from the public task text only, used by the fixture admission gate to detect spec ambiguity before spend.",
+  "authoring_protocol": "Written from task.md alone, choosing the alternative defensible interpretation at every identified decision point, then run against the hidden grader.",
+  "pre_reconciliation_result": {
+    "interpretations": {
+      "registry-miss": "record unknown_entity_type and reject with ValueError",
+      "handler-error": "let the handler exception propagate to the caller",
+      "handler-result-type": "return the handler result verbatim without type-checking",
+      "type-lookup-trimming": "strip the type once and use the trimmed value for lookup and the envelope",
+      "rejection-telemetry": "count malformed_event for handler errors as well",
+      "output-aliasing": "protect only the caller's input; the returned attributes may alias handler output",
+      "exporter-scope": "leave exporter/serializer on the legacy parse_record path",
+      "snapshot-scope": "leave snapshot/digest_helper on the legacy parse_record path",
+      "repeat-dedup": "count unknown_entity_type on every unresolved sighting; do not deduplicate re-ingestion"
+    },
+    "grader_score": 43,
+    "failed_dimensions": ["open-world-unicode", "malformed-telemetry", "degraded-path", "exact-type-match", "exporter-propagation", "snapshot-propagation", "repeat-dedup"],
+    "conclusion": "A defensible cold reading of the task text failed the grader, so those decisions were genuine ambiguities. task.md v4 pins each one explicitly (see fixture-contract.json decision_points); this alt was brought to the pinned semantics at zero provider cost."
+  },
+  "reconciliation": "task.md v4 pins every decision point; the alt was updated to the pinned semantics but keeps an independent structure.",
+  "interpretation_differences_after_pinning": "None by design: both references implement the pinned semantics. Remaining differences are structural only.",
+  "structural_differences": [
+    "validation via an ordered rule table instead of inline conditionals",
+    "type resolution, handler-error containment and unresolved dedup factored into _resolve / _note_unresolved helpers",
+    "unresolved dedup ledger is a dict of sighting counts rather than a set of seen identities",
+    "str.format-based consumers, serializer, exporter, digest_helper and snapshot instead of f-strings",
+    "differently worded README documenting the same extension path, degraded fallback, re-run dedup and both indirect consumers"
+  ]
+}

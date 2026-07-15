@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "verdict": "PASS",
+  "fixture": "open-world-record-parser",
+  "provider_calls": 0,
+  "arms": [
+    {
+      "arm": "vanilla",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": null
+    },
+    {
+      "arm": "mode-1-lean",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": ".agentic/enforcement.json"
+    },
+    {
+      "arm": "mode-2-routed",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": ".agentic/enforcement.json"
+    },
+    {
+      "arm": "mode-3-assured",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": ".agentic/enforcement.json"
+    },
+    {
+      "arm": "full",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": ".agentic/enforcement.json"
+    }
+  ],
+  "planned_paid_provider_calls_after_approval": 6,
+  "full_verifier_counted_separately": true
+}

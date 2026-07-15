@@ -1,0 +1,32 @@
+{
+  "statusChanges": [
+    {
+      "symbol": "DRV",
+      "statusChange": "HALTED",
+      "effectiveTime": 1782799200000,
+      "publishedTime": 1782795600000,
+      "id": "THE-44107"
+    },
+    {
+      "symbol": "FSTL",
+      "statusChange": "RESUMED",
+      "effectiveTime": 1782802800000,
+      "publishedTime": 1782799200000,
+      "id": "THE-44108"
+    },
+    {
+      "symbol": "GRNW",
+      "statusChange": "HALTED",
+      "effectiveTime": 1782810000000,
+      "publishedTime": 1782806400000,
+      "id": "THE-44109"
+    },
+    {
+      "symbol": "HXM",
+      "statusChange": "HALTED",
+      "effectiveTime": 1782813600000,
+      "publishedTime": 1782810000000,
+      "id": "THE-44110"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "verdict": "PASS",
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "minimal-core",
+      "pass": true
+    },
+    {
+      "id": "compact-requirement-ledger",
+      "pass": true
+    },
+    {
+      "id": "impact-map",
+      "pass": true
+    },
+    {
+      "id": "adversarial-verification",
+      "pass": true
+    },
+    {
+      "id": "durable-checkpoints",
+      "pass": true
+    },
+    {
+      "id": "session-handoff-state",
+      "pass": true
+    },
+    {
+      "id": "context-usage-telemetry",
+      "pass": true
+    }
+  ]
+}

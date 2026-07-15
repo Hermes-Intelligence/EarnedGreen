@@ -1,0 +1,94 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-12T20:41:19.7996916+02:00",
+    "mode":  "full",
+    "passed":  false,
+    "checks_passed":  10,
+    "checks_failed":  4,
+    "checks":  [
+                   {
+                       "id":  "json-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "68 files, 0 errors"
+                   },
+                   {
+                       "id":  "powershell-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "31 files, 0 errors"
+                   },
+                   {
+                       "id":  "knowledge-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "12/12"
+                   },
+                   {
+                       "id":  "model-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "10/10"
+                   },
+                   {
+                       "id":  "runtime-controls",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "4/4"
+                   },
+                   {
+                       "id":  "fixture-discrimination",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "2/2"
+                   },
+                   {
+                       "id":  "run-lifecycle",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "2/2"
+                   },
+                   {
+                       "id":  "security-hooks",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "8/8"
+                   },
+                   {
+                       "id":  "windows-platform",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "5/5"
+                   },
+                   {
+                       "id":  "doctor",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "failures=0, warnings=3"
+                   },
+                   {
+                       "id":  "objective-complete",
+                       "passed":  false,
+                       "exit_code":  1,
+                       "summary":  "26 open requirements"
+                   },
+                   {
+                       "id":  "twelve-executable-fixtures",
+                       "passed":  false,
+                       "exit_code":  1,
+                       "summary":  "2/12 fixtures"
+                   },
+                   {
+                       "id":  "verified-provider-config",
+                       "passed":  false,
+                       "exit_code":  1,
+                       "summary":  "Evals/local/provider-settings.json missing"
+                   },
+                   {
+                       "id":  "secure-isolation-proof",
+                       "passed":  false,
+                       "exit_code":  1,
+                       "summary":  "verified container/VM proof missing"
+                   }
+               ]
+}

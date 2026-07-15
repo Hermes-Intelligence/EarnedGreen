@@ -1,0 +1,66 @@
+{
+  "schema_version": 3,
+  "verdict": "PASS",
+  "fixture": "adaptive-contract-evolution-v2",
+  "provider_calls": 0,
+  "fixture_admission": {
+    "admitted": true,
+    "record_path": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\evidence\\fixture-admission-adaptive-contract-evolution-v2.json",
+    "reason": null,
+    "generated_at": "2026-07-15T14:28:18.384708+00:00",
+    "paid_history": {
+      "runs_scanned": 47,
+      "matching_runs": [
+        {
+          "run_id": "20260714-164755236-adaptive-contract-evolution-v2-vanilla-t1",
+          "case_id": "adaptive-contract-evolution-v2",
+          "arm": "vanilla",
+          "outcome_valid": true,
+          "score": 100,
+          "distinct_dimensions": 9
+        }
+      ],
+      "valid_paid_runs": 1
+    },
+    "gate": "fixture-admission"
+  },
+  "arms": [
+    {
+      "arm": "vanilla",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": null
+    },
+    {
+      "arm": "mode-1-lean",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": ".agentic/enforcement.json"
+    },
+    {
+      "arm": "mode-2-routed",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": ".agentic/enforcement.json"
+    },
+    {
+      "arm": "mode-3-assured",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": ".agentic/enforcement.json"
+    },
+    {
+      "arm": "full",
+      "prepared": true,
+      "hidden_paths": [],
+      "provider_calls": 0,
+      "completion_gate": ".agentic/enforcement.json"
+    }
+  ],
+  "planned_paid_provider_calls_after_approval": 6,
+  "full_verifier_counted_separately": true
+}

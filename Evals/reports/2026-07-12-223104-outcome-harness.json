@@ -1,0 +1,23 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-12T22:31:04.3532138+02:00",
+    "cases":  2,
+    "passed":  2,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "entity-parser-unseen",
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "hidden_accepts_reference":  true,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "objective-omission",
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "hidden_accepts_reference":  true,
+                        "passed":  true
+                    }
+                ]
+}

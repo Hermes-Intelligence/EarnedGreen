@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "verdict": "PASS",
+  "required_artifacts": 10,
+  "claims": 6,
+  "rejected_claims": 5,
+  "promotion_files": 48,
+  "pdf_pages": 3,
+  "pdf_unique_links": 12,
+  "provider_calls": 0,
+  "failures": []
+}

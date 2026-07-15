@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "purpose": "Second hidden reference authored from task.md plus the PUBLIC code alone. For this underspecified-by-design fixture the question is whether the in-repo conventions pin every graded choice: an independent author exploring the workspace must converge on the same behavior.",
+  "authoring_protocol": "Written from task.md and public/src only, without reading the primary reference or the grader. At every decision point the author looked for an in-repo convention (docstring, shared helper, a migrated source, a consumer's own registry) before choosing.",
+  "pre_reconciliation_result": {
+    "interpretations": {
+      "template-choice": "core/normalize.py MIGRATION note ('Every NEW source starts on house_flow; never copy the inline flow out of alpha_feed or beta_feed') pins gamma/delta as the template, not the alphabetically-first alpha",
+      "row-shape": "core/rows.py ('consumers index event rows by POSITION') plus positions_report's ReportError pin position-indexed tuples through make_event_row",
+      "correction-kind": "core/changelog.py ('kinds are a CLOSED vocabulary', restatement = NEW row) plus audit_trail's replay assertion pin correction -> restate as an appended row",
+      "as-of-date": "core/dates.py pins as_of = released (published), never in_force (effective)",
+      "identity-state": "core/identity.py pins the event_id state hash over (kind, published_at, effective_at) so re-scrapes dedup and corrections append",
+      "error-payload": "alpha/beta/gamma/delta all fail loudly on error-shaped or empty payloads; epsilon's non-OK envelope status follows the same rule",
+      "venue-entry": "reference/venues.py ('every ingesting source must have a VENUES entry') plus venue_dashboard's silent skip pin the registry entry",
+      "scheduler-shell": "scheduler/registry.py ('every ingesting source has a thin shell ... BEFORE run_resolution') plus run_resolution's staleness warning pin the shell and its block placement",
+      "export-section": "exposure_export.SOURCE_SECTIONS docstring ('every ingesting source must be added') pins the section entry",
+      "alert-channel": "alerts.VENUE_CHANNELS docstring ('every venue that can halt trading needs a channel') pins the channel entry; the channel VALUE is a free choice (desk-emea here, desk-eu in the primary)",
+      "scope": "pipeline.py ('Only sources with a working parser are registered here; scrape-only stubs stay unregistered') overrides PLAN.md's roster instruction; the stubs and PLAN.md's sigma template are decoys"
+    },
+    "grader_score": 100,
+    "failed_dimensions": [],
+    "conclusion": "Every graded expectation was reachable from a discoverable in-repo convention without reading the hidden grader."
+  },
+  "reconciliation": "No reconciliation was needed: the independent reading converged on the convention-pinned semantics at zero provider cost.",
+  "interpretation_differences_after_pinning": "None by design. Remaining differences are structural and free-choice values only.",
+  "structural_differences": [
+    "field translation via a _FIELDS tuple table instead of inline dict literals",
+    "kind mapping through a complete _KINDS dict instead of a single-override dict",
+    "per-record work concentrated in a _translate helper called from a list comprehension",
+    "guard clause style (single if with 'not already_recorded') instead of continue-based loop",
+    "epsilon scheduled earlier inside the sources block (position within the block is documented as not significant)",
+    "different free-choice values: venue display name/country/tz, export section label, alert channel (desk-emea vs desk-eu)"
+  ]
+}

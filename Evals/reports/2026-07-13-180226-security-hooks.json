@@ -1,0 +1,49 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-13T18:02:26.7070407+02:00",
+    "cases":  8,
+    "passed":  8,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "protect-env",
+                        "exit_code":  1,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "protect-hidden",
+                        "exit_code":  1,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "allow-source",
+                        "exit_code":  0,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-hard-reset",
+                        "exit_code":  1,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-recursive-delete",
+                        "exit_code":  1,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "allow-tests",
+                        "exit_code":  0,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "codex-hidden-patch",
+                        "exit_code":  1,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "invalid-payload-fails-closed",
+                        "exit_code":  1,
+                        "passed":  true
+                    }
+                ]
+}

@@ -1,0 +1,159 @@
+﻿{
+    "schema_version":  2,
+    "run_at":  "2026-07-14T10:04:17.2334146+02:00",
+    "cases":  25,
+    "passed":  25,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "protect-env",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "protect-hidden",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "protect-fixture-hidden",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "protect-stable-manifest",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "protect-core-runtime",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "protect-bootstrap",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "allow-source",
+                        "exit_code":  0,
+                        "expected":  0,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "allow-candidate",
+                        "exit_code":  0,
+                        "expected":  0,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "invalid-payload-fails-closed",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-hard-reset",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-recursive-delete",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-recursive-delete-reversed",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-recursive-delete-abbrev",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-ri-alias",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-rm-fr",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-rm-r-f",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-rm-long",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-force-with-lease",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-plus-refspec",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "reject-git-clean",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "allow-tests",
+                        "exit_code":  0,
+                        "expected":  0,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "allow-normal-rm",
+                        "exit_code":  0,
+                        "expected":  0,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "allow-normal-push",
+                        "exit_code":  0,
+                        "expected":  0,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "codex-hidden-patch",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    },
+                    {
+                        "id":  "codex-fixture-hidden-patch",
+                        "exit_code":  2,
+                        "expected":  2,
+                        "passed":  true
+                    }
+                ]
+}

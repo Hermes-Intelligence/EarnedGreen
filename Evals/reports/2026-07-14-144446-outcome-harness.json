@@ -1,0 +1,32 @@
+﻿{
+    "schema_version":  2,
+    "run_at":  "2026-07-14T14:44:46.6515691+02:00",
+    "phase_timeout_seconds":  15,
+    "cases":  1,
+    "passed":  1,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "entity-parser-unseen",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  16.67,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    }
+                ]
+}

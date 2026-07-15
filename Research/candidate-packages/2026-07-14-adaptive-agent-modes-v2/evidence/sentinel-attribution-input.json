@@ -1,0 +1,22 @@
+{
+  "schema_version":1,
+  "campaign_id":"20260713-201400-real-world-battery-screen",
+  "execution_integrity":"PASS",
+  "fixture_issues":{
+    "api-contract-propagation":{"spec_ambiguity_checks":["input-validation"],"grader_failure_checks":[]},
+    "coordinated-release-change":{"spec_ambiguity_checks":[],"grader_failure_checks":["documentation"]}
+  },
+  "runs":[
+    {"run_id":"20260713-214021509-api-contract-propagation-vanilla-t1","fixture":"api-contract-propagation","arm":"vanilla","failed_checks":["input-validation"],"pre_submit_gate":"not-applicable","router_relevance":"not-applicable"},
+    {"run_id":"20260713-214155937-api-contract-propagation-core-router-enforcement-t1","fixture":"api-contract-propagation","arm":"core-router-enforcement","failed_checks":["input-validation"],"pre_submit_gate":"missing-or-soft","router_relevance":"failed"},
+    {"run_id":"20260713-214324036-coordinated-release-change-vanilla-t1","fixture":"coordinated-release-change","arm":"vanilla","failed_checks":["documentation"],"pre_submit_gate":"not-applicable","router_relevance":"not-applicable"},
+    {"run_id":"20260713-214545512-coordinated-release-change-core-router-enforcement-t1","fixture":"coordinated-release-change","arm":"core-router-enforcement","failed_checks":["documentation"],"pre_submit_gate":"missing-or-soft","router_relevance":"failed"},
+    {"run_id":"20260713-213752603-resumable-batch-session-core-router-enforcement-t1","fixture":"resumable-batch-session","arm":"core-router-enforcement","failed_checks":[],"pre_submit_gate":"missing-or-soft","router_relevance":"unknown"},
+    {"run_id":"20260713-214826731-resumable-batch-session-vanilla-t1","fixture":"resumable-batch-session","arm":"vanilla","failed_checks":[],"pre_submit_gate":"not-applicable","router_relevance":"not-applicable"}
+  ],
+  "valid_unaffected_pairs":[{"fixture":"resumable-batch-session","vanilla":100,"full":100,"interpretation":"CEILING"}],
+  "systemic_issues":[
+    {"category":"ROUTER_FAILURE","confidence":"high","evidence":"API selected research-candidate from the response field source; migration selected security because email was treated as an external action.","action":"replace raw keyword routing with contextual phrases, negative matches and precision tests"},
+    {"category":"ENFORCEMENT_FAILURE","confidence":"high","evidence":"core-router-enforcement created only protected-file/public-test metadata; it generated no objective ledger and no agent-visible fail-closed pre-submit result.","action":"require executable objective/evidence completion gate"}
+  ]
+}

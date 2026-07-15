@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "objective", "budgets", "progress", "kill_file", "state_path"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "objective": { "type": "string", "minLength": 10 },
+    "budgets": { "type": "object", "required": ["max_iterations", "max_failures", "max_no_progress", "max_seconds", "max_cost"], "properties": { "max_iterations": { "type": "integer", "minimum": 1 }, "max_failures": { "type": "integer", "minimum": 0 }, "max_no_progress": { "type": "integer", "minimum": 1 }, "max_seconds": { "type": "integer", "minimum": 1 }, "max_cost": { "type": "number", "minimum": 0 } } },
+    "progress": { "type": "object", "required": ["end_state", "fingerprint_definition", "escalation"], "properties": { "end_state": { "type": "string" }, "fingerprint_definition": { "type": "string" }, "escalation": { "type": "string" } } },
+    "kill_file": { "type": "string" },
+    "state_path": { "type": "string" }
+  }
+}

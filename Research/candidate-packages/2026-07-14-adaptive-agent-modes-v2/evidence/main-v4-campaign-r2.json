@@ -1,0 +1,161 @@
+{
+  "schema_version": 3,
+  "campaign_id": "20260714-211923-adaptive-mode-ablation",
+  "status": "stopped-by-kill-switch",
+  "stage": "main",
+  "provider_calls": 5,
+  "fixture": "adaptive-contract-evolution-v4",
+  "fixture_admission": {
+    "admitted": true,
+    "record_path": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\evidence\\fixture-admission-adaptive-contract-evolution-v4.json",
+    "reason": null,
+    "generated_at": "2026-07-14T19:18:11.814142+00:00",
+    "paid_history": {
+      "runs_scanned": 40,
+      "matching_runs": [
+        {
+          "run_id": "20260714-181052657-adaptive-contract-evolution-v4-vanilla-t1",
+          "case_id": "adaptive-contract-evolution-v4",
+          "arm": "vanilla",
+          "outcome_valid": true,
+          "score": 70,
+          "distinct_dimensions": 13
+        }
+      ],
+      "valid_paid_runs": 1
+    },
+    "gate": "fixture-admission"
+  },
+  "paid_history": {
+    "valid_paid_runs": 1,
+    "matching_runs": 1
+  },
+  "canary_policy": {
+    "applies_when": "the fixture has no prior paid run whose Evals/runs run-record.json shows outcome_valid=true",
+    "first_stage": {
+      "calls": 1,
+      "arm": "cheapest (rank 0: vanilla)",
+      "approval": "separate explicit approval for exactly one call"
+    },
+    "main_stage_requires": {
+      "separate_approval": true,
+      "canary_outcome_valid": true,
+      "min_distinct_hidden_dimensions": 2,
+      "all_declared_dimensions_reported": true,
+      "note": "floor/ceiling collapse (a single reported dimension) blocks the remaining arms"
+    },
+    "admission_gate": "every campaign additionally requires a fresh Fixture Admission Gate record (candidate fixtures) or fresh eval-validity PASS (contracted fixtures)"
+  },
+  "canary_evidence": null,
+  "provider_snapshot": {
+    "generated_at": "2026-07-13T15:10:46.4282540+02:00",
+    "expires_at": "2026-07-20T15:10:46.4282540+02:00",
+    "distro": "AgenticBench",
+    "provider": {
+      "id": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "medium",
+      "cli_version": "codex-cli 0.144.3"
+    }
+  },
+  "model_policy": "same resolved provider model and effort across arms",
+  "runs": [
+    {
+      "run_key": "screen::adaptive-contract-evolution-v4::full::t1",
+      "arm": "full",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260715-092824975-adaptive-contract-evolution-v4-full-t1"
+    },
+    {
+      "run_key": "screen::adaptive-contract-evolution-v4::mode-1-lean::t1",
+      "arm": "mode-1-lean",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260715-094258076-adaptive-contract-evolution-v4-mode-1-lean-t1"
+    },
+    {
+      "run_key": "screen::adaptive-contract-evolution-v4::vanilla::t1",
+      "arm": "vanilla",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260715-094952006-adaptive-contract-evolution-v4-vanilla-t1"
+    },
+    {
+      "run_key": "screen::adaptive-contract-evolution-v4::mode-2-routed::t1",
+      "arm": "mode-2-routed",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260715-095401638-adaptive-contract-evolution-v4-mode-2-routed-t1"
+    },
+    {
+      "run_key": "screen::adaptive-contract-evolution-v4::mode-3-assured::t1",
+      "arm": "mode-3-assured",
+      "trial": 1,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null
+    }
+  ],
+  "independent_verifier_runs": [
+    {
+      "run_key": "screen::adaptive-contract-evolution-v4::full-verifier::t1",
+      "arm": "full",
+      "trial": 1,
+      "role": "independent-verifier",
+      "depends_on": "screen::adaptive-contract-evolution-v4::full::t1",
+      "status": "complete",
+      "run_id": "20260715-094039668-adaptive-contract-evolution-v4-full-verifier-t1"
+    }
+  ],
+  "loop": {
+    "max_total_provider_calls": 6,
+    "max_calls_per_invocation": 6,
+    "max_replacements": 0,
+    "max_turns_per_call": 18,
+    "max_wall_minutes_per_call": 25,
+    "kill_switch": "Evals/local/STOP",
+    "automatic_followup": false
+  },
+  "harness_snapshot": [
+    {
+      "path": "implementation/modes.json",
+      "sha256": "2C212A11D31A44FB554193D3A29B08B011A17F5E0382B1A4F1D732ACADD69DF3"
+    },
+    {
+      "path": "implementation/router-catalog.json",
+      "sha256": "EF42AE9630F2011E955C8286C58D50E4238083EC6E9CC68BBC404FACB83DA661"
+    },
+    {
+      "path": "implementation/adaptive_router.py",
+      "sha256": "58BE025EE2285880D27BF58B388F7096D20335214505CFDDB2987BDB07384404"
+    },
+    {
+      "path": "implementation/objective_compiler.py",
+      "sha256": "DB1CF73A9B8FC82117945230888B74B1FF4DB8643E80EFAF78CCF3FCB32E9A56"
+    },
+    {
+      "path": "implementation/pre_submit_gate.py",
+      "sha256": "D472B5A469F298C6B8ED84506504327CA56DB5964989B2F6163B495E9AB580DD"
+    },
+    {
+      "path": "implementation/eval_validity.py",
+      "sha256": "06F0EDFFF1D4E207CB29E64037A1A6BE0AD2CFFCA5BD601C755D51CD6B641AAA"
+    },
+    {
+      "path": "implementation/fixture_admission.py",
+      "sha256": "B9FFFC1777D5899E40DAEAD0C29E2D5D66CB180BDCC152396F28054377E7B1AE"
+    }
+  ],
+  "approval": {
+    "approved_at": "2026-07-14T19:19:35.465669+00:00",
+    "approved_by": "sebastian-chat-directive-build-then-main-stage",
+    "scope": "exactly 6 provider calls: five solutions plus one Full verifier",
+    "exact_calls": 6,
+    "stage": "main"
+  }
+}

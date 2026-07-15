@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20260714-132536-adaptive-mode-ablation",
+  "execution_integrity": "PASS",
+  "provider_calls": 6,
+  "unique_run_ids": 6,
+  "comparative_verdict": "INVALID",
+  "candidate_recommendation": null,
+  "arms": [
+    {
+      "arm": "vanilla",
+      "run_id": "20260714-140517821-adaptive-contract-evolution-vanilla-t1",
+      "score": 9,
+      "public_pass": true,
+      "outcome_valid": true,
+      "completion_gate_pass": true,
+      "observed_tokens": 181697,
+      "wall_seconds": 122.4,
+      "failed_checks": [
+        "fixture-runtime"
+      ],
+      "failure_details": [
+        "ValueError: unknown entity type: Å¼Ã³Å‚w-æ–°"
+      ]
+    },
+    {
+      "arm": "mode-1-lean",
+      "run_id": "20260714-134703477-adaptive-contract-evolution-mode-1-lean-t1",
+      "score": 9,
+      "public_pass": true,
+      "outcome_valid": true,
+      "completion_gate_pass": true,
+      "observed_tokens": 421357,
+      "wall_seconds": 239.3,
+      "failed_checks": [
+        "fixture-runtime"
+      ],
+      "failure_details": [
+        "ValueError: unknown entity type: 'Å¼Ã³Å‚w-æ–°'"
+      ]
+    },
+    {
+      "arm": "mode-2-routed",
+      "run_id": "20260714-135227691-adaptive-contract-evolution-mode-2-routed-t1",
+      "score": 9,
+      "public_pass": true,
+      "outcome_valid": true,
+      "completion_gate_pass": true,
+      "observed_tokens": 526234,
+      "wall_seconds": 256.7,
+      "failed_checks": [
+        "fixture-runtime"
+      ],
+      "failure_details": [
+        "ValueError: unknown entity type: Å¼Ã³Å‚w-æ–°"
+      ]
+    },
+    {
+      "arm": "mode-3-assured",
+      "run_id": "20260714-140721952-adaptive-contract-evolution-mode-3-assured-t1",
+      "score": 9,
+      "public_pass": true,
+      "outcome_valid": true,
+      "completion_gate_pass": true,
+      "observed_tokens": 498624,
+      "wall_seconds": 260.0,
+      "failed_checks": [
+        "fixture-runtime"
+      ],
+      "failure_details": [
+        "ValueError: unknown entity type: Å¼Ã³Å‚w-æ–°"
+      ]
+    },
+    {
+      "arm": "full",
+      "run_id": "20260714-135650267-adaptive-contract-evolution-full-t1",
+      "score": 9,
+      "public_pass": true,
+      "outcome_valid": true,
+      "completion_gate_pass": false,
+      "observed_tokens": 610413,
+      "wall_seconds": 325.8,
+      "failed_checks": [
+        "fixture-runtime"
+      ],
+      "failure_details": [
+        "ValueError: unknown entity type: Å¼Ã³Å‚w-æ–°"
+      ]
+    }
+  ],
+  "full_verifier": {
+    "status": "complete-quality-failure",
+    "verifier_valid": true,
+    "observed_tokens": 388076,
+    "wall_seconds": 177.8
+  },
+  "validity_issues": [
+    {
+      "category": "SPEC_AMBIGUITY",
+      "reason": "all five independent solutions and the Full verifier treated an unregistered-but-valid type as a counted rejection, while the hidden reference silently required pass-through; the public task never states registry-miss behavior"
+    },
+    {
+      "category": "GRADER_FAILURE",
+      "reason": "one early exception collapses the remaining eight hidden checks into fixture-runtime, so the 9/100 scores do not measure the other dimensions"
+    },
+    {
+      "category": "HARNESS_PLATFORM_MISMATCH",
+      "reason": "the independent verifier returned PASS, but the Windows final gate re-executed visible python3 aliases and received exit 9009"
+    }
+  ],
+  "stable_policy_changed": false,
+  "provider_calls_authorized_after_campaign": 0,
+  "next_action": "version the fixture: specify registry-miss semantics, isolate every hidden check, add a reasonable reject-on-miss semantic control, strengthen ambiguity/open-world gates, and locally validate before any separately approved provider campaign"
+}

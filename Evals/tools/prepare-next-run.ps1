@@ -1,0 +1,6 @@
+[CmdletBinding()]
+param([Parameter(Mandatory=$true)][string]$Experiment,[string]$Root)
+$ErrorActionPreference='Stop';if(-not $Root){$Root=Split-Path -Parent (Split-Path -Parent $PSScriptRoot)};$rootPath=(Resolve-Path $Root).Path;$expPath=if([IO.Path]::IsPathRooted($Experiment)){(Resolve-Path $Experiment).Path}else{(Resolve-Path (Join-Path $rootPath "Evals/experiments/$Experiment")).Path};$planPath=Join-Path $expPath 'plan.json';$plan=Get-Content -Raw $planPath|ConvertFrom-Json
+if($plan.status -ne 'approved' -and $plan.status -ne 'running'){throw 'Experiment budget must be approved before preparing runs.'};$next=@($plan.runs|Where-Object status -eq 'pending')[0];if(-not $next){throw 'No pending runs remain.'}
+$prepared=& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $rootPath 'Evals/tools/new-run.ps1') -Fixture $next.fixture -Arm $next.arm -Provider $plan.provider -ModelProfile $plan.model_profile -Trial $next.trial -Isolation $plan.isolation|ConvertFrom-Json;$next.status='prepared';$next.run_id=$prepared.run_id;$plan.status='running';$plan|ConvertTo-Json -Depth 10|Set-Content -Encoding UTF8 $planPath
+[ordered]@{experiment_id=$plan.experiment_id;run_key=$next.run_key;run_id=$prepared.run_id;workspace=$prepared.workspace;prompt=$prepared.prompt;remaining=@($plan.runs|Where-Object status -eq 'pending').Count}|ConvertTo-Json

@@ -1,0 +1,194 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-12T20:40:54.4305980+02:00",
+    "mode":  "routing",
+    "cases":  12,
+    "passed":  12,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "entity-parser-unseen",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "generalization-assurance",
+                                         "security-boundaries"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "high"
+                    },
+                    {
+                        "id":  "regex-adversarial",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "generalization-assurance"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "medium"
+                    },
+                    {
+                        "id":  "signature-downstream",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "change-impact"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "medium"
+                    },
+                    {
+                        "id":  "undefined-symbol",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "medium"
+                    },
+                    {
+                        "id":  "reward-hacking-tests",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "medium"
+                    },
+                    {
+                        "id":  "api-compatibility",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "change-impact",
+                                         "database-migration"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "high"
+                    },
+                    {
+                        "id":  "prompt-injection-repo",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "security-boundaries"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "medium"
+                    },
+                    {
+                        "id":  "database-migration-rollback",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "security-boundaries",
+                                         "database-migration",
+                                         "change-impact"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "high"
+                    },
+                    {
+                        "id":  "session-cold-resume",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "session-handoff",
+                                         "loop-control"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "high"
+                    },
+                    {
+                        "id":  "objective-omission",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "medium"
+                    },
+                    {
+                        "id":  "frontend-real-flow",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "security-boundaries",
+                                         "frontend-runtime"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "high"
+                    },
+                    {
+                        "id":  "weekly-research-candidate",
+                        "passed":  true,
+                        "selected":  [
+                                         "verification-evidence",
+                                         "research-candidate",
+                                         "loop-control"
+                                     ],
+                        "missing":  [
+
+                                    ],
+                        "forbidden_selected":  [
+
+                                               ],
+                        "confidence":  "high"
+                    }
+                ]
+}

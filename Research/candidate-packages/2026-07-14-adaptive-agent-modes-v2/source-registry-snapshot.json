@@ -1,0 +1,1210 @@
+﻿{
+    "schema_version":  1,
+    "generated_at":  "2026-07-14T09:14:38.0381108+02:00",
+    "source_inventories":  [
+                               "Research/sources/registry.json",
+                               "Research/sources/claude-v1-migration.json"
+                           ],
+    "sources":  [
+                    {
+                        "id":  "openai-codex-docs",
+                        "title":  "OpenAI Codex documentation",
+                        "url":  "https://learn.chatgpt.com/docs/",
+                        "type":  "official-docs",
+                        "tier":  1,
+                        "status":  "active",
+                        "topics":  [
+                                       "codex",
+                                       "hooks",
+                                       "agents",
+                                       "configuration",
+                                       "automation"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "Primary source for current Codex product behavior."
+                    },
+                    {
+                        "id":  "openai-codex-changelog",
+                        "title":  "OpenAI Codex changelog",
+                        "url":  "https://developers.openai.com/codex/changelog",
+                        "type":  "official-changelog",
+                        "tier":  1,
+                        "status":  "active",
+                        "topics":  [
+                                       "codex",
+                                       "model-drift",
+                                       "configuration"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "Use to invalidate version-sensitive claims."
+                    },
+                    {
+                        "id":  "openai-codex-blog",
+                        "title":  "OpenAI developer blog - Codex",
+                        "url":  "https://developers.openai.com/blog/",
+                        "type":  "official-engineering",
+                        "tier":  1,
+                        "status":  "active",
+                        "topics":  [
+                                       "codex",
+                                       "long-running",
+                                       "evals"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "Primary engineering narratives; mechanics still require docs verification."
+                    },
+                    {
+                        "id":  "anthropic-claude-code-docs",
+                        "title":  "Claude Code documentation",
+                        "url":  "https://code.claude.com/docs/en/overview",
+                        "type":  "official-docs",
+                        "tier":  1,
+                        "status":  "active",
+                        "topics":  [
+                                       "claude",
+                                       "hooks",
+                                       "skills",
+                                       "memory",
+                                       "loops",
+                                       "agents"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "Primary source for current Claude Code behavior."
+                    },
+                    {
+                        "id":  "anthropic-claude-code-changelog",
+                        "title":  "Claude Code changelog",
+                        "url":  "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+                        "type":  "official-changelog",
+                        "tier":  1,
+                        "status":  "active",
+                        "topics":  [
+                                       "claude",
+                                       "model-drift",
+                                       "configuration"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "Recheck version gates and deprecations."
+                    },
+                    {
+                        "id":  "anthropic-engineering",
+                        "title":  "Anthropic Engineering",
+                        "url":  "https://www.anthropic.com/engineering",
+                        "type":  "official-engineering",
+                        "tier":  1,
+                        "status":  "active",
+                        "topics":  [
+                                       "agents",
+                                       "context",
+                                       "evals",
+                                       "security",
+                                       "long-running"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "Primary production lessons; separate experiments from product guarantees."
+                    },
+                    {
+                        "id":  "agents-md-study",
+                        "title":  "Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?",
+                        "url":  "https://arxiv.org/abs/2602.11988",
+                        "type":  "primary-paper",
+                        "tier":  2,
+                        "status":  "active",
+                        "topics":  [
+                                       "instructions",
+                                       "context",
+                                       "evals",
+                                       "cost"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-08-11",
+                        "notes":  "Context files can increase cost without improving success; preserve experimental limitations."
+                    },
+                    {
+                        "id":  "probe-refine-guidance",
+                        "title":  "Probe-and-Refine Tuning of Repository Guidance for Coding Agents",
+                        "url":  "https://arxiv.org/abs/2606.20512",
+                        "type":  "primary-paper",
+                        "tier":  2,
+                        "status":  "active",
+                        "topics":  [
+                                       "instructions",
+                                       "evals",
+                                       "guidance"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-08-11",
+                        "notes":  "Evidence for tuning guidance through task probes rather than prose generation."
+                    },
+                    {
+                        "id":  "contextbench",
+                        "title":  "ContextBench: A Benchmark for Context Retrieval in Coding Agents",
+                        "url":  "https://arxiv.org/abs/2602.05892",
+                        "type":  "primary-paper",
+                        "tier":  2,
+                        "status":  "active",
+                        "topics":  [
+                                       "router",
+                                       "retrieval",
+                                       "context",
+                                       "evals"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-08-11",
+                        "notes":  "Use for Router precision/recall design and scaffolding ablations."
+                    },
+                    {
+                        "id":  "metr-productivity",
+                        "title":  "METR developer productivity study",
+                        "url":  "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+                        "type":  "primary-study",
+                        "tier":  2,
+                        "status":  "active",
+                        "topics":  [
+                                       "productivity",
+                                       "human-review",
+                                       "evals"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-08-11",
+                        "notes":  "Benchmarks and real developer productivity can diverge."
+                    },
+                    {
+                        "id":  "swe-bench",
+                        "title":  "SWE-bench",
+                        "url":  "https://www.swebench.com/",
+                        "type":  "benchmark",
+                        "tier":  2,
+                        "status":  "active",
+                        "topics":  [
+                                       "coding-agents",
+                                       "evals"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-08-11",
+                        "notes":  "Benchmark signal, not a substitute for private repository cases."
+                    },
+                    {
+                        "id":  "openhands-index",
+                        "title":  "OpenHands Index",
+                        "url":  "https://index.openhands.dev/",
+                        "type":  "benchmark",
+                        "tier":  2,
+                        "status":  "active",
+                        "topics":  [
+                                       "coding-agents",
+                                       "models",
+                                       "cost"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-08-11",
+                        "notes":  "Track model/harness combinations and methodology changes."
+                    },
+                    {
+                        "id":  "owasp-mcp-security",
+                        "title":  "OWASP MCP Security Cheat Sheet",
+                        "url":  "https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html",
+                        "type":  "security-guidance",
+                        "tier":  2,
+                        "status":  "active",
+                        "topics":  [
+                                       "security",
+                                       "mcp",
+                                       "prompt-injection"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-08-11",
+                        "notes":  "Security guidance; validate product-specific mechanics separately."
+                    },
+                    {
+                        "id":  "nist-ai-ssdf",
+                        "title":  "NIST SP 800-218A",
+                        "url":  "https://www.nist.gov/publications/secure-software-development-practices-generative-ai-and-dual-use-foundation-models-ssdf",
+                        "type":  "standard",
+                        "tier":  2,
+                        "status":  "active",
+                        "topics":  [
+                                       "security",
+                                       "governance",
+                                       "software-lifecycle"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-08-11",
+                        "notes":  "Governance and secure development baseline."
+                    },
+                    {
+                        "id":  "anthropic-youtube",
+                        "title":  "Anthropic official YouTube channel",
+                        "url":  "https://www.youtube.com/@anthropic-ai",
+                        "type":  "youtube-official",
+                        "tier":  4,
+                        "status":  "active",
+                        "topics":  [
+                                       "claude",
+                                       "agents",
+                                       "demos",
+                                       "talks"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-26",
+                        "notes":  "Transcripts are discovery evidence; technical mechanics require official docs corroboration."
+                    },
+                    {
+                        "id":  "openai-youtube",
+                        "title":  "OpenAI official YouTube channel",
+                        "url":  "https://www.youtube.com/@OpenAI",
+                        "type":  "youtube-official",
+                        "tier":  4,
+                        "status":  "active",
+                        "topics":  [
+                                       "codex",
+                                       "agents",
+                                       "demos",
+                                       "talks"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-26",
+                        "notes":  "Use transcripts and event dates; corroborate mechanics."
+                    },
+                    {
+                        "id":  "ai-engineer-youtube",
+                        "title":  "AI Engineer conference talks",
+                        "url":  "https://www.youtube.com/@aiDotEngineer",
+                        "type":  "youtube-conference",
+                        "tier":  4,
+                        "status":  "active",
+                        "topics":  [
+                                       "agents",
+                                       "practitioner",
+                                       "evals",
+                                       "orchestration"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-26",
+                        "notes":  "Signal and case studies, not canonical product documentation."
+                    },
+                    {
+                        "id":  "latent-space-podcast",
+                        "title":  "Latent Space podcast",
+                        "url":  "https://www.latent.space/podcast",
+                        "type":  "podcast",
+                        "tier":  4,
+                        "status":  "active",
+                        "topics":  [
+                                       "agents",
+                                       "models",
+                                       "practitioner"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-26",
+                        "notes":  "Extract hypotheses and named sources from transcripts; do not promote claims without corroboration."
+                    },
+                    {
+                        "id":  "simon-willison",
+                        "title":  "Simon Willison - AI and tooling notes",
+                        "url":  "https://simonwillison.net/tags/ai/",
+                        "type":  "practitioner-watchlist",
+                        "tier":  5,
+                        "status":  "active",
+                        "topics":  [
+                                       "agents",
+                                       "security",
+                                       "tools",
+                                       "codex"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "High-value signal; verify mechanics against primary sources."
+                    },
+                    {
+                        "id":  "geoffrey-huntley-ralph",
+                        "title":  "Geoffrey Huntley - Ralph",
+                        "url":  "https://ghuntley.com/ralph/",
+                        "type":  "practitioner-watchlist",
+                        "tier":  5,
+                        "status":  "active",
+                        "topics":  [
+                                       "loops",
+                                       "long-running",
+                                       "harness"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "Source of loop patterns and hypotheses; evaluate locally before adoption."
+                    },
+                    {
+                        "id":  "addy-osmani",
+                        "title":  "Addy Osmani - engineering notes",
+                        "url":  "https://addyosmani.com/",
+                        "type":  "practitioner-watchlist",
+                        "tier":  5,
+                        "status":  "active",
+                        "topics":  [
+                                       "agentic-engineering",
+                                       "frontend",
+                                       "productivity"
+                                   ],
+                        "last_checked":  "2026-07-12",
+                        "next_check":  "2026-07-19",
+                        "notes":  "Discovery lane; follow cited primary evidence."
+                    },
+                    {
+                        "id":  "claude-v1-developers-openai-com-codex-cli-features",
+                        "title":  "Claude v1 discovery: developers.openai.com/codex/cli/features",
+                        "url":  "https://developers.openai.com/codex/cli/features",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-deepwiki-com-openai-codex-4-2-headless-execution-mode-codex-exec",
+                        "title":  "Claude v1 discovery: deepwiki.com/openai/codex/4.2-headless-execution-mode-(codex-exec",
+                        "url":  "https://deepwiki.com/openai/codex/4.2-headless-execution-mode-(codex-exec",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-kunalganglani-com-blog-loop-engineering-agent-loops",
+                        "title":  "Claude v1 discovery: www.kunalganglani.com/blog/loop-engineering-agent-loops",
+                        "url":  "https://www.kunalganglani.com/blog/loop-engineering-agent-loops",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-datasciencedojo-com-blog-agentic-loops-explained-from-react-to-loop-engi",
+                        "title":  "Claude v1 discovery: datasciencedojo.com/blog/agentic-loops-explained-from-react-to-loop-engineering-2026-guide/",
+                        "url":  "https://datasciencedojo.com/blog/agentic-loops-explained-from-react-to-loop-engineering-2026-guide/",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-explainx-ai-blog-anthropic-engineer-loops-prompts-ai-coding-harness-engi",
+                        "title":  "Claude v1 discovery: explainx.ai/blog/anthropic-engineer-loops-prompts-ai-coding-harness-engineering-2026",
+                        "url":  "https://explainx.ai/blog/anthropic-engineer-loops-prompts-ai-coding-harness-engineering-2026",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-developers-openai-com-codex-hooks",
+                        "title":  "Claude v1 discovery: developers.openai.com/codex/hooks",
+                        "url":  "https://developers.openai.com/codex/hooks",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-developers-openai-com-codex-config-advanced",
+                        "title":  "Claude v1 discovery: developers.openai.com/codex/config-advanced",
+                        "url":  "https://developers.openai.com/codex/config-advanced",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-agent-approvals-security",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/agent-approvals-security",
+                        "url":  "https://learn.chatgpt.com/docs/agent-approvals-security",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-extend-mcp",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/extend/mcp",
+                        "url":  "https://learn.chatgpt.com/docs/extend/mcp?surface=cli",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-developer-commands",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/developer-commands",
+                        "url":  "https://learn.chatgpt.com/docs/developer-commands?surface=cli",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-custom-prompts",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/custom-prompts",
+                        "url":  "https://learn.chatgpt.com/docs/custom-prompts",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-anthropic-com-engineering-harness-design-long-running-apps",
+                        "title":  "Claude v1 discovery: www.anthropic.com/engineering/harness-design-long-running-apps",
+                        "url":  "https://www.anthropic.com/engineering/harness-design-long-running-apps",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-northflank-com-blog-best-code-execution-sandbox-for-ai-agents",
+                        "title":  "Claude v1 discovery: northflank.com/blog/best-code-execution-sandbox-for-ai-agents",
+                        "url":  "https://northflank.com/blog/best-code-execution-sandbox-for-ai-agents",
+                        "type":  "vendor-or-security-engineering",
+                        "tier":  3,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-amux-io-guides-ai-agent-sandboxing",
+                        "title":  "Claude v1 discovery: amux.io/guides/ai-agent-sandboxing/",
+                        "url":  "https://amux.io/guides/ai-agent-sandboxing/",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-thebrightbyte-com-playbook-expertise-lethal-trifecta-ai-agent-defense-ar",
+                        "title":  "Claude v1 discovery: thebrightbyte.com/playbook/expertise/lethal-trifecta-ai-agent-defense-architecture-2026",
+                        "url":  "https://thebrightbyte.com/playbook/expertise/lethal-trifecta-ai-agent-defense-architecture-2026",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-sophos-com-en-us-blog-inside-the-lethal-trifecta-blast-radius-reduction",
+                        "title":  "Claude v1 discovery: www.sophos.com/en-us/blog/inside-the-lethal-trifecta-blast-radius-reduction-in-ai-agent-deployments",
+                        "url":  "https://www.sophos.com/en-us/blog/inside-the-lethal-trifecta-blast-radius-reduction-in-ai-agent-deployments",
+                        "type":  "vendor-or-security-engineering",
+                        "tier":  3,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-helpnetsecurity-com-2026-06-11-owasp-prompt-injection-ai-security-failur",
+                        "title":  "Claude v1 discovery: www.helpnetsecurity.com/2026/06/11/owasp-prompt-injection-ai-security-failures/",
+                        "url":  "https://www.helpnetsecurity.com/2026/06/11/owasp-prompt-injection-ai-security-failures/",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-modal-com-resources-best-code-execution-sandboxes-ai-agents",
+                        "title":  "Claude v1 discovery: modal.com/resources/best-code-execution-sandboxes-ai-agents",
+                        "url":  "https://modal.com/resources/best-code-execution-sandboxes-ai-agents",
+                        "type":  "vendor-or-security-engineering",
+                        "tier":  3,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-futureagi-com-blog-llm-as-a-judge",
+                        "title":  "Claude v1 discovery: futureagi.com/blog/llm-as-a-judge/",
+                        "url":  "https://futureagi.com/blog/llm-as-a-judge/",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-arxiv-org-abs-2606-29920",
+                        "title":  "Claude v1 discovery: arxiv.org/abs/2606.29920",
+                        "url":  "https://arxiv.org/abs/2606.29920",
+                        "type":  "primary-paper",
+                        "tier":  2,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-code-claude-com-docs-en-agent-teams",
+                        "title":  "Claude v1 discovery: code.claude.com/docs/en/agent-teams",
+                        "url":  "https://code.claude.com/docs/en/agent-teams",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-usewire-io-blog-anthropic-managed-agents-memory-context-engineering",
+                        "title":  "Claude v1 discovery: usewire.io/blog/anthropic-managed-agents-memory-context-engineering/",
+                        "url":  "https://usewire.io/blog/anthropic-managed-agents-memory-context-engineering/",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-tembo-io-blog-claude-code-multi-agent-orchestration",
+                        "title":  "Claude v1 discovery: www.tembo.io/blog/claude-code-multi-agent-orchestration",
+                        "url":  "https://www.tembo.io/blog/claude-code-multi-agent-orchestration",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-github-com-openai-codex-blob-main-codex-rs-linux-sandbox-readme-md",
+                        "title":  "Claude v1 discovery: github.com/openai/codex/blob/main/codex-rs/linux-sandbox/README.md",
+                        "url":  "https://github.com/openai/codex/blob/main/codex-rs/linux-sandbox/README.md",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-code-claude-com-docs-en-context-window",
+                        "title":  "Claude v1 discovery: code.claude.com/docs/en/context-window",
+                        "url":  "https://code.claude.com/docs/en/context-window",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-code-claude-com-docs-en-hooks",
+                        "title":  "Claude v1 discovery: code.claude.com/docs/en/hooks",
+                        "url":  "https://code.claude.com/docs/en/hooks",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-claude-com-blog-lessons-from-building-claude-code-how-we-use-skills",
+                        "title":  "Claude v1 discovery: claude.com/blog/lessons-from-building-claude-code-how-we-use-skills",
+                        "url":  "https://claude.com/blog/lessons-from-building-claude-code-how-we-use-skills",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-cognition-com-blog-dont-build-multi-agents",
+                        "title":  "Claude v1 discovery: cognition.com/blog/dont-build-multi-agents",
+                        "url":  "https://cognition.com/blog/dont-build-multi-agents",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-sourcegraph-com-blog-agentic-coding",
+                        "title":  "Claude v1 discovery: sourcegraph.com/blog/agentic-coding",
+                        "url":  "https://sourcegraph.com/blog/agentic-coding",
+                        "type":  "vendor-or-security-engineering",
+                        "tier":  3,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md",
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-code-claude-com-docs-en-hooks-guide",
+                        "title":  "Claude v1 discovery: code.claude.com/docs/en/hooks-guide",
+                        "url":  "https://code.claude.com/docs/en/hooks-guide",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-code-claude-com-docs-en-goal",
+                        "title":  "Claude v1 discovery: code.claude.com/docs/en/goal",
+                        "url":  "https://code.claude.com/docs/en/goal",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-anthropic-com-engineering-effective-harnesses-for-long-running-agents",
+                        "title":  "Claude v1 discovery: www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+                        "url":  "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md",
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-code-claude-com-docs-en-scheduled-tasks",
+                        "title":  "Claude v1 discovery: code.claude.com/docs/en/scheduled-tasks",
+                        "url":  "https://code.claude.com/docs/en/scheduled-tasks",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-code-claude-com-docs-en-routines",
+                        "title":  "Claude v1 discovery: code.claude.com/docs/en/routines",
+                        "url":  "https://code.claude.com/docs/en/routines",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-code-claude-com-docs-en-agent-loop",
+                        "title":  "Claude v1 discovery: code.claude.com/docs/en/agent-loop",
+                        "url":  "https://code.claude.com/docs/en/agent-loop",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-anthropic-com-engineering-claude-code-auto-mode",
+                        "title":  "Claude v1 discovery: www.anthropic.com/engineering/claude-code-auto-mode",
+                        "url":  "https://www.anthropic.com/engineering/claude-code-auto-mode",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-github-com-openai-codex-issues-16068",
+                        "title":  "Claude v1 discovery: github.com/openai/codex/issues/16068",
+                        "url":  "https://github.com/openai/codex/issues/16068",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-codex-danielvaughan-com-2026-06-02-codex-cli-session-archiving-lifecycle",
+                        "title":  "Claude v1 discovery: codex.danielvaughan.com/2026/06/02/codex-cli-session-archiving-lifecycle-management-v0136/",
+                        "url":  "https://codex.danielvaughan.com/2026/06/02/codex-cli-session-archiving-lifecycle-management-v0136/",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-agent-configuration-agents-md",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/agent-configuration/agents-md",
+                        "url":  "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-simonwillison-net-2026-mar-16-codex-subagents",
+                        "title":  "Claude v1 discovery: simonwillison.net/2026/Mar/16/codex-subagents/",
+                        "url":  "https://simonwillison.net/2026/Mar/16/codex-subagents/",
+                        "type":  "practitioner-or-secondary",
+                        "tier":  5,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-developers-openai-com-codex-subagents",
+                        "title":  "Claude v1 discovery: developers.openai.com/codex/subagents",
+                        "url":  "https://developers.openai.com/codex/subagents",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-non-interactive-mode",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/non-interactive-mode",
+                        "url":  "https://learn.chatgpt.com/docs/non-interactive-mode",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md",
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-config-file-config-reference",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/config-file/config-reference",
+                        "url":  "https://learn.chatgpt.com/docs/config-file/config-reference",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md",
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-anthropic-com-engineering-effective-context-engineering-for-ai-agents",
+                        "title":  "Claude v1 discovery: www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+                        "url":  "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Claude/OPERATING_CONTRACT.md",
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-developers-openai-com-blog-run-long-horizon-tasks-with-codex",
+                        "title":  "Claude v1 discovery: developers.openai.com/blog/run-long-horizon-tasks-with-codex",
+                        "url":  "https://developers.openai.com/blog/run-long-horizon-tasks-with-codex",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-hooks",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/hooks",
+                        "url":  "https://learn.chatgpt.com/docs/hooks",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md",
+                                              "Research/knowledge-base/2026-07-12-findings.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    },
+                    {
+                        "id":  "claude-v1-learn-chatgpt-com-docs-automations",
+                        "title":  "Claude v1 discovery: learn.chatgpt.com/docs/automations",
+                        "url":  "https://learn.chatgpt.com/docs/automations",
+                        "type":  "official-docs-or-engineering",
+                        "tier":  1,
+                        "status":  "pending-review",
+                        "topics":  [
+                                       "claude-v1-discovery"
+                                   ],
+                        "discovered_at":  "2026-07-12",
+                        "discovered_in":  [
+                                              "Codex/OPERATING_CONTRACT.md"
+                                          ],
+                        "last_checked":  null,
+                        "next_check":  "2026-07-12",
+                        "notes":  "Preserved from Claude\u0027s original corpus. Must pass link, relevance, provenance and claim-level review before active use."
+                    }
+                ]
+}

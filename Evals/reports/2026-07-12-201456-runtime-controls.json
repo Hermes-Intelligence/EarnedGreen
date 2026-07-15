@@ -1,0 +1,25 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-12T20:14:56.8045148+02:00",
+    "cases":  4,
+    "passed":  3,
+    "failed":  1,
+    "results":  [
+                    {
+                        "id":  "promotion-preview-no-write",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "promotion-and-rollback",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "loop-no-progress-stop",
+                        "passed":  false
+                    },
+                    {
+                        "id":  "handoff-valid",
+                        "passed":  true
+                    }
+                ]
+}

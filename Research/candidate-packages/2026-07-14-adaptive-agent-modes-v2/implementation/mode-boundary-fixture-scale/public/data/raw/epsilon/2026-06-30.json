@@ -1,0 +1,25 @@
+{
+  "envelope": {
+    "status": "OK",
+    "generated": "2026-06-30T06:10:00Z",
+    "feed": "epsilon-notices-v2",
+    "events": [
+      {
+        "ric": "NDR",
+        "category": "halt",
+        "text": "Trading halted pending news",
+        "released": "2026-06-30",
+        "in_force": "2026-07-01",
+        "ref": "EPS-0991"
+      },
+      {
+        "ric": "PXT",
+        "category": "resume",
+        "text": "Trading resumed",
+        "released": "2026-06-30",
+        "in_force": "2026-06-30",
+        "ref": "EPS-0992"
+      }
+    ]
+  }
+}

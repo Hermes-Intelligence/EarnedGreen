@@ -1,0 +1,97 @@
+{
+  "schema_version": 2,
+  "campaign_id": "20260714-111231-adaptive-mode-ablation",
+  "status": "candidate-screen-invalid",
+  "provider_calls": 6,
+  "comparative_valid": false,
+  "validity_issues": [
+    {
+      "arm": "vanilla",
+      "category": "INVALID_CONTROL_PROMPT",
+      "reason": "the supposed coding baseline received Candidate read-only scaffolding and was prohibited from editing"
+    },
+    {
+      "arm": "full",
+      "category": "HARNESS_PLATFORM_MISMATCH",
+      "reason": "host final gate treated the Linux python3 launcher as product failure despite verifier PASS"
+    }
+  ],
+  "arms": [
+    {
+      "arm": "vanilla",
+      "rank": 0,
+      "product_score": 25,
+      "public_pass": true,
+      "completion_gate_pass": true,
+      "critical_failure": false,
+      "failure_attribution": "INVALID_CONTROL_PROMPT",
+      "wall_seconds": 26.565233,
+      "observed_tokens": 38259,
+      "actual_model": "gpt-5.6-sol",
+      "effort": "medium",
+      "quality_passed": false
+    },
+    {
+      "arm": "mode-1-lean",
+      "rank": 1,
+      "product_score": 100,
+      "public_pass": true,
+      "completion_gate_pass": true,
+      "critical_failure": false,
+      "failure_attribution": null,
+      "wall_seconds": 187.731258,
+      "observed_tokens": 388416,
+      "actual_model": "gpt-5.6-sol",
+      "effort": "medium",
+      "quality_passed": true
+    },
+    {
+      "arm": "mode-2-routed",
+      "rank": 2,
+      "product_score": 100,
+      "public_pass": true,
+      "completion_gate_pass": true,
+      "critical_failure": false,
+      "failure_attribution": null,
+      "wall_seconds": 225.838886,
+      "observed_tokens": 419491,
+      "actual_model": "gpt-5.6-sol",
+      "effort": "medium",
+      "quality_passed": true
+    },
+    {
+      "arm": "mode-3-assured",
+      "rank": 3,
+      "product_score": 100,
+      "public_pass": true,
+      "completion_gate_pass": true,
+      "critical_failure": false,
+      "failure_attribution": null,
+      "wall_seconds": 217.88987,
+      "observed_tokens": 421147,
+      "actual_model": "gpt-5.6-sol",
+      "effort": "medium",
+      "quality_passed": true
+    },
+    {
+      "arm": "full",
+      "rank": 4,
+      "product_score": 100,
+      "public_pass": true,
+      "completion_gate_pass": false,
+      "critical_failure": true,
+      "failure_attribution": "HARNESS_PLATFORM_MISMATCH",
+      "wall_seconds": 326.061716,
+      "observed_tokens": 576757,
+      "actual_model": "gpt-5.6-sol",
+      "effort": "medium",
+      "quality_passed": false
+    }
+  ],
+  "best_product_score": 100,
+  "raw_rule_recommendation": "mode-1-lean",
+  "candidate_recommendation": null,
+  "decision_rule": "lowest mode within 3 points of best with no critical failure, only when control and completion-gate validity pass",
+  "stable_policy_changed": false,
+  "next_action": "repair and zero-provider-test the invalid control and platform boundary; any replacement screen requires separate approval"
+}

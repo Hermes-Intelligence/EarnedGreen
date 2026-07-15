@@ -1,0 +1,22 @@
+# transient
+*.tmp
+Evals/local/*
+!Evals/local/.gitkeep
+Evals/runs/*
+!Evals/runs/.gitkeep
+Evals/experiments/*
+!Evals/experiments/.gitkeep
+*.log
+__pycache__/
+.DS_Store
+Thumbs.db
+
+# provider credentials and local sessions (never repository material)
+**/.codex/auth.json
+**/.claude/.credentials.json
+**/.claude.json
+**/*oauth*.json
+**/*session-token*
+
+# PDF render scratch (rendered PDFs in Research Outputs/ and Setup/ ARE tracked)
+.automation/.render/

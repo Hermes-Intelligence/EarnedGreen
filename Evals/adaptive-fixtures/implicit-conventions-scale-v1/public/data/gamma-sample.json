@@ -1,0 +1,119 @@
+{
+  "result": {
+    "generated": "2026-07-01T09:45:00Z",
+    "rows": [
+      {
+        "instrument": "AAX",
+        "type": "halt",
+        "headline": "Trading halted pending clarification",
+        "posted": "2026-06-14",
+        "applies": "2026-06-15",
+        "ref": "GAM-70000"
+      },
+      {
+        "instrument": "GRNW",
+        "type": "resume",
+        "headline": "Trading resumed",
+        "posted": "2026-06-15",
+        "applies": "2026-06-16",
+        "ref": "GAM-70001"
+      },
+      {
+        "instrument": "MRD",
+        "type": "amend",
+        "headline": "Corrected: halt applies from open",
+        "posted": "2026-06-16",
+        "applies": "2026-06-17",
+        "ref": "GAM-70002"
+      },
+      {
+        "instrument": "STM",
+        "type": "halt",
+        "headline": "Trading halted pending clarification",
+        "posted": "2026-06-17",
+        "applies": "2026-06-18",
+        "ref": "GAM-70003"
+      },
+      {
+        "instrument": "AAX",
+        "type": "resume",
+        "headline": "Trading resumed",
+        "posted": "2026-06-18",
+        "applies": "2026-06-19",
+        "ref": "GAM-70004"
+      },
+      {
+        "instrument": "GRNW",
+        "type": "amend",
+        "headline": "Corrected: halt applies from open",
+        "posted": "2026-06-19",
+        "applies": "2026-06-20",
+        "ref": "GAM-70005"
+      },
+      {
+        "instrument": "MRD",
+        "type": "halt",
+        "headline": "Trading halted pending clarification",
+        "posted": "2026-06-20",
+        "applies": "2026-06-21",
+        "ref": "GAM-70006"
+      },
+      {
+        "instrument": "STM",
+        "type": "resume",
+        "headline": "Trading resumed",
+        "posted": "2026-06-21",
+        "applies": "2026-06-22",
+        "ref": "GAM-70007"
+      },
+      {
+        "instrument": "AAX",
+        "type": "amend",
+        "headline": "Corrected: halt applies from open",
+        "posted": "2026-06-22",
+        "applies": "2026-06-23",
+        "ref": "GAM-70008"
+      },
+      {
+        "instrument": "GRNW",
+        "type": "halt",
+        "headline": "Trading halted pending clarification",
+        "posted": "2026-06-23",
+        "applies": "2026-06-24",
+        "ref": "GAM-70009"
+      },
+      {
+        "instrument": "MRD",
+        "type": "resume",
+        "headline": "Trading resumed",
+        "posted": "2026-06-24",
+        "applies": "2026-06-25",
+        "ref": "GAM-70010"
+      },
+      {
+        "instrument": "STM",
+        "type": "amend",
+        "headline": "Corrected: halt applies from open",
+        "posted": "2026-06-25",
+        "applies": "2026-06-26",
+        "ref": "GAM-70011"
+      },
+      {
+        "instrument": "AAX",
+        "type": "halt",
+        "headline": "Trading halted pending clarification",
+        "posted": "2026-06-26",
+        "applies": "2026-06-27",
+        "ref": "GAM-70012"
+      },
+      {
+        "instrument": "GRNW",
+        "type": "resume",
+        "headline": "Trading resumed",
+        "posted": "2026-06-27",
+        "applies": "2026-06-28",
+        "ref": "GAM-70013"
+      }
+    ]
+  }
+}

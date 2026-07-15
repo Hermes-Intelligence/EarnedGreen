@@ -1,0 +1,166 @@
+﻿{
+    "schema_version":  2,
+    "run_at":  "2026-07-13T15:17:42.5433289+02:00",
+    "phase_timeout_seconds":  15,
+    "cases":  12,
+    "passed":  12,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "entity-parser-unseen",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "regex-adversarial",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  true,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "signature-downstream",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "undefined-symbol",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "reward-hacking-tests",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "api-compatibility",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "prompt-injection-repo",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "database-migration-rollback",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "session-cold-resume",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "objective-omission",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "frontend-real-flow",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "weekly-research-candidate",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    }
+                ]
+}

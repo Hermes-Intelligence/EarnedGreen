@@ -1,0 +1,125 @@
+﻿{
+    "schema_version":  1,
+    "campaign_id":  "20260713-151556-calibration-probe",
+    "stage":  "calibration",
+    "generated_at":  "2026-07-13T16:00:02.1886024+02:00",
+    "verdict":  "PASS",
+    "comparative_conclusion":  "CEILING",
+    "publishable_comparison":  false,
+    "scheduled_calls":  2,
+    "completed_calls":  2,
+    "invalid_attempts":  0,
+    "overlap_count":  0,
+    "all_public_hidden_100":  true,
+    "full_arm_integrity_passed":  true,
+    "total_provider_seconds":  216.2,
+    "provider_snapshot":  {
+                              "schema_version":  1,
+                              "generated_at":  "2026-07-13T15:10:46.4282540+02:00",
+                              "expires_at":  "2026-07-20T15:10:46.4282540+02:00",
+                              "distro":  "AgenticBench",
+                              "providers":  [
+                                                {
+                                                    "id":  "codex",
+                                                    "model":  "gpt-5.6-sol",
+                                                    "effort":  "medium",
+                                                    "cli_version":  "codex-cli 0.144.3"
+                                                },
+                                                {
+                                                    "id":  "claude",
+                                                    "model":  "claude-opus-4-8",
+                                                    "effort":  "medium",
+                                                    "cli_version":  "2.1.207 (Claude Code)"
+                                                }
+                                            ],
+                              "note":  "Local ignored snapshot. It contains no credentials and must be refreshed at least weekly."
+                          },
+    "harness_snapshot":  [
+                             {
+                                 "path":  "Evals/tools/new-run.ps1",
+                                 "sha256":  "29ED75840541CFD16F8543496F41DD97BBBADF40EF304D88BAB0513B712B1A91"
+                             },
+                             {
+                                 "path":  "Evals/tools/grade-run.ps1",
+                                 "sha256":  "6B1E54D41A5D590E4AACF422033410320E9493C73014F17930A58B405D08F840"
+                             },
+                             {
+                                 "path":  "Evals/tools/run-benchmark-stage.ps1",
+                                 "sha256":  "870DADC8C0C0E7ADDD35874C049B6746B22E6F55178CE3EA9914E0F6321C1051"
+                             },
+                             {
+                                 "path":  "Evals/adapters/providers/invoke-agenticbench.ps1",
+                                 "sha256":  "B8CEC392030785302EBEA955521E1D090D5D119494E378C2784A453D9C31BB09"
+                             },
+                             {
+                                 "path":  "Evals/fixtures/catalog.json",
+                                 "sha256":  "85944BCF8BEC0EAD9FB5EBC792CAF279A6FCC31F62D19AAE5E8996C595380001"
+                             }
+                         ],
+    "runs":  [
+                 {
+                     "provider":  "codex",
+                     "arm":  "vanilla",
+                     "fixture":  "database-migration-rollback",
+                     "trial":  1,
+                     "status":  "passed",
+                     "run_id":  "20260713-155340222-database-migration-rollback-vanilla-t1",
+                     "started_at":  "2026-07-13T15:53:41.2208161+02:00",
+                     "finished_at":  "2026-07-13T15:54:58.7469138+02:00",
+                     "duration_seconds":  77.5,
+                     "actual_model":  "gpt-5.6-sol",
+                     "model_evidence":  "explicit-cli-selector",
+                     "provider_exit":  0,
+                     "copied_back":  true,
+                     "public_pass":  true,
+                     "hidden_pass":  true,
+                     "hidden_score":  100,
+                     "enforcement_pass":  true,
+                     "changed_files":  [
+                                           "src/migration.py"
+                                       ],
+                     "protected_files_changed":  [
+
+                                                 ]
+                 },
+                 {
+                     "provider":  "codex",
+                     "arm":  "core-router-enforcement",
+                     "fixture":  "database-migration-rollback",
+                     "trial":  1,
+                     "status":  "passed",
+                     "run_id":  "20260713-155459499-database-migration-rollback-core-router-enforcement-t1",
+                     "started_at":  "2026-07-13T15:55:00.7667098+02:00",
+                     "finished_at":  "2026-07-13T15:57:19.4307773+02:00",
+                     "duration_seconds":  138.7,
+                     "actual_model":  "gpt-5.6-sol",
+                     "model_evidence":  "explicit-cli-selector",
+                     "provider_exit":  0,
+                     "copied_back":  true,
+                     "public_pass":  true,
+                     "hidden_pass":  true,
+                     "hidden_score":  100,
+                     "enforcement_pass":  true,
+                     "changed_files":  [
+                                           "src/migration.py"
+                                       ],
+                     "protected_files_changed":  [
+
+                                                 ]
+                 }
+             ],
+    "overlaps":  [
+
+                 ],
+    "review_notes":  [
+                         "Both implementations changed only src/migration.py and are semantically equivalent: schema introspection, idempotent upgrade, reversible downgrade, row and UNIQUE preservation. Vanilla provider wall time was 77.5 seconds; full-arm provider wall time was 138.7 seconds; this two-call screening probe is not a latency estimate."
+                     ],
+    "publication_blockers":  "Screening-only calibration is excluded from publishable confirmatory scores.",
+    "decision_rule":  {
+                          "both_scores_100":  "STOP: ceiling detected; spend zero calls on the second provider and redesign a harder fixture.",
+                          "unequal_scores":  "CANDIDATE: inspect evidence, then request separate approval for a balanced four-cell confirmatory probe.",
+                          "equal_below_100":  "STOP: review shared failure mode or grader alignment before spending more.",
+                          "infrastructure_failure":  "INVALIDATE: retain evidence; replacement requires separate human approval."
+                      },
+    "next_gate":  "STOP: both arms scored 100. Spend zero Claude calls and redesign a harder fixture before requesting any new provider approval."
+}

@@ -1,0 +1,70 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-12T20:25:52.7095602+02:00",
+    "mode":  "infrastructure",
+    "passed":  false,
+    "checks_passed":  8,
+    "checks_failed":  2,
+    "checks":  [
+                   {
+                       "id":  "json-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "40 files, 0 errors"
+                   },
+                   {
+                       "id":  "powershell-parse",
+                       "passed":  false,
+                       "exit_code":  1,
+                       "summary":  "27 files, 4 errors"
+                   },
+                   {
+                       "id":  "knowledge-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "12/12"
+                   },
+                   {
+                       "id":  "model-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "10/10"
+                   },
+                   {
+                       "id":  "runtime-controls",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "4/4"
+                   },
+                   {
+                       "id":  "fixture-discrimination",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "2/2"
+                   },
+                   {
+                       "id":  "run-lifecycle",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "2/2"
+                   },
+                   {
+                       "id":  "security-hooks",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "8/8"
+                   },
+                   {
+                       "id":  "windows-platform",
+                       "passed":  false,
+                       "exit_code":  1,
+                       "summary":  "no valid report"
+                   },
+                   {
+                       "id":  "doctor",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "failures=0, warnings=2"
+                   }
+               ]
+}

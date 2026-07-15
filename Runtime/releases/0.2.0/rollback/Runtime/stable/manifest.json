@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "release": "0.1.0",
+  "status": "stable-minimal",
+  "promoted_at": "2026-07-12T18:00:00+02:00",
+  "promoted_by": "user-directed-rebuild",
+  "core": "Core/runtime.md",
+  "objective": "Objectives/active/OBJ-20260712-agentic-work-best-practices.json",
+  "router_catalog": "Router/catalog/modules.json",
+  "platform_adapters": {
+    "claude": "Claude/BOOTSTRAP.md",
+    "codex": "Codex/BOOTSTRAP.md"
+  },
+  "candidate_rules_are_authoritative": false,
+  "notes": "Only the minimal Core is stable. Existing long contracts remain research/reference material until evaluated and promoted."
+}

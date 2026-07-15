@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "fixture": "implicit-conventions-scale-v1",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-scale",
+  "generated_at": "2026-07-15T13:29:59.058989+00:00",
+  "fixture_fingerprint": {
+    "file_count": 105,
+    "newest_mtime": 1784121987.2340853,
+    "sha256": "28711B27329647D34AA77ABDAF5EC250D03651785D893D7FD407080499E7CBA6"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": {
+          "template-choice": "core/normalize.py MIGRATION note ('Every NEW source starts on house_flow; never copy the inline flow out of alpha_feed or beta_feed') pins gamma/delta as the template, not the alphabetically-first alpha",
+          "row-shape": "core/rows.py ('consumers index event rows by POSITION') plus positions_report's ReportError pin position-indexed tuples through make_event_row",
+          "correction-kind": "core/changelog.py ('kinds are a CLOSED vocabulary', restatement = NEW row) plus audit_trail's replay assertion pin correction -> restate as an appended row",
+          "as-of-date": "core/dates.py pins as_of = released (published), never in_force (effective)",
+          "identity-state": "core/identity.py pins the event_id state hash over (kind, published_at, effective_at) so re-scrapes dedup and corrections append",
+          "error-payload": "alpha/beta/gamma/delta all fail loudly on error-shaped or empty payloads; epsilon's non-OK envelope status follows the same rule",
+          "venue-entry": "reference/venues.py ('every ingesting source must have a VENUES entry') plus venue_dashboard's silent skip pin the registry entry",
+          "scheduler-shell": "scheduler/registry.py ('every ingesting source has a thin shell ... BEFORE run_resolution') plus run_resolution's staleness warning pin the shell and its block placement",
+          "export-section": "exposure_export.SOURCE_SECTIONS docstring ('every ingesting source must be added') pins the section entry",
+          "alert-channel": "alerts.VENUE_CHANNELS docstring ('every venue that can halt trading needs a channel') pins the channel entry; the channel VALUE is a free choice (desk-emea here, desk-eu in the primary)",
+          "scope": "pipeline.py ('Only sources with a working parser are registered here; scrape-only stubs stay unregistered') overrides PLAN.md's roster instruction; the stubs and PLAN.md's sigma template are decoys"
+        },
+        "after_pinning": "None by design. Remaining differences are structural and free-choice values only.",
+        "structural": [
+          "field translation via a _FIELDS tuple table instead of inline dict literals",
+          "kind mapping through a complete _KINDS dict instead of a single-override dict",
+          "per-record work concentrated in a _translate helper called from a list comprehension",
+          "guard clause style (single if with 'not already_recorded') instead of continue-based loop",
+          "epsilon scheduled earlier inside the sources block (position within the block is documented as not significant)",
+          "different free-choice values: venue display name/country/tz, export section label, alert channel (desk-emea vs desk-eu)"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": false,
+      "detail": "",
+      "serialized_output_dimensions": [
+        "consumer-exposure",
+        "consumer-alerts"
+      ],
+      "adversary_score": 100,
+      "differing_format_files": [
+        "src/consumers/exposure_export.py",
+        "src/consumers/alerts.py"
+      ]
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "mode-1-local",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 16,
+          "expected_band": [
+            8,
+            25
+          ],
+          "band_pass": true,
+          "ok": true
+        },
+        {
+          "control": "plausible-cold-pass",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 48,
+          "expected_band": [
+            40,
+            60
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 14,
+          "declared_dimensions": 14,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 14,
+          "declared_dimensions": 14,
+          "dimension_diff": [],
+          "score": 6,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 14,
+          "declared_dimensions": 14,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "fixture_class": "underspecified-by-design",
+        "anchored_checks": [
+          "basic-functionality",
+          "changelog-discipline",
+          "consumer-alerts",
+          "consumer-exposure",
+          "migration-path",
+          "order-dependency",
+          "point-in-time",
+          "row-contract",
+          "run-order",
+          "scope-judgment",
+          "silent-zero-rows",
+          "state-identity",
+          "token-guard",
+          "venue-config"
+        ],
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 46,
+    "matching_runs": [],
+    "valid_paid_runs": 0
+  }
+}

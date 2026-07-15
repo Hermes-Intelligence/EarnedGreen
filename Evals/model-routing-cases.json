@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "cases": [
+    { "id": "simple-mechanical", "task": "Rename a private local variable as a mechanical change and run deterministic checks.", "expected_profile": "fast-low-risk" },
+    { "id": "ordinary-feature", "task": "Build a normal product feature with tests.", "expected_profile": "balanced-daily" },
+    { "id": "difficult-bug", "task": "Fix an intermittent cross-module regression bug.", "expected_profile": "deep-implementation" },
+    { "id": "public-refactor", "task": "Refactor a public API and update consumers.", "expected_profile": "deep-implementation" },
+    { "id": "database-migration", "task": "Create a destructive production database migration with rollback.", "expected_profile": "architecture-high-risk" },
+    { "id": "security-review", "task": "Audit authentication and production secret handling.", "expected_profile": "adversarial-review" },
+    { "id": "weekly-research", "task": "Research current agent harness evidence and produce a candidate package.", "expected_profile": "research-synthesizer" },
+    { "id": "explicit-user-selector", "provider": "anthropic-claude-code", "profile": "balanced-daily", "explicit_selector": "sonnet", "expected_selector": "sonnet" },
+    { "id": "risk-floor-rejection", "provider": "anthropic-claude-code", "profile": "fast-low-risk", "risk": "high", "expected_error": "adequate risk floor" },
+    { "id": "incompatible-selector-rejection", "provider": "anthropic-claude-code", "profile": "architecture-high-risk", "risk": "high", "explicit_selector": "haiku", "expected_error": "does not satisfy capability profile" }
+  ]
+}

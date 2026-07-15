@@ -1,0 +1,416 @@
+{
+  "schema_version": 1,
+  "kind": "v4-semantic-regrade",
+  "fixture": "adaptive-contract-evolution-v4",
+  "provider_calls": 0,
+  "grader": "hidden/grade.py (semantic serialization checks)",
+  "runs_regraded": 5,
+  "headline": {
+    "all_arms_semantic_score": [
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "all_arms_exact_score": [
+      70,
+      70,
+      70,
+      70,
+      70
+    ],
+    "semantic_scores_all_equal": true,
+    "exact_scores_all_equal": true,
+    "interpretation": "Once format noise is removed, the arms converge on the SAME outcome (all semantic scores equal). Any remaining difference is in PROCESS (consumer enumeration, impact-map sections) and TOKEN COST, not the graded outcome."
+  },
+  "table": [
+    {
+      "arm": "full",
+      "run_id": "20260715-092824975-adaptive-contract-evolution-v4-full-t1",
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "missed_dims_semantic": [],
+      "token_cost": 1626616,
+      "consumer_enum_completeness": 1.0,
+      "consumer_edit_completeness": 1.0,
+      "self_attestation_gap": false,
+      "self_attestation_detail": "impact-map marked consumers 'verified' and the semantic grade passes every consumer dimension: the self-attestation is trustworthy on this run"
+    },
+    {
+      "arm": "mode-1-lean",
+      "run_id": "20260715-094258076-adaptive-contract-evolution-v4-mode-1-lean-t1",
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "missed_dims_semantic": [],
+      "token_cost": 658269,
+      "consumer_enum_completeness": null,
+      "consumer_edit_completeness": 1.0,
+      "self_attestation_gap": null,
+      "self_attestation_detail": "N/A: run has no impact-map (no self-attestation to check, e.g. vanilla)"
+    },
+    {
+      "arm": "vanilla",
+      "run_id": "20260715-094952006-adaptive-contract-evolution-v4-vanilla-t1",
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "missed_dims_semantic": [],
+      "token_cost": 313237,
+      "consumer_enum_completeness": null,
+      "consumer_edit_completeness": 1.0,
+      "self_attestation_gap": null,
+      "self_attestation_detail": "N/A: run has no impact-map (no self-attestation to check, e.g. vanilla)"
+    },
+    {
+      "arm": "mode-2-routed",
+      "run_id": "20260715-095401638-adaptive-contract-evolution-v4-mode-2-routed-t1",
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "missed_dims_semantic": [],
+      "token_cost": 579344,
+      "consumer_enum_completeness": null,
+      "consumer_edit_completeness": 1.0,
+      "self_attestation_gap": null,
+      "self_attestation_detail": "N/A: run has no impact-map (no self-attestation to check, e.g. vanilla)"
+    },
+    {
+      "arm": "vanilla-canary",
+      "run_id": "20260714-181052657-adaptive-contract-evolution-v4-vanilla-t1",
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "missed_dims_semantic": [],
+      "token_cost": 212369,
+      "consumer_enum_completeness": null,
+      "consumer_edit_completeness": 1.0,
+      "self_attestation_gap": null,
+      "self_attestation_detail": "N/A: run has no impact-map (no self-attestation to check, e.g. vanilla)"
+    }
+  ],
+  "detail": [
+    {
+      "run_id": "20260715-092824975-adaptive-contract-evolution-v4-full-t1",
+      "arm": "full",
+      "has_impact_map": true,
+      "token_cost": 1626616,
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "consumer_enumeration_completeness": 1.0,
+      "consumer_enumeration": {
+        "ground_truth": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "enumerated": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "hit": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "missed": []
+      },
+      "consumer_edit_completeness": 1.0,
+      "consumer_edits": {
+        "required": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "edited": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "unedited": []
+      },
+      "impact_map_section_completeness": {
+        "sections_present": [
+          "compatibility",
+          "consumers",
+          "definitions",
+          "documentation",
+          "observability",
+          "tests"
+        ],
+        "sections_verified": [
+          "compatibility",
+          "consumers",
+          "definitions",
+          "documentation",
+          "observability",
+          "tests"
+        ],
+        "completeness": 1.0
+      },
+      "self_attestation_gap": false,
+      "self_attestation_detail": "impact-map marked consumers 'verified' and the semantic grade passes every consumer dimension: the self-attestation is trustworthy on this run",
+      "consumer_dimension_status": {
+        "consumer-primary": true,
+        "exporter-propagation": true,
+        "snapshot-propagation": true
+      }
+    },
+    {
+      "run_id": "20260715-094258076-adaptive-contract-evolution-v4-mode-1-lean-t1",
+      "arm": "mode-1-lean",
+      "has_impact_map": false,
+      "token_cost": 658269,
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "consumer_enumeration_completeness": null,
+      "consumer_enumeration": {
+        "ground_truth": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "enumerated": [],
+        "hit": [],
+        "missed": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ]
+      },
+      "consumer_edit_completeness": 1.0,
+      "consumer_edits": {
+        "required": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "edited": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "unedited": []
+      },
+      "impact_map_section_completeness": {
+        "sections_present": [],
+        "sections_verified": [],
+        "completeness": null
+      },
+      "self_attestation_gap": null,
+      "self_attestation_detail": "N/A: run has no impact-map (no self-attestation to check, e.g. vanilla)",
+      "consumer_dimension_status": {
+        "consumer-primary": true,
+        "exporter-propagation": true,
+        "snapshot-propagation": true
+      }
+    },
+    {
+      "run_id": "20260715-094952006-adaptive-contract-evolution-v4-vanilla-t1",
+      "arm": "vanilla",
+      "has_impact_map": false,
+      "token_cost": 313237,
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "consumer_enumeration_completeness": null,
+      "consumer_enumeration": {
+        "ground_truth": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "enumerated": [],
+        "hit": [],
+        "missed": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ]
+      },
+      "consumer_edit_completeness": 1.0,
+      "consumer_edits": {
+        "required": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "edited": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "unedited": []
+      },
+      "impact_map_section_completeness": {
+        "sections_present": [],
+        "sections_verified": [],
+        "completeness": null
+      },
+      "self_attestation_gap": null,
+      "self_attestation_detail": "N/A: run has no impact-map (no self-attestation to check, e.g. vanilla)",
+      "consumer_dimension_status": {
+        "consumer-primary": true,
+        "exporter-propagation": true,
+        "snapshot-propagation": true
+      }
+    },
+    {
+      "run_id": "20260715-095401638-adaptive-contract-evolution-v4-mode-2-routed-t1",
+      "arm": "mode-2-routed",
+      "has_impact_map": false,
+      "token_cost": 579344,
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "consumer_enumeration_completeness": null,
+      "consumer_enumeration": {
+        "ground_truth": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "enumerated": [],
+        "hit": [],
+        "missed": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ]
+      },
+      "consumer_edit_completeness": 1.0,
+      "consumer_edits": {
+        "required": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "edited": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "unedited": []
+      },
+      "impact_map_section_completeness": {
+        "sections_present": [],
+        "sections_verified": [],
+        "completeness": null
+      },
+      "self_attestation_gap": null,
+      "self_attestation_detail": "N/A: run has no impact-map (no self-attestation to check, e.g. vanilla)",
+      "consumer_dimension_status": {
+        "consumer-primary": true,
+        "exporter-propagation": true,
+        "snapshot-propagation": true
+      }
+    },
+    {
+      "run_id": "20260714-181052657-adaptive-contract-evolution-v4-vanilla-t1",
+      "arm": "vanilla",
+      "has_impact_map": false,
+      "token_cost": 212369,
+      "original_exact_score": 70,
+      "semantic_score": 100,
+      "consumer_enumeration_completeness": null,
+      "consumer_enumeration": {
+        "ground_truth": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "enumerated": [],
+        "hit": [],
+        "missed": [
+          "src/consumers.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ]
+      },
+      "consumer_edit_completeness": 1.0,
+      "consumer_edits": {
+        "required": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "edited": [
+          "README.md",
+          "src/consumers.py",
+          "src/contracts.py",
+          "src/digest_helper.py",
+          "src/exporter.py",
+          "src/serializer.py",
+          "src/snapshot.py"
+        ],
+        "unedited": []
+      },
+      "impact_map_section_completeness": {
+        "sections_present": [],
+        "sections_verified": [],
+        "completeness": null
+      },
+      "self_attestation_gap": null,
+      "self_attestation_detail": "N/A: run has no impact-map (no self-attestation to check, e.g. vanilla)",
+      "consumer_dimension_status": {
+        "consumer-primary": true,
+        "exporter-propagation": true,
+        "snapshot-propagation": true
+      }
+    }
+  ]
+}

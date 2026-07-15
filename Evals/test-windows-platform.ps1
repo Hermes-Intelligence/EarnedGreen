@@ -1,0 +1,15 @@
+[CmdletBinding()]
+param([string]$OutputPath)
+$ErrorActionPreference='Stop';$root=Split-Path -Parent $PSScriptRoot;$temp=Join-Path ([IO.Path]::GetTempPath()) ('Agentic OneDrive Style '+[guid]::NewGuid().ToString('N'));$results=@()
+try{
+    New-Item -ItemType Directory -Force -Path $temp|Out-Null;$marker=[string]([char]0x0142);$unicode="Existing local rule: unicode-$marker`r`n";[IO.File]::WriteAllText((Join-Path $temp 'AGENTS.md'),$unicode,[Text.UTF8Encoding]::new($false));[IO.File]::WriteAllText((Join-Path $temp 'CLAUDE.md'),$unicode,[Text.UTF8Encoding]::new($false))
+    & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'tools/init.ps1') -TargetRepo $temp|Out-Null;$firstA=(Get-FileHash (Join-Path $temp 'AGENTS.md') -Algorithm SHA256).Hash;$firstC=(Get-FileHash (Join-Path $temp 'CLAUDE.md') -Algorithm SHA256).Hash
+    & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'tools/init.ps1') -TargetRepo $temp|Out-Null;$secondA=(Get-FileHash (Join-Path $temp 'AGENTS.md') -Algorithm SHA256).Hash;$secondC=(Get-FileHash (Join-Path $temp 'CLAUDE.md') -Algorithm SHA256).Hash;$body=Get-Content (Join-Path $temp 'AGENTS.md') -Raw -Encoding UTF8
+    $results+=[pscustomobject]@{id='spaces-unicode-crlf-idempotent';passed=($firstA -eq $secondA -and $firstC -eq $secondC -and $body.Contains("unicode-$marker") -and ([regex]::Matches($body,'AGENTIC-WORK:BEGIN').Count -eq 1))}
+    $deep=$temp;1..12|ForEach-Object{$deep=Join-Path $deep ('long-segment-'+('x'*10))};$longSupported=$false;try{New-Item -ItemType Directory -Force -Path $deep -ErrorAction Stop|Out-Null;$longSupported=Test-Path $deep}catch{$longError=$_.Exception.Message};$results+=[pscustomobject]@{id='long-path-capability-recorded';passed=$true;supported=$longSupported;length=$deep.Length;error=if($longSupported){$null}else{$longError}}
+    $lockPath=Join-Path $temp 'locked.txt';Set-Content $lockPath 'original';$before=(Get-FileHash $lockPath -Algorithm SHA256).Hash;$stream=[IO.File]::Open($lockPath,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::None);try{$locked=$false;try{Set-Content $lockPath 'changed'}catch{$locked=$true}}finally{$stream.Dispose()};$after=(Get-FileHash $lockPath -Algorithm SHA256).Hash;$results+=[pscustomobject]@{id='exclusive-lock-no-corruption';passed=($locked -and $before -eq $after)}
+    $results+=[pscustomobject]@{id='onedrive-detection';passed=($root -match 'OneDrive')}
+    $results+=[pscustomobject]@{id='wsl-availability-recorded';passed=$true;available=[bool](Get-Command wsl -ErrorAction SilentlyContinue)}
+}finally{if(Test-Path $temp){Remove-Item $temp -Recurse -Force}}
+$failed=@($results|Where-Object{-not $_.passed}).Count;$report=[ordered]@{schema_version=1;run_at=[datetimeoffset]::Now.ToString('o');platform="$([Environment]::OSVersion)";cases=$results.Count;passed=$results.Count-$failed;failed=$failed;results=$results}
+if(-not $OutputPath){$OutputPath=Join-Path $root ("Evals/reports/{0}-windows-platform.json" -f (Get-Date -Format 'yyyy-MM-dd-HHmmss'))};$report|ConvertTo-Json -Depth 8|Set-Content -Encoding UTF8 $OutputPath;$report|ConvertTo-Json -Depth 8;if($failed){exit 1}

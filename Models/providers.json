@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-12T20:00:00+02:00",
+  "expires_at": "2026-07-19T20:00:00+02:00",
+  "policy": { "volatile_data_only": true, "recommendation_only": true, "never_persist_user_default": true, "require_actual_model_logging": true, "expired_catalog_behavior": "warn-and-use-provider-current-alias-or-explicit-user-choice" },
+  "providers": [
+    {
+      "id": "anthropic-claude-code",
+      "official_sources": ["https://platform.claude.com/docs/en/about-claude/models/overview", "https://code.claude.com/docs/en/model-config"],
+      "discovery": { "method": "official-models-api-and-docs", "refresh_days": 7 },
+      "selectors": [
+        { "id": "haiku", "kind": "provider-current-alias", "traits": ["tool-use", "coding", "low-latency", "low-cost", "high-throughput"], "profiles": ["fast-low-risk", "research-worker"] },
+        { "id": "sonnet", "kind": "provider-current-alias", "traits": ["tool-use", "coding", "strong-reasoning", "balanced", "agentic-coding"], "profiles": ["balanced-daily", "deep-implementation", "research-synthesizer"] },
+        { "id": "opus", "kind": "provider-current-alias", "traits": ["tool-use", "coding", "frontier-reasoning", "highest-reliability", "critique"], "profiles": ["deep-implementation", "architecture-high-risk", "adversarial-review", "research-synthesizer"] },
+        { "id": "fable", "kind": "provider-current-alias", "traits": ["tool-use", "coding", "frontier-reasoning", "creative-reasoning", "multimodal"], "profiles": ["creative-design", "architecture-high-risk"] }
+      ]
+    },
+    {
+      "id": "openai-codex",
+      "official_sources": ["https://developers.openai.com/api/docs/models", "https://developers.openai.com/codex/models"],
+      "discovery": { "method": "official-model-catalog-and-runtime-availability", "refresh_days": 7 },
+      "selectors": [
+        { "id": "current-fast", "kind": "capability-selector", "traits": ["tool-use", "coding", "low-latency", "low-cost", "high-throughput"], "profiles": ["fast-low-risk", "research-worker"] },
+        { "id": "current-balanced", "kind": "capability-selector", "traits": ["tool-use", "coding", "strong-reasoning", "balanced", "agentic-coding"], "profiles": ["balanced-daily", "deep-implementation", "research-synthesizer"] },
+        { "id": "current-frontier-coding", "kind": "capability-selector", "traits": ["tool-use", "coding", "frontier-reasoning", "highest-reliability", "agentic-coding", "critique"], "profiles": ["deep-implementation", "architecture-high-risk", "adversarial-review", "research-synthesizer"] },
+        { "id": "current-frontier-creative", "kind": "capability-selector", "traits": ["frontier-reasoning", "creative-reasoning", "multimodal"], "profiles": ["creative-design"] }
+      ]
+    }
+  ]
+}

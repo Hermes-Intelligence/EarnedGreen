@@ -1,0 +1,13 @@
+{
+  "schema_version": 2,
+  "verdict": "PASS",
+  "layout": "temporary promoted tree",
+  "selected_mode": "mode-3-assured",
+  "selected_modules": ["objective-integrity", "verification-evidence", "generalization-assurance"],
+  "context_characters": 3009,
+  "windows_gate_present": true,
+  "posix_gate_present": true,
+  "powershell_parse_errors": 0,
+  "provider_calls": 0,
+  "stable_modified": false
+}

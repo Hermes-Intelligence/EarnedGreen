@@ -1,0 +1,49 @@
+﻿{
+    "schema_version":  1,
+    "generated_at":  "2026-07-14T13:46:43.1184071+02:00",
+    "task":  "Execute exactly six approved sequential Codex calls for campaign 20260714-132536-adaptive-mode-ablation, stop fail-closed, summarize quality time tokens and capability separation",
+    "repo":  "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices",
+    "fingerprint":  {
+                        "task_type":  "feature-or-change",
+                        "risk":  "low",
+                        "risk_factors":  [
+
+                                         ],
+                        "changed_paths":  [
+
+                                          ]
+                    },
+    "core":  "Core/runtime.md",
+    "selected_modules":  [
+                             {
+                                 "id":  "verification-evidence",
+                                 "path":  "Core/knowledge-modules/verification-evidence.md",
+                                 "score":  1000,
+                                 "reasons":  [
+                                                 "always-on routed gate"
+                                             ]
+                             }
+                         ],
+    "rejected_modules":  [
+                             "generalization-assurance",
+                             "change-impact",
+                             "security-boundaries",
+                             "loop-control",
+                             "session-handoff",
+                             "database-migration",
+                             "frontend-runtime",
+                             "research-candidate"
+                         ],
+    "context_budget":  {
+                           "max_modules":  6,
+                           "target_characters":  18000,
+                           "hard_limit_characters":  28000
+                       },
+    "selected_characters":  714,
+    "model_routing":  {
+                          "capability_profile":  "balanced-daily",
+                          "recommendation_only":  true,
+                          "note":  "Resolve through tools/model-route.ps1; never persist the user\u0027s default model."
+                      },
+    "routing_confidence":  "low"
+}

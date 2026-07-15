@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "generated_at": "GENERATED_LOCALLY",
+  "expires_at": "GENERATED_LOCALLY_PLUS_SEVEN_DAYS",
+  "distro": "AgenticBench",
+  "providers": [
+    { "id": "codex", "model": "provider-default", "effort": "medium", "cli_version": "DISCOVERED_LOCALLY" },
+    { "id": "claude", "model": "provider-default", "effort": "medium", "cli_version": "DISCOVERED_LOCALLY" }
+  ],
+  "note": "Example only. Generate the ignored local snapshot with refresh-local-provider-settings.ps1. Never add credentials here."
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "status": "candidate",
+  "closed_world_source": "implementation/modes.json",
+  "capabilities": [
+    {"id":"minimal-core","status":"active","evidence_paths":["implementation/prepare_context.py","implementation/capability_activation_probe.py"],"reason":"every scaffolded arm receives the promoted minimal Core and the probe verifies it"},
+    {"id":"focused-verification","status":"active","evidence_paths":["implementation/pre_submit_gate.py","implementation/prepare_context.py"],"reason":"verification runs are recorded and re-executed by the completion gate"},
+    {"id":"compact-requirement-ledger","status":"active","evidence_paths":["implementation/objective_compiler.py","implementation/prepare_context.py","implementation/capability_activation_probe.py"],"reason":"Mode 1 receives a smaller schema-valid ledger with identical requirement IDs"},
+    {"id":"precision-router","status":"active","evidence_paths":["implementation/adaptive_router.py","implementation/router-catalog.json"],"reason":"contextual module selection and budgets are executable"},
+    {"id":"objective-ledger","status":"active","evidence_paths":["implementation/objective_compiler.py","implementation/pre_submit_gate.py"],"reason":"material requirements receive IDs and fail-closed evidence checks"},
+    {"id":"pre-submit-gate","status":"active","evidence_paths":["implementation/pre_submit_gate.py"],"reason":"completion is executable and fail-closed"},
+    {"id":"impact-map","status":"active","evidence_paths":["implementation/prepare_context.py","implementation/pre_submit_gate.py","implementation/capability_activation_probe.py"],"reason":"Mode 3+ compiles six fail-closed impact sections"},
+    {"id":"adversarial-verification","status":"active","evidence_paths":["implementation/prepare_context.py","implementation/pre_submit_gate.py","implementation/capability_activation_probe.py"],"reason":"Mode 3+ requires a threat model and a re-executable adversarial challenge"},
+    {"id":"context-usage-telemetry","status":"active","evidence_paths":["implementation/context_telemetry.py","implementation/grade_adaptive_run.py","implementation/capability_activation_probe.py"],"reason":"each graded adaptive run emits observable-only context usage telemetry"},
+    {"id":"durable-checkpoints","status":"active","evidence_paths":["implementation/prepare_context.py","implementation/pre_submit_gate.py","implementation/capability_activation_probe.py"],"reason":"wide or multi-session Mode 3+ work compiles and gates an evidence-backed checkpoint"},
+    {"id":"session-handoff-state","status":"active","evidence_paths":["implementation/prepare_context.py","implementation/pre_submit_gate.py","implementation/capability_activation_probe.py"],"reason":"wide or multi-session Mode 3+ work compiles and gates resumable state"},
+    {"id":"independent-verifier","status":"active","evidence_paths":["implementation/prepare_full_verifier.py","implementation/finalize_full_verification.py"],"reason":"Full uses a fresh separate verifier call and product-change check"},
+    {"id":"bounded-loop","status":"active","evidence_paths":["implementation/run_ablation_campaign.py"],"reason":"campaign calls, time, replacements, kill switch and automatic follow-up are bounded"},
+    {"id":"human-approval-boundaries","status":"active","evidence_paths":["implementation/approve_ablation_campaign.py","implementation/prepare_adaptive_run.py"],"reason":"campaign scope and Full scope approval are explicit"}
+  ]
+}

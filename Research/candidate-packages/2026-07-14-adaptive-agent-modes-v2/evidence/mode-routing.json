@@ -1,0 +1,182 @@
+{
+  "schema_version": 2,
+  "verdict": "PASS",
+  "provider_calls": 0,
+  "cases": [
+    {
+      "id": "status-only",
+      "verdict": "PASS",
+      "mode": "vanilla",
+      "selected_modules": [],
+      "failures": []
+    },
+    {
+      "id": "private-rename",
+      "verdict": "PASS",
+      "mode": "mode-1-lean",
+      "selected_modules": [
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "ordinary-feature",
+      "verdict": "PASS",
+      "mode": "mode-2-routed",
+      "selected_modules": [
+        "objective-integrity",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "api-contract",
+      "verdict": "PASS",
+      "mode": "mode-3-assured",
+      "selected_modules": [
+        "change-impact",
+        "objective-integrity",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "open-world-parser",
+      "verdict": "PASS",
+      "mode": "mode-3-assured",
+      "selected_modules": [
+        "generalization-assurance",
+        "objective-integrity",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "cache-reliability",
+      "verdict": "PASS",
+      "mode": "mode-3-assured",
+      "selected_modules": [
+        "objective-integrity",
+        "reliability-contract",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "email-schema",
+      "verdict": "PASS",
+      "mode": "full",
+      "selected_modules": [
+        "change-impact",
+        "database-migration",
+        "objective-integrity",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "prompt-injection",
+      "verdict": "PASS",
+      "mode": "mode-3-assured",
+      "selected_modules": [
+        "objective-integrity",
+        "security-boundaries",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "cold-resume",
+      "verdict": "PASS",
+      "mode": "mode-3-assured",
+      "selected_modules": [
+        "objective-integrity",
+        "session-handoff",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "research-source-registry",
+      "verdict": "PASS",
+      "mode": "mode-2-routed",
+      "selected_modules": [
+        "objective-integrity",
+        "research-candidate",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "meta-source-field",
+      "verdict": "PASS",
+      "mode": "mode-2-routed",
+      "selected_modules": [
+        "objective-integrity",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "external-action",
+      "verdict": "PASS",
+      "mode": "full",
+      "selected_modules": [
+        "objective-integrity",
+        "security-boundaries",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "wide-mechanical",
+      "verdict": "PASS",
+      "mode": "mode-3-assured",
+      "selected_modules": [
+        "change-impact",
+        "objective-integrity",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "tiny-critical",
+      "verdict": "PASS",
+      "mode": "full",
+      "selected_modules": [
+        "objective-integrity",
+        "security-boundaries",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "explain-deploy",
+      "verdict": "PASS",
+      "mode": "vanilla",
+      "selected_modules": [],
+      "failures": []
+    },
+    {
+      "id": "credential-runbook",
+      "verdict": "PASS",
+      "mode": "mode-2-routed",
+      "selected_modules": [
+        "objective-integrity",
+        "security-boundaries",
+        "verification-evidence"
+      ],
+      "failures": []
+    },
+    {
+      "id": "benchmark-design",
+      "verdict": "PASS",
+      "mode": "mode-2-routed",
+      "selected_modules": [
+        "objective-integrity",
+        "verification-evidence"
+      ],
+      "failures": []
+    }
+  ]
+}

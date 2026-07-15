@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "verdict": "PASS",
+  "checked_at": "2026-07-15",
+  "map": "claims-rules-map.json",
+  "claims_total": 23,
+  "rules_total": 42,
+  "links_total": 55,
+  "rules_supported": 23,
+  "rules_partial": 8,
+  "rules_unsupported": 11,
+  "unsupported_rule_ids": [
+    "RULE-BENCH-CANARY",
+    "RULE-CKM-RELIABILITY-CONTRACT",
+    "RULE-CKM-RISK-DISCOVERY",
+    "RULE-CORE-04",
+    "RULE-CORE-10",
+    "RULE-KM-DATABASE-MIGRATION",
+    "RULE-MODE-BREADTH-CAP",
+    "RULE-MODE-CLARITY-SPEC-SYNTHESIS",
+    "RULE-MODE-DOWNGRADE-POLICY",
+    "RULE-MODE-NUMERIC-CEILINGS",
+    "RULE-POL-GENERALIZATION"
+  ],
+  "expired_claims": [],
+  "rules_with_expired_claims": [],
+  "warnings": [],
+  "errors": []
+}

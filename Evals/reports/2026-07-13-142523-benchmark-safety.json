@@ -1,0 +1,25 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-13T14:25:23.0026210+02:00",
+    "cases":  4,
+    "passed":  4,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "exclusive-campaign-lock",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "exclusive-provider-lock",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "closed-campaign-cannot-reopen",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "post-smoke-requires-explicit-models",
+                        "passed":  true
+                    }
+                ]
+}

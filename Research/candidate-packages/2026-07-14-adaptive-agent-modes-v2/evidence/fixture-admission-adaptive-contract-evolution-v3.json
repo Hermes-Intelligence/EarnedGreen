@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "fixture": "adaptive-contract-evolution-v3",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-v3",
+  "generated_at": "2026-07-15T14:28:21.026778+00:00",
+  "fixture_fingerprint": {
+    "file_count": 26,
+    "newest_mtime": 1784043087.6716347,
+    "sha256": "2A98C6EF81992EBB461B75AC3768541F02B5E0B2234F7404D8D77B8EB08B3DEB"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": {
+          "registry-miss": "record unknown_entity_type and reject with ValueError",
+          "handler-error": "let the handler exception propagate to the caller",
+          "handler-result-type": "return the handler result verbatim without type-checking",
+          "type-lookup-trimming": "strip the type once and use the trimmed value for lookup and the envelope",
+          "rejection-telemetry": "count malformed_event for handler errors as well",
+          "output-aliasing": "protect only the caller's input; the returned attributes may alias handler output",
+          "exporter-scope": "leave exporter/serializer on the legacy parse_record path"
+        },
+        "after_pinning": "None by design: both references implement the pinned semantics. Remaining differences are structural only.",
+        "structural": [
+          "validation via an ordered rule table instead of inline conditionals",
+          "type resolution and handler-error containment factored into a _resolve helper",
+          "str.format-based consumers, serializer and exporter instead of f-strings",
+          "differently worded README documenting the same extension path, degraded fallback and compatibility behavior"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": true,
+      "detail": "fixture declares no serialized_output_dimensions; format-adversary is opt-in and not applicable here",
+      "serialized_output_dimensions": []
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "mode-1-local",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 16,
+          "expected_band": [
+            8,
+            30
+          ],
+          "band_pass": true,
+          "ok": true
+        },
+        {
+          "control": "plausible-cold-pass",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 73,
+          "expected_band": [
+            66,
+            80
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 11,
+          "declared_dimensions": 11,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 11,
+          "declared_dimensions": 11,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 11,
+          "declared_dimensions": 11,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "triggered": true,
+        "trigger_terms": [
+          "lookup",
+          "open-world",
+          "registry",
+          "unseen"
+        ],
+        "miss_behavior_sentence": "Treat entity types and attribute names as open-world: they are non-blank strings that may appear for the first time in production; resolve optional per-type behavior through the runtime  ; do not encode discovered samples as an allowlist or regex alternation.",
+        "decision_points_declared": 8,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 47,
+    "matching_runs": [
+      {
+        "run_id": "20260714-174322702-adaptive-contract-evolution-v3-vanilla-t1",
+        "case_id": "adaptive-contract-evolution-v3",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 91,
+        "distinct_dimensions": 11
+      }
+    ],
+    "valid_paid_runs": 1
+  }
+}

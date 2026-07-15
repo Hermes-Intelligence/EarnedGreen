@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "statement", "topic", "applicability", "sources", "research_verdict", "verification_verdict", "confidence", "expires_at"],
+  "properties": {
+    "id": { "type": "string" },
+    "statement": { "type": "string" },
+    "topic": { "type": "string" },
+    "applicability": { "type": "object" },
+    "sources": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "research_verdict": { "enum": ["proposed", "rejected"] },
+    "verification_verdict": { "enum": ["confirmed", "corrected", "unsupported", "refuted", "expired"] },
+    "confidence": { "enum": ["high", "medium", "low"] },
+    "verified_by": { "type": "string" },
+    "verified_at": { "type": "string" },
+    "expires_at": { "type": "string" },
+    "candidate_guidance": { "type": "string" }
+  }
+}

@@ -1,0 +1,32 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-12T20:27:23.9606259+02:00",
+    "platform":  "Microsoft Windows NT 10.0.26200.0",
+    "cases":  5,
+    "passed":  3,
+    "failed":  2,
+    "results":  [
+                    {
+                        "id":  "spaces-unicode-crlf-idempotent",
+                        "passed":  false
+                    },
+                    {
+                        "id":  "long-path-create",
+                        "passed":  false,
+                        "length":  377
+                    },
+                    {
+                        "id":  "exclusive-lock-no-corruption",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "onedrive-detection",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "wsl-availability-recorded",
+                        "passed":  true,
+                        "available":  true
+                    }
+                ]
+}

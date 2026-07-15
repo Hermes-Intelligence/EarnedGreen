@@ -1,0 +1,415 @@
+﻿{
+    "schema_version":  1,
+    "campaign_id":  "20260713-181006-complex-ingestion-screen",
+    "stage":  "complex-screen",
+    "generated_at":  "2026-07-13T19:17:19.2665153+02:00",
+    "screening_only":  true,
+    "publishable_comparison":  false,
+    "measurement_integrity":  {
+                                  "verdict":  "PASS",
+                                  "approved_calls":  6,
+                                  "completed_unique_runs":  6,
+                                  "provider_executions_in_window":  6,
+                                  "orphan_runs":  0,
+                                  "claude_runs":  0,
+                                  "overlaps":  0,
+                                  "invalid_outcomes":  0,
+                                  "protected_file_changes":  0
+                              },
+    "comparative_result":  {
+                               "conclusion":  "NO_ACTIONABLE_SIGNAL",
+                               "median_quality_delta_full_minus_vanilla":  0,
+                               "every_pair_within_three":  true,
+                               "any_critical_floor_difference":  false,
+                               "quality_tie_for_resource_comparison":  true,
+                               "decision":  "STOP: no confirmation or cross-provider calls. Redesign the fixture before requesting more provider spend."
+                           },
+    "fixture_alignment":  {
+                              "status":  "REVIEW_REQUIRED",
+                              "systematic_failed_checks":  [
+                                                               "replay-duplicate"
+                                                           ],
+                              "observation":  "All six solutions added index to duplicate skipped records, while the hidden replay check requires an exact object without index. The public task specifies exact fields for rejected records but not an equally explicit exact-field schema for skipped records.",
+                              "impact":  "Treat the shared 95 as common-mode fixture-alignment evidence, not as proof that either arm has a reliability defect. Preserve the original pinned results; clarify and revalidate a future fixture instead of retroactively regrading this campaign."
+                          },
+    "arms":  {
+                 "vanilla":  {
+                                 "runs":  3,
+                                 "quality_median":  95,
+                                 "quality_min":  95,
+                                 "quality_max":  95,
+                                 "dimension_medians":  {
+                                                           "functional":  20,
+                                                           "generalization":  25,
+                                                           "reliability":  15,
+                                                           "security":  15,
+                                                           "edge-cases":  10,
+                                                           "performance":  10
+                                                       },
+                                 "wall_seconds_median":  216.5,
+                                 "wall_seconds_total":  660.2,
+                                 "tokens_median":  215413,
+                                 "tokens_total":  651146
+                             },
+                 "core-router-enforcement":  {
+                                                 "runs":  3,
+                                                 "quality_median":  95,
+                                                 "quality_min":  95,
+                                                 "quality_max":  95,
+                                                 "dimension_medians":  {
+                                                                           "functional":  20,
+                                                                           "generalization":  25,
+                                                                           "reliability":  15,
+                                                                           "security":  15,
+                                                                           "edge-cases":  10,
+                                                                           "performance":  10
+                                                                       },
+                                                 "wall_seconds_median":  253.1,
+                                                 "wall_seconds_total":  717.6,
+                                                 "tokens_median":  262510,
+                                                 "tokens_total":  783086
+                                             }
+             },
+    "resource_comparison":  {
+                                "median_seconds_delta_full_minus_vanilla":  36.6,
+                                "median_seconds_percent_delta":  16.9,
+                                "median_tokens_delta_full_minus_vanilla":  47097,
+                                "median_tokens_percent_delta":  21.9,
+                                "total_observed_tokens":  1434232,
+                                "reported_cost_coverage":  "0/6 provider calls",
+                                "cost_basis":  [
+                                                   "not-reported-by-subscription-cli"
+                                               ],
+                                "interpretation":  "Because quality and critical outcomes tied, resource use is reported as a secondary comparison. Subscription monetary cost was not exposed by the CLI and is not estimated."
+                            },
+    "pairs":  [
+                  {
+                      "trial":  1,
+                      "grader_seed":  20260714,
+                      "vanilla_score":  95,
+                      "full_score":  95,
+                      "quality_delta_full_minus_vanilla":  0,
+                      "critical_floor_difference":  false,
+                      "vanilla_seconds":  214.4,
+                      "full_seconds":  253.1,
+                      "seconds_delta_full_minus_vanilla":  38.7,
+                      "vanilla_tokens":  236350,
+                      "full_tokens":  262510,
+                      "token_delta_full_minus_vanilla":  26160
+                  },
+                  {
+                      "trial":  2,
+                      "grader_seed":  20260715,
+                      "vanilla_score":  95,
+                      "full_score":  95,
+                      "quality_delta_full_minus_vanilla":  0,
+                      "critical_floor_difference":  false,
+                      "vanilla_seconds":  216.5,
+                      "full_seconds":  202.1,
+                      "seconds_delta_full_minus_vanilla":  -14.4,
+                      "vanilla_tokens":  215413,
+                      "full_tokens":  253000,
+                      "token_delta_full_minus_vanilla":  37587
+                  },
+                  {
+                      "trial":  3,
+                      "grader_seed":  20260716,
+                      "vanilla_score":  95,
+                      "full_score":  95,
+                      "quality_delta_full_minus_vanilla":  0,
+                      "critical_floor_difference":  false,
+                      "vanilla_seconds":  229.3,
+                      "full_seconds":  262.4,
+                      "seconds_delta_full_minus_vanilla":  33.1,
+                      "vanilla_tokens":  199383,
+                      "full_tokens":  267576,
+                      "token_delta_full_minus_vanilla":  68193
+                  }
+              ],
+    "runs":  [
+                 {
+                     "run_id":  "20260713-185504920-production-ingestion-evolution-core-router-enforcement-t1",
+                     "arm":  "core-router-enforcement",
+                     "trial":  1,
+                     "grader_seed":  20260714,
+                     "status":  "scored",
+                     "provider":  "codex",
+                     "actual_model":  "gpt-5.6-sol",
+                     "effort":  "medium",
+                     "started_at":  "2026-07-13T18:55:06.7009914+02:00",
+                     "finished_at":  "2026-07-13T18:59:19.8322352+02:00",
+                     "duration_seconds":  253.1,
+                     "provider_exit":  0,
+                     "outcome_valid":  true,
+                     "public_pass":  true,
+                     "hidden_score":  95,
+                     "hidden_pass":  false,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "dimensions":  {
+                                        "functional":  20,
+                                        "generalization":  25,
+                                        "reliability":  15,
+                                        "security":  15,
+                                        "edge-cases":  10,
+                                        "performance":  10
+                                    },
+                     "failed_checks":  [
+                                           "replay-duplicate"
+                                       ],
+                     "token_usage":  {
+                                         "input_tokens":  251674,
+                                         "cached_input_tokens":  204800,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  10836,
+                                         "reasoning_output_tokens":  4741,
+                                         "total_observed_tokens":  262510,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "total_observed_tokens":  262510,
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli"
+                 },
+                 {
+                     "run_id":  "20260713-185127891-production-ingestion-evolution-vanilla-t1",
+                     "arm":  "vanilla",
+                     "trial":  1,
+                     "grader_seed":  20260714,
+                     "status":  "scored",
+                     "provider":  "codex",
+                     "actual_model":  "gpt-5.6-sol",
+                     "effort":  "medium",
+                     "started_at":  "2026-07-13T18:51:29.3254139+02:00",
+                     "finished_at":  "2026-07-13T18:55:03.7293326+02:00",
+                     "duration_seconds":  214.4,
+                     "provider_exit":  0,
+                     "outcome_valid":  true,
+                     "public_pass":  true,
+                     "hidden_score":  95,
+                     "hidden_pass":  false,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "dimensions":  {
+                                        "functional":  20,
+                                        "generalization":  25,
+                                        "reliability":  15,
+                                        "security":  15,
+                                        "edge-cases":  10,
+                                        "performance":  10
+                                    },
+                     "failed_checks":  [
+                                           "replay-duplicate"
+                                       ],
+                     "token_usage":  {
+                                         "input_tokens":  227380,
+                                         "cached_input_tokens":  197632,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  8970,
+                                         "reasoning_output_tokens":  3840,
+                                         "total_observed_tokens":  236350,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "total_observed_tokens":  236350,
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli"
+                 },
+                 {
+                     "run_id":  "20260713-184803228-production-ingestion-evolution-core-router-enforcement-t2",
+                     "arm":  "core-router-enforcement",
+                     "trial":  2,
+                     "grader_seed":  20260715,
+                     "status":  "scored",
+                     "provider":  "codex",
+                     "actual_model":  "gpt-5.6-sol",
+                     "effort":  "medium",
+                     "started_at":  "2026-07-13T18:48:04.7778366+02:00",
+                     "finished_at":  "2026-07-13T18:51:26.8709009+02:00",
+                     "duration_seconds":  202.1,
+                     "provider_exit":  0,
+                     "outcome_valid":  true,
+                     "public_pass":  true,
+                     "hidden_score":  95,
+                     "hidden_pass":  false,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "dimensions":  {
+                                        "functional":  20,
+                                        "generalization":  25,
+                                        "reliability":  15,
+                                        "security":  15,
+                                        "edge-cases":  10,
+                                        "performance":  10
+                                    },
+                     "failed_checks":  [
+                                           "replay-duplicate"
+                                       ],
+                     "token_usage":  {
+                                         "input_tokens":  243619,
+                                         "cached_input_tokens":  219136,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  9381,
+                                         "reasoning_output_tokens":  3364,
+                                         "total_observed_tokens":  253000,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "total_observed_tokens":  253000,
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli"
+                 },
+                 {
+                     "run_id":  "20260713-190737862-production-ingestion-evolution-vanilla-t2",
+                     "arm":  "vanilla",
+                     "trial":  2,
+                     "grader_seed":  20260715,
+                     "status":  "scored",
+                     "provider":  "codex",
+                     "actual_model":  "gpt-5.6-sol",
+                     "effort":  "medium",
+                     "started_at":  "2026-07-13T19:07:39.2869587+02:00",
+                     "finished_at":  "2026-07-13T19:11:15.7430025+02:00",
+                     "duration_seconds":  216.5,
+                     "provider_exit":  0,
+                     "outcome_valid":  true,
+                     "public_pass":  true,
+                     "hidden_score":  95,
+                     "hidden_pass":  false,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "dimensions":  {
+                                        "functional":  20,
+                                        "generalization":  25,
+                                        "reliability":  15,
+                                        "security":  15,
+                                        "edge-cases":  10,
+                                        "performance":  10
+                                    },
+                     "failed_checks":  [
+                                           "replay-duplicate"
+                                       ],
+                     "token_usage":  {
+                                         "input_tokens":  206567,
+                                         "cached_input_tokens":  181504,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  8846,
+                                         "reasoning_output_tokens":  3804,
+                                         "total_observed_tokens":  215413,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "total_observed_tokens":  215413,
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli"
+                 },
+                 {
+                     "run_id":  "20260713-190312701-production-ingestion-evolution-core-router-enforcement-t3",
+                     "arm":  "core-router-enforcement",
+                     "trial":  3,
+                     "grader_seed":  20260716,
+                     "status":  "scored",
+                     "provider":  "codex",
+                     "actual_model":  "gpt-5.6-sol",
+                     "effort":  "medium",
+                     "started_at":  "2026-07-13T19:03:14.3965158+02:00",
+                     "finished_at":  "2026-07-13T19:07:36.8003119+02:00",
+                     "duration_seconds":  262.4,
+                     "provider_exit":  0,
+                     "outcome_valid":  true,
+                     "public_pass":  true,
+                     "hidden_score":  95,
+                     "hidden_pass":  false,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "dimensions":  {
+                                        "functional":  20,
+                                        "generalization":  25,
+                                        "reliability":  15,
+                                        "security":  15,
+                                        "edge-cases":  10,
+                                        "performance":  10
+                                    },
+                     "failed_checks":  [
+                                           "replay-duplicate"
+                                       ],
+                     "token_usage":  {
+                                         "input_tokens":  256973,
+                                         "cached_input_tokens":  230144,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  10603,
+                                         "reasoning_output_tokens":  4710,
+                                         "total_observed_tokens":  267576,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "total_observed_tokens":  267576,
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli"
+                 },
+                 {
+                     "run_id":  "20260713-185920975-production-ingestion-evolution-vanilla-t3",
+                     "arm":  "vanilla",
+                     "trial":  3,
+                     "grader_seed":  20260716,
+                     "status":  "scored",
+                     "provider":  "codex",
+                     "actual_model":  "gpt-5.6-sol",
+                     "effort":  "medium",
+                     "started_at":  "2026-07-13T18:59:22.2633146+02:00",
+                     "finished_at":  "2026-07-13T19:03:11.5465285+02:00",
+                     "duration_seconds":  229.3,
+                     "provider_exit":  0,
+                     "outcome_valid":  true,
+                     "public_pass":  true,
+                     "hidden_score":  95,
+                     "hidden_pass":  false,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "dimensions":  {
+                                        "functional":  20,
+                                        "generalization":  25,
+                                        "reliability":  15,
+                                        "security":  15,
+                                        "edge-cases":  10,
+                                        "performance":  10
+                                    },
+                     "failed_checks":  [
+                                           "replay-duplicate"
+                                       ],
+                     "token_usage":  {
+                                         "input_tokens":  189157,
+                                         "cached_input_tokens":  164352,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  10226,
+                                         "reasoning_output_tokens":  4084,
+                                         "total_observed_tokens":  199383,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "total_observed_tokens":  199383,
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli"
+                 }
+             ],
+    "protocol":  "Evals/baselines/production-ingestion-protocol.json",
+    "additional_provider_calls":  0
+}

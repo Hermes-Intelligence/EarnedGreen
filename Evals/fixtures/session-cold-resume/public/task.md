@@ -1,0 +1,3 @@
+# Task: persist a safe, resumable session checkpoint
+
+Implement `save_checkpoint(path, state)` and `load_checkpoint(path, max_age_hours=168, now=None)`. A checkpoint requires `schema_version`, `objective_id`, `task`, `status`, `updated_at`, `decisions`, `evidence`, `blockers`, one non-empty string `next_action`, and `changed_paths`. Save atomically as UTF-8 JSON. Recursively omit keys containing `secret`, `token`, `password` or `credential` case-insensitively. Loading malformed, structurally invalid or stale active checkpoints must raise `ValueError`; `now` is an optional timezone-aware datetime used by tests.

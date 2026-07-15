@@ -1,0 +1,361 @@
+﻿{
+    "schema_version":  1,
+    "campaign_id":  "20260713-201400-real-world-battery-screen",
+    "stage":  "battery-sentinel",
+    "generated_at":  "2026-07-13T21:53:44.2760578+02:00",
+    "claim_level":  "cost-bounded screening only",
+    "measurement_integrity":  {
+                                  "verdict":  "PASS",
+                                  "approved_calls":  6,
+                                  "completed_unique_runs":  6,
+                                  "provider_executions_in_window":  6,
+                                  "orphan_runs":  0,
+                                  "overlaps":  0,
+                                  "invalid_outcomes":  0,
+                                  "protected_file_changes":  0,
+                                  "later_stage_run_ids":  0
+                              },
+    "comparative_result":  {
+                               "conclusion":  "NO_ACTIONABLE_SIGNAL",
+                               "all_task_deltas_within_three":  true,
+                               "any_critical_difference":  false,
+                               "decision":  "This sentinel alone shows no quality lift. The diversity stage remains locked and requires a separate human decision; no replication, Claude run, promotion or model switch is authorized."
+                           },
+    "arms":  {
+                 "vanilla":  {
+                                 "runs":  3,
+                                 "macro_median_score":  90,
+                                 "mean_score":  93.33,
+                                 "quality_passes":  1,
+                                 "median_wall_seconds":  118.3,
+                                 "total_wall_seconds":  353.3,
+                                 "median_tokens":  138906,
+                                 "total_tokens":  420145
+                             },
+                 "core-router-enforcement":  {
+                                                 "runs":  3,
+                                                 "macro_median_score":  90,
+                                                 "mean_score":  93.33,
+                                                 "quality_passes":  1,
+                                                 "median_wall_seconds":  148.1,
+                                                 "total_wall_seconds":  395.7,
+                                                 "median_tokens":  189758,
+                                                 "total_tokens":  556156
+                                             }
+             },
+    "resource_comparison":  {
+                                "median_seconds_delta_full_minus_vanilla":  29.8,
+                                "median_seconds_percent_delta":  25.2,
+                                "median_tokens_delta_full_minus_vanilla":  50852,
+                                "median_tokens_percent_delta":  36.6,
+                                "total_observed_tokens":  976301,
+                                "monetary_cost_coverage":  "0/6",
+                                "cost_basis":  [
+                                                   "not-reported-by-subscription-cli"
+                                               ]
+                            },
+    "pairs":  [
+                  {
+                      "fixture":  "api-contract-propagation",
+                      "vanilla_score":  90,
+                      "full_score":  90,
+                      "quality_delta_full_minus_vanilla":  0,
+                      "critical_difference":  false,
+                      "vanilla_failed_checks":  [
+                                                    "input-validation"
+                                                ],
+                      "full_failed_checks":  [
+                                                 "input-validation"
+                                             ],
+                      "vanilla_seconds":  94,
+                      "full_seconds":  87.2,
+                      "vanilla_tokens":  143136,
+                      "full_tokens":  148029
+                  },
+                  {
+                      "fixture":  "coordinated-release-change",
+                      "vanilla_score":  90,
+                      "full_score":  90,
+                      "quality_delta_full_minus_vanilla":  0,
+                      "critical_difference":  false,
+                      "vanilla_failed_checks":  [
+                                                    "documentation"
+                                                ],
+                      "full_failed_checks":  [
+                                                 "documentation"
+                                             ],
+                      "vanilla_seconds":  141,
+                      "full_seconds":  160.4,
+                      "vanilla_tokens":  138103,
+                      "full_tokens":  189758
+                  },
+                  {
+                      "fixture":  "resumable-batch-session",
+                      "vanilla_score":  100,
+                      "full_score":  100,
+                      "quality_delta_full_minus_vanilla":  0,
+                      "critical_difference":  false,
+                      "vanilla_failed_checks":  [
+
+                                                ],
+                      "full_failed_checks":  [
+
+                                             ],
+                      "vanilla_seconds":  118.3,
+                      "full_seconds":  148.1,
+                      "vanilla_tokens":  138906,
+                      "full_tokens":  218369
+                  }
+              ],
+    "runs":  [
+                 {
+                     "run_id":  "20260713-214155937-api-contract-propagation-core-router-enforcement-t1",
+                     "fixture":  "api-contract-propagation",
+                     "arm":  "core-router-enforcement",
+                     "status":  "scored",
+                     "actual_model":  "gpt-5.6-sol",
+                     "hidden_score":  90,
+                     "quality_passed":  false,
+                     "failed_checks":  [
+                                           "input-validation"
+                                       ],
+                     "duration_seconds":  87.2,
+                     "total_observed_tokens":  148029,
+                     "token_usage":  {
+                                         "input_tokens":  144583,
+                                         "cached_input_tokens":  118528,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  3446,
+                                         "reasoning_output_tokens":  931,
+                                         "total_observed_tokens":  148029,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli",
+                     "public_pass":  true,
+                     "outcome_valid":  true,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "changed_files":  [
+                                           "src/audit.py",
+                                           "src/client.py",
+                                           "src/service.py",
+                                           "tests/test_contract.py"
+                                       ],
+                     "started_at":  "2026-07-13T21:41:56.4071061+02:00",
+                     "finished_at":  "2026-07-13T21:43:23.5835884+02:00",
+                     "provider":  "codex-agenticbench"
+                 },
+                 {
+                     "run_id":  "20260713-214021509-api-contract-propagation-vanilla-t1",
+                     "fixture":  "api-contract-propagation",
+                     "arm":  "vanilla",
+                     "status":  "scored",
+                     "actual_model":  "gpt-5.6-sol",
+                     "hidden_score":  90,
+                     "quality_passed":  false,
+                     "failed_checks":  [
+                                           "input-validation"
+                                       ],
+                     "duration_seconds":  94,
+                     "total_observed_tokens":  143136,
+                     "token_usage":  {
+                                         "input_tokens":  139052,
+                                         "cached_input_tokens":  124416,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  4084,
+                                         "reasoning_output_tokens":  793,
+                                         "total_observed_tokens":  143136,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli",
+                     "public_pass":  true,
+                     "outcome_valid":  true,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "changed_files":  [
+                                           "src/audit.py",
+                                           "src/client.py",
+                                           "src/service.py"
+                                       ],
+                     "started_at":  "2026-07-13T21:40:21.6123797+02:00",
+                     "finished_at":  "2026-07-13T21:41:55.6409327+02:00",
+                     "provider":  "codex-agenticbench"
+                 },
+                 {
+                     "run_id":  "20260713-214545512-coordinated-release-change-core-router-enforcement-t1",
+                     "fixture":  "coordinated-release-change",
+                     "arm":  "core-router-enforcement",
+                     "status":  "scored",
+                     "actual_model":  "gpt-5.6-sol",
+                     "hidden_score":  90,
+                     "quality_passed":  false,
+                     "failed_checks":  [
+                                           "documentation"
+                                       ],
+                     "duration_seconds":  160.4,
+                     "total_observed_tokens":  189758,
+                     "token_usage":  {
+                                         "input_tokens":  183723,
+                                         "cached_input_tokens":  165120,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  6035,
+                                         "reasoning_output_tokens":  1933,
+                                         "total_observed_tokens":  189758,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli",
+                     "public_pass":  true,
+                     "outcome_valid":  true,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "changed_files":  [
+                                           "docs/user-schema.md",
+                                           "migrations/backfill_primary_email.py",
+                                           "src/api.py",
+                                           "src/model.py"
+                                       ],
+                     "started_at":  "2026-07-13T21:45:45.9939310+02:00",
+                     "finished_at":  "2026-07-13T21:48:26.4172264+02:00",
+                     "provider":  "codex-agenticbench"
+                 },
+                 {
+                     "run_id":  "20260713-214324036-coordinated-release-change-vanilla-t1",
+                     "fixture":  "coordinated-release-change",
+                     "arm":  "vanilla",
+                     "status":  "scored",
+                     "actual_model":  "gpt-5.6-sol",
+                     "hidden_score":  90,
+                     "quality_passed":  false,
+                     "failed_checks":  [
+                                           "documentation"
+                                       ],
+                     "duration_seconds":  141,
+                     "total_observed_tokens":  138103,
+                     "token_usage":  {
+                                         "input_tokens":  131992,
+                                         "cached_input_tokens":  110336,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  6111,
+                                         "reasoning_output_tokens":  1863,
+                                         "total_observed_tokens":  138103,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli",
+                     "public_pass":  true,
+                     "outcome_valid":  true,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "changed_files":  [
+                                           "docs/user-schema.md",
+                                           "migrations/backfill_primary_email.py",
+                                           "src/api.py",
+                                           "src/model.py"
+                                       ],
+                     "started_at":  "2026-07-13T21:43:24.1648031+02:00",
+                     "finished_at":  "2026-07-13T21:45:45.2113752+02:00",
+                     "provider":  "codex-agenticbench"
+                 },
+                 {
+                     "run_id":  "20260713-213752603-resumable-batch-session-core-router-enforcement-t1",
+                     "fixture":  "resumable-batch-session",
+                     "arm":  "core-router-enforcement",
+                     "status":  "passed",
+                     "actual_model":  "gpt-5.6-sol",
+                     "hidden_score":  100,
+                     "quality_passed":  true,
+                     "failed_checks":  [
+
+                                       ],
+                     "duration_seconds":  148.1,
+                     "total_observed_tokens":  218369,
+                     "token_usage":  {
+                                         "input_tokens":  211884,
+                                         "cached_input_tokens":  183296,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  6485,
+                                         "reasoning_output_tokens":  2419,
+                                         "total_observed_tokens":  218369,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli",
+                     "public_pass":  true,
+                     "outcome_valid":  true,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "changed_files":  [
+                                           "src/checkpoint.py",
+                                           "src/worker.py"
+                                       ],
+                     "started_at":  "2026-07-13T21:37:53.0828459+02:00",
+                     "finished_at":  "2026-07-13T21:40:21.1819289+02:00",
+                     "provider":  "codex-agenticbench"
+                 },
+                 {
+                     "run_id":  "20260713-214826731-resumable-batch-session-vanilla-t1",
+                     "fixture":  "resumable-batch-session",
+                     "arm":  "vanilla",
+                     "status":  "passed",
+                     "actual_model":  "gpt-5.6-sol",
+                     "hidden_score":  100,
+                     "quality_passed":  true,
+                     "failed_checks":  [
+
+                                       ],
+                     "duration_seconds":  118.3,
+                     "total_observed_tokens":  138906,
+                     "token_usage":  {
+                                         "input_tokens":  133985,
+                                         "cached_input_tokens":  117504,
+                                         "cache_creation_input_tokens":  0,
+                                         "cache_read_input_tokens":  0,
+                                         "output_tokens":  4921,
+                                         "reasoning_output_tokens":  1877,
+                                         "total_observed_tokens":  138906,
+                                         "accounting":  "input-includes-cached; total=input+output",
+                                         "source":  "codex-turn-completed"
+                                     },
+                     "reported_cost_usd":  null,
+                     "cost_basis":  "not-reported-by-subscription-cli",
+                     "public_pass":  true,
+                     "outcome_valid":  true,
+                     "enforcement_pass":  true,
+                     "protected_files_changed":  [
+
+                                                 ],
+                     "changed_files":  [
+                                           "src/checkpoint.py",
+                                           "src/worker.py"
+                                       ],
+                     "started_at":  "2026-07-13T21:48:26.8423936+02:00",
+                     "finished_at":  "2026-07-13T21:50:25.1737189+02:00",
+                     "provider":  "codex-agenticbench"
+                 }
+             ],
+    "protocol":  "Evals/baselines/real-world-battery-protocol.json",
+    "additional_provider_calls":  0
+}

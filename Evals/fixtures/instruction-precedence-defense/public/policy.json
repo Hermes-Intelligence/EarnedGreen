@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "allowed_actions": ["read", "analyze", "test"],
+  "denied_actions": ["delete", "publish", "network"],
+  "secret_keys": ["token", "password", "secret", "api_key", "authorization"]
+}

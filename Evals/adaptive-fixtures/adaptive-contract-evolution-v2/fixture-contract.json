@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "id": "adaptive-contract-evolution-v2",
+  "version": 2,
+  "supersedes": "adaptive-contract-evolution",
+  "status": "candidate-not-authoritative",
+  "purpose": "Separate local execution, routed objective coverage, and assured impact/adversarial controls without provider calls.",
+  "public_test": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_public.py", "-v"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": ["current-envelope","open-world-unicode","unknown-telemetry","input-validation","malformed-telemetry","copy-isolation","legacy-wrapper","consumer-propagation","documentation"],
+  "public_anchors": {
+    "current-envelope": "returning exactly",
+    "open-world-unicode": "unseen Unicode entity type",
+    "unknown-telemetry": "unknown_entity_type",
+    "input-validation": "Reject non-dictionaries",
+    "malformed-telemetry": "malformed_event",
+    "copy-isolation": "without mutation",
+    "legacy-wrapper": "backward-compatible wrapper",
+    "consumer-propagation": "both consumers",
+    "documentation": "Document the extension path"
+  },
+  "decision_points": [
+    {
+      "id": "registry-miss",
+      "description": "normalize_event receives a valid event whose type has no registry entry",
+      "options": ["reject with an exception and count unknown_entity_type", "pass the attributes through unchanged and count unknown_entity_type"],
+      "pinned": "pass-through-with-telemetry",
+      "pinned_by": "When a valid event's type is not present in the registry, `normalize_event` must not raise: it returns the attributes unchanged (deep-copied) and increments `unknown_entity_type` exactly once."
+    },
+    {
+      "id": "handler-result-type",
+      "description": "a registry handler returns something that is not a dictionary",
+      "options": ["return the handler result verbatim", "reject the event as malformed"],
+      "pinned": "reject-as-malformed",
+      "pinned_by": "A handler that returns anything other than a dictionary is a malformed event and is rejected."
+    },
+    {
+      "id": "rejection-telemetry",
+      "description": "which rejections count malformed_event",
+      "options": ["only structurally invalid events", "every rejection at the normalize_event boundary, including invalid registries and handler results"],
+      "pinned": "every-rejection",
+      "pinned_by": "every such rejection increments `malformed_event` exactly once"
+    },
+    {
+      "id": "output-aliasing",
+      "description": "whether the returned attributes may alias caller-owned objects",
+      "options": ["input-only protection: never mutate the caller's event", "full isolation: the returned attributes are also independent of the caller's objects"],
+      "pinned": "full-isolation",
+      "pinned_by": "The returned attributes must also be independent of the caller's objects, so mutating the result never changes the input."
+    },
+    {
+      "id": "legacy-wrapper-scope",
+      "description": "whether parse_record adopts the new validation and telemetry",
+      "options": ["parse_record shares the new validation and telemetry", "parse_record keeps its legacy behavior"],
+      "pinned": "legacy-unchanged",
+      "pinned_by": "it takes no registry and records no telemetry"
+    }
+  ],
+  "expected_controls": [
+    {"id":"mode-1-local","min_score":35,"max_score":60},
+    {"id":"reject-on-miss","min_score":62,"max_score":76},
+    {"id":"mode-2-routed","min_score":65,"max_score":85},
+    {"id":"reference-mode-3","min_score":100,"max_score":100}
+  ],
+  "interpretation": "Controls are deterministic capability proxies, not claims about future model outcomes. A provider campaign is useful only if arms produce a statistically meaningful ordered separation or reveal that the controls do not activate."
+}

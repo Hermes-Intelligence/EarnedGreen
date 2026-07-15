@@ -1,0 +1,41 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-13T20:18:47.4166480+02:00",
+    "cases":  8,
+    "passed":  8,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "exclusive-campaign-lock",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "exclusive-provider-lock",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "closed-campaign-cannot-reopen",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "post-smoke-requires-explicit-models",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "calibration-manifest-exactly-two-pending-calls",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "provider-telemetry-token-and-cost-accounting",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "partial-quality-is-valid-scored-outcome",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "complex-screen-manifest-six-paired-calls",
+                        "passed":  true
+                    }
+                ]
+}

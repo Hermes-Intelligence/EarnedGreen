@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "verdict": "PASS",
+  "provider_calls": 0,
+  "traceability_pass": true,
+  "registry_miss_policy_explicit": true,
+  "grader_check_isolation": true,
+  "ordered_separation_pass": true,
+  "controls": [
+    {
+      "public_pass": true,
+      "hidden_pass": false,
+      "score": 50,
+      "diagnostic": null,
+      "id": "mode-1-local",
+      "expected_range": [
+        35,
+        60
+      ],
+      "range_pass": true
+    },
+    {
+      "public_pass": true,
+      "hidden_pass": false,
+      "score": 72,
+      "diagnostic": null,
+      "id": "reject-on-miss",
+      "expected_range": [
+        62,
+        76
+      ],
+      "range_pass": true
+    },
+    {
+      "public_pass": true,
+      "hidden_pass": false,
+      "score": 78,
+      "diagnostic": null,
+      "id": "mode-2-routed",
+      "expected_range": [
+        65,
+        85
+      ],
+      "range_pass": true
+    },
+    {
+      "public_pass": true,
+      "hidden_pass": true,
+      "score": 100,
+      "diagnostic": null,
+      "id": "reference-mode-3",
+      "expected_range": [
+        100,
+        100
+      ],
+      "range_pass": true
+    }
+  ],
+  "failures": []
+}

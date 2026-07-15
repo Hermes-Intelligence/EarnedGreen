@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "purpose": "Second hidden reference authored from public task text only, used by the fixture admission gate to detect spec ambiguity before spend.",
+  "authoring_protocol": "Written from task.md alone, choosing the alternative defensible interpretation at every identified decision point, then run against the hidden grader.",
+  "pre_reconciliation_result": {
+    "interpretations": {
+      "registry-miss": "record unknown_entity_type and reject with ValueError",
+      "handler-result-type": "return the handler result verbatim without type-checking",
+      "rejection-telemetry": "count malformed_event only for structurally invalid events",
+      "output-aliasing": "protect only the caller's input; the returned attributes may alias handler output"
+    },
+    "grader_score": 50,
+    "failed_dimensions": ["open-world-unicode", "input-validation", "malformed-telemetry", "consumer-propagation"],
+    "conclusion": "A defensible reading of the v1 task text failed the grader, proving SPEC_AMBIGUITY; this reproduces the paid-campaign failure (all five solvers and the verifier chose reject-on-miss) at zero cost."
+  },
+  "reconciliation": "task.md v2 pins every decision point (see fixture-contract.json decision_points); the alt was updated to the pinned semantics but keeps an independent structure.",
+  "interpretation_differences_after_pinning": "None by design: both references implement the pinned semantics. Remaining differences are structural only.",
+  "structural_differences": [
+    "validation via an ordered rule table instead of inline conditionals",
+    "malformed rejection raises from a helper after counting, with per-rule reasons",
+    "str.format-based consumers instead of f-strings",
+    "differently worded README documenting the same extension path and compatibility behavior"
+  ]
+}

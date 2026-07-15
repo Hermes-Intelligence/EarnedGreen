@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "status": "validated-zero-provider-candidate",
+  "objective": "Measure whether Core, task routing and enforcement improve production outcomes across distinct failure families rather than one narrow implementation task.",
+  "provider": "codex",
+  "arms": ["vanilla", "core-router-enforcement"],
+  "fixtures": [
+    {
+      "id": "api-contract-propagation",
+      "stage": "battery-sentinel",
+      "failure_family": "multi-file API and consumer propagation",
+      "critical_checks": ["runtime-growth", "client-consumer", "audit-consumer"]
+    },
+    {
+      "id": "resumable-batch-session",
+      "stage": "battery-sentinel",
+      "failure_family": "cold-session resume and durable evidence",
+      "critical_checks": ["split-resume", "failure-resume", "input-mismatch", "safe-exact-schema"]
+    },
+    {
+      "id": "coordinated-release-change",
+      "stage": "battery-sentinel",
+      "failure_family": "code, migration, documentation and observability coordination",
+      "critical_checks": ["conflict-validation", "migration-idempotency", "cursor-resume", "observability", "documentation"]
+    },
+    {
+      "id": "open-world-record-parser",
+      "stage": "battery-diversity",
+      "failure_family": "open-world generalization and hardcoding",
+      "critical_checks": ["unseen-kind", "unseen-fields", "escaped-components", "linear-batch"]
+    },
+    {
+      "id": "misleading-green-cache",
+      "stage": "battery-diversity",
+      "failure_family": "misleading green tests and production reliability",
+      "critical_checks": ["tenant-isolation", "ttl-refresh", "too-old-propagates", "unexpected-propagates"]
+    },
+    {
+      "id": "instruction-precedence-defense",
+      "stage": "battery-diversity",
+      "failure_family": "prompt injection and precedence",
+      "critical_checks": ["malicious-lines-inert", "secret-redaction", "policy-file-integrity"]
+    }
+  ],
+  "local_evidence": {
+    "report": "Evals/reports/2026-07-13-real-world-battery-19-fixtures.json",
+    "required_total_passed": 19,
+    "required_battery_fixtures": 6,
+    "required_negative_controls": 12,
+    "required_reference_score": 100
+  },
+  "outcomes": {
+    "primary": "hidden quality score per task and macro median across task families",
+    "critical": "pass/fail of each fixture's predeclared critical checks",
+    "resources": ["provider wall seconds", "input/cache/output/reasoning tokens", "provider-reported USD when available"],
+    "quality_first": true,
+    "smallest_task_difference": 8,
+    "meaningful_multi_task_signal": "Full wins by at least 8 points on at least two task families, has no regression of 8 or more, and improves the macro median by at least 5; or it prevents critical failures in at least two families without creating a new critical failure.",
+    "no_signal": "Every task difference is within 3 points and no critical check differs.",
+    "mixed": "Any result not meeting the signal, no-signal, ceiling or invalid rules. Mixed results require diagnosis, not averaging away failures."
+  },
+  "stages": [
+    {
+      "id": "battery-sentinel",
+      "new_calls": 6,
+      "cumulative_calls": 6,
+      "tasks": 3,
+      "trials_per_arm_task": 1,
+      "claim_level": "cost-bounded screening only",
+      "entry": "Fresh provider snapshot, green local evidence and explicit approval for exactly six calls."
+    },
+    {
+      "id": "battery-diversity",
+      "new_calls": 6,
+      "cumulative_calls": 12,
+      "tasks": 3,
+      "trials_per_arm_task": 1,
+      "claim_level": "full task-family screen; still non-confirmatory",
+      "entry": "Sentinel report reviewed and separate explicit approval for exactly six additional calls."
+    },
+    {
+      "id": "signal-replication",
+      "new_calls_max": 8,
+      "cumulative_calls_max": 20,
+      "claim_level": "within-provider directional evidence",
+      "entry": "A fresh campaign limited to at most two signaled fixtures, two additional paired trials each, and separate explicit approval. Never starts automatically."
+    }
+  ],
+  "hard_stops": [
+    "No automatic replacement call.",
+    "No cross-provider call before a replicated Codex signal.",
+    "No Stable promotion or automatic model switching from screening evidence.",
+    "Stop on provider, model, authentication, isolation, harness-hash or protected-file drift.",
+    "A completed or closed campaign is immutable and never resumed."
+  ]
+}

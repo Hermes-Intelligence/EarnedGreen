@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15",
+  "mode": "report-only",
+  "modified_files": [],
+  "cross_references": {
+    "broken_references": [],
+    "package_broken_references": [],
+    "unmentioned_tools": [],
+    "broken_count": 0,
+    "package_broken_count": 0
+  },
+  "staleness": {
+    "stale_items": [],
+    "stale_count": 0
+  },
+  "contradictions": {
+    "contradiction_candidates": [
+      {
+        "kind": "v1-workflow-assertion",
+        "artifact": "workstreams/2026-07-12-bootstrap-agentic-best-practices.md",
+        "detail": "mentions research-workflow.js without a v1/legacy/deprecated marker while the v2 runbook exists",
+        "note": "candidate for human review"
+      },
+      {
+        "kind": "v1-workflow-assertion",
+        "artifact": "workstreams/2026-07-12-bootstrap-agentic-best-practices.md",
+        "detail": "mentions engine/state.json without a v1/legacy/deprecated marker while the v2 runbook exists",
+        "note": "candidate for human review"
+      },
+      {
+        "kind": "package-status-divergence",
+        "artifact": "2026-07-14-adaptive-agent-modes-v2",
+        "detail": "run-manifest.json status='boundary-campaign-invalid-fixture-repair-required' vs handoff.json status='research-utilization-layer-added-suite-23-of-23-green-awaiting-owner-review'",
+        "note": "candidate for human review: statuses may describe different lifecycle stages"
+      }
+    ],
+    "candidate_count": 3,
+    "limits": "targeted heuristics only; semantic contradictions (e.g. a stale count in prose) are NOT detected"
+  },
+  "orphans": {
+    "orphans": [
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-001",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-002",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-003",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-004",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-005",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-006",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-007",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-008",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-014",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      },
+      {
+        "kind": "unlinked-finding",
+        "artifact": "F-2026-07-12-018",
+        "detail": "in findings-index.json but justifies no rule in claims-rules-map.json"
+      }
+    ],
+    "orphan_count": 10
+  }
+}

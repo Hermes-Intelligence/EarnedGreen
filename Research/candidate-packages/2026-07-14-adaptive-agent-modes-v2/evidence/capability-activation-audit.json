@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "verdict": "PASS",
+  "provider_calls": 0,
+  "declared_capabilities": 14,
+  "active_capabilities": 14,
+  "failures": [],
+  "behavioral_probe": "capability-activation-probe.json",
+  "rule": "every capability declared by a mode must be active, backed by existing evidence paths, and pass a zero-provider behavioral probe before provider comparison"
+}

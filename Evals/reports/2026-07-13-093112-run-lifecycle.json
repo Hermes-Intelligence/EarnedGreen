@@ -1,0 +1,21 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-13T09:31:12.4516483+02:00",
+    "cases":  2,
+    "passed":  2,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "entity-parser-unseen-vanilla",
+                        "passed":  true,
+                        "score":  100,
+                        "publishable":  false
+                    },
+                    {
+                        "id":  "objective-omission-core-router-enforcement",
+                        "passed":  true,
+                        "score":  100,
+                        "publishable":  false
+                    }
+                ]
+}

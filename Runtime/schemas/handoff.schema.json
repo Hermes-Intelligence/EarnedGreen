@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schema_version", "objective_id", "task", "status", "updated_at", "decisions", "evidence", "blockers", "next_action", "changed_paths"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "objective_id": { "type": "string", "minLength": 1 },
+    "task": { "type": "string", "minLength": 5 },
+    "status": { "enum": ["in_progress", "blocked", "awaiting_review", "complete"] },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "decisions": { "type": "array", "items": { "type": "object", "required": ["id", "decision", "reason"], "properties": { "id": { "type": "string" }, "decision": { "type": "string" }, "reason": { "type": "string" } } } },
+    "evidence": { "type": "array", "items": { "type": "object", "required": ["claim", "artifact"], "properties": { "claim": { "type": "string" }, "artifact": { "type": "string" } } } },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "next_action": { "type": "string", "minLength": 5 },
+    "changed_paths": { "type": "array", "items": { "type": "string" } },
+    "requirements": { "type": "array", "items": { "type": "object", "required": ["id", "status"], "properties": { "id": { "type": "string" }, "status": { "type": "string" }, "evidence": { "type": "array", "items": { "type": "string" } } } } }
+  }
+}

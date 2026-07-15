@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "release": "0.2.0",
+  "status": "stable-minimal",
+  "promoted_at": "2026-07-12T18:00:00+02:00",
+  "promoted_by": "user-directed-rebuild",
+  "core": "Core/runtime.md",
+  "objective": "Objectives/active/OBJ-20260712-agentic-work-best-practices.json",
+  "router_catalog": "Router/catalog/modules.json",
+  "adaptive_modes": "Runtime/adaptive-modes.json",
+  "adaptive_router_catalog": "Router/catalog/adaptive-modules.json",
+  "adaptive_tools": "tools/adaptive",
+  "adaptive_entry_point": "tools/route.ps1 -Adaptive",
+  "platform_adapters": {
+    "claude": "Claude/BOOTSTRAP.md",
+    "codex": "Codex/BOOTSTRAP.md"
+  },
+  "candidate_rules_are_authoritative": false,
+  "notes": "Only the minimal Core is stable. Existing long contracts remain research/reference material until evaluated and promoted. Release 0.2.0 adds the adaptive mode layer as a COST ladder plus governance controls (human gate on critical consequence, durable checkpoints, spec-freeze anti-scope-shrink); it is explicitly NOT a correctness-lift claim - a 5-fixture/10-call screen measured a decisive null on correctness lift while scaffolded arms cost 5-8x tokens (see Setup/adaptive-modes.md). The classic router (Router/catalog/modules.json + tools/route.ps1 default path) is unchanged; the adaptive layer is additive and opt-in via tools/route.ps1 -Adaptive. Runtime/releases/0.2.0/promotion-record.json is the authoritative promotion timestamp and approver."
+}

@@ -1,0 +1,118 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-14T10:16:10.8053907+02:00",
+    "mode":  "full",
+    "passed":  false,
+    "checks_passed":  17,
+    "checks_failed":  1,
+    "checks":  [
+                   {
+                       "id":  "json-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "344 files, 0 errors"
+                   },
+                   {
+                       "id":  "powershell-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "59 files, 0 errors"
+                   },
+                   {
+                       "id":  "knowledge-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "12/12"
+                   },
+                   {
+                       "id":  "model-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "10/10"
+                   },
+                   {
+                       "id":  "runtime-controls",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "5/5"
+                   },
+                   {
+                       "id":  "fixture-discrimination",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "19/19"
+                   },
+                   {
+                       "id":  "run-lifecycle",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "3/3"
+                   },
+                   {
+                       "id":  "real-world-battery-lifecycle",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "9/9"
+                   },
+                   {
+                       "id":  "benchmark-safety",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "8/8"
+                   },
+                   {
+                       "id":  "security-hooks",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "25/25"
+                   },
+                   {
+                       "id":  "windows-platform",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "5/5"
+                   },
+                   {
+                       "id":  "wsl-isolation",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "True/"
+                   },
+                   {
+                       "id":  "secret-hygiene",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "656/656"
+                   },
+                   {
+                       "id":  "doctor",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "failures=0, warnings=3"
+                   },
+                   {
+                       "id":  "objective-complete",
+                       "passed":  false,
+                       "exit_code":  1,
+                       "summary":  "24 open requirements"
+                   },
+                   {
+                       "id":  "twelve-executable-fixtures",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "19/12 fixtures"
+                   },
+                   {
+                       "id":  "verified-provider-config",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "Codex and Claude authenticated in AgenticBench"
+                   },
+                   {
+                       "id":  "secure-isolation-proof",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "dedicated WSL with Windows drive unmounted"
+                   }
+               ]
+}

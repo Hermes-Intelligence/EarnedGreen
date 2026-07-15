@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run-record",
+  "type": "object",
+  "required": ["schema_version", "case_id", "arm", "provider", "requested_profile", "actual_model", "effort", "started_at", "finished_at", "exit_code", "outcome_valid", "quality_passed", "enforcement_passed", "public_tests", "grader"],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "case_id": { "type": "string" },
+    "arm": { "enum": ["vanilla", "core", "core-router", "core-router-enforcement"] },
+    "provider": { "type": "string" },
+    "requested_profile": { "type": "string" },
+    "requested_selector": { "type": ["string", "null"] },
+    "actual_model": { "type": "string", "minLength": 1 },
+    "effort": { "type": "string" },
+    "tokens": { "type": ["integer", "null"], "minimum": 0 },
+    "token_usage": {
+      "type": ["object", "null"],
+      "properties": {
+        "total_observed_tokens": { "type": ["integer", "null"], "minimum": 0 },
+        "source": { "type": "string" }
+      }
+    },
+    "cost": { "type": ["number", "null"], "minimum": 0 },
+    "monetary_cost": {
+      "type": ["object", "null"],
+      "properties": {
+        "amount_usd": { "type": ["number", "null"], "minimum": 0 },
+        "basis": { "type": "string" }
+      }
+    },
+    "started_at": { "type": "string" },
+    "finished_at": { "type": "string", "format": "date-time" },
+    "exit_code": { "type": "integer" },
+    "outcome_valid": { "type": "boolean" },
+    "quality_passed": { "type": "boolean" },
+    "enforcement_passed": { "type": "boolean" },
+    "isolation": { "type": ["string", "null"] },
+    "publishable_hidden_result": { "type": "boolean" },
+    "changed_files": { "type": "array", "items": { "type": "string" } },
+    "protected_files_changed": { "type": "array", "items": { "type": "string" } },
+    "failure_kind": { "type": ["string", "null"], "enum": ["agent_crash", "grader_error", null] },
+    "public_tests": {
+      "type": "object",
+      "required": ["passed", "exit_code"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "exit_code": { "type": "integer" },
+        "output": { "type": ["string", "null"] }
+      }
+    },
+    "grader": {
+      "type": "object",
+      "required": ["passed", "score", "evidence"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "score": { "type": "number" },
+        "seed": { "type": ["integer", "null"] },
+        "dimensions": { "type": ["object", "null"] },
+        "checks": { "type": ["array", "null"] },
+        "evidence": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

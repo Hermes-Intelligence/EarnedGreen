@@ -1,0 +1,110 @@
+{
+  "schema_version": 3,
+  "campaign_id": "20260714-174315-adaptive-mode-ablation",
+  "status": "complete",
+  "stage": "canary",
+  "provider_calls": 1,
+  "fixture": "adaptive-contract-evolution-v3",
+  "fixture_admission": {
+    "admitted": true,
+    "record_path": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\evidence\\fixture-admission-adaptive-contract-evolution-v3.json",
+    "reason": null,
+    "generated_at": "2026-07-14T15:41:16.800005+00:00",
+    "paid_history": {
+      "runs_scanned": 38,
+      "matching_runs": [],
+      "valid_paid_runs": 0
+    },
+    "gate": "fixture-admission"
+  },
+  "paid_history": {
+    "valid_paid_runs": 0,
+    "matching_runs": 0
+  },
+  "canary_policy": {
+    "applies_when": "the fixture has no prior paid run whose Evals/runs run-record.json shows outcome_valid=true",
+    "first_stage": {
+      "calls": 1,
+      "arm": "cheapest (rank 0: vanilla)",
+      "approval": "separate explicit approval for exactly one call"
+    },
+    "main_stage_requires": {
+      "separate_approval": true,
+      "canary_outcome_valid": true,
+      "min_distinct_hidden_dimensions": 2,
+      "all_declared_dimensions_reported": true,
+      "note": "floor/ceiling collapse (a single reported dimension) blocks the remaining arms"
+    },
+    "admission_gate": "every campaign additionally requires a fresh Fixture Admission Gate record (candidate fixtures) or fresh eval-validity PASS (contracted fixtures)"
+  },
+  "canary_evidence": null,
+  "provider_snapshot": {
+    "generated_at": "2026-07-13T15:10:46.4282540+02:00",
+    "expires_at": "2026-07-20T15:10:46.4282540+02:00",
+    "distro": "AgenticBench",
+    "provider": {
+      "id": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "medium",
+      "cli_version": "codex-cli 0.144.3"
+    }
+  },
+  "model_policy": "same resolved provider model and effort across arms",
+  "runs": [
+    {
+      "run_key": "screen::adaptive-contract-evolution-v3::vanilla::t1",
+      "arm": "vanilla",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260714-174322702-adaptive-contract-evolution-v3-vanilla-t1"
+    }
+  ],
+  "independent_verifier_runs": [],
+  "loop": {
+    "max_total_provider_calls": 1,
+    "max_calls_per_invocation": 1,
+    "max_replacements": 0,
+    "max_turns_per_call": 18,
+    "max_wall_minutes_per_call": 25,
+    "kill_switch": "Evals/local/STOP",
+    "automatic_followup": false
+  },
+  "harness_snapshot": [
+    {
+      "path": "implementation/modes.json",
+      "sha256": "A6F8628E3785E8AF45CF35C31B0BB41AC98DF490B2C86F8E14EEA461CC7E710F"
+    },
+    {
+      "path": "implementation/router-catalog.json",
+      "sha256": "EF42AE9630F2011E955C8286C58D50E4238083EC6E9CC68BBC404FACB83DA661"
+    },
+    {
+      "path": "implementation/adaptive_router.py",
+      "sha256": "C6D0621350EB8B10E7C8B4D7CE41362E4C92C20A4282ACF57CC9321EB9EC7DD9"
+    },
+    {
+      "path": "implementation/objective_compiler.py",
+      "sha256": "DB1CF73A9B8FC82117945230888B74B1FF4DB8643E80EFAF78CCF3FCB32E9A56"
+    },
+    {
+      "path": "implementation/pre_submit_gate.py",
+      "sha256": "8D04614D7CE1ED9A5C926AB0594F7AB449C909408999177594A1AC4B6F0FEAD5"
+    },
+    {
+      "path": "implementation/eval_validity.py",
+      "sha256": "06F0EDFFF1D4E207CB29E64037A1A6BE0AD2CFFCA5BD601C755D51CD6B641AAA"
+    },
+    {
+      "path": "implementation/fixture_admission.py",
+      "sha256": "59E367C05A21900E6042292A4EB43A14BFA03F8C4B5C1C75019BF0A7D6967324"
+    }
+  ],
+  "approval": {
+    "approved_at": "2026-07-14T15:43:15.371351+00:00",
+    "approved_by": "sebastian-preauthorized-autonomous-canary",
+    "scope": "exactly one canary call on the cheapest arm; every further arm needs a separate approval after the canary run-record is validated",
+    "exact_calls": 1,
+    "stage": "canary"
+  }
+}

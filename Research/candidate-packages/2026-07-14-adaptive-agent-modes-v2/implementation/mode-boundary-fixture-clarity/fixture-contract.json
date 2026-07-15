@@ -1,0 +1,35 @@
+{
+  "schema_version": 2,
+  "id": "implicit-conventions-v1",
+  "version": 1,
+  "status": "candidate-not-authoritative",
+  "fixture_class": "underspecified-by-design",
+  "purpose": "Clarity-axis fixture: an UNDERSPECIFIED task over an existing small codebase whose correctness depends on implicit house conventions (a miniature of the real DC WIRE / state-adapter cases). The task text carries almost none of the real requirements; every hidden-grader expectation is instead traceable to a discoverable in-repo convention (see convention_anchors). It measures whether the spec-first planning layer (clarity signal + spec synthesis + ledger freeze) makes an agent DISCOVER the conventions before implementing.",
+  "public_test": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_public.py", "-v"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": ["basic-functionality", "column-contract", "order-dependency", "token-guard", "changelog-discipline", "point-in-time", "silent-zero-rows"],
+  "convention_anchors": [
+    {"check_id": "basic-functionality", "evidence_file": "task.md", "quote": "producing the same product table and change log as the existing sources"},
+    {"check_id": "column-contract", "evidence_file": "src/rows.py", "quote": "downstream consumers index rows by POSITION, not by name"},
+    {"check_id": "order-dependency", "evidence_file": "src/guard.py", "quote": "scrub_tokens must run BEFORE resolve.resolve_issuer"},
+    {"check_id": "token-guard", "evidence_file": "src/guard.py", "quote": "They must never be used to resolve an issuer."},
+    {"check_id": "changelog-discipline", "evidence_file": "src/changelog.py", "quote": "existing rows are never updated and never deleted"},
+    {"check_id": "point-in-time", "evidence_file": "src/dates.py", "quote": "as_of must ALWAYS be the knowledge date, published_at, never effective_at"},
+    {"check_id": "silent-zero-rows", "evidence_file": "src/sources/alpha_feed.py", "quote": "a source must never load zero rows silently"}
+  ],
+  "postmortem_class_coverage": {
+    "covered": {
+      "silent-failure": "silent-zero-rows: an error-shaped payload at transport success must fail loudly, never load zero rows",
+      "domain-invariants": "changelog-discipline (restatement = new row, append-only) and point-in-time (knowledge date, never effective date)",
+      "ambiguity-defer": "token-guard: an ambiguous token is masked and never guessed into an issuer"
+    },
+    "future_fixture_candidates": ["verifier-validity (a broken cross-check as confidence arbiter)", "distribution-coverage (parser built for the rarest format)", "fresh-deploy (cold-start from zero)", "artifact-concurrency (double-writer on a results artifact)"]
+  },
+  "expected_controls": [
+    {"id": "mode-1-local", "min_score": 8, "max_score": 30},
+    {"id": "plausible-cold-pass", "min_score": 45, "max_score": 65, "models": "the demonstrated cold-agent failure mode on underspecified tasks over existing code: a clean solution that implements the happy path and the obvious integration, passes the weak public tests, and violates exactly the four implicit conventions it never went looking for (order-dependency, point-in-time, changelog-discipline, silent-zero-rows). This control is the fixture's cheap deterministic headroom proxy for a future paid canary."},
+    {"id": "reference", "min_score": 100, "max_score": 100}
+  ],
+  "interpretation": "Controls are deterministic capability proxies, not claims about future model outcomes. The plausible-cold-pass control lands mid-band (expected 47) to show the fixture has wide discriminating headroom across four independent convention dimensions. Because the task is underspecified BY DESIGN, admission does not require task-sentence pinning (interpretation-coverage); instead every hidden expectation must be anchored to a discoverable in-repo convention (convention_anchors), the spec-discovery equivalent of public anchors."
+}

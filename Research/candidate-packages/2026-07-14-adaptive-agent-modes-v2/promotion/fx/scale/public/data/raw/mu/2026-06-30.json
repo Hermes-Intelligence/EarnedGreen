@@ -1,0 +1,25 @@
+{
+  "notices": [
+    {
+      "isin": "DE000MUB0071",
+      "kind": "halt",
+      "text": "Handelsaussetzung",
+      "published": "2026-06-30",
+      "validFrom": "2026-06-30"
+    },
+    {
+      "isin": "DE000MUB0113",
+      "kind": "resume",
+      "text": "Wiederaufnahme des Handels",
+      "published": "2026-06-30",
+      "validFrom": "2026-06-30"
+    },
+    {
+      "isin": "DE000MUB0246",
+      "kind": "halt",
+      "text": "Handelsaussetzung bis auf weiteres",
+      "published": "2026-06-30",
+      "validFrom": "2026-07-01"
+    }
+  ]
+}

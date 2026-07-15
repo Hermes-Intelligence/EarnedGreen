@@ -1,0 +1,9 @@
+{
+  "result": {
+    "rows": [
+      {"instrument": "QRV", "type": "halt", "headline": "Trading halted pending news", "posted": "2026-07-01", "applies": "2026-07-01"},
+      {"instrument": "ZMT", "type": "halt", "headline": "Volatility pause on ZMT", "posted": "2026-07-01", "applies": "2026-07-02"},
+      {"instrument": "ZMT", "type": "amend", "headline": "Corrected: pause extended", "posted": "2026-07-02", "applies": "2026-07-03"}
+    ]
+  }
+}

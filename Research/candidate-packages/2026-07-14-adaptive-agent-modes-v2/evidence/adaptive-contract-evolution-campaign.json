@@ -1,0 +1,121 @@
+{
+  "schema_version": 2,
+  "campaign_id": "20260714-132536-adaptive-mode-ablation",
+  "status": "complete",
+  "provider_calls": 6,
+  "fixture": "adaptive-contract-evolution",
+  "provider_snapshot": {
+    "generated_at": "2026-07-13T15:10:46.4282540+02:00",
+    "expires_at": "2026-07-20T15:10:46.4282540+02:00",
+    "distro": "AgenticBench",
+    "provider": {
+      "id": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "medium",
+      "cli_version": "codex-cli 0.144.3"
+    }
+  },
+  "model_policy": "same resolved provider model and effort across arms",
+  "runs": [
+    {
+      "run_key": "screen::adaptive-contract-evolution::mode-1-lean::t1",
+      "arm": "mode-1-lean",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260714-134703477-adaptive-contract-evolution-mode-1-lean-t1"
+    },
+    {
+      "run_key": "screen::adaptive-contract-evolution::mode-2-routed::t1",
+      "arm": "mode-2-routed",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260714-135227691-adaptive-contract-evolution-mode-2-routed-t1"
+    },
+    {
+      "run_key": "screen::adaptive-contract-evolution::full::t1",
+      "arm": "full",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260714-135650267-adaptive-contract-evolution-full-t1"
+    },
+    {
+      "run_key": "screen::adaptive-contract-evolution::vanilla::t1",
+      "arm": "vanilla",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260714-140517821-adaptive-contract-evolution-vanilla-t1"
+    },
+    {
+      "run_key": "screen::adaptive-contract-evolution::mode-3-assured::t1",
+      "arm": "mode-3-assured",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260714-140721952-adaptive-contract-evolution-mode-3-assured-t1"
+    }
+  ],
+  "independent_verifier_runs": [
+    {
+      "run_key": "screen::adaptive-contract-evolution::full-verifier::t1",
+      "arm": "full",
+      "trial": 1,
+      "role": "independent-verifier",
+      "depends_on": "screen::adaptive-contract-evolution::full::t1",
+      "status": "complete-quality-failure",
+      "run_id": "20260714-140217401-adaptive-contract-evolution-full-verifier-t1"
+    }
+  ],
+  "loop": {
+    "max_total_provider_calls": 6,
+    "max_calls_per_invocation": 6,
+    "max_replacements": 0,
+    "max_turns_per_call": 18,
+    "max_wall_minutes_per_call": 25,
+    "kill_switch": "Evals/local/STOP",
+    "automatic_followup": false
+  },
+  "harness_snapshot": [
+    {
+      "path": "implementation/modes.json",
+      "sha256": "A6F8628E3785E8AF45CF35C31B0BB41AC98DF490B2C86F8E14EEA461CC7E710F"
+    },
+    {
+      "path": "implementation/router-catalog.json",
+      "sha256": "EF42AE9630F2011E955C8286C58D50E4238083EC6E9CC68BBC404FACB83DA661"
+    },
+    {
+      "path": "implementation/adaptive_router.py",
+      "sha256": "C6D0621350EB8B10E7C8B4D7CE41362E4C92C20A4282ACF57CC9321EB9EC7DD9"
+    },
+    {
+      "path": "implementation/objective_compiler.py",
+      "sha256": "DB1CF73A9B8FC82117945230888B74B1FF4DB8643E80EFAF78CCF3FCB32E9A56"
+    },
+    {
+      "path": "implementation/pre_submit_gate.py",
+      "sha256": "9AFCE0BDDB853869F73D9AF7C6954DD3FB388A7043D850DC741700A2479EBB9A"
+    },
+    {
+      "path": "implementation/eval_validity.py",
+      "sha256": "3809EC8C47444A2021620B48F3435529B5CB8C23F77A9C653E9024E4727181D6"
+    }
+  ],
+  "approval": {
+    "approved_at": "2026-07-14T11:47:03.402107+00:00",
+    "approved_by": "user-no-to-jedziemy",
+    "scope": "exactly six provider calls: five solutions plus one independent Full verifier"
+  },
+  "recoveries": [
+    {
+      "at": "2026-07-14T11:52:08.013692+00:00",
+      "run_id": "20260714-134703477-adaptive-contract-evolution-mode-1-lean-t1",
+      "kind": "zero-provider-host-grader-encoding-repair",
+      "provider_calls_added": 0,
+      "score": 9
+    }
+  ]
+}

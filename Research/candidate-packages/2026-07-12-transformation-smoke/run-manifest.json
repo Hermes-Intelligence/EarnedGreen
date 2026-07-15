@@ -1,0 +1,27 @@
+﻿{
+    "schema_version":  1,
+    "run_id":  "2026-07-12-transformation-smoke",
+    "status":  "candidate-initialized",
+    "created_at":  "2026-07-12T18:47:28.0405532+02:00",
+    "topics":  [
+                   "knowledge-routing,source-governance"
+               ],
+    "stable_manifest_sha256":  "047B2DAFA22FEB9D59479B3FF7DBE902407CB2E090E64D4B9FC36C4AF0562BFA",
+    "stable_paths_writable":  false,
+    "direct_commit_or_push_allowed":  false,
+    "source_registry":  "Research/sources/registry.json",
+    "due_source_ids":  [
+                           null
+                       ],
+    "required_artifacts":  [
+                               "run-manifest.json",
+                               "source-registry-snapshot.json",
+                               "claims.json",
+                               "rejected-claims.json",
+                               "source-registry.patch.json",
+                               "proposed-changes.md",
+                               "eval-plan.json",
+                               "report.md",
+                               "report.pdf"
+                           ]
+}

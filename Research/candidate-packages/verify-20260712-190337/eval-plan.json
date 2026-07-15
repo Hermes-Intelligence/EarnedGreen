@@ -1,0 +1,12 @@
+﻿{
+    "status":  "pending",
+    "required_eval_arms":  [
+                               "vanilla",
+                               "core",
+                               "core-router",
+                               "core-router-enforcement"
+                           ],
+    "cases":  [
+
+              ]
+}

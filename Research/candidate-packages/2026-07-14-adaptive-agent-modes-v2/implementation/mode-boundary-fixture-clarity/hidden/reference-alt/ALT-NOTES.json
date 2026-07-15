@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "purpose": "Second hidden reference authored from task.md plus the PUBLIC code alone. For this underspecified-by-design fixture the question is not whether the task sentences pin every choice (they deliberately do not) but whether the in-repo conventions do: an independent author exploring the workspace must converge on the same behavior.",
+  "authoring_protocol": "Written from task.md and public/src only, without reading the primary reference or the grader. At every decision point the author looked for an in-repo convention (docstring, shared helper, or the alpha/beta source pattern) before choosing.",
+  "pre_reconciliation_result": {
+    "interpretations": {
+      "row-shape": "rows.make_row and the COLUMNS docstring ('consumers index rows by POSITION') pin position-indexed tuples; a dict row would have been the cold guess",
+      "step-order": "guard.py's docstring ('scrub_tokens must run BEFORE resolve.resolve_issuer') plus the identical alpha/beta flow pin scrub-before-resolve",
+      "amend-handling": "changelog.py's docstring ('APPEND-ONLY ... never updated and never deleted') pins amend -> new restate row; overwrite/dedup would have been the cold guess",
+      "as-of-date": "dates.py pins as_of = published_at ('never effective_at'); gamma's 'applies' field is the tempting wrong choice",
+      "error-payload": "alpha_feed/beta_feed docstrings and code pin loud FeedError on error-shaped or zero-row payloads; returning [] would have been the cold guess",
+      "ambiguous-tokens": "guard.AMBIGUOUS_TOKENS plus resolve.py's fallback comment pin masking before issuer extraction"
+    },
+    "grader_score": 100,
+    "failed_dimensions": [],
+    "conclusion": "Every graded expectation was reachable from a discoverable in-repo convention without reading the hidden grader; the fixture's convention_anchors in fixture-contract.json list the exact quotes."
+  },
+  "reconciliation": "No reconciliation was needed: the independent reading converged on the pinned semantics at zero provider cost.",
+  "interpretation_differences_after_pinning": "None by design: both references implement the convention-pinned semantics. Remaining differences are structural only.",
+  "structural_differences": [
+    "field translation via a (_FIELDS) mapping table instead of inline dict literals",
+    "kind mapping through _KIND_BY_TYPE.get instead of a conditional expression",
+    "scrub/resolve chained functionally (resolve(scrub(event))) instead of sequential statements",
+    "error check via payload.get('error') is not None instead of the 'error' in payload membership test",
+    "list-comprehension load_events over a _translate helper"
+  ]
+}

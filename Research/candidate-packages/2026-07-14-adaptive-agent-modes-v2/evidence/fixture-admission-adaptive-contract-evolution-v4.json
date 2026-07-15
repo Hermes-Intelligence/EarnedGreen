@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "fixture": "adaptive-contract-evolution-v4",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-v4",
+  "generated_at": "2026-07-15T14:28:23.020840+00:00",
+  "fixture_fingerprint": {
+    "file_count": 40,
+    "newest_mtime": 1784105413.765812,
+    "sha256": "E8DDBE80CD4108A5ABEDBA7BFAA5F40622349D404981B551184130A51F24FB03"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": {
+          "registry-miss": "record unknown_entity_type and reject with ValueError",
+          "handler-error": "let the handler exception propagate to the caller",
+          "handler-result-type": "return the handler result verbatim without type-checking",
+          "type-lookup-trimming": "strip the type once and use the trimmed value for lookup and the envelope",
+          "rejection-telemetry": "count malformed_event for handler errors as well",
+          "output-aliasing": "protect only the caller's input; the returned attributes may alias handler output",
+          "exporter-scope": "leave exporter/serializer on the legacy parse_record path",
+          "snapshot-scope": "leave snapshot/digest_helper on the legacy parse_record path",
+          "repeat-dedup": "count unknown_entity_type on every unresolved sighting; do not deduplicate re-ingestion"
+        },
+        "after_pinning": "None by design: both references implement the pinned semantics. Remaining differences are structural only.",
+        "structural": [
+          "validation via an ordered rule table instead of inline conditionals",
+          "type resolution, handler-error containment and unresolved dedup factored into _resolve / _note_unresolved helpers",
+          "unresolved dedup ledger is a dict of sighting counts rather than a set of seen identities",
+          "str.format-based consumers, serializer, exporter, digest_helper and snapshot instead of f-strings",
+          "differently worded README documenting the same extension path, degraded fallback, re-run dedup and both indirect consumers"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": false,
+      "detail": "",
+      "serialized_output_dimensions": [
+        "consumer-primary",
+        "exporter-propagation",
+        "snapshot-propagation"
+      ],
+      "adversary_score": 100,
+      "differing_format_files": [
+        "src/serializer.py",
+        "src/digest_helper.py",
+        "src/consumers.py"
+      ]
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "mode-1-local",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 11,
+          "expected_band": [
+            8,
+            30
+          ],
+          "band_pass": true,
+          "ok": true
+        },
+        {
+          "control": "plausible-cold-pass",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 65,
+          "expected_band": [
+            55,
+            68
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 13,
+          "declared_dimensions": 13,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 13,
+          "declared_dimensions": 13,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 13,
+          "declared_dimensions": 13,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "triggered": true,
+        "trigger_terms": [
+          "lookup",
+          "open-world",
+          "registry",
+          "unknown",
+          "unseen"
+        ],
+        "miss_behavior_sentence": "Treat entity types and attribute names as open-world: they are non-blank strings that may appear for the first time in production; resolve optional per-type behavior through the runtime  ; do not encode discovered samples as an allowlist or regex alternation.",
+        "decision_points_declared": 10,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 47,
+    "matching_runs": [
+      {
+        "run_id": "20260714-181052657-adaptive-contract-evolution-v4-vanilla-t1",
+        "case_id": "adaptive-contract-evolution-v4",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 70,
+        "distinct_dimensions": 13
+      },
+      {
+        "run_id": "20260715-092824975-adaptive-contract-evolution-v4-full-t1",
+        "case_id": "adaptive-contract-evolution-v4",
+        "arm": "full",
+        "outcome_valid": true,
+        "score": 70,
+        "distinct_dimensions": 13
+      },
+      {
+        "run_id": "20260715-094258076-adaptive-contract-evolution-v4-mode-1-lean-t1",
+        "case_id": "adaptive-contract-evolution-v4",
+        "arm": "mode-1-lean",
+        "outcome_valid": true,
+        "score": 70,
+        "distinct_dimensions": 13
+      },
+      {
+        "run_id": "20260715-094952006-adaptive-contract-evolution-v4-vanilla-t1",
+        "case_id": "adaptive-contract-evolution-v4",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 70,
+        "distinct_dimensions": 13
+      },
+      {
+        "run_id": "20260715-095401638-adaptive-contract-evolution-v4-mode-2-routed-t1",
+        "case_id": "adaptive-contract-evolution-v4",
+        "arm": "mode-2-routed",
+        "outcome_valid": true,
+        "score": 70,
+        "distinct_dimensions": 13
+      }
+    ],
+    "valid_paid_runs": 5
+  }
+}

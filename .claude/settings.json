@@ -1,0 +1,36 @@
+{
+  "_note": "Live enforcement for this repository. Hooks point at the single-source scripts under Claude/hooks/ (not a copy). protect-files guards secrets and the Stable governance surface on Edit/Write; block-dangerous-command flags destructive shell commands on every command-executing tool. Both block only on exit code 2.",
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/Claude/hooks/protect-files.ps1\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/Claude/hooks/block-dangerous-command.ps1\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

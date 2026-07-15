@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "fixture": "production-ingestion-evolution",
+  "status": "validated-zero-provider-candidate",
+  "objective": "Measure whether the agentic environment improves production solution quality on an open-solution, multi-risk repository task, and quantify its time and resource overhead.",
+  "arms": ["vanilla", "core-router-enforcement"],
+  "primary_outcomes": {
+    "hidden_quality_score": {
+      "range": [0, 100],
+      "dimensions": {
+        "functional": 20,
+        "generalization": 25,
+        "reliability": 20,
+        "security": 15,
+        "edge-cases": 10,
+        "performance": 10
+      },
+      "smallest_meaningful_difference": 8,
+      "critical_floors": {
+        "generalization": 20,
+        "reliability": 15,
+        "security": 15
+      }
+    }
+  },
+  "resource_outcomes": {
+    "provider_wall_seconds": "measured",
+    "total_observed_tokens": "measured from provider events",
+    "token_breakdown": "input/cache/output/reasoning when exposed",
+    "reported_cost_usd": "provider-reported only; may differ from subscription charge",
+    "subscription_charge": "not observable unless the provider exposes it"
+  },
+  "analysis": {
+    "pairing": "same provider, explicit model, effort, task, trial seed, limits and clean workspace across arms",
+    "quality_first": true,
+    "win_rule": "A quality win requires at least 8 median points or a passed critical floor that the other arm misses. Time or tokens break ties only when quality differs by at most 5 points and critical outcomes are equivalent.",
+    "never_collapse": "Always report absolute quality and every dimension beside time, tokens and cost. Do not hide a security or generalization failure inside one efficiency number.",
+    "descriptive_uncertainty": "Report paired differences and medians at three trials; bootstrap intervals and stronger claims require at least five trials per arm."
+  },
+  "stages": [
+    {
+      "id": "complex-screen",
+      "new_calls": 6,
+      "cumulative_calls": 6,
+      "providers": ["codex"],
+      "trials_per_arm": 3,
+      "claim_level": "screening only",
+      "stop_rules": [
+        "Stop if both arms score 100 in every pair: ceiling.",
+        "Stop if every paired quality difference is within 3 points and no critical check differs: no actionable signal.",
+        "Stop and inspect if any run is infrastructure-invalid; replacements need separate approval."
+      ]
+    },
+    {
+      "id": "complex-confirm",
+      "new_calls": 4,
+      "cumulative_calls": 10,
+      "providers": ["codex"],
+      "trials_per_arm": 5,
+      "claim_level": "within-provider directional evidence",
+      "entry": "Only after complex-screen shows at least an 8-point paired quality signal or a critical-dimension difference and receives separate human approval."
+    },
+    {
+      "id": "cross-provider",
+      "new_calls": 6,
+      "cumulative_calls": 16,
+      "providers": ["claude"],
+      "trials_per_arm": 3,
+      "claim_level": "external-validity screen",
+      "entry": "Only after a confirmed Codex effect and separate human approval."
+    }
+  ],
+  "zero_provider_discrimination": {
+    "starter": 46,
+    "negative_controls": {
+      "hardcoded": 46,
+      "secure-but-closed": 70,
+      "generic-stateless": 85
+    },
+    "reference": 100,
+    "reference_margin_over_strongest_negative": 15
+  }
+}

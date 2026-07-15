@@ -1,0 +1,36 @@
+{
+  "_status": "reference template. The live copy is .claude/settings.json in this repo; init.ps1 installs an equivalent into a target repo. Hooks block only on exit code 2.",
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/Claude/hooks/protect-files.ps1\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/Claude/hooks/block-dangerous-command.ps1\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

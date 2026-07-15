@@ -1,0 +1,116 @@
+{
+  "schema_version": 3,
+  "campaign_id": "20260715-154015-adaptive-mode-ablation",
+  "status": "complete",
+  "stage": "canary",
+  "provider_calls": 1,
+  "fixture": "implicit-conventions-scale-v1",
+  "fixture_admission": {
+    "admitted": true,
+    "record_path": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\evidence\\fixture-admission-implicit-conventions-scale-v1.json",
+    "reason": null,
+    "generated_at": "2026-07-15T13:39:53.269386+00:00",
+    "paid_history": {
+      "runs_scanned": 46,
+      "matching_runs": [],
+      "valid_paid_runs": 0
+    },
+    "gate": "fixture-admission"
+  },
+  "paid_history": {
+    "valid_paid_runs": 0,
+    "matching_runs": 0,
+    "runs_dir_overridden": false
+  },
+  "canary_policy": {
+    "applies_when": "the fixture has no prior paid run whose Evals/runs run-record.json shows outcome_valid=true",
+    "first_stage": {
+      "calls": 1,
+      "arm": "cheapest (rank 0: vanilla)",
+      "approval": "separate explicit approval for exactly one call"
+    },
+    "main_stage_requires": {
+      "separate_approval": true,
+      "canary_outcome_valid": true,
+      "min_distinct_hidden_dimensions": 2,
+      "all_declared_dimensions_reported": true,
+      "note": "floor/ceiling collapse (a single reported dimension) blocks the remaining arms"
+    },
+    "admission_gate": "every campaign additionally requires a fresh Fixture Admission Gate record (candidate fixtures) or fresh eval-validity PASS (contracted fixtures)"
+  },
+  "canary_evidence": null,
+  "provider_snapshot": {
+    "generated_at": "2026-07-13T15:10:46.4282540+02:00",
+    "expires_at": "2026-07-20T15:10:46.4282540+02:00",
+    "distro": "AgenticBench",
+    "provider": {
+      "id": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "medium",
+      "cli_version": "codex-cli 0.144.3"
+    }
+  },
+  "model_policy": "same resolved provider model and effort across arms",
+  "runs": [
+    {
+      "run_key": "screen::implicit-conventions-scale-v1::vanilla::t1",
+      "arm": "vanilla",
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260715-154029242-implicit-conventions-scale-v1-vanilla-t1"
+    }
+  ],
+  "independent_verifier_runs": [],
+  "loop": {
+    "max_total_provider_calls": 1,
+    "max_calls_per_invocation": 1,
+    "max_replacements": 0,
+    "max_turns_per_call": 40,
+    "max_wall_minutes_per_call": 50,
+    "kill_switch": "Evals/local/STOP",
+    "automatic_followup": false
+  },
+  "loop_overrides": {
+    "max_turns_per_call": 40,
+    "max_wall_minutes_per_call": 50,
+    "reason": "Scale fixture: at the default 18 turns / 25 minutes the workspace cannot even be read, so a low vanilla score would measure truncation, not prioritization. Raising both budgets keeps the measured axis 'does scaffolding buy correct prioritization at scale', not 'who ran out of clock'."
+  },
+  "harness_snapshot": [
+    {
+      "path": "implementation/modes.json",
+      "sha256": "2C212A11D31A44FB554193D3A29B08B011A17F5E0382B1A4F1D732ACADD69DF3"
+    },
+    {
+      "path": "implementation/router-catalog.json",
+      "sha256": "EF42AE9630F2011E955C8286C58D50E4238083EC6E9CC68BBC404FACB83DA661"
+    },
+    {
+      "path": "implementation/adaptive_router.py",
+      "sha256": "A39D9436E5BF03E4EE176C39D822F2296ACDE71474B4B35246E7DE189DAB3141"
+    },
+    {
+      "path": "implementation/objective_compiler.py",
+      "sha256": "DB1CF73A9B8FC82117945230888B74B1FF4DB8643E80EFAF78CCF3FCB32E9A56"
+    },
+    {
+      "path": "implementation/pre_submit_gate.py",
+      "sha256": "D472B5A469F298C6B8ED84506504327CA56DB5964989B2F6163B495E9AB580DD"
+    },
+    {
+      "path": "implementation/eval_validity.py",
+      "sha256": "06F0EDFFF1D4E207CB29E64037A1A6BE0AD2CFFCA5BD601C755D51CD6B641AAA"
+    },
+    {
+      "path": "implementation/fixture_admission.py",
+      "sha256": "43D5D29EB755378C57991F6C4FC46383FA98F66D86F988D008FA9B762684846F"
+    }
+  ],
+  "approval": {
+    "approved_at": "2026-07-15T13:40:16.073694+00:00",
+    "approved_by": "sebastian-preauthorized-inconclusive-loop-scale-canary",
+    "scope": "exactly one canary call on the cheapest arm; every further arm needs a separate approval after the canary run-record is validated",
+    "exact_calls": 1,
+    "stage": "canary"
+  }
+}

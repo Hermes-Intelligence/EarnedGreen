@@ -1,0 +1,282 @@
+{
+  "schema_version": 2,
+  "observable_only": true,
+  "runs": [
+    {
+      "run_id": "20260713-214021509-api-contract-propagation-vanilla-t1",
+      "fixture": "api-contract-propagation",
+      "arm": "vanilla",
+      "tokens": 143136,
+      "core": {
+        "selected": false,
+        "opened": false
+      },
+      "selected_modules": [],
+      "selected_count": 0,
+      "opened_count": 0,
+      "action_linked_count": 0,
+      "observable_only": true
+    },
+    {
+      "run_id": "20260713-214155937-api-contract-propagation-core-router-enforcement-t1",
+      "fixture": "api-contract-propagation",
+      "arm": "core-router-enforcement",
+      "tokens": 148029,
+      "core": {
+        "selected": true,
+        "opened": true
+      },
+      "selected_modules": [
+        {
+          "id": "verification-evidence",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "compile",
+            "evidence",
+            "runtime",
+            "test",
+            "typecheck"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "change-impact",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "call site",
+            "compatibility",
+            "consumer",
+            "integration",
+            "rollback"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "research-candidate",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "candidate",
+            "claim",
+            "promotion",
+            "reject",
+            "source registry"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "generalization-assurance",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "allowlist",
+            "metamorphic",
+            "property",
+            "unicode",
+            "unknown",
+            "unseen"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        }
+      ],
+      "selected_count": 4,
+      "opened_count": 4,
+      "action_linked_count": 4,
+      "observable_only": true
+    },
+    {
+      "run_id": "20260713-214324036-coordinated-release-change-vanilla-t1",
+      "fixture": "coordinated-release-change",
+      "arm": "vanilla",
+      "tokens": 138103,
+      "core": {
+        "selected": false,
+        "opened": false
+      },
+      "selected_modules": [],
+      "selected_count": 0,
+      "opened_count": 0,
+      "action_linked_count": 0,
+      "observable_only": true
+    },
+    {
+      "run_id": "20260713-214545512-coordinated-release-change-core-router-enforcement-t1",
+      "fixture": "coordinated-release-change",
+      "arm": "core-router-enforcement",
+      "tokens": 189758,
+      "core": {
+        "selected": true,
+        "opened": true
+      },
+      "selected_modules": [
+        {
+          "id": "verification-evidence",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "compile",
+            "evidence",
+            "runtime",
+            "test",
+            "typecheck"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "database-migration",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "batch",
+            "compatibility",
+            "idempotent",
+            "resumable",
+            "rollback"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "change-impact",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "call site",
+            "compatibility",
+            "consumer",
+            "integration",
+            "rollback"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "security-boundaries",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "least privilege",
+            "protected",
+            "untrusted"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        }
+      ],
+      "selected_count": 4,
+      "opened_count": 4,
+      "action_linked_count": 4,
+      "observable_only": true
+    },
+    {
+      "run_id": "20260713-213752603-resumable-batch-session-core-router-enforcement-t1",
+      "fixture": "resumable-batch-session",
+      "arm": "core-router-enforcement",
+      "tokens": 218369,
+      "core": {
+        "selected": true,
+        "opened": true
+      },
+      "selected_modules": [
+        {
+          "id": "verification-evidence",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "compile",
+            "evidence",
+            "runtime",
+            "test",
+            "typecheck"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "security-boundaries",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "least privilege",
+            "protected",
+            "untrusted"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "session-handoff",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "checkpoint",
+            "decision",
+            "evidence",
+            "next action",
+            "resume"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "database-migration",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "batch",
+            "compatibility",
+            "resumable",
+            "rollback"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        },
+        {
+          "id": "change-impact",
+          "selected": true,
+          "opened": true,
+          "observable_marker_hits": [
+            "call site",
+            "compatibility",
+            "consumer",
+            "integration",
+            "rollback"
+          ],
+          "action_linked": true,
+          "note": "action_linked is lexical telemetry, not a claim about private reasoning"
+        }
+      ],
+      "selected_count": 5,
+      "opened_count": 5,
+      "action_linked_count": 5,
+      "observable_only": true
+    },
+    {
+      "run_id": "20260713-214826731-resumable-batch-session-vanilla-t1",
+      "fixture": "resumable-batch-session",
+      "arm": "vanilla",
+      "tokens": 138906,
+      "core": {
+        "selected": false,
+        "opened": false
+      },
+      "selected_modules": [],
+      "selected_count": 0,
+      "opened_count": 0,
+      "action_linked_count": 0,
+      "observable_only": true
+    }
+  ],
+  "totals": {
+    "selected": 13,
+    "opened": 13,
+    "action_linked": 13
+  }
+}

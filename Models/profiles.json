@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "profiles": [
+    { "id": "fast-low-risk", "description": "Bounded mechanical work with strong deterministic checks.", "minimum_capabilities": ["tool-use"], "preferred_traits": ["low-latency", "low-cost"], "effort": "low", "max_risk": "low" },
+    { "id": "balanced-daily", "description": "Normal implementation, investigation and documentation.", "minimum_capabilities": ["tool-use", "coding"], "preferred_traits": ["balanced"], "effort": "medium", "max_risk": "medium" },
+    { "id": "deep-implementation", "description": "Cross-module implementation, difficult debugging and long-horizon work.", "minimum_capabilities": ["tool-use", "coding", "strong-reasoning"], "preferred_traits": ["agentic-coding", "long-context"], "effort": "high", "max_risk": "high" },
+    { "id": "architecture-high-risk", "description": "Security, irreversible migrations, architecture and production-critical decisions.", "minimum_capabilities": ["tool-use", "coding", "frontier-reasoning"], "preferred_traits": ["highest-reliability"], "effort": "high", "max_risk": "critical", "human_gate": true },
+    { "id": "creative-design", "description": "Divergent product, UX and visual concept work followed by deterministic validation.", "minimum_capabilities": ["creative-reasoning"], "preferred_traits": ["multimodal", "frontier-reasoning"], "effort": "high", "max_risk": "medium" },
+    { "id": "adversarial-review", "description": "Independent review using a different family when possible.", "minimum_capabilities": ["strong-reasoning"], "preferred_traits": ["independent-family", "critique"], "effort": "high", "max_risk": "critical", "human_gate": true },
+    { "id": "research-worker", "description": "Parallel source retrieval, extraction and claim normalization.", "minimum_capabilities": ["tool-use"], "preferred_traits": ["low-cost", "high-throughput"], "effort": "medium", "max_risk": "low" },
+    { "id": "research-synthesizer", "description": "Cross-source synthesis, contradiction analysis and candidate preparation.", "minimum_capabilities": ["tool-use", "strong-reasoning"], "preferred_traits": ["long-context", "citation-discipline"], "effort": "high", "max_risk": "high" }
+  ]
+}

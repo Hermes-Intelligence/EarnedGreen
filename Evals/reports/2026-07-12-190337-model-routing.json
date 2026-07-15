@@ -1,0 +1,59 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-12T19:03:37.0544907+02:00",
+    "scope":  "deterministic profile routing only; not outcome quality",
+    "cases":  8,
+    "passed":  6,
+    "failed":  2,
+    "results":  [
+                    {
+                        "id":  "simple-mechanical",
+                        "passed":  false,
+                        "expected":  "balanced-daily",
+                        "actual":  "deep-implementation"
+                    },
+                    {
+                        "id":  "ordinary-feature",
+                        "passed":  true,
+                        "expected":  "balanced-daily",
+                        "actual":  "balanced-daily"
+                    },
+                    {
+                        "id":  "difficult-bug",
+                        "passed":  true,
+                        "expected":  "deep-implementation",
+                        "actual":  "deep-implementation"
+                    },
+                    {
+                        "id":  "public-refactor",
+                        "passed":  true,
+                        "expected":  "deep-implementation",
+                        "actual":  "deep-implementation"
+                    },
+                    {
+                        "id":  "database-migration",
+                        "passed":  true,
+                        "expected":  "architecture-high-risk",
+                        "actual":  "architecture-high-risk"
+                    },
+                    {
+                        "id":  "security-review",
+                        "passed":  true,
+                        "expected":  "adversarial-review",
+                        "actual":  "adversarial-review"
+                    },
+                    {
+                        "id":  "weekly-research",
+                        "passed":  true,
+                        "expected":  "research-synthesizer",
+                        "actual":  "research-synthesizer"
+                    },
+                    {
+                        "id":  "explicit-user-selector",
+                        "passed":  false,
+                        "expected":  "sonnet",
+                        "actual":  null,
+                        "recommendation_only":  null
+                    }
+                ]
+}

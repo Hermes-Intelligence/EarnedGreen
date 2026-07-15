@@ -1,0 +1,88 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-13T13:45:47.1866201+02:00",
+    "mode":  "infrastructure",
+    "passed":  true,
+    "checks_passed":  13,
+    "checks_failed":  0,
+    "checks":  [
+                   {
+                       "id":  "json-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "146 files, 0 errors"
+                   },
+                   {
+                       "id":  "powershell-parse",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "50 files, 0 errors"
+                   },
+                   {
+                       "id":  "knowledge-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "12/12"
+                   },
+                   {
+                       "id":  "model-routing",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "10/10"
+                   },
+                   {
+                       "id":  "runtime-controls",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "5/5"
+                   },
+                   {
+                       "id":  "fixture-discrimination",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "12/12"
+                   },
+                   {
+                       "id":  "run-lifecycle",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "3/3"
+                   },
+                   {
+                       "id":  "benchmark-safety",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "4/4"
+                   },
+                   {
+                       "id":  "security-hooks",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "8/8"
+                   },
+                   {
+                       "id":  "windows-platform",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "5/5"
+                   },
+                   {
+                       "id":  "wsl-isolation",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "True/"
+                   },
+                   {
+                       "id":  "secret-hygiene",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "336/336"
+                   },
+                   {
+                       "id":  "doctor",
+                       "passed":  true,
+                       "exit_code":  0,
+                       "summary":  "failures=0, warnings=3"
+                   }
+               ]
+}
