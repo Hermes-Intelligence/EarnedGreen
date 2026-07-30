@@ -1,0 +1,332 @@
+{
+ "schema_version": 1,
+ "rails": "exploratory instrument analysis; no scores, no re-grading, no shipped-grader change",
+ "ladder_order": [
+  "moved",
+  "any-gain",
+  "gains-superset",
+  "kindset-superset",
+  "kindset-equal",
+  "textseq-equal"
+ ],
+ "families": {
+  "charts-lines": {
+   "separating_level_for_valid_lineage": "any-gain",
+   "implementations": {
+    "after": {
+     "moved": true,
+     "any-gain": true,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "altformat": {
+     "moved": true,
+     "any-gain": true,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "vanilla": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": false,
+     "kindset-superset": false,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "oracle-loop": {
+     "moved": true,
+     "any-gain": true,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "vanilla-configured": {
+     "moved": true,
+     "any-gain": true,
+     "gains-superset": false,
+     "kindset-superset": false,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "relation-loop": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": false,
+     "kindset-superset": false,
+     "kindset-equal": false,
+     "textseq-equal": false
+    }
+   }
+  },
+  "charts-table": {
+   "separating_level_for_valid_lineage": "gains-superset",
+   "implementations": {
+    "after": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "altformat": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "vanilla": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "oracle-loop": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "vanilla-configured": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "relation-loop": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    }
+   }
+  },
+  "citation-hygiene": {
+   "separating_level_for_valid_lineage": "gains-superset",
+   "implementations": {
+    "after": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "altformat": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "vanilla": {
+     "moved": false,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "oracle-loop": {
+     "moved": false,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "vanilla-configured": {
+     "moved": false,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "relation-loop": {
+     "moved": false,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    }
+   }
+  },
+  "block-citations": {
+   "separating_level_for_valid_lineage": "gains-superset",
+   "implementations": {
+    "after": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "altformat": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "vanilla": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "oracle-loop": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "vanilla-configured": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "relation-loop": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    }
+   }
+  },
+  "enum-normalization": {
+   "separating_level_for_valid_lineage": "gains-superset",
+   "implementations": {
+    "after": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "altformat": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "vanilla": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "oracle-loop": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "vanilla-configured": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    },
+    "relation-loop": {
+     "moved": false,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": false
+    }
+   }
+  },
+  "ordering": {
+   "separating_level_for_valid_lineage": "gains-superset",
+   "implementations": {
+    "after": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "altformat": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": true,
+     "textseq-equal": true
+    },
+    "vanilla": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "oracle-loop": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "vanilla-configured": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    },
+    "relation-loop": {
+     "moved": true,
+     "any-gain": false,
+     "gains-superset": true,
+     "kindset-superset": true,
+     "kindset-equal": false,
+     "textseq-equal": false
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,10 @@
+{
+  "commit": "a1b2c3d",
+  "message": "fix(ingest): keep the LAST row for a duplicate id, not the first",
+  "body": "Batches arrive oldest-first. Collapsing duplicates by first-seen pinned every updated record to its oldest version. Three weeks of address changes silently did not apply.",
+  "probe": [
+    {"id": "u-1", "email": "a@x.io", "city": "Gdansk"},
+    {"id": "u-2", "email": "b@x.io", "city": "Poznan"},
+    {"id": "u-1", "email": "a@x.io", "city": "Krakow"}
+  ]
+}

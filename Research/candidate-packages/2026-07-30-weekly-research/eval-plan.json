@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-07-30-weekly-research",
+  "status": "pending",
+  "provider_spend_required": false,
+  "rationale": "Candidate proposes source-registry changes, a model-catalog refresh, and documentation corrections only - no change to Runtime/stable behaviour, Router modules or adaptive tooling. Acceptable on zero-provider checks. One bucket is under mandatory security review (see EV-SEC).",
+  "cases": [
+    {
+      "id": "EV-SEC",
+      "name": "Security-flagged bucket human review",
+      "kind": "review",
+      "blocking": true,
+      "method": "The auto-mode monitor flagged the claude-hooks-permissions research AND verify agents as possible classifier reconnaissance. Its 24 claims are tagged security_review_required in claims.json. A human must review the agents' actual fetched sources (all official code.claude.com docs) and either clear or drop each claim.",
+      "pass_criteria": "Every security_review_required claim is explicitly cleared by a human before it informs any promoted text; none promoted silently."
+    },
+    {
+      "id": "EV-01",
+      "name": "Source patch applies and is reversible",
+      "kind": "static",
+      "blocking": true,
+      "method": "Dry-run source-registry.patch.json against registry.json; confirm every add/update/retire id resolves and a rollback restores the pre-patch file hash.",
+      "pass_criteria": "All entries apply; rollback reproduces original registry.json hash."
+    },
+    {
+      "id": "EV-02",
+      "name": "No stable doc cites the retired URL",
+      "kind": "static",
+      "blocking": true,
+      "method": "Grep the repo for the 1 retired URL (codex issue #8759).",
+      "pass_criteria": "Zero references, or updated to the current source."
+    },
+    {
+      "id": "EV-MODEL",
+      "name": "Model-catalog re-verification before catalog refresh",
+      "kind": "review",
+      "blocking": true,
+      "method": "Re-open the official provider doc for EACH of the 33 model-catalog claims (ids, aliases, context windows, effort levels, deprecations) at promotion time. Only then refresh Models/providers.json.",
+      "pass_criteria": "Every model fact re-verified against an official source; no fabricated id/number; live catalog refresh matches."
+    },
+    {
+      "id": "EV-COR",
+      "name": "Corrected claims reconciled with contracts",
+      "kind": "review",
+      "blocking": true,
+      "method": "Diff each of the 6 corrected_statements against Claude/Codex OPERATING_CONTRACT text; fix or explicitly defer each contradiction.",
+      "pass_criteria": "Every contradiction fixed or deferred with a reason."
+    },
+    {
+      "id": "EV-VS",
+      "name": "Version-sensitive sample re-verification",
+      "kind": "review",
+      "blocking": true,
+      "method": "Randomly sample 15 of the 244 version-sensitive claims and re-open the cited tier-1 source at promotion.",
+      "pass_criteria": ">=14/15 still supported; any failure blocks that bucket pending full recheck."
+    },
+    {
+      "id": "EV-REJ",
+      "name": "Rejected claims stay out of guidance",
+      "kind": "static",
+      "blocking": true,
+      "method": "Confirm none of the 4 unsupported ids appear in proposed-changes.md or promoted text.",
+      "pass_criteria": "Zero occurrences."
+    },
+    {
+      "id": "EV-RPT",
+      "name": "Report source integrity + PDF URIs",
+      "kind": "static",
+      "blocking": false,
+      "method": "Every Sources-appendix entry appears in claims.json or the patch; rendered PDF exposes clickable URI annotations.",
+      "pass_criteria": "No orphan sources; PDF URI annotations > 0."
+    }
+  ]
+}

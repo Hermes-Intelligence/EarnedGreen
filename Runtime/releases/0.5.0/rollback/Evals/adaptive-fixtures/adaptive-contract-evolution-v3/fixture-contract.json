@@ -1,0 +1,94 @@
+{
+  "schema_version": 2,
+  "id": "adaptive-contract-evolution-v3",
+  "version": 3,
+  "supersedes": "adaptive-contract-evolution-v2",
+  "status": "candidate-not-authoritative",
+  "purpose": "Harder mode-boundary fixture: keep a solvable happy path but bury three failure modes that scaffolding specifically prevents (an omission-prone rare-path requirement, an indirectly reached consumer, and an adversarial open-world edge), so scaffolded arms have genuine headroom over a cold pass.",
+  "public_test": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_public.py", "-v"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": ["current-envelope","open-world-unicode","input-validation","malformed-telemetry","copy-isolation","legacy-wrapper","consumer-primary","documentation","degraded-path","exporter-propagation","exact-type-match"],
+  "discriminating_checks": {
+    "degraded-path": "D1 omission-prone: a registered handler that raises must be contained under handler_error and fall back to the original attributes; stated once in prose on a rare path.",
+    "exporter-propagation": "D2 downstream-propagation: the audit-export consumer (exporter.export_digest -> serializer.serialize) is reached two hops away and must adopt the new registry-aware, schema-versioned contract; the two obvious consumers (render_primary/render_audit) are named in the bullet list, this one only in prose.",
+    "exact-type-match": "D3 adversarial open-world: a trailing-space type must be an unresolved type, not a trimmed match to a registered handler."
+  },
+  "public_anchors": {
+    "current-envelope": "returning exactly",
+    "open-world-unicode": "may appear for the first time",
+    "input-validation": "Reject non-dictionaries",
+    "malformed-telemetry": "malformed_event",
+    "copy-isolation": "independent of the caller's objects",
+    "legacy-wrapper": "backward-compatible wrapper",
+    "consumer-primary": "render_primary",
+    "documentation": "Document the extension path",
+    "degraded-path": "handler_error",
+    "exporter-propagation": "export_digest",
+    "exact-type-match": "compared exactly"
+  },
+  "decision_points": [
+    {
+      "id": "registry-miss",
+      "description": "normalize_event receives a valid event whose type has no registry entry",
+      "options": ["reject with an exception and count unknown_entity_type", "pass the attributes through unchanged and count unknown_entity_type"],
+      "pinned": "pass-through-with-telemetry",
+      "pinned_by": "When a valid event's type is not present in the registry, `normalize_event` must not raise: it returns the attributes unchanged (deep-copied) and increments `unknown_entity_type` exactly once."
+    },
+    {
+      "id": "handler-error",
+      "description": "a registered handler raises an exception while processing an event",
+      "options": ["let the exception propagate or reject the event as malformed", "contain it: count handler_error, fall back to the original attributes, return normally"],
+      "pinned": "contain-and-count",
+      "pinned_by": "When a registered handler raises any exception, `normalize_event` does not propagate it and does not treat the event as malformed: it increments `handler_error` exactly once, falls back to the deep-copied original attributes, and returns the normal envelope."
+    },
+    {
+      "id": "handler-result-type",
+      "description": "a registry handler returns something that is not a dictionary",
+      "options": ["return the handler result verbatim", "reject the event as malformed"],
+      "pinned": "reject-as-malformed",
+      "pinned_by": "A handler that returns anything other than a dictionary is a malformed event and is rejected."
+    },
+    {
+      "id": "type-lookup-trimming",
+      "description": "whether the type is trimmed before the registry lookup and in the envelope",
+      "options": ["trim the type for lookup and output", "compare and echo the original untrimmed type; strip only to test blankness"],
+      "pinned": "exact-untrimmed",
+      "pinned_by": "Entity types are compared exactly: the value used for the registry lookup and for `entity_type` in the envelope is the original string, never a trimmed or otherwise rewritten form, even though the blank check uses its stripped length."
+    },
+    {
+      "id": "output-aliasing",
+      "description": "whether the returned attributes may alias caller-owned objects",
+      "options": ["input-only protection: never mutate the caller's event", "full isolation: the returned attributes are also independent of the caller's objects"],
+      "pinned": "full-isolation",
+      "pinned_by": "The returned attributes must also be independent of the caller's objects, so mutating the result never changes the input."
+    },
+    {
+      "id": "legacy-wrapper-scope",
+      "description": "whether parse_record adopts the new validation, telemetry and schema_version",
+      "options": ["parse_record shares the new validation, telemetry and schema_version", "parse_record keeps its legacy behavior"],
+      "pinned": "legacy-unchanged",
+      "pinned_by": "Preserve `parse_record(record)` as a backward-compatible wrapper with its existing legacy behavior; it takes no registry, records no telemetry, and does not gain the `schema_version` field."
+    },
+    {
+      "id": "exporter-scope",
+      "description": "whether the indirect audit-export path adopts the evolved contract",
+      "options": ["leave exporter/serializer on the legacy parse_record path", "route the export path through normalize_event with the registry and schema_version"],
+      "pinned": "adopt-normalized-contract",
+      "pinned_by": "The audit export path `exporter.export_digest(records, registry)`, which serializes two hops away through `serializer.serialize`, must adopt the normalized contract, pass the registry through, and include `schema_version` in each serialized line."
+    },
+    {
+      "id": "rejection-telemetry",
+      "description": "which outcomes count malformed_event versus handler_error",
+      "options": ["count malformed_event for every failed event including handler errors", "count malformed_event only for boundary rejections; the handler-error fallback counts handler_error"],
+      "pinned": "separate-counters",
+      "pinned_by": "Every rejection at the `normalize_event` boundary increments `malformed_event` exactly once; the handler-error fallback is not a rejection and increments `handler_error` instead."
+    }
+  ],
+  "expected_controls": [
+    {"id":"mode-1-local","min_score":8,"max_score":30},
+    {"id":"plausible-cold-pass","min_score":66,"max_score":80,"models":"the expected unscaffolded/vanilla failure mode: a clean cold pass that implements the happy path and obvious cases, passes the public test, but omits exactly the three scaffolding-caught dimensions (degraded-path, exporter-propagation, exact-type-match). This control is the fixture's cheap deterministic headroom proxy."},
+    {"id":"reference","min_score":100,"max_score":100}
+  ],
+  "interpretation": "Controls are deterministic capability proxies, not claims about future model outcomes. The plausible-cold-pass control targets a middle band (66-80) to show the fixture has real discriminating headroom; a provider campaign is useful only if the scaffolded arms produce an ordered separation above that band or reveal that the controls do not activate."
+}

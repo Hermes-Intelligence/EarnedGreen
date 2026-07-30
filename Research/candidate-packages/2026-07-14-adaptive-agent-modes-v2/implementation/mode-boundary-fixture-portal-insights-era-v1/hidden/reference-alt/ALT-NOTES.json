@@ -1,0 +1,8 @@
+﻿{
+  "schema_version": 1,
+  "what_this_variant_is": "The era after-state (1e762e5) with the buckets endpoint's canonical ordering spelled as ORDER BY array_position(ARRAY[...], bucket_label) instead of ORDER BY CASE (first occurrence; the coverage-report path keeps CASE - a mixed-spelling module is itself a realistic valid state).",
+  "pre_reconciliation_result": {"interpretations": "identical to the reference on every anchored convention; the variant varies only the SQL spelling of the same canonical order, which the conventions deliberately do not specify"},
+  "interpretation_differences_after_pinning": [],
+  "structural_differences": ["bucket ordering expressed via array_position instead of CASE in get_run_buckets"],
+  "why_it_must_score_100": "A grader red on this variant would be pinning the ORDER BY spelling rather than the presented order - the over-constraint class. The driver ranks rows by the labels LISTED in the clause, whatever the spelling; this admission check proves the shipped grader inherits that agnosticism."
+}

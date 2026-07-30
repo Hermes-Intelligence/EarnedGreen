@@ -1,0 +1,119 @@
+{
+  "schema_version": 2,
+  "id": "adaptive-contract-evolution-v4",
+  "version": 4,
+  "supersedes": "adaptive-contract-evolution-v3",
+  "status": "candidate-not-authoritative",
+  "purpose": "Mode-boundary fixture aimed at the demonstrated model blind spot (multi-hop indirect downstream propagation and state-tracing): keep a solvable happy path but bury two independent indirect-consumer chains and one re-run state interaction, so scaffolded arms have wide, robust headroom over a cold pass while the model's reliably-solvable dimensions stay fair.",
+  "public_test": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_public.py", "-v"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": ["current-envelope","open-world-unicode","input-validation","malformed-telemetry","copy-isolation","legacy-wrapper","consumer-primary","documentation","degraded-path","exact-type-match","exporter-propagation","snapshot-propagation","repeat-dedup"],
+  "serialized_output_dimensions": ["consumer-primary","exporter-propagation","snapshot-propagation"],
+  "serialized_output_note": "These dimensions grade serialized/rendered strings. The hidden grader checks them SEMANTICALLY (content, not exact string). Because the task never pins a delimiter/prefix/placement convention, admission runs a format-adversary: hidden/reference-format-alt implements the same substance with deliberately different formats and MUST still score 100, proving the grader is format-agnostic. This closes the hole that made the v4 main stage invalid (five arms scored an identical 70 on formatting differences).",
+  "process_ground_truth": {
+    "description": "Ground truth for process_metrics.py: the complete set of downstream consumers a full impact analysis must enumerate, and the source files a complete solution must edit. Used to score enumeration/edit completeness and the self-attestation gap independently of the outcome score.",
+    "consumers": ["src/consumers.py","src/serializer.py","src/exporter.py","src/digest_helper.py","src/snapshot.py"],
+    "consumer_dimensions": ["consumer-primary","exporter-propagation","snapshot-propagation"],
+    "required_edits": ["src/contracts.py","src/consumers.py","src/serializer.py","src/exporter.py","src/digest_helper.py","src/snapshot.py","README.md"]
+  },
+  "discriminating_checks": {
+    "exporter-propagation": "Chain A (downstream-propagation): the audit-export consumer (exporter.export_digest -> serializer.serialize -> normalize_event) is reached two hops away and must adopt the new registry-aware, schema-versioned contract; the two obvious consumers (render_primary/render_audit) are named in the bullet list, this one only in prose.",
+    "snapshot-propagation": "Chain B (downstream-propagation, independent from A): the cache-snapshot consumer (snapshot.build_snapshot -> digest_helper.digest_line -> normalize_event) is reached two hops away through a DIFFERENT intermediary and must independently adopt the new contract; described in its own prose sentence, in its own module, so catching A does not reveal B.",
+    "repeat-dedup": "Hard omission (state interaction across a re-run): the unknown-type telemetry is per identity, so a replayed unresolved (entity_type, entity_id) counts unknown_repeat and never counts unknown_entity_type a second time. Only visible by tracing what happens when the same unresolved event is re-ingested; not unit-tested publicly."
+  },
+  "public_anchors": {
+    "current-envelope": "returning exactly",
+    "open-world-unicode": "may appear for the first time",
+    "input-validation": "Reject non-dictionaries",
+    "malformed-telemetry": "malformed_event",
+    "copy-isolation": "independent of the caller's objects",
+    "legacy-wrapper": "backward-compatible wrapper",
+    "consumer-primary": "render_primary",
+    "documentation": "Document the extension path",
+    "degraded-path": "handler_error",
+    "exact-type-match": "compared exactly",
+    "exporter-propagation": "export_digest",
+    "snapshot-propagation": "build_snapshot",
+    "repeat-dedup": "unknown_repeat"
+  },
+  "decision_points": [
+    {
+      "id": "registry-miss",
+      "description": "normalize_event receives a valid event whose type has no registry entry",
+      "options": ["reject with an exception and count unknown_entity_type", "pass the attributes through unchanged and count unknown_entity_type"],
+      "pinned": "pass-through-with-telemetry",
+      "pinned_by": "When a valid event's type is not present in the registry, `normalize_event` must not raise: it returns the attributes unchanged (deep-copied) and increments `unknown_entity_type` exactly once for the first sighting of that identity."
+    },
+    {
+      "id": "handler-error",
+      "description": "a registered handler raises an exception while processing an event",
+      "options": ["let the exception propagate or reject the event as malformed", "contain it: count handler_error, fall back to the original attributes, return normally"],
+      "pinned": "contain-and-count",
+      "pinned_by": "When a registered handler raises any exception, `normalize_event` does not propagate it and does not treat the event as malformed: it increments `handler_error` exactly once, falls back to the deep-copied original attributes, and returns the normal envelope."
+    },
+    {
+      "id": "handler-result-type",
+      "description": "a registry handler returns something that is not a dictionary",
+      "options": ["return the handler result verbatim", "reject the event as malformed"],
+      "pinned": "reject-as-malformed",
+      "pinned_by": "A handler that returns anything other than a dictionary is a malformed event and is rejected."
+    },
+    {
+      "id": "type-lookup-trimming",
+      "description": "whether the type is trimmed before the registry lookup and in the envelope",
+      "options": ["trim the type for lookup and output", "compare and echo the original untrimmed type; strip only to test blankness"],
+      "pinned": "exact-untrimmed",
+      "pinned_by": "Entity types are compared exactly: the value used for the registry lookup and for `entity_type` in the envelope is the original string, never a trimmed or otherwise rewritten form, even though the blank check uses its stripped length."
+    },
+    {
+      "id": "output-aliasing",
+      "description": "whether the returned attributes may alias caller-owned objects",
+      "options": ["input-only protection: never mutate the caller's event", "full isolation: the returned attributes are also independent of the caller's objects"],
+      "pinned": "full-isolation",
+      "pinned_by": "The returned attributes must also be independent of the caller's objects, so mutating the result never changes the input."
+    },
+    {
+      "id": "legacy-wrapper-scope",
+      "description": "whether parse_record adopts the new validation, telemetry and schema_version",
+      "options": ["parse_record shares the new validation, telemetry and schema_version", "parse_record keeps its legacy behavior"],
+      "pinned": "legacy-unchanged",
+      "pinned_by": "Preserve `parse_record(record)` as a backward-compatible wrapper with its existing legacy behavior; it takes no registry, records no telemetry, and does not gain the `schema_version` field."
+    },
+    {
+      "id": "exporter-scope",
+      "description": "whether the indirect audit-export path adopts the evolved contract",
+      "options": ["leave exporter/serializer on the legacy parse_record path", "route the export path through normalize_event with the registry and schema_version"],
+      "pinned": "adopt-normalized-contract",
+      "pinned_by": "The audit export path `exporter.export_digest(records, registry)` serializes two hops away through `serializer.serialize`; it must adopt the normalized contract, pass the registry through, and include `schema_version` in each serialized line."
+    },
+    {
+      "id": "snapshot-scope",
+      "description": "whether the indirect cache-snapshot path adopts the evolved contract",
+      "options": ["leave snapshot/digest_helper on the legacy parse_record path", "route the snapshot path through normalize_event with the registry and schema_version"],
+      "pinned": "adopt-normalized-contract",
+      "pinned_by": "The cache snapshot path `snapshot.build_snapshot(events, registry)` builds each line two hops away through `digest_helper.digest_line`; it too must adopt the normalized contract, pass the registry through, and carry `schema_version` in every snapshot line."
+    },
+    {
+      "id": "repeat-dedup",
+      "description": "how the unknown-type telemetry behaves when the same unresolved event is re-ingested",
+      "options": ["count unknown_entity_type on every unresolved sighting", "deduplicate by identity: first sighting counts unknown_entity_type, later re-ingestions count unknown_repeat"],
+      "pinned": "idempotent-repeat-counter",
+      "pinned_by": "the first time an unresolved `(entity_type, entity_id)` pair is seen it increments `unknown_entity_type`, but a later re-ingestion of that same unresolved pair is a repeat and increments `unknown_repeat` instead, never `unknown_entity_type` a second time."
+    },
+    {
+      "id": "rejection-telemetry",
+      "description": "which outcomes count malformed_event versus handler_error",
+      "options": ["count malformed_event for every failed event including handler errors", "count malformed_event only for boundary rejections; the handler-error fallback counts handler_error"],
+      "pinned": "separate-counters",
+      "pinned_by": "Every rejection at the `normalize_event` boundary increments `malformed_event` exactly once; the handler-error fallback is not a rejection and increments `handler_error` instead."
+    }
+  ],
+  "expected_controls": [
+    {"id":"mode-1-local","min_score":8,"max_score":30},
+    {"id":"plausible-cold-pass","min_score":55,"max_score":68,"models":"the demonstrated unscaffolded/vanilla failure mode on this model: a clean cold pass that implements the happy path, every bullet, the buried degraded-path and the adversarial exact-type edge (all of which the live vanilla arm caught on v3), passes the public test, but omits exactly the three scaffolding-caught dimensions -- the two indirect propagation chains (exporter-propagation, snapshot-propagation) and the re-run state interaction (repeat-dedup). This control is the fixture's cheap deterministic headroom proxy."}
+    ,{"id":"reference","min_score":100,"max_score":100}
+  ],
+  "controls_semantic_revalidation": "Bands re-validated under the SEMANTIC grader (content, not exact-string). The controls fail on SUBSTANCE, not formatting, so their scores are unchanged: mode-1-local 11 (band 8-30, floor), plausible-cold-pass 65 (band 55-68, still missing exporter-propagation + snapshot-propagation + repeat-dedup because it leaves both indirect chains on the legacy path and never carries the version there), reference 100. Ordering mode-1-local < plausible-cold-pass < reference is preserved. Note that the five live main-stage arms, which the exact grader scored 70 on formatting alone, all score 100 under the semantic grader (see evidence/main-v4-semantic-regrade.json): the discriminating headroom is real only against a solution that omits the CONTENT, which the plausible-cold-pass proxy still does.",
+  "interpretation": "Controls are deterministic capability proxies, not claims about future model outcomes. The plausible-cold-pass control targets a middle-low band (55-68) to show the fixture has WIDE discriminating headroom across three independent dimensions the model's cold pass is demonstrated to miss (multi-hop propagation x2 and a re-run state interaction). A provider campaign is useful only if the scaffolded arms produce an ordered separation above that band or reveal that the controls do not activate."
+}

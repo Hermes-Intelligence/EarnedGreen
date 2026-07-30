@@ -1,170 +1,190 @@
-# Agentic Work Best Practices
+# Earned Green
 
-A staged, measurable source of truth for production-grade Codex and Claude work.
+**Stop your agent reporting "done" when it isn't.**
 
-## Active architecture
+```bash
+git clone <this repo> && cd earned-green
+python -m awbp demo
+```
+
+No install, no API key, no network, no config. It runs in under a second and
+prints this:
 
 ```text
-Stable manifest -> minimal Core -> deterministic task Router -> Context Pack
-                                                    -> objective/evidence gates
-                                                    -> capability profile -> expiring provider catalog
+── ARM 1   the suite the change writes for itself ─────────────────────────
+          provenance: authored (rank 1 of 4) — measured at zero lift, 9 runs
 
-Research source registry -> candidate package -> evals -> human approval -> promotion
+     PASS  trims surrounding whitespace from string fields
+     PASS  lowercases the email field
+     PASS  drops rows with no id
+     PASS  coerces a numeric amount string to int
+     PASS  leaves unknown fields untouched
+     PASS  collapses a duplicate id to a single row
+     PASS  strict mode raises when a row carries no id
+
+    7 of 7 checks pass.  VERDICT: done.
+
+── ARM 2   predicates derived from this module's own repair history ───────
+          provenance: diff-derived (rank 4 of 4)
+
+    calibration: all 2 hold on the code that was there before the change.
+    So a red below is about the change, not about the predicate.
+
+     FAIL  the returned rows must match the repaired behaviour
+           derived from a1b2c3d  fix: keep the LAST row for a duplicate id
+     FAIL  the caller's list must be left exactly as it was passed
+           derived from e4f5a6b  fix: stop normalising the caller's rows in place
+
+  NOT MECHANICALLY COVERED BY ARM 1 — 2 behaviour(s) broken
+
+    silent_defect_rate    arm 1: 0.22      arm 2: 0.00
 ```
 
-Active global and repository pointers load only [`Runtime/stable/manifest.json`](Runtime/stable/manifest.json), [`Core/runtime.md`](Core/runtime.md), and the relevant platform bootstrap. The long v1 contracts and research corpus are reference material, not always-on instructions.
+Same change. Same repository. Two verdicts. **The disagreement is the product.**
 
-## Commands
+The model's diff is frozen so the demo needs no provider. Everything else runs
+when you run it, including the derivation of those two predicates, which nobody
+wrote: they are the observed difference two real repairs made, replayed live.
 
-```powershell
-# normal new session or restart (agents run this themselves)
-powershell -ExecutionPolicy Bypass -File tools/preflight.ps1 -Mode core -TargetRepo <repo>
+---
 
-# first clone setup (installs current Codex in WSL only when requested)
-powershell -ExecutionPolicy Bypass -File setup.ps1 -InstallCodex -GlobalPointers
+## The number
 
-# one-time interactive provider authentication
-powershell -ExecutionPolicy Bypass -File setup.ps1 -LoginCodex
+On a real production campaign, the unassisted arm reported the task complete on
+**every trial** with **2 of 8 required behaviours broken**.
 
-# diagnose
-powershell -ExecutionPolicy Bypass -File tools/agentic.ps1 doctor -TargetRepo <repo>
+| | reported "done" with broken behaviours |
+|---|---:|
+| well-configured agent, no harness | **25%** |
+| same agent, same model, this harness | **0%** |
 
-# idempotently install/refresh repo pointers
-powershell -ExecutionPolicy Bypass -File tools/agentic.ps1 init -TargetRepo <repo>
+Two further families, measured with predicates mined from each repository's own
+repair history: **88.7 against 33.3**, and **71.3 against 43.0**. The baseline in
+both was well-configured, not a straw man.
 
-# compile a task-specific Context Pack
-powershell -ExecutionPolicy Bypass -File tools/agentic.ps1 route -TargetRepo <repo> -Task "<task>"
+Three other ideas in this repository measured **exactly zero** and are documented
+at the same length as the wins. [`BENCHMARKS.md`](BENCHMARKS.md) has all of it,
+including the retraction.
 
-# refuse false completion
-powershell -ExecutionPolicy Bypass -File tools/objective-check.ps1
+---
 
-# deterministic routing evals
-powershell -ExecutionPolicy Bypass -File Evals/run-evals.ps1 -Mode routing
+## What it actually is
 
-# infrastructure release gate
-powershell -ExecutionPolicy Bypass -File tools/release-gate.ps1 -Mode infrastructure
+Not a prompt library and not an agent framework. It is a **measuring instrument
+for agent work**, and its one job is to make an unearned green impossible to
+report.
 
-# live provider authentication and isolation check before paid benchmarks
-powershell -ExecutionPolicy Bypass -File tools/preflight.ps1 -Mode benchmark
+Every mechanism that survived measurement here does the same thing: it changes
+**what gets reported and when the harness refuses to grade**. Every mechanism
+that tried to change what the model *does* measured zero. That is the finding the
+whole repository is organised around.
 
-# validate all 19 fixtures and the six-family real-world battery without provider calls
-powershell -ExecutionPolicy Bypass -File Evals/validate-outcome-harness.ps1
-powershell -ExecutionPolicy Bypass -File Evals/test-real-world-battery.ps1
+### The four questions it asks before work starts
 
-# create a new unapproved 6 + 6 battery campaign (starts zero calls)
-powershell -ExecutionPolicy Bypass -File Evals/tools/new-real-world-battery-screen.ps1
+**1. Where will the oracle come from?** Asked before anything else, because it
+decides what a green is worth.
 
-# recommendation only: resolve a capability profile for the current provider
-powershell -ExecutionPolicy Bypass -File tools/agentic.ps1 model-recommend -Provider anthropic-claude-code -Profile deep-implementation
+```bash
+python awbp/oracle_plan.py --repo /path/to/your/repo
 ```
 
-## Restart and resume behavior
+Ten seconds, zero config, on any repository. It reports the strongest oracle
+*your* repo can actually supply, ranked by the measured ladder — and says
+`WEAK` to your face when the only thing available is the task description.
 
-Node, the provider CLI, authentication, global pointers and machine-local setup evidence persist across a normal Windows restart. The platform bootstrap tells Codex and Claude to run the lightweight `core` preflight themselves and resume from [`workstreams/current.json`](workstreams/current.json). You do **not** rerun setup or login after each reboot.
+**2. Who does the work and who checks it?** Declared at task start with a reason
+of at least eight words that refers to *this* task. `solo`, `reviewed` (cheap
+executor plus strong adversarial reviewer), or `council`. Each carries its own
+measurement history rather than a recommendation, because on the one campaign
+that compared them the cheap-plus-reviewer arm produced the best-formatted
+document at **52% of the cost** and dropped three of four checkable figures.
+There is no winner, so there is no default.
 
-The full setup is needed only on a fresh clone or machine, after revoked/expired authentication, after missing dependencies, or when preflight explicitly returns `setup_required=true`. Immediately before a paid benchmark, the stricter `benchmark` mode rechecks the live provider login and WSL isolation instead of trusting old evidence.
+**3. Where does user-visible state live in production?** One field. It exists
+because a spec line saying "local-first is fine" produced a polished team board
+that stored the whole team's data in one person's browser, and nobody noticed
+until someone asked whether it worked in production.
 
-## Weekly research and model refresh
+**4. Can the instrument tell good from hollow?** If it cannot, the harness
+**refuses to grade**. Not a weaker verdict — no verdict. A result from an
+uncalibrated instrument is not a weak result, it is not a result.
 
-Ask the agent to run the weekly research workflow (in Claude Code: `/weekly-research`). The agent must follow [`Research/engine/research-brief.md`](Research/engine/research-brief.md), so the request automatically includes source rechecks, research radar discovery and provider/model drift review.
+### Use it on your own repository
 
-For models and providers, every weekly run must:
-
-1. Check whether [`Models/providers.json`](Models/providers.json) is expired or a material provider/model release was detected.
-2. Use `tools/model-refresh-plan.ps1` and verify current models, aliases, capabilities, effort levels, deprecations, availability and tool-version gates against official provider sources.
-3. Keep stable capability profiles independent of volatile product names. Never invent a model ID or silently change the user's default model.
-4. Write the proposed provider catalog only inside the new candidate package, together with provenance, a reviewable diff and required routing/outcome evals.
-5. End at `awaiting-eval`. Research must not directly replace the active catalog or Stable rules.
-6. Promote only in a separate, explicit, human-approved step after the required evals and rollback review.
-
-If the active provider catalog has expired before promotion, model routing must warn, prefer a provider-maintained current alias when supported, or request refresh. It must not pretend stale availability data is current.
-
-The candidate workflow, dry-run-first `promote-candidate` command and rollback command are implemented. Promotion remains a separately reviewed, explicitly human-approved repository change, never an automatic side effect of research.
-
-## Governance
-
-- Stable changes only through separate, explicit promotion after required evals and human approval.
-- Weekly research reuses the reviewed [`registry.json`](Research/sources/registry.json) plus the complete [`claude-v1-migration.json`](Research/sources/claude-v1-migration.json), rechecks due sources, proposes source updates and writes only a candidate package.
-- Model selection uses stable capability profiles and expiring provider catalogs. It is recommendation-only until controlled outcome evals demonstrate lift; it never silently persists a user's default model.
-- Candidate promotion and rollback are dry-run by default and require explicit `-Approve` plus approver identity. Promotion verifies hashes, required artifacts and eval gates.
-- Benchmark protocol and commands are documented in [`Setup/benchmarking/benchmarking-handbook.md`](Setup/benchmarking/benchmarking-handbook.md) and the six-family [`real-world-battery.md`](Setup/benchmarking/real-world-battery.md), each with a matching visually verified PDF.
-- Research never edits Stable, global pointers, sibling repos, Git history or remotes.
-- Candidate reports end with clickable source appendices and receive visual PDF QA.
-- Objective status comes from [`Objectives/active/OBJ-20260712-agentic-work-best-practices.json`](Objectives/active/OBJ-20260712-agentic-work-best-practices.json), not an agent's declaration.
-
-## Current evidence
-
-- Claude v1 preserved as `AgenticWorkBestPractices-Claude-v1-2026-07-12.zip` plus SHA-256 beside the repo.
-- Objective ledger: 31 requirements across nine pillars; deliberately incomplete items remain visible.
-- Deterministic Router suite: 12/12 mock cases selected required modules.
-- Deterministic model-profile suite: 10/10 cases passed, including risk-floor and incompatible-selector rejection; this does not yet prove outcome quality.
-- Source memory: 21 reviewed seeds plus 47/47 Claude-v1 URLs preserved as pending review (68 unique URLs total).
-- `init` test: existing content preserved, exactly one managed block, identical hashes after the second run.
-- Candidate initializer smoke test: Stable manifest hash unchanged.
-- Quickstart: visually verified as one page.
-- Transformation report: visually verified, three pages, 20 unique clickable source links.
-- Stage 2 verification report: visually verified, four pages, nine clickable source links.
-- Post-incident infrastructure release gate: 13/13 checks passed after JSON/PowerShell parsing, routing, runtime, fixture discrimination, lifecycle, benchmark-safety, security-hook, Windows/OneDrive, WSL-isolation and secret-hygiene tests.
-- Outcome harness: 19 executable fixtures. The original 13 cover focused failure modes and composite ingestion; six new real-world fixtures cover API consumer propagation, open-world parsing, misleading green tests, cold-session resume, coordinated rollout surfaces and instruction precedence.
-- Full harness proof: 19/19 structures complete; every flawed starter passes its public tests and is rejected by the hidden grader; every reference solution passes public and hidden checks. The six-family battery additionally rejects 12 public-green negative controls at scores from 25 to 85 while all six references score 100.
-- Experiment lifecycle: randomized staged 40-run plan, explicit per-stage approval, exclusive campaign/provider locks, orphan refusal, host grading, cost ceilings and retained invalid-attempt evidence are implemented.
-- Complex screen execution: exactly 6/6 approved Codex calls completed sequentially with zero orphans, overlaps, invalid outcomes, Claude calls or protected-file changes. Both arms scored 95/100 in all three pairs, so the predeclared conclusion is `NO_ACTIONABLE_SIGNAL`.
-- Complex screen resource evidence: at tied measured quality, Core+Router+enforcement used 253.1 versus 216.5 median wall seconds (+16.9%) and 262,510 versus 215,413 median observed tokens (+21.9%). Subscription monetary cost was not exposed and was not estimated.
-
-## Current benchmark state
-
-- Nineteen private fixtures are executable and validated; `REQ-EVAL-002` remains verified with stronger multi-task isolation evidence.
-- Dedicated `AgenticBench` WSL isolation is verified: C: is not mounted, Windows interop and sudo are absent, the provider user has no privileged groups, and central hidden graders remain host-only.
-- Codex CLI 0.144.3 and Claude Code 2.1.207 are installed user-locally in the dedicated distro; versions are discovered dynamically and may change on an explicit tools refresh.
-- Both one-time OAuth logins inside `AgenticBench` are complete. Doctor and benchmark preflight pass; normal reboots do not require setup or login again.
-- The first provider-backed smoke is preserved as a closed, non-publishable infrastructure shakeout. It exposed concurrent-runner and enforcement defects; no result from that campaign may be used as a Codex/Claude or vanilla/full comparison.
-- The repaired four-call smoke completed cleanly: exactly four sequential calls, all public/hidden scores 100, zero overlaps and zero invalid attempts. This proves harness viability, not full-arm lift; n=1 per cell is inconclusive and Codex's exact provider-default model remains unresolved.
-- Future runs no longer use an anonymous default. The current ignored, weekly-expiring local snapshot explicitly selects `gpt-5.6-sol` at medium effort and `claude-opus-4-8` at medium effort; this does not rewrite historical smoke telemetry, Stable rules or user defaults.
-- The non-publishable minimum-cost calibration completed exactly two Codex calls on `database-migration-rollback`: vanilla and Core+Router+enforcement both scored 100/100. There were zero overlaps, invalid attempts, replacements or Claude calls. The predeclared ceiling rule stopped all further spend; a harder fixture must be validated before any new provider approval.
-- The full release gate currently passes 17/18 checks. Its only red check is intentional: 24 objective requirements still need evidence, so the repository must not claim completion yet. Infrastructure alone passes 14/14.
-- Campaign `20260713-181006-complex-ingestion-screen` is complete and permanently stopped at screening. Exactly six paired Codex calls produced identical 95/100 scores and no critical-floor difference. The only shared failure was `replay-duplicate`: all six solutions added `index` to a skipped duplicate while the hidden grader required exact equality without it, exposing a public-contract/hidden-grader alignment concern. The immutable report is under `Evals/reports/20260713-181006-complex-ingestion-screen-complex-screen.{json,md,pdf}`.
-- The independent six-family battery passes 19/19 full-harness validation. Its 12 negative controls all pass public tests and are rejected by hidden graders; its six reference solutions score 100. The three-page Setup guide passed visual and PDF integrity QA.
-- Campaign `20260713-201400-real-world-battery-screen` is prepared with 12 unique Codex cells, staged as separately approved 6 + 6 calls on six task families and two arms. It has zero approvals, zero run IDs, 13 current harness hashes and explicit `gpt-5.6-sol`/medium. No provider call, replication, Claude stage or automatic promotion is authorized.
-- A real weekly research candidate has not yet completed.
-- Automatic model switching remains disabled until staged A/B evidence covers quality, cost and latency.
-
-No commit or push has been performed.
-
-## Safe subscription benchmarks
-
-Provider-backed benchmarks run in a separate WSL2 distribution named `AgenticBench`. It has no mounted Windows drive, no Windows executable interop, no `sudo`, no personal files and no hidden graders. Only a public run workspace is copied in; the returned workspace is size/type/secret checked before host-only grading.
-
-One-time setup on a fresh clone:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File Setup/benchmark.ps1 -Create -LoginCodex -LoginClaude -RefreshProviderCatalog
+```bash
+python -m awbp init                       # detect the stack; verify the tests run today
+python -m awbp task "what you want done"  # route it, freeze the baseline and the suite
+python -m awbp check                      # run the frozen suite
+python -m awbp probe                      # revert each hunk: does anything notice?
 ```
 
-OAuth stays inside the local WSL distribution. Git ignores machine-local settings and known provider credential paths; the infrastructure gate also scans candidate repository files for credential-shaped content.
+Nothing is installed, no PATH is touched, and nothing is written into your
+repository except `.agentic/`.
 
-Create and run only the four-run smoke stage first:
+### Or use it without cloning it
 
-```powershell
-powershell -ExecutionPolicy Bypass -File Evals/tools/new-benchmark-campaign.ps1
-powershell -ExecutionPolicy Bypass -File Evals/tools/approve-benchmark-stage.ps1 -Campaign <id> -Stage smoke -ApprovedBy <name>
-powershell -ExecutionPolicy Bypass -File Evals/tools/run-benchmark-stage.ps1 -Campaign <id> -Stage smoke -MaxRunsThisInvocation 4
+The read-only half speaks MCP over stdio, standard library only, no dependencies:
+
+```json
+{
+  "mcpServers": {
+    "earned-green": {
+      "command": "python",
+      "args": ["-m", "awbp", "mcp"],
+      "cwd": "/path/to/earned-green"
+    }
+  }
+}
 ```
 
-The remaining gates add 4, 16 and 16 runs, reaching cumulative totals of 8, 24 and 40. Each stage needs separate approval. Creating `Evals/local/STOP` stops the loop before the next run. Every post-smoke stage rejects volatile `provider-default` selectors and requires a fresh explicit model snapshot.
+Five tools: `oracle_plan`, `host_rules`, `check_calibration`, `coverage_manifest`
+and `demo`. Every one of them reads. The commands that write stay in the CLI on
+purpose, so an agent reaching through a socket cannot snapshot your workspace as
+a side effect of asking a question — and the test suite asserts that by
+fingerprinting a repository before and after every tool runs against it.
 
-After a universal smoke ceiling, create the screening-only two-call calibration instead of unlocking a larger stage:
+---
 
-```powershell
-powershell -ExecutionPolicy Bypass -File Evals/tools/new-benchmark-calibration.ps1
-powershell -ExecutionPolicy Bypass -File Evals/tools/approve-benchmark-stage.ps1 -Campaign <id> -Stage calibration -ApprovedBy <name>
-powershell -ExecutionPolicy Bypass -File Evals/tools/run-benchmark-stage.ps1 -Campaign <id> -Stage calibration -MaxRunsThisInvocation 2
-```
+## Why the honesty is the point
 
-Creation costs zero calls. Approval and execution are separate; never combine them in automation. The calibration is excluded from publishable confirmatory scores and cannot authorize follow-up runs.
+The single most repeatable finding across this whole programme is uncomfortable:
 
-The validated composite screen is documented in [`Setup/benchmarking/complex-benchmark-design.md`](Setup/benchmarking/complex-benchmark-design.md) and its matching PDF. Its first stage requires a separate approval for exactly six calls:
+> **The instrument is wrong more often than the work is.**
 
-```powershell
-powershell -ExecutionPolicy Bypass -File Evals/tools/approve-benchmark-stage.ps1 -Campaign 20260713-181006-complex-ingestion-screen -Stage complex-screen -ApprovedBy <name>
-powershell -ExecutionPolicy Bypass -File Evals/tools/run-benchmark-stage.ps1 -Campaign 20260713-181006-complex-ingestion-screen -Stage complex-screen -MaxRunsThisInvocation 6
-```
+One day's session produced eighteen defects in instruments and none in the work
+they were grading. The dangerous ones all produced *plausible numbers* — a
+predicate whose word boundaries had been written into the source as literal
+backspace bytes, so it matched nothing, reported PASS for its whole life, and
+made every document it touched look checked.
+
+That is why nothing here ships unmeasured, why the nulls stay in the README, and
+why the calibration gate exists at all.
+
+---
+
+## Layout
+
+| path | what is in it |
+|---|---|
+| [`awbp/`](awbp/) | the tool. Every module runs standalone; `python -m awbp` dispatches |
+| [`awbp/demo/`](awbp/demo/) | the fixture above. 30 lines before, 30 lines after — read them |
+| [`BENCHMARKS.md`](BENCHMARKS.md) | every campaign, every null, every retraction |
+| [`START-HERE.md`](START-HERE.md) | written for the agent, not for you |
+| [`Runtime/stable/manifest.json`](Runtime/stable/manifest.json) | what is promoted, and what each release refused to claim |
+| [`Evals/`](Evals/) | fixtures, run records, and the harness that produced the numbers |
+| [`Research/`](Research/) | candidate packages. Never authoritative; promotion is a separate act |
+
+Just cloned this and want the agent to drive? Say one thing:
+
+> **"Read `START-HERE.md` and use it."**
+
+---
+
+## Status
+
+Release **0.6.5**. Measured on six task families across four production
+repositories. Positive on two, null on three, saturated on one.
+
+The cost router is wired and **unmeasured at n=1**. The execution-strategy
+declaration is recorded and **has no outcome correlation yet**. Both say so in
+their own output.

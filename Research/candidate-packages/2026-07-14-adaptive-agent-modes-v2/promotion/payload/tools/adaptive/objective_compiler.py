@@ -30,8 +30,9 @@ def evidence_types(statement: str) -> list[str]:
         kinds.add("migration")
     if any(term in text for term in ("metric", "logging", "observability", "trace")):
         kinds.add("observability")
-    if any(term in text for term in ("consumer", "compatib", "public api", "wrapper", "import")):
-        kinds.add("impact")
+    # Consumer/compatibility statements are verified MECHANICALLY by the
+    # verification loop's symbol sweep (schema 4); an agent-attached "impact"
+    # evidence path would reintroduce self-attestation, so no kind is emitted.
     if any(term in text for term in ("secret", "credential", "authorization", "prompt injection", "untrusted")):
         kinds.add("security")
     return sorted(kinds)

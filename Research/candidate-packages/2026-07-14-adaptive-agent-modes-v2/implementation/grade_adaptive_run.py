@@ -55,11 +55,12 @@ def main() -> None:
     grader = repo / manifest["central_hidden_grader"]
     hidden_exit, hidden, hidden_output = run_json([sys.executable, str(grader), str(workspace)], workspace)
     gate_result = None
-    if manifest["arm"] != "vanilla":
+    gated = bool(manifest.get("completion_gate"))
+    if gated:
         gate_path = workspace / ".agentic/pre-submit-result.json"
         if gate_path.is_file():
             gate_result = json.loads(gate_path.read_text(encoding="utf-8-sig"))
-    enforcement_pass = not protected_changed and (manifest["arm"] == "vanilla" or bool(gate_result and gate_result.get("verdict") == "PASS" and gate_result.get("completion_allowed")))
+    enforcement_pass = not protected_changed and (not gated or bool(gate_result and gate_result.get("verdict") == "PASS" and gate_result.get("completion_allowed")))
     execution_path = run / "provider-execution.json"
     execution = json.loads(execution_path.read_text(encoding="utf-8-sig")) if execution_path.is_file() else {}
     hidden_valid = bool(hidden and isinstance(hidden.get("score"), (int, float)) and 0 <= hidden["score"] <= 100)

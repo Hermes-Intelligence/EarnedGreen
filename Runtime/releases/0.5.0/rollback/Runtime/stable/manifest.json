@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "release": "0.4.0",
+  "status": "stable-minimal",
+  "promoted_at": "2026-07-12T18:00:00+02:00",
+  "promoted_by": "user-directed-rebuild",
+  "core": "Core/runtime.md",
+  "objective": "Objectives/active/OBJ-20260712-agentic-work-best-practices.json",
+  "router_catalog": "Router/catalog/modules.json",
+  "adaptive_modes": "Runtime/adaptive-modes.json",
+  "adaptive_router_catalog": "Router/catalog/adaptive-modules.json",
+  "adaptive_tools": "tools/adaptive",
+  "adaptive_entry_point": "tools/route.ps1 -Adaptive",
+  "platform_adapters": {
+    "claude": "Claude/BOOTSTRAP.md",
+    "codex": "Codex/BOOTSTRAP.md"
+  },
+  "candidate_rules_are_authoritative": false,
+  "notes": "Only the minimal Core is stable. Release 0.4.0 is the MEASURED verification-loop architecture. Quality comes from a harness-authored, digest-frozen check suite (acceptance, behavioural differential against a pre-change baseline, deterministic repo-wide symbol sweep, property checks over real data, ingested verifier findings) that the harness executes and the completion gate re-runs itself; agent self-attestation never completes a task. Measured on a shadow-replay of a real shipped fix (medi-ny NYRx parser rework), 3 trials/arm: the lean loop scored 100/100/100 versus an unscaffolded control's 77/77/77; guided feedback alone reached 100 at 2-4x tokens. Prompt scaffolding was measured as pure overhead across six fixtures (4-10.7x cost, no lift) and removed: the five-level ladder became three modes (lite/standard/critical, consequence-gated), and the impact-map and adversarial-threat-model forms are deleted. Release 0.4.0 additionally makes evidence HARNESS-GENERATED (the gate writes verification evidence from its own re-run; agents no longer transcribe it) and attaches guidance to FAILING checks rather than to prompts (just-in-time retrieval). Benchmark verdicts require >=3 trials/arm (~16pt same-arm variance measured). See Setup/adaptive-modes.md and Setup/benchmarking/verification-loop-results.md. The classic router (Router/catalog/modules.json + tools/route.ps1 default path) is unchanged; the adaptive layer stays additive and opt-in via tools/route.ps1 -Adaptive. Runtime/releases/0.4.0/promotion-record.json is the authoritative promotion timestamp and approver."
+}

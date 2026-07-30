@@ -82,7 +82,14 @@ def resolve_command(command: list[str], python: str | None = None) -> list[str]:
 # Every locally-authored candidate boundary fixture lives under implementation/
 # in its own directory. Resolution is by declared id, so adding a new version
 # (v3, v4, ...) only requires listing its directory here.
-CANDIDATE_FIXTURE_DIRS = ("mode-boundary-fixture", "mode-boundary-fixture-v3", "mode-boundary-fixture-v4", "mode-boundary-fixture-clarity", "mode-boundary-fixture-scale")
+CANDIDATE_FIXTURE_DIRS = ("mode-boundary-fixture", "mode-boundary-fixture-v3", "mode-boundary-fixture-v4",
+                          "mode-boundary-fixture-clarity", "mode-boundary-fixture-scale",
+                          "mode-boundary-fixture-medi-ny", "mode-boundary-fixture-vextrum-edition-v1",
+                          "mode-boundary-fixture-hermes-etl-skip-v1", "mode-boundary-fixture-vextrum-era-v2",
+                          "mode-boundary-fixture-vextrum-era-v3-gen4",
+                          "mode-boundary-fixture-vextrum-dataflow-era-v1",
+                          "mode-boundary-fixture-vextrum-dataflow-era-v2",
+                          "mode-boundary-fixture-portal-insights-era-v1")
 
 
 def local_fixture_dir(fixture_id: str, base: Path | None = None) -> tuple[Path | None, dict[str, Any] | None]:
@@ -245,14 +252,165 @@ class Gate:
         self.grader = self.fixture / self.contract["hidden_grader"]
         self.declared = set(self.contract["checks"])
         self.expected_score = self.contract.get("expected_reference_score", 100)
+        # Proprietary fixtures (workspace_source == "hermes-local-copy") never commit
+        # the real subtree the agent edits. The base workspace and every graded
+        # overlay materialize the parser at grade time from a LOCAL Hermes git ref;
+        # only the grader, task, sample PDF, conventions and notes live in the
+        # package. See _provision_hermes / fixture-contract.json "hermes_local".
+        self.proprietary = (self.contract.get("proprietary") is True
+                            or self.contract.get("workspace_source") == "hermes-local-copy")
+
+    # ---- proprietary / local-git-copy materialization -----------------------
+    # The source the agent edits is a real proprietary subtree and is NEVER
+    # committed here: every variant is materialized at grade time from a LOCAL
+    # git ref. `local_source` is the general form; `hermes_local` is the original
+    # medi-ny spelling and is still honoured so that fixture keeps working.
+    _LEGACY_DEFAULTS = {"repo_dir": "HermesAirflow", "target_path": "src/pdl_parser.py"}
+
+    def _source_spec(self) -> dict[str, Any]:
+        spec = self.contract.get("local_source") or self.contract.get("hermes_local")
+        if not spec:
+            raise RuntimeError("a proprietary fixture must declare `local_source` (or legacy `hermes_local`)")
+        merged = dict(spec)
+        # medi-ny names the file `parser_path`; the general contract says `source_path`.
+        merged.setdefault("source_path", merged.get("parser_path"))
+        if not merged.get("source_path") and not merged.get("files"):
+            raise RuntimeError("`local_source` must name `source_path` (single-file form) "
+                               "or `files` (multi-file form)")
+        merged.setdefault("target_path", self._LEGACY_DEFAULTS["target_path"])
+        merged.setdefault("repo_dir", self._LEGACY_DEFAULTS["repo_dir"])
+        return merged
+
+    def _file_specs(self) -> list[dict[str, Any]]:
+        """Per-file materialization specs. Single-file contracts yield one spec;
+        the multi-file form (`local_source.files: [{source_path, target_path,
+        altformat_replace?, normalizations?}, ...]`) inherits repo_dir/refs from
+        the shared spec — a wide era usually spans several modules."""
+        shared = self._source_spec()
+        files = shared.get("files")
+        if not files:
+            return [shared]
+        specs = []
+        for row in files:
+            merged = {k: v for k, v in shared.items() if k != "files"}
+            # per-file keys override; per-file altformat/normalizations REPLACE
+            # the shared ones, never merge, so a rule can't apply twice
+            for key in ("altformat_append", "altformat_replace", "normalizations"):
+                merged.pop(key, None)
+            merged.update(row)
+            if not merged.get("source_path") or not merged.get("target_path"):
+                raise RuntimeError("each entry in `local_source.files` needs source_path and target_path")
+            specs.append(merged)
+        return specs
+
+    def _source_repo(self) -> Path:
+        # The local checkout is a sibling of the AWBP repo root (…/GithubRepos/<repo_dir>).
+        repo = self.repo.parent / self._source_spec()["repo_dir"]
+        if not (repo / ".git").exists():
+            raise RuntimeError(f"local repo not found for materialization: {repo}")
+        return repo
+
+    def _git_show(self, ref: str, rel_path: str) -> str:
+        repo = self._source_repo()
+        completed = subprocess.run(["git", "-C", str(repo), "show", f"{ref}:{rel_path}"],
+                                   text=True, capture_output=True, encoding="utf-8", errors="replace")
+        if completed.returncode != 0:
+            raise RuntimeError(f"git show {ref}:{rel_path} failed: {completed.stderr[:300]}")
+        return completed.stdout
+
+    def _normalize_source(self, src: str, spec: dict[str, Any] | None = None) -> str:
+        """Apply the contract's declared rewrites so the materialized file stands alone.
+
+        Declared in the contract rather than hardcoded here: medi-ny rewrites a
+        Hermes package import to `import config`; another fixture's source will
+        need something else entirely, and a hardcoded Python regex would silently
+        do nothing to a JS file rather than fail.
+        """
+        spec = spec or self._source_spec()
+        rules = spec.get("normalizations")
+        if rules is None and "import_normalization" in spec:
+            # Legacy medi-ny behaviour, preserved verbatim.
+            return re.sub(r"^from hermes_intelligence[^\n]*import config", "import config", src, flags=re.M)
+        for rule in rules or []:
+            src = re.sub(rule["pattern"], rule["replacement"], src, flags=re.M)
+        return src
+
+    def _variant_source(self, variant: str, spec: dict[str, Any] | None = None) -> str:
+        spec = spec or self._source_spec()
+        base_ref = spec["before_ref"] if variant.startswith("before") else spec["after_ref"]
+        src = self._normalize_source(self._git_show(base_ref, spec["source_path"]), spec)
+        if variant.endswith("altformat"):
+            # A genuinely DIFFERENT-but-valid solution: it proves the semantic
+            # grader is agnostic to formatting choices a correct implementation is
+            # free to make. Two spellings, because the shape of "a valid variant"
+            # depends on the module:
+            #   altformat_append  - wrap the public entry point (works when the
+            #                       behaviour to vary is reachable from outside);
+            #   altformat_replace - rewrite the source (needed when the choice
+            #                       lives in an INTERNAL function that no wrapper
+            #                       can reach, e.g. the JS edition renderer).
+            # Both are per-fixture and language-specific, so both live in the contract.
+            append = spec.get("altformat_append")
+            replace = spec.get("altformat_replace")
+            if not append and not replace:
+                raise RuntimeError("this fixture declares an `-altformat` variant but no "
+                                   "`altformat_append`/`altformat_replace` in its local_source spec")
+            for rule in replace or []:
+                mutated = src.replace(rule["find"], rule["replace"], 1)
+                if mutated == src:
+                    # Fail loudly: a no-op alt would silently be the reference
+                    # again, and `reference-alt-pass` would prove nothing.
+                    raise RuntimeError(f"altformat_replace found no match for {rule['find'][:60]!r}: "
+                                       "the alt variant would be identical to the reference")
+                src = mutated
+            if append:
+                src += append
+        return src
+
+    def _provision(self, workspace: Path, overlays: list[Path]) -> None:
+        """Materialize the graded workspace. Standard fixtures copy public + overlays.
+        Proprietary fixtures copy the non-proprietary public/overlay files, then inject
+        the git-materialized parser variant selected by the overlay (base = before)."""
+        shutil.copytree(self.public, workspace, dirs_exist_ok=True)
+        for overlay in overlays:
+            shutil.copytree(overlay, workspace, dirs_exist_ok=True)
+        if not self.proprietary:
+            return
+        mapping = self.contract.get("materialize", {})
+        variant = mapping.get("base", "before")
+        for overlay in overlays:
+            key = overlay.relative_to(self.fixture).as_posix()
+            if key in mapping:
+                variant = mapping[key]
+        self.materialize_into(workspace, variant)
+
+    def materialize_into(self, workspace: Path, variant: str) -> None:
+        """Write every materialized source file of `variant` into the workspace.
+
+        For the altformat variant, files WITHOUT altformat rules materialize as
+        the plain reference — the valid variant differs only where the contract
+        says a different-but-correct choice exists; at least one file must
+        declare rules or the alt would silently equal the reference."""
+        specs = self._file_specs()
+        if variant.endswith("altformat"):
+            if not any(s.get("altformat_append") or s.get("altformat_replace") for s in specs):
+                raise RuntimeError("this fixture declares an `-altformat` variant but no file "
+                                   "carries altformat_append/altformat_replace rules")
+        for spec in specs:
+            file_variant = variant
+            if (variant.endswith("altformat")
+                    and not (spec.get("altformat_append") or spec.get("altformat_replace"))):
+                file_variant = "after"
+            target = workspace / spec["target_path"]
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(self._variant_source(file_variant, spec), encoding="utf-8")
 
     def grade_overlay(self, overlays: list[Path], mutate=None) -> dict[str, Any]:
-        """Copy public + overlays into a temp workspace, run public test and grader."""
+        """Provision a temp workspace (public + overlays, or materialized parser for
+        proprietary fixtures), run public test and grader."""
         with tempfile.TemporaryDirectory(prefix="fixture-admission-") as temp_name:
             workspace = Path(temp_name)
-            shutil.copytree(self.public, workspace, dirs_exist_ok=True)
-            for overlay in overlays:
-                shutil.copytree(overlay, workspace, dirs_exist_ok=True)
+            self._provision(workspace, overlays)
             if mutate:
                 mutate(workspace)
             public_cmd = resolve_command(list(self.contract["public_test"]))

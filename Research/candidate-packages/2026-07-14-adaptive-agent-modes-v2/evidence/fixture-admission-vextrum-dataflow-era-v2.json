@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "fixture": "vextrum-dataflow-era-v2",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-vextrum-dataflow-era-v2",
+  "generated_at": "2026-07-20T00:01:35.764638+00:00",
+  "fixture_fingerprint": {
+    "file_count": 13,
+    "newest_mtime": 1784505691.2220163,
+    "sha256": "1F9277C3B9C37F00B40631E9DBE913F5B535E55E19E467682D9C7B397017AD92"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": "identical to the reference on every anchored convention; the variant varies only the SQL write pattern used to persist the watermark, which the conventions deliberately do not specify",
+        "after_pinning": [],
+        "structural": [
+          "watermark persisted via UPDATE-then-INSERT instead of a single upsert statement"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": true,
+      "detail": "fixture declares no serialized_output_dimensions; format-adversary is opt-in and not applicable here",
+      "serialized_output_dimensions": []
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "before-module",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 14,
+          "expected_band": [
+            5,
+            30
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "fixture_class": "underspecified-by-design",
+        "anchored_checks": [
+          "e2e-chain",
+          "execution-robustness",
+          "incremental-materialization",
+          "params-contract",
+          "preserved-behaviour",
+          "resume-reuse",
+          "uds-routing"
+        ],
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 162,
+    "matching_runs": [
+      {
+        "run_id": "20260720-002011095-vextrum-dataflow-era-v2-vanilla-t1",
+        "case_id": "vextrum-dataflow-era-v2",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 14,
+        "distinct_dimensions": 7
+      },
+      {
+        "run_id": "20260720-003152194-vextrum-dataflow-era-v2-oracle-loop-t1-i2",
+        "case_id": "vextrum-dataflow-era-v2",
+        "arm": "oracle-loop",
+        "outcome_valid": true,
+        "score": 43,
+        "distinct_dimensions": 7
+      },
+      {
+        "run_id": "20260720-004725610-vextrum-dataflow-era-v2-vanilla-configured-t3",
+        "case_id": "vextrum-dataflow-era-v2",
+        "arm": "vanilla-configured",
+        "outcome_valid": true,
+        "score": 43,
+        "distinct_dimensions": 7
+      },
+      {
+        "run_id": "20260720-005129128-vextrum-dataflow-era-v2-vanilla-configured-t2",
+        "case_id": "vextrum-dataflow-era-v2",
+        "arm": "vanilla-configured",
+        "outcome_valid": true,
+        "score": 43,
+        "distinct_dimensions": 7
+      },
+      {
+        "run_id": "20260720-010754851-vextrum-dataflow-era-v2-oracle-loop-t3-i3",
+        "case_id": "vextrum-dataflow-era-v2",
+        "arm": "oracle-loop",
+        "outcome_valid": true,
+        "score": 43,
+        "distinct_dimensions": 7
+      },
+      {
+        "run_id": "20260720-012752210-vextrum-dataflow-era-v2-vanilla-configured-t1",
+        "case_id": "vextrum-dataflow-era-v2",
+        "arm": "vanilla-configured",
+        "outcome_valid": true,
+        "score": 43,
+        "distinct_dimensions": 7
+      },
+      {
+        "run_id": "20260720-015400550-vextrum-dataflow-era-v2-oracle-loop-t2-i3",
+        "case_id": "vextrum-dataflow-era-v2",
+        "arm": "oracle-loop",
+        "outcome_valid": true,
+        "score": 43,
+        "distinct_dimensions": 7
+      }
+    ],
+    "valid_paid_runs": 7
+  }
+}

@@ -1,111 +1,109 @@
-# Adaptive agent modes - a cost ladder with governance controls
+# Adaptive agent modes — the verification loop
 
-**What this is.** The adaptive mode ladder picks the least expensive scaffolding
-level that still carries the governance controls a task's consequences demand:
-a human gate on critical consequence, durable checkpoints and handoff for wide
-or multi-session work, and a spec-freeze that blocks silent scope-shrink on
-underspecified tasks.
+**One sentence.** Quality does not come from telling an agent to be careful; it comes from a check suite the agent cannot edit, executed by the harness, whose failures are handed back until the work is genuinely green.
 
-**What this is NOT.** It is not a correctness-lift claim. The measured evidence
-is a decisive null: across 5 admission-gated fixtures and 10 paid calls, every
-arm - unscaffolded vanilla included - converged at 100/100 under fair semantic
-grading on single-pass-sized workspaces, while the scaffolded arms cost 5-8x the
-tokens (the Full arm ~5.2x the main vanilla arm on the v4 re-grade alone). What
-the scaffolding bought was not score but PROCESS artifacts: only the Full arm
-produced a complete impact map, and its "consumers verified" self-attestation
-was truthful (`self_attestation_gap = false`). Choose a mode to buy governance
-and auditability, not points. The numeric mode ceilings remain declared
-`hypothesis-pending-benchmark`.
+This is the measured architecture of release 0.4.0. Everything below was learned by spending real provider calls on a real proprietary task and letting the numbers overrule the design.
 
-## Selection
+## What the measurements say
 
-The router chooses the cheapest mode covering four dimensions: **consequence**
-(blast radius - the only path to Full and its human gate), **breadth** (width of
-change) and **continuity** (session boundaries), which each cap at Mode 3, and
-**clarity** (an underspecified mutating task floors at Mode 2 and receives the
-spec-synthesis capability). Action intent is separate: explaining, planning or
-dry-running a deployment or credential rotation does not select Full.
+The benchmark task is a shadow-replay of a real shipped fix: the NYRx Preferred Drug List parser rework from HermesAirflow history. The agent gets the pre-fix code and the same brief the engineer had; the grader compares against the fix that actually shipped, across eight behavioural dimensions. Model: `gpt-5.6-sol` at medium effort, identical across arms. Three trials per arm (a single trial is never a verdict — the same arm has swung 16 points between runs).
 
-| Mode | Use | What you pay for | Typical capability profile |
+| Arm | What it gets | Score | Tokens per trial |
 |---|---|---|---|
-| Vanilla | Advisory / read-only answer; no file changes | Nothing (no scaffold) | Fast provider profile |
-| Mode 1 - Lean | Small, reversible, local change | Minimal Core, compact requirement ledger, focused verification | `fast-low-risk` |
-| Mode 2 - Routed | Ordinary feature or bounded bug fix | Precision Context Pack, objective/evidence ledger, pre-submit gate | `balanced-daily` |
-| Mode 3 - Assured | Public contract, open-world parser, security-sensitive local change, wide mechanical change, multi-session implementation | Impact map, adversarial checks, durable checkpoints and session handoff | `deep-implementation` |
-| Full | Critical consequence only: production migration rollout, external side effect, credential rotation, cross-system release | Human scope approval, independent verifier, bounded loop | `architecture-high-risk` plus `adversarial-review` |
+| Unscaffolded control | The task, nothing else | 77, 77, 77 | 272–316k |
+| Loop only | The task + failing checks handed back, with guidance | 89¹, **100, 100** | 647k–1.21M |
+| Lean scaffold + loop | Context pack + ledger + the same loop | **100, 100, 100** | 1.54–2.68M |
 
-Size never buys the human gate: a 30-file mechanical rename stays at Mode 3,
-while a one-line credential rotation is Full. Higher modes cost real tokens -
-budget them like any other spend.
+*¹ That trial was invalidated by the protected-files tripwire — the agent edited a file it was not allowed to touch — and is reported for completeness.*
 
-## Governance controls by mode
+**100 is the ceiling**: it means the agent reproduced the behaviour of the fix a human engineer shipped after several iterations. The loop reaches it. The bare agent never does, on any trial.
 
-1. Mode 2+ requires a reproducible pre-submit PASS (`.agentic/run-pre-submit.ps1`
-   / `.sh`); unresolved material ambiguity blocks completion.
-2. Mode 3+ additionally gates six impact-map areas and an adversarial challenge;
-   wide or multi-session work gates a durable checkpoint and session handoff.
-3. Full also requires explicit human scope approval and an independent verifier
-   PASS (the verifier is a separate call - Full is never one call).
-4. Underspecified mutating tasks (clarity axis) must produce a validated spec
-   (`spec.json`: surface inventory, convention inventory with file evidence,
-   pinned decision points, risk register, acceptance tests) whose requirement
-   ledger is FROZEN: scope may only shrink through a recorded
-   `owner_scope_changes` entry; additions are always allowed. The pre-submit
-   gate re-executes every acceptance test.
-5. Decision-time research surfacing: design/benchmark/architecture prompts get
-   the top topic-matched findings from `Research/knowledge-base/findings-index.json`
-   attached to the routing result (`relevant_findings`) and the Context Pack.
-6. Capability profiles resolve through the weekly expiring provider catalog
-   (`Models/providers.json`); stale data blocks automatic selection.
+Three earlier campaigns (six fixtures, 17 calls) measured the opposite of what this environment used to believe: **prompt scaffolding bought nothing.** Stacking instructions, impact-map forms and adversarial-threat-model templates produced identical scores at 4–10.7× the token cost. Those forms are gone. What replaced them is below.
 
-## Layout (additive - the classic router is untouched)
+## The three modes
 
-- `tools/route.ps1` - classic keyword router by default (unchanged behaviour);
-  `-Adaptive` opts into the layer below.
-- `tools/adaptive/` - the Python: `prepare_or_route.py` (entry),
-  `adaptive_router.py`, `prepare_context.py`, `objective_compiler.py`,
-  `pre_submit_gate.py`, `spec_synthesis.py`, `process_metrics.py`,
-  `fixture_admission.py`, `claims_ledger.py`, `vault_hygiene.py`,
-  `resolve_capability_profile.py`, plus `modules/`, `schemas/` and a local
-  `findings-index.json` copy.
-- `Runtime/adaptive-modes.json` - the five-mode taxonomy, axes, escalation
-  triggers, capability profiles.
-- `Router/catalog/adaptive-modules.json` - the precision knowledge catalog used
-  ONLY by the adaptive path (`Router/catalog/modules.json` remains the classic
-  catalog).
-- `Evals/adaptive-fixtures/` - the admission-gated boundary fixtures; not
-  registered in the stable fixture catalog (see the README there).
-- `tools/vault-hygiene.ps1`, `tools/spec-synthesis.ps1` - thin launchers.
+Modes exist for **cost** and **governance**. They do not exist to make the model smarter — that job belongs to the loop.
 
-## Commands
+| Mode | When | What you get |
+|---|---|---|
+| **lite** | Advisory answers; trivial mechanical or doc edits (≤4 requirements, ≤2 files) | Minimal core, compact ledger, completion gate |
+| **standard** | Everything else that mutates code — features, parsers, public contracts, security-sensitive changes, wide refactors, multi-session work | Precision context pack + **the verification loop** |
+| **critical** | Only critical blast radius: deploys, credential rotation, production data rollouts, cross-system releases | standard + human scope gate + independent verifier |
 
-```powershell
-# Classic (unchanged)
-powershell -ExecutionPolicy Bypass -File tools/route.ps1 -Repo <repo> -Task "<task>"
+Only **consequence** selects a mode, and only critical consequence buys the human gate. Explaining, planning or dry-running a deploy is not a deploy. Two axes attach capabilities without changing the mode: **clarity** (an underspecified task gets spec synthesis with a frozen requirement ledger — a guardrail against silent scope-shrink, not a quality claim) and **continuity** (multi-session work gets durable checkpoints and handoff). **Breadth is telemetry only**: a 30-file rename is ordinary `standard` work, because the symbol sweep covers the consumer surface mechanically — width was measured and predicts nothing.
 
-# Adaptive: routing decision only (no writes)
-powershell -ExecutionPolicy Bypass -File tools/route.ps1 -Adaptive -NoWrite -Repo <repo> -Task "<task>"
+## The verification loop
 
-# Adaptive: compile the mode-specific context pack into <repo>/.agentic
-powershell -ExecutionPolicy Bypass -File tools/route.ps1 -Adaptive -Repo <repo> -Task "<task>"
-powershell -ExecutionPolicy Bypass -File tools/route.ps1 -Adaptive -Repo <repo> -TaskFile <task.md>
+At prepare time — before a single token is spent — the harness snapshots the workspace and freezes a check suite. The agent implements, then runs:
 
-# Completion gate (from the workspace)
-powershell -ExecutionPolicy Bypass -File .agentic/run-pre-submit.ps1
+```
+python .agentic/verification_loop.py step --suite .agentic/check-suite.json --workspace .
 ```
 
-The adaptive path needs `python` (or the Windows `py` launcher) on PATH and
-fails with a clear message when neither exists. `-ForceMode` exists only for
-scaffolded benchmark arms; normal work must use adaptive selection.
+| Exit | Meaning | Next |
+|---|---|---|
+| 0 | Every independent check passes | Proceed to the completion gate |
+| 1 | Failures remain | Read `.agentic/loop-feedback.json`, fix the causes, step again |
+| 2 | Terminated — iteration budget or no progress | Stop. Escalate to a human with the remaining failures |
 
-## Benchmark rule
+The suite and its budgets are digest-frozen. Weakening a check, deleting one, or granting yourself more iterations fails the gate. **Adding** checks is always allowed. The completion gate re-runs the whole suite itself, so a green report the agent wrote proves nothing — only the re-execution counts.
 
-The coding benchmark baseline is a separate, unscaffolded task-only
-`vanilla-control`; it never reuses the read-only runtime Vanilla preset. Compare
-arms on the same admission-gated fixture, model and effort; fixtures without
-valid paid history get a one-call canary on the cheapest arm first, and the
-remaining arms need a separate approval constructible only from a valid canary
-run-record. Count the Full verifier call honestly. Given the measured null,
-prefer the CHEAPEST mode whose governance controls the task's consequences
-actually require; never argue a higher mode from expected quality lift without
-new fixture evidence that shows separation.
+### The five kinds of check
+
+- **acceptance** — a command that must exit 0 (public tests, frozen spec acceptance tests).
+- **differential** — the same command runs against the pre-change snapshot and against your work; any output difference not declared as expected is a silent regression. This catches the class of bug that no amount of prompting caught: a field quietly changing while the task was about something else.
+- **symbol-sweep** — every file referencing a symbol you touched must be changed or explicitly inspected with a recorded note. This is the deterministic answer to "the agent said it checked the consumers."
+- **property** — invariants over real data samples. **Requirements that live in the data are still requirements**: the benchmark's hardest defect was a rule no task text mentioned and only the data revealed.
+- **finding** — an independent verifier's finding, blocking until a proving command re-executes green or a human waives it in writing. Prose never closes a finding.
+
+### Guidance travels with failures, not with prompts
+
+A failing check carries its own guidance — the relevant convention excerpt and the direction of the fix — into the feedback. A passing check carries nothing. This is just-in-time retrieval applied to verification: you pay for context exactly when something is red, and never otherwise.
+
+It is also, empirically, the highest-leverage component in the system. Guidance attached to failures is what took the bare agent from 77 to 100.
+
+### Evidence is generated, not transcribed
+
+Earlier versions made the agent write evidence rows, verification runs and a completion claim. Measurement killed that design: the heavyweight scaffold burned its turn budget on paperwork and ran out mid-fix, scoring 88 with a gate that honestly refused to certify it.
+
+Since the harness re-executes every check anyway, **the harness writes the evidence**. The agent owns only what genuinely needs judgment: resolving material ambiguities, and recording what it actually verified at a consumer site. If a suite contains nothing executable, the gate falls back to demanding recorded verification commands — it never accepts nothing.
+
+## What it costs
+
+Preparing the loop costs zero model tokens. The first iteration costs what an unscaffolded run costs. Further iterations happen **only when independent checks are red** — that is, exactly when the unscaffolded agent would have shipped the defect and you would have paid for it later, in production.
+
+On the benchmark, reaching the ceiling cost 2–4× an unscaffolded run through the loop-only path and 5–9× through the lean scaffold path. On work the model already handles, the loop goes green on the first iteration and the overhead is a few seconds of CPU. Budget it as insurance that bills on claims, not as a subscription.
+
+## Benchmark protocol
+
+Any claim about this environment must clear the same bar we hold ourselves to:
+
+- **Three trials per arm minimum.** Single-trial results are exploratory and may never be reported as verdicts. The same arm scored 73 and 89 on identical inputs.
+- **The canary rule.** A fixture with no valid paid history gets exactly one call on the cheapest arm; the main stage needs separate approval built from a validated canary record. The canary is not a trial.
+- **The admission gate.** A fixture proves it discriminates before it costs money: the known-bad control must fail, the reference must pass, and graders must survive a hostile battery.
+- **Checks are harness-side.** If the control arm can read the checks, you are measuring the checks as context, not measuring the loop. We learned this by contaminating a campaign and discarding 11 calls.
+- **Every loop iteration is a counted provider call.**
+
+## Entry points
+
+```powershell
+tools/route.ps1 -Adaptive -TaskFile <task>      # mode decision + context pack
+```
+
+```
+awbp/prepare_context.py     # context, ledger, baseline snapshot, frozen check suite
+awbp/verification_loop.py   # the loop
+awbp/harness_checks.py      # the checks
+awbp/pre_submit_gate.py     # fail-closed completion gate (re-runs the suite)
+```
+
+Declare project-specific checks in `harness-checks.json` at your repo root: give each a `kind`, a `script`, and `guidance` that names the convention and the fix direction. Scripts are sha-pinned when the suite is frozen.
+
+The classic router (`Router/catalog/modules.json`, default `tools/route.ps1`) is unchanged. The adaptive layer is additive and opt-in.
+
+## What we still do not know
+
+- The loop is measured on one real task family. Replication on a second is the next honest step.
+- The scaffold's contribution beyond the loop is not separated: `standard-loop` and `vanilla-loop` both reach 100, and three trials cannot resolve reliability differences that small.
+- End-to-end browser checks and true adversarial multi-agent debate are described in the research corpus and are not built.
+- Bare benchmark arms are not told which files are protected; three trials were invalidated on a rule the arm was never given.

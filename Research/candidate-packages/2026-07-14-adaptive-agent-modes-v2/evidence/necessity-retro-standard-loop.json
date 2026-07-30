@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "purpose": "Retroactive necessity probe over the three winning standard-loop trials of campaign 20260716-143155. Zero provider calls. Answers SpecBench-style saturation doubt for THIS result: was the 100/100/100 earned?",
+  "verdict": "EARNED - every substantive hunk of every winning change was necessary for at least one behavioural check",
+  "trials": [
+    {
+      "trial": 1,
+      "schema_version": 1,
+      "hunks_total": 5,
+      "hunks_substantive": 4,
+      "hunks_probed": 4,
+      "truncated": false,
+      "necessary": 4,
+      "uncovered": 0,
+      "inconclusive_structural": 0,
+      "necessity_ratio": 1.0,
+      "earned": true,
+      "uncovered_hunks": [],
+      "rule": "every substantive hunk of the change must be necessary for at least one check; an uncovered hunk is either unneeded code or untested code, and both are worth surfacing",
+      "policy": "standard: report uncovered hunks and require a check or an explicit note. critical: an uncovered substantive hunk fails the gate - nothing reaches a human gate with unexplained, untested code in the diff."
+    },
+    {
+      "trial": 3,
+      "schema_version": 1,
+      "hunks_total": 4,
+      "hunks_substantive": 3,
+      "hunks_probed": 3,
+      "truncated": false,
+      "necessary": 3,
+      "uncovered": 0,
+      "inconclusive_structural": 0,
+      "necessity_ratio": 1.0,
+      "earned": true,
+      "uncovered_hunks": [],
+      "rule": "every substantive hunk of the change must be necessary for at least one check; an uncovered hunk is either unneeded code or untested code, and both are worth surfacing",
+      "policy": "standard: report uncovered hunks and require a check or an explicit note. critical: an uncovered substantive hunk fails the gate - nothing reaches a human gate with unexplained, untested code in the diff."
+    },
+    {
+      "trial": 2,
+      "schema_version": 1,
+      "hunks_total": 7,
+      "hunks_substantive": 6,
+      "hunks_probed": 6,
+      "truncated": false,
+      "necessary": 6,
+      "uncovered": 0,
+      "inconclusive_structural": 0,
+      "necessity_ratio": 1.0,
+      "earned": true,
+      "uncovered_hunks": [],
+      "rule": "every substantive hunk of the change must be necessary for at least one check; an uncovered hunk is either unneeded code or untested code, and both are worth surfacing",
+      "policy": "standard: report uncovered hunks and require a check or an explicit note. critical: an uncovered substantive hunk fails the gate - nothing reaches a human gate with unexplained, untested code in the diff."
+    }
+  ]
+}

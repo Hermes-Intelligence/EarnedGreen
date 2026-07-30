@@ -1,0 +1,421 @@
+{
+  "schema_version": 4,
+  "campaign_id": "20260716-120701-adaptive-mode-ablation",
+  "status": "complete",
+  "stage": "main",
+  "provider_calls": 11,
+  "fixture": "medi-ny-parser-rework-v1",
+  "trials": 3,
+  "trial_policy": {
+    "min_trials_per_arm_for_verdict": 3,
+    "single_trial_status": "exploratory-no-verdict",
+    "rationale": "~16pt same-arm run-to-run variance measured on medi-ny-parser-rework-v1 (vanilla scored 73 and 89 across runs); a single trial cannot detect a mode-sized effect and must never be reported as a verdict"
+  },
+  "loop_arm_policy": {
+    "max_iterations_per_trial": 2,
+    "feedback": "structured failures from the harness-run check suite, returned verbatim and identically to scaffolded and bare loop arms",
+    "no_progress_rule": "an iteration whose failure fingerprint equals the previous one ends the trial early (no-progress)",
+    "call_accounting": "every iteration is a provider call and counts toward campaign ceilings; planned ceilings reserve max_iterations_per_trial per loop-arm trial",
+    "primary_metrics": [
+      "iterations_to_green",
+      "silent_errors_en_route (regressions caught by checks the agent never self-reported)",
+      "final score",
+      "tokens"
+    ],
+    "override_note": "ceiling lowered for budget; only downward overrides are permitted"
+  },
+  "verdict_eligible": true,
+  "fixture_admission": {
+    "admitted": true,
+    "record_path": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\evidence\\fixture-admission-medi-ny-parser-rework-v1.json",
+    "reason": null,
+    "generated_at": "2026-07-16T10:01:25.834544+00:00",
+    "paid_history": {
+      "runs_scanned": 65,
+      "matching_runs": [
+        {
+          "run_id": "20260715-191915367-medi-ny-parser-rework-v1-vanilla-t1",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "vanilla",
+          "outcome_valid": true,
+          "score": 73,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260715-193535591-medi-ny-parser-rework-v1-mode-3-assured-t1",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "mode-3-assured",
+          "outcome_valid": true,
+          "score": 89,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260715-194225712-medi-ny-parser-rework-v1-mode-2-routed-t1",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "mode-2-routed",
+          "outcome_valid": true,
+          "score": 73,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260715-194825885-medi-ny-parser-rework-v1-vanilla-t1",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "vanilla",
+          "outcome_valid": true,
+          "score": 89,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260715-195249589-medi-ny-parser-rework-v1-full-t1",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "full",
+          "outcome_valid": true,
+          "score": 89,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260715-201409792-medi-ny-parser-rework-v1-mode-1-lean-t1",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "mode-1-lean",
+          "outcome_valid": true,
+          "score": 89,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-105702609-medi-ny-parser-rework-v1-vanilla-t2",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "vanilla",
+          "outcome_valid": true,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-110158590-medi-ny-parser-rework-v1-vanilla-loop-t2",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "vanilla-loop",
+          "outcome_valid": true,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-110559408-medi-ny-parser-rework-v1-vanilla-loop-t3",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "vanilla-loop",
+          "outcome_valid": true,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-111014207-medi-ny-parser-rework-v1-standard-t2",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "standard",
+          "outcome_valid": true,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-111824491-medi-ny-parser-rework-v1-vanilla-t1",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "vanilla",
+          "outcome_valid": true,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-112216657-medi-ny-parser-rework-v1-standard-t3",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "standard",
+          "outcome_valid": true,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-112819225-medi-ny-parser-rework-v1-standard-loop-t2",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "standard-loop",
+          "outcome_valid": true,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-113506281-medi-ny-parser-rework-v1-vanilla-t3",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "vanilla",
+          "outcome_valid": true,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-114030945-medi-ny-parser-rework-v1-standard-t1",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "standard",
+          "outcome_valid": false,
+          "score": 88,
+          "distinct_dimensions": 8
+        },
+        {
+          "run_id": "20260716-115036792-medi-ny-parser-rework-v1-standard-loop-t3",
+          "case_id": "medi-ny-parser-rework-v1",
+          "arm": "standard-loop",
+          "outcome_valid": true,
+          "score": 100,
+          "distinct_dimensions": 8
+        }
+      ],
+      "valid_paid_runs": 15
+    },
+    "gate": "fixture-admission"
+  },
+  "paid_history": {
+    "valid_paid_runs": 16,
+    "matching_runs": 17,
+    "runs_dir_overridden": false
+  },
+  "canary_policy": {
+    "applies_when": "the fixture has no prior paid run whose Evals/runs run-record.json shows outcome_valid=true",
+    "first_stage": {
+      "calls": 1,
+      "arm": "cheapest (vanilla)",
+      "approval": "separate explicit approval for exactly one call"
+    },
+    "main_stage_requires": {
+      "separate_approval": true,
+      "canary_outcome_valid": true,
+      "min_distinct_hidden_dimensions": 2,
+      "all_declared_dimensions_reported": true,
+      "note": "floor/ceiling collapse (a single reported dimension) blocks the remaining arms; the canary validates the fixture and is NOT counted as a trial"
+    },
+    "admission_gate": "every campaign additionally requires a fresh Fixture Admission Gate record (candidate fixtures) or fresh eval-validity PASS (contracted fixtures)"
+  },
+  "canary_evidence": null,
+  "provider_snapshot": {
+    "generated_at": "2026-07-13T15:10:46.4282540+02:00",
+    "expires_at": "2026-07-20T15:10:46.4282540+02:00",
+    "distro": "AgenticBench",
+    "provider": {
+      "id": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "medium",
+      "cli_version": "codex-cli 0.144.3"
+    }
+  },
+  "model_policy": "same resolved provider model and effort across arms",
+  "runs": [
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::standard::t1",
+      "arm": "standard",
+      "context_arm": "standard",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260716-120757775-medi-ny-parser-rework-v1-standard-t1",
+      "iterations": []
+    },
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::standard::t3",
+      "arm": "standard",
+      "context_arm": "standard",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 3,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260716-121715150-medi-ny-parser-rework-v1-standard-t3",
+      "iterations": []
+    },
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::vanilla::t1",
+      "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260716-122538841-medi-ny-parser-rework-v1-vanilla-t1",
+      "iterations": []
+    },
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::vanilla::t3",
+      "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 3,
+      "role": "solution",
+      "status": "graded-invalid-protected-violation",
+      "run_id": "20260716-122928127-medi-ny-parser-rework-v1-vanilla-t3",
+      "iterations": []
+    },
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::vanilla::t2",
+      "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 2,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260716-123349553-medi-ny-parser-rework-v1-vanilla-t2",
+      "iterations": []
+    },
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::standard::t2",
+      "arm": "standard",
+      "context_arm": "standard",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 2,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260716-123728414-medi-ny-parser-rework-v1-standard-t2",
+      "iterations": []
+    },
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::vanilla-loop::t3",
+      "arm": "vanilla-loop",
+      "context_arm": "vanilla",
+      "loop": true,
+      "max_iterations": 2,
+      "trial": 3,
+      "role": "solution",
+      "status": "graded-invalid-protected-violation",
+      "run_id": "20260716-124737642-medi-ny-parser-rework-v1-vanilla-loop-t3-i2",
+      "iterations": [
+        {
+          "iteration": 1,
+          "run_id": "20260716-124324142-medi-ny-parser-rework-v1-vanilla-loop-t3",
+          "green": false,
+          "failing_check_ids": [
+            "public-tests",
+            "bare-name-properties"
+          ],
+          "failure_fingerprint": "C4E4CF1692C76ABE3DB253AC2636EB3AABD3F3C5D5A72DE05F5C7AD01328AF2A"
+        },
+        {
+          "iteration": 2,
+          "run_id": "20260716-124737642-medi-ny-parser-rework-v1-vanilla-loop-t3-i2",
+          "green": true,
+          "failing_check_ids": [],
+          "failure_fingerprint": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945"
+        }
+      ],
+      "loop_outcome": "green"
+    },
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::vanilla-loop::t1",
+      "arm": "vanilla-loop",
+      "context_arm": "vanilla",
+      "loop": true,
+      "max_iterations": 2,
+      "trial": 1,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260716-125523410-medi-ny-parser-rework-v1-vanilla-loop-t1-i2",
+      "iterations": [
+        {
+          "iteration": 1,
+          "run_id": "20260716-125159382-medi-ny-parser-rework-v1-vanilla-loop-t1",
+          "green": false,
+          "failing_check_ids": [
+            "bare-name-properties"
+          ],
+          "failure_fingerprint": "AE0DBEC1318F9AA9416025EA0A8407FE16F1BA05393C9531D136323814A8C247"
+        },
+        {
+          "iteration": 2,
+          "run_id": "20260716-125523410-medi-ny-parser-rework-v1-vanilla-loop-t1-i2",
+          "green": false,
+          "failing_check_ids": [
+            "row-field-differential"
+          ],
+          "failure_fingerprint": "9FBEB9979D10F4CE920920E129A5342D15E961081C96A24D7619A0472456B221"
+        }
+      ],
+      "loop_outcome": "iteration-budget"
+    },
+    {
+      "run_key": "screen::medi-ny-parser-rework-v1::vanilla-loop::t2",
+      "arm": "vanilla-loop",
+      "context_arm": "vanilla",
+      "loop": true,
+      "max_iterations": 2,
+      "trial": 2,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260716-125724263-medi-ny-parser-rework-v1-vanilla-loop-t2",
+      "iterations": [
+        {
+          "iteration": 1,
+          "run_id": "20260716-125724263-medi-ny-parser-rework-v1-vanilla-loop-t2",
+          "green": true,
+          "failing_check_ids": [],
+          "failure_fingerprint": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945"
+        }
+      ],
+      "loop_outcome": "green"
+    }
+  ],
+  "independent_verifier_runs": [],
+  "loop": {
+    "max_total_provider_calls": 12,
+    "max_calls_per_invocation": 12,
+    "max_replacements": 0,
+    "max_turns_per_call": 30,
+    "max_wall_minutes_per_call": 40,
+    "kill_switch": "Evals/local/STOP",
+    "automatic_followup": false
+  },
+  "loop_overrides": {
+    "max_turns_per_call": 30,
+    "max_wall_minutes_per_call": 40,
+    "reason": "The editable workspace is a real ~373-line proprietary parser whose correctness depends on the documented PDL geometry and the pipeline's name-based guards; a raised turn/wall budget keeps the measured axis 'does scaffolding find the documented cleaning conventions' rather than 'who ran out of clock reading the module'."
+  },
+  "harness_snapshot": [
+    {
+      "path": "implementation/modes.json",
+      "sha256": "289DF40AB4D3FA1B8918AACEECEAD41954503B5C303E10A26CBB1AC6B8B4030D"
+    },
+    {
+      "path": "implementation/router-catalog.json",
+      "sha256": "1EA8C87F0F05E4D0E340960A4B31E0C5C2775F2B0E31EA9133B576D024662B0E"
+    },
+    {
+      "path": "implementation/adaptive_router.py",
+      "sha256": "F62D08135099230A281318389695C4CCDD136B7BE25DE1DD9479826DCE4E47EB"
+    },
+    {
+      "path": "implementation/objective_compiler.py",
+      "sha256": "CABCDDBC07B53CB56A8F4C16B49B4E22D6927B60E804342F25E4997B027EB115"
+    },
+    {
+      "path": "implementation/pre_submit_gate.py",
+      "sha256": "465448C38A23D9E89E101C4CDDD90C0E1776D33F0B1B73E5B562A40313C68628"
+    },
+    {
+      "path": "implementation/harness_checks.py",
+      "sha256": "44EC220A7B48A39CDD8F1C49BA82A3FA94A19FEEE0343D2EBF233F0C9C811019"
+    },
+    {
+      "path": "implementation/verification_loop.py",
+      "sha256": "5FBE29B13D40094B0739FFF270DCAFA7BB8801A4E0306E329F468FF8C5AAF39B"
+    },
+    {
+      "path": "implementation/eval_validity.py",
+      "sha256": "06F0EDFFF1D4E207CB29E64037A1A6BE0AD2CFFCA5BD601C755D51CD6B641AAA"
+    },
+    {
+      "path": "implementation/fixture_admission.py",
+      "sha256": "A507B8DD36D53F091BF5200171A1DE65C96A6FB024602599D25CDE76DDE9D27F"
+    }
+  ],
+  "approval": {
+    "approved_at": "2026-07-16T10:07:16.792701+00:00",
+    "approved_by": "owner (chat 2026-07-16 loop-experiment envelope <=25 calls; 11 spent on contaminated-exploratory; this clean verdict-eligible campaign uses <=12 of the remaining 14)",
+    "scope": "at most 12 provider calls: 3 arms x 3 trial(s); 1 loop arm(s) reserve 2 iteration calls per trial and may use fewer",
+    "exact_calls": 12,
+    "stage": "main"
+  }
+}

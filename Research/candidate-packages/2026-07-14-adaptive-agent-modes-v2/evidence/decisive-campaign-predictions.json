@@ -1,0 +1,49 @@
+{
+ "schema_version": 1,
+ "registered_at": "2026-07-19",
+ "registered_before": "any provider call of the decisive campaign",
+ "question": "THE question this environment exists to answer (owner, 2026-07-19): on a hard, long, wide task, is the full environment SIGNIFICANTLY better than well-configured vanilla (good CLAUDE.md + conventions in workspace)? Measured on BOTH axes: new-behaviour score under a VALID instrument, and envelope integrity en route.",
+ "design": {
+  "fixture": "vextrum-era-v3-gen4 (same task/workspace as vextrum-era-v2; GEN-4 relational grader — admitted PASS, before=17/after=100/alt=100)",
+  "arms": {
+   "vanilla-configured": "the owner's named baseline: one call, workspace conventions available, no loop",
+   "oracle-loop": "full environment: verification loop + derived suite of 30 gen-4 pins (25 relational discriminating + 5 preservation guards), iteration ceiling 3, zero authoring calls"
+  },
+  "trials": 3,
+  "spend": "1 canary (bare vanilla, fixture-validation only) + main: 3 vanilla-configured + 3 oracle-loop trials x up to 3 iterations = at most 13 calls total",
+  "owner_approval": "blanket chat approval 2026-07-19 ('zrobmy test finalny - daje od razu zgode na spend'); exact number fixed by the session at 13 and recorded in each stage's approval record"
+ },
+ "honest_framing_registered_up_front": [
+  "The oracle-loop's predicates derive from the era's own history (replay paradigm). This measures the FORCING power of the loop under a valid instrument — the ceiling question P-R2 that gen-3 could not answer because its pins were unwinnable. A user gets such predicates from oracle_cli derive only where history provides a before/after; the deployable-everywhere layer remains guards.",
+  "Same module/repo as prior era measurements; the instrument was designed FROM the era ladder analysis. The family policy and relations were validated on the probe's four solutions — fresh runs are the sanctioned verdict path, but generalization beyond this task family is explicitly NOT claimed.",
+  "min_trials_per_arm_for_verdict=3 is met by design; if any trial invalidates (arm_validity), the verdict degrades to exploratory and says so."
+ ],
+ "predictions": [
+  {
+   "id": "P-D1",
+   "claim": "Bare-vanilla canary scores in the admission band (17-50) and reports >=2 distinct dimensions: the task still breaks one-shot under the gen-4 grader (it measures MORE real work than gen-3, so the canary may land above 14/17, but far from 100).",
+   "falsified_if": "canary scores 100 (task inside one-shot competence under a valid instrument -> REGISTERED BRAKE: stop before the main stage, report saturation)"
+  },
+  {
+   "id": "P-D2",
+   "claim": "oracle-loop mean final score > vanilla-configured mean final score, and the gap exceeds the measured same-arm variance band (~16 pts): iterating against valid red predicates forces work the one-shot arm leaves undone.",
+   "falsified_if": "means within 16 pts, or vanilla-configured >= oracle-loop — the environment's forcing layer buys nothing even with a valid instrument on a hard task; the repo's core promise fails its decisive test and the verdict is published as such"
+  },
+  {
+   "id": "P-D3",
+   "claim": "oracle-loop uses its iterations: at least one trial has iteration >=2 with a SHRINKING failure set (progress, not the gen-3 no-progress stall) — distinguishing 'the loop forces' from 'the model one-shots anyway'.",
+   "falsified_if": "every oracle-loop trial is green at iteration 1 (task saturates for the loop arm: no forcing was needed) or every trial stalls no-progress (valid pins still do not translate into convergence)"
+  },
+  {
+   "id": "P-D4",
+   "claim": "Envelope axis: oracle-loop ends every trial with preservation guards GREEN (the loop refuses done on a broken envelope). vanilla-configured breaks >=1 preservation guard at claimed-done in >=1 of 3 trials (silent defect en route on a wide rework, the medi-ny sdr pattern).",
+   "falsified_if": "vanilla-configured also ends all trials guard-green (then the envelope advantage is not demonstrated ON THIS TASK and is reported as such; the axis stands on the medi-ny measurement alone)"
+  },
+  {
+   "id": "P-D5",
+   "claim": "The honest-zero families move: in >=1 oracle-loop trial the citation-hygiene or block-citations family goes GREEN (red predicates force the universally-neglected dimensions), while vanilla-configured leaves both RED in all trials (probe pattern).",
+   "falsified_if": "no oracle-loop trial ever greens either family (the loop cannot force text-adjacent work even with countable observables), or vanilla-configured greens them unforced (they were not neglect-prone after all)"
+  }
+ ],
+ "verdict_rule": "Pre-committed: the environment is 'significantly better than well-configured vanilla on the hard case' ONLY IF P-D2 holds. P-D4/P-D5 characterize WHERE the advantage lives. Any other outcome is published at face value, including the negative."
+}

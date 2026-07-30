@@ -1,0 +1,80 @@
+{
+  "schema_version": 2,
+  "id": "vextrum-era-v3-gen4",
+  "version": 1,
+  "status": "candidate-not-authoritative",
+  "fixture_class": "underspecified-by-design",
+  "proprietary": true,
+  "workspace_source": "local-git-copy",
+  "purpose": "GENERATION-3 DIFFICULTY FIXTURE. Both prior families saturated: a frontier model one-shots a well-specified single-file ticket. Difficulty hypothesis from our own data: one-shot breaks on a LARGE, UNDER-specified behavioural surface. This fixture replays a real FOUR-COMMIT era on VextrumFrontend's edition renderer (3c8af98 'fixes to reports' -> 778c755 'vector chart and others' -> 707587c 'better report formatting' -> 225e1ef 'citation fixes'; ~470 churn on one module): the before-state renders trend/multi-line charts as text dumps, the after-state draws real vector charts, plus block-citation, formatting, ordering and citation-hygiene changes. The grader is MECHANICAL and GEN-4 (build_era_oracle_gen4.py derives RELATIONAL predicates — kinds-superset and per-kind count-direction — from the era diff over a rich corpus, altformat-filtered), replacing v2's exact projections after the measured validity failure: exact projections from a single reference pinned the reference's rendering choices and graded real agent work zero (evidence/era-instrument-analysis-*.json). Relational predicates reward partial real work while keeping structural red-on-before separation (all 5 pre-registered instrument predictions confirmed, evidence/gen4-era-validation-*.json). Same task workspace and public surface as vextrum-era-v2; ONLY the hidden instrument changed. enum-normalization is now UNGRADED AND NAMED (wording-only change, no countable observable — the gen-4 boundary); sources-section is gen-4-gradable but stays ungraded because no discoverable convention anchors it (fairness rule); bars/ratio/fallback/gaps layouts remain ungraded-named as in v2.",
+  "context_tags": ["rendering", "documents", "pdf", "frontend", "charts"],
+  "public_test": ["node", "--test", "tests/public.test.js"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": [
+    "charts-lines",
+    "charts-table",
+    "citation-hygiene",
+    "block-citations",
+    "ordering",
+    "preserved-behaviour"
+  ],
+  "serialized_output_dimensions": [],
+  "local_source": {
+    "repo_dir": "VextrumFrontend",
+    "source_path": "src/lib/editionPdf.js",
+    "target_path": "src/editionPdf.js",
+    "before_ref": "3c8af98^",
+    "after_ref": "225e1ef",
+    "rework_commits": ["3c8af98", "778c755", "707587c", "225e1ef"],
+    "normalizations": [],
+    "normalization_note": "None needed (verified in v1 and by the era derivation probe): zero top-level imports; jspdf resolves to the fixture stub, editionPdfAssets is optional behind try/catch. The driver uses the era's STABLE public surface (buildEditionDoc || downloadEditionPdf): buildEditionDoc was born DURING the era.",
+    "altformat_replace": [
+      {
+        "find": "return out.slice(0, 3).join(\", \")",
+        "replace": "return out.slice(0, 3).join(\" · \")"
+      }
+    ],
+    "altformat_note": "The middot separator variant (valid-but-different): kills separator-identity pinning at derivation time and proves grader format-agnosticism at admission time."
+  },
+  "materialize": {
+    "base": "before",
+    "hidden/reference": "after",
+    "hidden/reference-alt": "after-altformat",
+    "negative-controls/before-module": "before"
+  },
+  "grading_surface": {
+    "api": "downloadEditionPdf(edition, meta) — the entry point present at every era ref (buildEditionDoc, when present, is preferred by the driver)",
+    "recording_stub": "public/node_modules/jspdf/index.mjs v2: one `events` stream, text AND drawing in emission order; coordinates rounded to integers by the stub itself so no predicate can pin float layout",
+    "mechanical_grader": "hidden/grade.py (GEN-4) executes hidden/derived-predicates.json: RELATIONAL discriminating predicates (kinds-superset + count-direction, built by build_era_oracle_gen4.py) + exact textseq preservation guards; 6 graded families. Hand-made parts: the corpus, the family grouping and the family policy (set from the measured instrument validation); every expectation VALUE and every relation baseline is mechanical."
+  },
+  "convention_anchors": [
+    {"check_id": "charts-lines", "evidence_file": "CONVENTIONS.md",
+     "quote": "Trend and multi-line visuals are drawn as real vector charts"},
+    {"check_id": "charts-table", "evidence_file": "CONVENTIONS.md",
+     "quote": "A table visual renders its column headers and every row's cells"},
+    {"check_id": "citation-hygiene", "evidence_file": "CONVENTIONS.md",
+     "quote": "A citation must not be rendered twice in the same run."},
+    {"check_id": "citation-hygiene", "evidence_file": "CONVENTIONS.md",
+     "quote": "At most three citations are rendered in a run."},
+    {"check_id": "citation-hygiene", "evidence_file": "CONVENTIONS.md",
+     "quote": "Citations in a run are visually separated"},
+    {"check_id": "block-citations", "evidence_file": "CONVENTIONS.md",
+     "quote": "A block's own `citations` list renders beneath that block as its numbered\n  source references."},
+    {"check_id": "ordering", "evidence_file": "CONVENTIONS.md",
+     "quote": "Blocks and visuals interleave strictly by their declared `order` key."},
+    {"check_id": "preserved-behaviour", "evidence_file": "CONVENTIONS.md",
+     "quote": "Cleaning up how content is presented must never delete what it says."}
+  ],
+  "expected_controls": [
+    {"id": "before-module", "min_score": 5, "max_score": 25,
+     "note": "The REAL pre-era module: passes only preserved-behaviour (its own pinned text on the unchanged surface), fails all five change families. Expected deterministic score 17 (1 of 6 families) under the gen-4 grader."},
+    {"id": "reference", "min_score": 100, "max_score": 100}
+  ],
+  "campaign_loop_overrides": {
+    "max_turns_per_call": 60,
+    "max_wall_minutes_per_call": 40,
+    "reason": "Same rationale as vextrum-v1/hermes-etl (measured binding at 30 on v1); the era task is 4x wider, so the raised budget keeps the measured axis the work, not the clock."
+  },
+  "interpretation": "Underspecified-by-design at scale: a symptom-level task plus discoverable conventions covering a ~470-churn four-commit rework. Every graded family is anchored to a CONVENTIONS.md sentence; five layout-level era changes are ungraded AND NAMED (ungraded_named_dimensions in the grader output) so green never quietly claims them. Score moves in steps of ~17 (6 families). HONEST CAVEATS to publish with any result: same module and repo as vextrum-v1 (this measures the DIFFICULTY axis, not family independence); citation-hygiene rides on a piece-count projection, which assumes the agent extends the module's existing emission granularity rather than rewriting it — a rewrite that changes granularity would fail that family for a debatable reason (flagged, not hidden)."
+}

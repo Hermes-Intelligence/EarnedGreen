@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "arms": {
+    "standard-loop": {
+      "trials": 3,
+      "undefined_oracle_runs": 0,
+      "claimed_done": 3,
+      "claimed_done_with_silent_defects": 0,
+      "silent_defect_rate_mean": 0.0,
+      "silent_defect_rate_per_trial": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distinct_silent_dimensions": []
+    },
+    "vanilla": {
+      "trials": 3,
+      "undefined_oracle_runs": 0,
+      "claimed_done": 3,
+      "claimed_done_with_silent_defects": 3,
+      "silent_defect_rate_mean": 0.25,
+      "silent_defect_rate_per_trial": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "distinct_silent_dimensions": [
+        "gen-annotation-strip",
+        "paren-wrap-reassembly"
+      ]
+    },
+    "vanilla-loop": {
+      "trials": 3,
+      "undefined_oracle_runs": 0,
+      "claimed_done": 3,
+      "claimed_done_with_silent_defects": 1,
+      "silent_defect_rate_mean": 0.0417,
+      "silent_defect_rate_per_trial": [
+        0.125,
+        0.0,
+        0.0
+      ],
+      "distinct_silent_dimensions": [
+        "paren-wrap-reassembly"
+      ]
+    }
+  },
+  "runs": [
+    {
+      "run_id": "20260716-150736203-medi-ny-parser-rework-v1-standard-loop-t1-i2",
+      "arm": "standard-loop",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "pre-submit-gate",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm claimed done and the oracle agrees"
+    },
+    {
+      "run_id": "20260716-151515860-medi-ny-parser-rework-v1-vanilla-loop-t1-i2",
+      "arm": "vanilla-loop",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "public-tests",
+      "oracle_dimensions": 8,
+      "oracle_failing": [
+        "paren-wrap-reassembly"
+      ],
+      "silent_defects": [
+        "paren-wrap-reassembly"
+      ],
+      "silent_defect_rate": 0.125,
+      "oracle_score": 89,
+      "note": "claimed done while the oracle sees failures: these are silent defects"
+    },
+    {
+      "run_id": "20260716-151915880-medi-ny-parser-rework-v1-standard-loop-t3",
+      "arm": "standard-loop",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "pre-submit-gate",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm claimed done and the oracle agrees"
+    },
+    {
+      "run_id": "20260716-152642750-medi-ny-parser-rework-v1-vanilla-t1",
+      "arm": "vanilla",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "public-tests",
+      "oracle_dimensions": 8,
+      "oracle_failing": [
+        "gen-annotation-strip",
+        "paren-wrap-reassembly"
+      ],
+      "silent_defects": [
+        "gen-annotation-strip",
+        "paren-wrap-reassembly"
+      ],
+      "silent_defect_rate": 0.25,
+      "oracle_score": 77,
+      "note": "claimed done while the oracle sees failures: these are silent defects"
+    },
+    {
+      "run_id": "20260716-153852755-medi-ny-parser-rework-v1-standard-loop-t2-i2",
+      "arm": "standard-loop",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "pre-submit-gate",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm claimed done and the oracle agrees"
+    },
+    {
+      "run_id": "20260716-154734201-medi-ny-parser-rework-v1-vanilla-loop-t3-i2",
+      "arm": "vanilla-loop",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "public-tests",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm claimed done and the oracle agrees"
+    },
+    {
+      "run_id": "20260716-155314784-medi-ny-parser-rework-v1-vanilla-t3",
+      "arm": "vanilla",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "public-tests",
+      "oracle_dimensions": 8,
+      "oracle_failing": [
+        "gen-annotation-strip",
+        "paren-wrap-reassembly"
+      ],
+      "silent_defects": [
+        "gen-annotation-strip",
+        "paren-wrap-reassembly"
+      ],
+      "silent_defect_rate": 0.25,
+      "oracle_score": 77,
+      "note": "claimed done while the oracle sees failures: these are silent defects"
+    },
+    {
+      "run_id": "20260716-155713999-medi-ny-parser-rework-v1-vanilla-t2",
+      "arm": "vanilla",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "public-tests",
+      "oracle_dimensions": 8,
+      "oracle_failing": [
+        "gen-annotation-strip",
+        "paren-wrap-reassembly"
+      ],
+      "silent_defects": [
+        "gen-annotation-strip",
+        "paren-wrap-reassembly"
+      ],
+      "silent_defect_rate": 0.25,
+      "oracle_score": 77,
+      "note": "claimed done while the oracle sees failures: these are silent defects"
+    },
+    {
+      "run_id": "20260716-160441087-medi-ny-parser-rework-v1-vanilla-loop-t2-i2",
+      "arm": "vanilla-loop",
+      "case_id": "medi-ny-parser-rework-v1",
+      "claimed_done": true,
+      "visible_signal": "public-tests",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm claimed done and the oracle agrees"
+    }
+  ],
+  "rule": "a defect is SILENT only when the arm's own evidence said done; an arm that reported red has an honest failure, not a silent defect"
+}

@@ -79,11 +79,11 @@ def main() -> None:
     manifest = {
         "schema_version": 1,
         "candidate_id": CANDIDATE.name,
-        "release": "0.2.0",
+        "release": "0.5.0",
         "status": "awaiting-approval",
         "stable_manifest_before_sha256": sha256(REPO / "Runtime/stable/manifest.json"),
         "required_evals": [
-            {"report": "evidence/candidate-eval-summary.json", "minimum_passed": 25, "maximum_failed": 0},
+            {"report": "evidence/candidate-eval-summary.json", "minimum_passed": 30, "maximum_failed": 0},
             {"report": "evidence/stable-release-gate-infrastructure.json", "minimum_passed": 15, "maximum_failed": 0},
         ],
         "files": files,
@@ -91,7 +91,25 @@ def main() -> None:
             "approved": False,
             "approved_by": None,
             "approved_at": None,
-            "notes": "Owner approved promotion under the repositioned framing (cost ladder + governance controls, decisive null on correctness lift). release-gate.ps1 -Mode full runs at -Approve time and is EXPECTED to fail objective-complete (open requirements) for this incremental promotion; the owner-run -Approve uses the recorded operator skip. No gate is weakened.",
+            "notes": (
+                "Owner approved (chat, 2026-07-16: 'Powiedz promuj i zbuduje payload promocyjny + shim do roota' -> 'dawaj'). "
+                "Release 0.5.0 = EARNED GREEN + one-file onboarding. A green suite stops being evidence until the checks "
+                "have proved they discriminate: vacuity gate (admitted only if RED on the pre-change baseline via an "
+                "ASSERTION), necessity probe (revert each hunk, demand a behavioural check reddens), adversarial review "
+                "with a DIVERGENCE WITNESS (an attack counts only when the frozen suite is green on it AND a deterministic "
+                "witness shows it behaving differently from the real implementation - no oracle needed, and no claim about "
+                "which side is right). Checks are authored by a clean-context subagent, which is what makes a fresh clone "
+                "usable; awbp never calls a model, so spend stays where the approval ceiling lives. "
+                "EVIDENCE: 0.4.0's own 100/100/100 retroactively confirmed EARNED (necessity_ratio 1.0 x3, zero uncovered "
+                "hunks, zero calls); end-to-end on an unseen repo with real subagents, an admitted check went GREEN and "
+                "EARNED and a real adversary then DEFEATED that suite by witness divergence. Candidate suite 30/30, "
+                "163/163 unit tests, 0 provider calls. "
+                "SCOPE LIMIT, STATED: this is a MECHANISM release, not a comparative-outcome release. silent_defect_rate is "
+                "NOT measured and there is NO comparison against a well-configured vanilla agent; the medi-ny provenance "
+                "leak must be repaired before that experiment runs. Nothing here claims otherwise - see Setup/earned-green.md. "
+                "release-gate.ps1 -Mode full is EXPECTED to fail objective-complete (open requirements unrelated to this "
+                "increment; same recorded operator skip as 0.2.0/0.3.0/0.4.0). No gate is weakened."
+            ),
         },
         "rollback": "generated automatically by tools/promote-candidate.ps1 if and only if approved",
         "provider_calls_authorized": 0,

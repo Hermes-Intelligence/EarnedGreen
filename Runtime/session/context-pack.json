@@ -1,8 +1,8 @@
 ﻿{
     "schema_version":  1,
-    "generated_at":  "2026-07-14T13:46:43.1184071+02:00",
-    "task":  "Execute exactly six approved sequential Codex calls for campaign 20260714-132536-adaptive-mode-ablation, stop fail-closed, summarize quality time tokens and capability separation",
-    "repo":  "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices",
+    "generated_at":  "2026-07-19T23:08:12.1255112+02:00",
+    "task":  "Improve readability, typography hierarchy, spacing, and consistency of the PŚO Home demo HTML to match Vextrum Workspaces, then visually and functionally verify it.",
+    "repo":  "C:\\Users\\kaczm\\.codex\\.chatgpt-projects\\g-p-6a5b2f6f8600819193325a517e013fc2",
     "fingerprint":  {
                         "task_type":  "feature-or-change",
                         "risk":  "low",

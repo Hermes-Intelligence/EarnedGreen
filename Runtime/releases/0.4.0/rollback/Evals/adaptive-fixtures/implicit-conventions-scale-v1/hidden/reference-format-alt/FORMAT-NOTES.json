@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "purpose": "Prove the hidden grader grades CONTENT for the serialized dimensions (consumer-exposure, consumer-alerts). This overlay keeps the reference substance and changes only serialization choices an agent could legitimately make while editing the two consumers.",
+  "format_matrix": {
+    "exposure_export": {
+      "reference": "list of 'section|as_of|symbol|issuer->ticker|kind' lines",
+      "format_alt": "single newline-joined block of 'symbol :: issuer => ticker [section] {kind @ as_of}' lines (different delimiters, field order and return type)"
+    },
+    "alerts": {
+      "reference": "list of '[channel] symbol kind as of date (venue)' lines",
+      "format_alt": "list of 'KIND!symbol!venue!date -> channel' lines (different delimiters, casing and field order)"
+    }
+  },
+  "unchanged_substance": [
+    "SOURCE_SECTIONS gains the epsilon section; unknown sources still skipped",
+    "VENUE_CHANNELS gains the epsilon channel; unmapped venues still dropped",
+    "resolution ladder, changelog discipline, house flow and row contract untouched"
+  ]
+}

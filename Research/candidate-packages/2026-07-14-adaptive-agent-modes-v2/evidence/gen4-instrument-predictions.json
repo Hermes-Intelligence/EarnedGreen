@@ -1,0 +1,38 @@
+{
+ "schema_version": 1,
+ "registered_at": "2026-07-19",
+ "registered_before": "running derive_relational on any era material (unit tests on synthetic streams excepted — engineering, not measurement)",
+ "context": "Gen-4 instrument: RELATIONAL predicates (gained-kinds subset + per-kind count-direction) designed from the era ladder analysis (era-instrument-analysis-interpretation.json). This validation is EXPLORATORY on old material: no scores, no re-grading of the probe, verdict-grade claims need fresh runs.",
+ "predictions": [
+  {
+   "id": "P-G1",
+   "claim": "derive_relational on era before/after with altformat as the valid variant admits at least one kinds-superset predicate for each vector-chart input (vis-trend, vis-multiline): the reference gained draw kinds over the text-rendered before, and altformat (same lineage) carries them too.",
+   "falsified_if": "no kinds-superset predicate admits for a chart input"
+  },
+  {
+   "id": "P-G2",
+   "claim": "On chart kinds-superset predicates the four probe implementations reproduce the ladder ordering: oracle-loop GREEN (its kindset was a measured superset of the reference), vanilla-configured RED on at least one (it drew fill/rect charts but lacked point-marker kinds — any-gain only), bare vanilla and relation-loop RED on all (no vector charts).",
+   "falsified_if": "oracle-loop fails a chart kinds-superset predicate (the mid-level does not reward the measured real work: gen-4 drawing design is wrong), or vanilla passes one (the mid-level does not separate: too coarse)"
+  },
+  {
+   "id": "P-G3",
+   "claim": "A count-direction predicate admits on cite-run (the citation-hygiene text observable is countable and altformat agrees on direction), and ALL FOUR agent implementations are RED on it — preserving the honest zeros the shipped grader measured (no agent touched citation hygiene).",
+   "falsified_if": "no count-direction predicate admits on cite-run, or any agent passes it (would contradict the raw-stream finding that cite-run streams were identical to before)"
+  },
+  {
+   "id": "P-G4",
+   "claim": "No relational predicate admits on the preserved-behaviour guard inputs (unicode, bare-url, long-prose, legacy, empty): before == after there, so gains are empty and count directions are null — structural, not filtered.",
+   "falsified_if": "any relational predicate admits on a guard input"
+  },
+  {
+   "id": "P-G5",
+   "claim": "Red-on-before is STRUCTURAL for both relational forms: evaluating the admitted relational predicates against the before streams yields RED on every predicate (gains are disjoint from before's kinds by construction; before sits exactly at the count baseline).",
+   "falsified_if": "any admitted relational predicate is GREEN on before"
+  }
+ ],
+ "honesty_rails": [
+  "this is a NEW experiment on OLD material; outcomes are labeled exploratory in all reporting",
+  "the four era solutions' compliance with conventions remains undecidable from one reference; gen-4 partial-credit levels measure PROGRESS DIRECTION, not compliance",
+  "text-semantic dimensions without a countable observable stay NAMED unverified — gen-4 does not claim to close that boundary"
+ ]
+}

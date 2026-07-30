@@ -19,8 +19,21 @@ NAVY=colors.HexColor("#132238"); BLUE=colors.HexColor("#2364AA"); CYAN=colors.He
 def inline(text):
     escaped=html.escape(text)
     escaped=re.sub(r"\[([^]]+)\]\((https?://[^)]+)\)",lambda m:f'<link href="{m.group(2)}" color="#2364AA"><u>{m.group(1)}</u></link>',escaped)
-    escaped=re.sub(r"`([^`]+)`",r'<font name="Courier" color="#173F5F">\1</font>',escaped)
+    # Relative links (sibling files) cannot be clickable in a standalone PDF:
+    # render the label alone instead of leaking raw markdown brackets.
+    escaped=re.sub(r"\[([^]]+)\]\((?!https?://)[^)]+\)",r"\1",escaped)
+    # Code spans are extracted to placeholders BEFORE emphasis: a literal
+    # asterisk inside `codex/*` must never open an <i> that then closes across
+    # the </font> boundary (reportlab rejects crossed tags outright).
+    spans=[]
+    def _stash(m):
+        spans.append(m.group(1)); return f"\x00{len(spans)-1}\x00"
+    escaped=re.sub(r"`([^`]+)`",_stash,escaped)
     escaped=re.sub(r"\*\*([^*]+)\*\*",r'<b>\1</b>',escaped)
+    # Single-asterisk emphasis runs AFTER bold so **x** is not eaten as *…*.
+    escaped=re.sub(r"(?<!\*)\*([^*\n]+)\*(?!\*)",r'<i>\1</i>',escaped)
+    for index,span in enumerate(spans):
+        escaped=escaped.replace(f"\x00{index}\x00",f'<font name="Courier" color="#173F5F">{span}</font>')
     return escaped
 
 
@@ -39,11 +52,14 @@ def styles():
     }
 
 
-def header_footer(canvas,doc):
+CANDIDATE_FOOTER="Candidate evidence - not Stable guidance"
+
+
+def header_footer(canvas,doc,footer=CANDIDATE_FOOTER):
     canvas.saveState(); w,h=A4
     canvas.setFillColor(NAVY); canvas.rect(0,h-13*mm,w,13*mm,fill=1,stroke=0)
     canvas.setFillColor(colors.white); canvas.setFont("Helvetica-Bold",8); canvas.drawString(18*mm,h-8.2*mm,"AGENTIC WORK BEST PRACTICES")
-    canvas.setFillColor(MUTED); canvas.setFont("Helvetica",7.5); canvas.drawString(18*mm,9*mm,"Candidate evidence - not Stable guidance")
+    canvas.setFillColor(MUTED); canvas.setFont("Helvetica",7.5); canvas.drawString(18*mm,9*mm,footer)
     canvas.drawRightString(w-18*mm,9*mm,f"{doc.page}"); canvas.restoreState()
 
 
@@ -80,17 +96,20 @@ def markdown_story(path):
     return story
 
 
-def build(source,output):
+def build(source,output,footer=CANDIDATE_FOOTER):
     output.parent.mkdir(parents=True,exist_ok=True)
     doc=BaseDocTemplate(str(output),pagesize=A4,rightMargin=18*mm,leftMargin=18*mm,topMargin=20*mm,bottomMargin=16*mm,title=source.stem,author="AgenticWorkBestPractices")
-    doc.addPageTemplates(PageTemplate(id="main",frames=[Frame(doc.leftMargin,doc.bottomMargin,doc.width,doc.height,id="body")],onPage=header_footer))
+    doc.addPageTemplates(PageTemplate(id="main",frames=[Frame(doc.leftMargin,doc.bottomMargin,doc.width,doc.height,id="body")],onPage=lambda c,d:header_footer(c,d,footer)))
     doc.build(markdown_story(source))
 
 
 def main():
     build(CANDIDATE/"report.md",CANDIDATE/"report.pdf")
-    setup=CANDIDATE/"promotion/payload/Setup/adaptive-modes"
-    build(setup.with_suffix(".md"),setup.with_suffix(".pdf"))
+    # Payload docs become Stable on promotion, so they must not carry the
+    # candidate-evidence footer.
+    payload=CANDIDATE/"promotion/payload/Setup"
+    for stem in (payload/"adaptive-modes", payload/"benchmarking/verification-loop-results"):
+        build(stem.with_suffix(".md"),stem.with_suffix(".pdf"),footer="Stable guidance - promoted release")
 
 
 if __name__=="__main__": main()

@@ -108,7 +108,7 @@ def filled_spec(root: Path) -> dict:
 
 def base_evidence(ledger: dict) -> dict:
     return {
-        "mode": "mode-2-routed",
+        "mode": "standard",
         "capabilities": ["minimal-core", "precision-router", "objective-ledger", "focused-verification", "pre-submit-gate", "spec-synthesis"],
         "requirements": [
             {"requirement_id": row["id"], "status": "verified",
@@ -130,7 +130,7 @@ class ClarityClassificationTests(unittest.TestCase):
             with self.subTest(prompt=prompt):
                 result = route(prompt)
                 self.assertEqual("underspecified", result["analysis"]["axes"]["clarity"])
-                self.assertGreaterEqual(result["mode_rank"], 2, "underspecified mutating work floors at mode-2")
+                self.assertGreaterEqual(result["mode_rank"], 1, "underspecified mutating work runs in standard or above")
                 self.assertIn("spec-synthesis", result["capabilities"])
 
     def test_well_specified_prompts(self) -> None:
@@ -152,10 +152,9 @@ class ClarityClassificationTests(unittest.TestCase):
         self.assertEqual("underspecified", result["analysis"]["axes"]["clarity"])
         self.assertIn("spec-synthesis", result["capabilities"])
 
-    def test_forced_low_modes_never_receive_spec_synthesis(self) -> None:
-        for arm in ("vanilla", "mode-1-lean"):
-            result = route(UNDERSPECIFIED_PROMPTS[0], forced_mode=arm)
-            self.assertNotIn("spec-synthesis", result["capabilities"], arm)
+    def test_forced_lite_never_receives_spec_synthesis(self) -> None:
+        result = route(UNDERSPECIFIED_PROMPTS[0], forced_mode="lite")
+        self.assertNotIn("spec-synthesis", result["capabilities"])
 
     def test_clarity_never_changes_the_human_gate(self) -> None:
         result = route(UNDERSPECIFIED_PROMPTS[0])
@@ -381,7 +380,7 @@ class PrepareContextSpecFirstTests(unittest.TestCase):
             result = prepare(root / "task.md", root, output, [], None)
             decision = json.loads((output / "mode-decision.json").read_text(encoding="utf-8"))
             self.assertIn("spec-synthesis", decision["capabilities"])
-            self.assertGreaterEqual(decision["mode_rank"], 2)
+            self.assertGreaterEqual(decision["mode_rank"], 1, "spec synthesis runs in standard or above")
             for name in ("spec.json", "spec.md", "spec_synthesis.py", "objective_compiler.py", "risk-discovery.md"):
                 self.assertTrue((output / name).is_file(), name)
             spec = json.loads((output / "spec.json").read_text(encoding="utf-8"))

@@ -1,0 +1,82 @@
+{
+  "schema_version": 2,
+  "id": "implicit-conventions-scale-v1",
+  "version": 1,
+  "status": "candidate-not-authoritative",
+  "fixture_class": "underspecified-by-design",
+  "purpose": "Scale-axis fixture: the same underspecified-task / implicit-conventions design as implicit-conventions-v1, but over a workspace that EXCEEDS single-pass comprehension (~57 Python modules, ~3.9k lines, ~130KB incl. reference data, decoy stubs and a misleading PLAN.md). Four fixtures in a row showed the benchmark model scores 100 under a fair semantic grader whenever the codebase fits one comprehension pass; the owner's real pain (HermesAirflow DC WIRE) comes from conventions and dependencies spread across MORE code than one pass can hold. Every hidden expectation is evidence-anchored, and the evidence for each load-bearing convention deliberately lives >= 2 modules away from where the new code must respect it; two dimensions are only visible by reading two distant files together. The fixture tests whether scaffolding (spec-first, impact-map, checkpoints) buys correctness at scale, i.e. whether prioritized exploration under a bounded turn/wall budget still discovers distant conventions.",
+  "public_test": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_public.py", "-v"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": ["basic-functionality", "row-contract", "order-dependency", "token-guard", "point-in-time", "state-identity", "silent-zero-rows", "changelog-discipline", "migration-path", "run-order", "venue-config", "consumer-exposure", "consumer-alerts", "scope-judgment"],
+  "serialized_output_dimensions": ["consumer-exposure", "consumer-alerts"],
+  "serialized_output_note": "These dimensions grade rendered export/alert lines. The hidden grader checks them SEMANTICALLY (token presence in any serialization: the epsilon symbol and the resolved ticker in the export, the halted symbol in the alerts). Because agents demonstrably restructure a consumer while editing it (the live v4 main stage), admission runs the format-adversary: hidden/reference-format-alt rewrites both consumers with different delimiters, field order and return shapes and MUST still score 100.",
+  "format_bearing_files": ["src/consumers/exposure_export.py", "src/consumers/alerts.py"],
+  "distance_map": {
+    "description": "Where each convention's evidence lives vs where the new code must respect it. Distances are in module hops through directories the obvious happy path never touches.",
+    "migration-path": "evidence in src/core/normalize.py (MIGRATION note) + src/consumers/run_health.py (_LEGACY_SOURCES grandfather list); applied in src/sources/epsilon_feed.py. The nearest template (alpha_feed, alphabetically first) is the WRONG one; the correct templates (gamma/delta) are only identifiable by reading the two distant files together.",
+    "changelog-discipline": "evidence split across src/core/changelog.py (closed KINDS vocabulary, append-only) + src/consumers/audit_trail.py (replay assertion that enforces the shape); applied in the epsilon kind mapping. Alpha's restate mapping is keyed off a numeric rev field epsilon does not have, so it does not transfer by copying.",
+    "run-order": "evidence in src/scheduler/registry.py + src/scheduler/run_resolution.py (why a late shell silently vanishes from exposure); applied by creating src/scheduler/run_epsilon.py and placing it in the sources block.",
+    "venue-config": "evidence in src/reference/venues.py + src/consumers/venue_dashboard.py (silent skip); applied by adding the epsilon VENUES entry.",
+    "consumer-exposure": "evidence in src/consumers/exposure_export.py (SOURCE_SECTIONS + silent skip); applied by adding the epsilon section.",
+    "consumer-alerts": "evidence in src/consumers/alerts.py (VENUE_CHANNELS + silent drop); applied by adding the epsilon channel.",
+    "scope-judgment": "evidence in src/pipeline.py (registration scoped to working parsers) + RELEASES.md (truthful history); the decoys are 10 scrape-only stub sources and PLAN.md, which claims all fifteen venues are LIVE, calls the half-written sigma stub the modern template, and instructs registering the full roster."
+  },
+  "convention_anchors": [
+    {"check_id": "basic-functionality", "evidence_file": "task.md", "quote": "producing the same events table and change log as the existing sources"},
+    {"check_id": "row-contract", "evidence_file": "src/core/rows.py", "quote": "downstream consumers index event rows by POSITION, not by name"},
+    {"check_id": "order-dependency", "evidence_file": "src/core/guard.py", "quote": "scrub_tokens must run BEFORE resolve.resolve_issuer"},
+    {"check_id": "token-guard", "evidence_file": "src/core/guard.py", "quote": "They must never be used to resolve an issuer."},
+    {"check_id": "point-in-time", "evidence_file": "src/core/dates.py", "quote": "as_of must ALWAYS be the knowledge date, published_at, never effective_at"},
+    {"check_id": "state-identity", "evidence_file": "src/core/identity.py", "quote": "a lifecycle change yields a NEW event row while an unchanged record keeps the same id"},
+    {"check_id": "silent-zero-rows", "evidence_file": "src/sources/alpha_feed.py", "quote": "a source must never load zero rows silently"},
+    {"check_id": "changelog-discipline", "evidence_file": "src/core/changelog.py", "quote": "existing rows are never updated and never deleted"},
+    {"check_id": "changelog-discipline", "evidence_file": "src/core/changelog.py", "quote": "kinds are a CLOSED vocabulary"},
+    {"check_id": "changelog-discipline", "evidence_file": "src/consumers/audit_trail.py", "quote": "replay hard-fails on an unknown kind, a missing field or a gap in seq"},
+    {"check_id": "migration-path", "evidence_file": "src/core/normalize.py", "quote": "Every NEW source starts on house_flow; never copy the inline flow out of alpha_feed or beta_feed"},
+    {"check_id": "migration-path", "evidence_file": "src/consumers/run_health.py", "quote": "sources still on the legacy inline path (alpha, beta) are grandfathered"},
+    {"check_id": "run-order", "evidence_file": "src/scheduler/registry.py", "quote": "every ingesting source has a thin shell module scheduled in the sources block, BEFORE run_resolution"},
+    {"check_id": "run-order", "evidence_file": "src/scheduler/run_resolution.py", "quote": "a source shell scheduled after resolution contributes nothing to exposure until the next day"},
+    {"check_id": "venue-config", "evidence_file": "src/reference/venues.py", "quote": "every ingesting source must have a VENUES entry"},
+    {"check_id": "venue-config", "evidence_file": "src/consumers/venue_dashboard.py", "quote": "venues without a registry entry are skipped"},
+    {"check_id": "consumer-exposure", "evidence_file": "src/consumers/exposure_export.py", "quote": "every ingesting source must be added to SOURCE_SECTIONS"},
+    {"check_id": "consumer-alerts", "evidence_file": "src/consumers/alerts.py", "quote": "every venue that can halt trading needs a channel in VENUE_CHANNELS"},
+    {"check_id": "scope-judgment", "evidence_file": "src/pipeline.py", "quote": "Only sources with a working parser are registered here; scrape-only stubs stay unregistered until their parser lands."}
+  ],
+  "process_ground_truth": {
+    "description": "Ground truth for process_metrics.py: the complete set of downstream consumer/registry files a full impact analysis must enumerate, and the files a complete solution must create or edit. Used to score consumer enumeration/edit completeness and the self-attestation gap independently of the outcome score.",
+    "consumers": ["src/consumers/positions_report.py", "src/consumers/venue_dashboard.py", "src/consumers/exposure_export.py", "src/consumers/alerts.py", "src/consumers/audit_trail.py", "src/consumers/run_health.py", "src/scheduler/registry.py"],
+    "consumer_dimensions": ["venue-config", "consumer-exposure", "consumer-alerts", "run-order"],
+    "required_edits": ["src/sources/epsilon_feed.py", "src/pipeline.py", "src/reference/venues.py", "src/scheduler/registry.py", "src/scheduler/run_epsilon.py", "src/consumers/exposure_export.py", "src/consumers/alerts.py"]
+  },
+  "campaign_loop_overrides": {
+    "max_turns_per_call": 40,
+    "max_wall_minutes_per_call": 50,
+    "reason": "Scale fixture: at the default 18 turns / 25 minutes the workspace cannot even be read, so a low vanilla score would measure truncation, not prioritization. Raising both budgets keeps the measured axis 'does scaffolding buy correct prioritization at scale', not 'who ran out of clock'."
+  },
+  "scale_profile": {
+    "python_modules": 57,
+    "python_lines_approx": 2550,
+    "total_lines_approx": 3900,
+    "total_bytes_approx": 133000,
+    "approx_content_tokens": 33000,
+    "decoys": "10 scrape-only stub sources (sigma..omicron, the medi_XX pattern: fetch descriptor + capture dossier, load_events raises NotImplementedError; sigma additionally carries a wrong-pattern draft parser sketch that PLAN.md calls the template) + PLAN.md claiming all fifteen venues are LIVE + a rebuild=True backfill instruction that contradicts the append-only discipline",
+    "single_pass_argument": "An exhaustive read is ~33k content tokens across 72 files; within an interactive 18-turn/25-minute run (the live clarity run consumed 121k tokens and 84 seconds on a 12-file, 52KB workspace) exhaustive coverage plus implementation is not realistic, and the campaign_loop_overrides raise the budget so the binding constraint is prioritization, not the clock."
+  },
+  "postmortem_class_coverage": {
+    "covered": {
+      "silent-failure": "silent-zero-rows plus three deliberate silent-skip consumers (dashboard, export, alerts): missing registration produces no error anywhere",
+      "domain-invariants": "changelog-discipline (append-only, closed vocabulary), point-in-time (knowledge date), state-identity (state hash: change=new row, unchanged=skip)",
+      "ambiguity-defer": "token-guard: ambiguous tokens are masked, never guessed into issuers; unresolved tickers stay in the venue bucket",
+      "distribution-coverage": "scope-judgment: the agent must judge real scope from code (registry docstring, RELEASES.md, stub modules) against an overstated PLAN.md",
+      "hidden-ordering": "run-order (shell before resolution) and order-dependency (scrub before resolve): both degrade silently when violated"
+    },
+    "future_fixture_candidates": ["verifier-validity (a broken cross-check as confidence arbiter)", "fresh-deploy (cold-start from zero)", "artifact-concurrency (double-writer on a results artifact)"]
+  },
+  "expected_controls": [
+    {"id": "mode-1-local", "min_score": 8, "max_score": 25},
+    {"id": "plausible-cold-pass", "min_score": 40, "max_score": 60, "models": "the modeled strong single-pass agent on a workspace it cannot exhaustively read: it reads task.md, the sample, PLAN.md, the nearest live source (alpha) and the pipeline registry, translates the alpha template faithfully (getting every template-local convention right: loud errors, published-date keying, scrub-before-resolve, row contract, state dedup) and misses exactly the seven distance-driven dimensions: migration-path (copied the legacy template), changelog-discipline (closed vocabulary lives two modules away and alpha's rev-keyed restate mapping does not transfer), run-order, venue-config, consumer-exposure, consumer-alerts (three subtrees it never opened) and scope-judgment (followed PLAN.md's roster instruction). Expected 48. This control is the fixture's cheap deterministic headroom proxy for the paid canary."},
+    {"id": "reference", "min_score": 100, "max_score": 100}
+  ],
+  "interpretation": "Controls are deterministic capability proxies, not claims about future model outcomes. The plausible-cold-pass control lands mid-band (expected 48) across seven independent distance-driven dimensions, so the fixture has wide discriminating headroom precisely on the axis the four prior fixtures could not reach: conventions whose evidence a single comprehension pass does not surface. Because the task is underspecified BY DESIGN, admission verifies convention_anchors (every hidden expectation quoted from a discoverable in-repo convention) instead of task-sentence pinning. A null result at scale (the live vanilla arm still scoring 100 under the raised turn budget) would mean the model class prioritizes exploration well enough that scaffolding buys no correctness lift at any tested size, repositioning the environment as guardrails plus cost discipline rather than a correctness amplifier."
+}

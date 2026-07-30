@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "what_this_variant_is": "The era's after-state (081b23d) with the watermark advance rewritten from a single INSERT..ON CONFLICT upsert into an UPDATE-then-INSERT pair (altformat_replace in fixture-contract.json). Same semantics on every convention: the watermark still advances to the max as_of seen, exactly once per run that saw new events.",
+  "pre_reconciliation_result": {
+    "interpretations": "identical to the reference on every anchored convention; the variant varies only the SQL write pattern used to persist the watermark, which the conventions deliberately do not specify"
+  },
+  "interpretation_differences_after_pinning": [],
+  "structural_differences": [
+    "watermark persisted via UPDATE-then-INSERT instead of a single upsert statement"
+  ],
+  "why_it_must_score_100": "A grader red on this variant would be pinning the watermark write VERB or its exact statement count rather than the fact that the watermark advances — the over-constraint class. The driver additionally normalizes all watermark writes to one event kind, and the derivation-time variant filter kills exact-count pins the variant disagrees with; this admission check proves the shipped grader inherits that agnosticism."
+}

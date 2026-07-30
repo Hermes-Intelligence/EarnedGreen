@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "purpose": "Second hidden reference authored from the public task text only, used by the fixture admission gate to detect spec ambiguity before spend.",
+  "authoring_protocol": "Written from task.md alone, choosing the alternative defensible interpretation at every identified decision point, then run against the hidden grader.",
+  "pre_reconciliation_result": {
+    "interpretations": {
+      "registry-miss": "record unknown_entity_type and reject with ValueError",
+      "handler-error": "let the handler exception propagate to the caller",
+      "handler-result-type": "return the handler result verbatim without type-checking",
+      "type-lookup-trimming": "strip the type once and use the trimmed value for lookup and the envelope",
+      "rejection-telemetry": "count malformed_event for handler errors as well",
+      "output-aliasing": "protect only the caller's input; the returned attributes may alias handler output",
+      "exporter-scope": "leave exporter/serializer on the legacy parse_record path"
+    },
+    "grader_score": 55,
+    "failed_dimensions": ["open-world-unicode", "malformed-telemetry", "degraded-path", "exporter-propagation", "exact-type-match"],
+    "conclusion": "A defensible cold reading of the task text failed the grader, so those decisions were genuine ambiguities. task.md v3 pins each one explicitly (see fixture-contract.json decision_points); this alt was brought to the pinned semantics at zero provider cost."
+  },
+  "reconciliation": "task.md v3 pins every decision point; the alt was updated to the pinned semantics but keeps an independent structure.",
+  "interpretation_differences_after_pinning": "None by design: both references implement the pinned semantics. Remaining differences are structural only.",
+  "structural_differences": [
+    "validation via an ordered rule table instead of inline conditionals",
+    "type resolution and handler-error containment factored into a _resolve helper",
+    "str.format-based consumers, serializer and exporter instead of f-strings",
+    "differently worded README documenting the same extension path, degraded fallback and compatibility behavior"
+  ]
+}

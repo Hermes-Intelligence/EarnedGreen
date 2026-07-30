@@ -3,7 +3,7 @@ param(
     [Parameter(ValueFromRemainingArguments = $true)][string[]]$RemainingArgs = @()
 )
 # Thin launcher for the report-only vault hygiene scan. All arguments pass
-# straight through to tools/adaptive/vault_hygiene.py (see --help there).
+# straight through to awbp/vault_hygiene.py (see --help there).
 # The scan NEVER modifies repository content; it writes a dated JSON+MD report.
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
@@ -17,5 +17,5 @@ if ($python) {
     $pythonExe = $py.Source
     $prefix = @('-3')
 }
-& $pythonExe @prefix (Join-Path $root 'tools/adaptive/vault_hygiene.py') @RemainingArgs
+& $pythonExe @prefix (Join-Path $root 'awbp/vault_hygiene.py') @RemainingArgs
 exit $LASTEXITCODE

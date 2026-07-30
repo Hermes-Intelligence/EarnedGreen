@@ -1,0 +1,138 @@
+{
+  "schema_version": 2,
+  "id": "vextrum-edition-rework-v1",
+  "version": 1,
+  "status": "candidate-not-authoritative",
+  "fixture_class": "underspecified-by-design",
+  "proprietary": true,
+  "workspace_source": "local-git-copy",
+  "purpose": "Task family #2, and the FIRST non-Python fixture. Every mechanism in this environment (hunk-revert necessity probe, vacuity gate, divergence witness) claims to be LANGUAGE-AGNOSTIC because it works on the diff rather than an AST; that claim ships in Stable 0.5.0's docs and has never been tested outside Python. This fixture tests it. The task is the REAL, underspecified edition-rendering rework shipped in VextrumFrontend across 778c755^..225e1ef ('vector chart and others' -> 'better report formatting' -> 'citation fixes', 306 insertions / 54 deletions): the before-state hands agent-authored prose to the renderer verbatim, so runs of adjacent citation links arrive as a digit-wall and raw ordered-list markers survive into the deliverable. The rework added a deterministic text clean-up pass ahead of rendering. Pure string logic: fully offline, zero provider/model calls, zero npm dependencies. PROPRIETARY ISOLATION: the module the agent edits is a real Vextrum subtree and is NEVER committed to this package; every variant materializes at grade time from a LOCAL VextrumFrontend git ref (see local_source + materialize). Only the grader, task, conventions, the recording jspdf stub and the synthetic edition input live here.",
+  "public_test": [
+    "node",
+    "--test",
+    "tests/public.test.js"
+  ],
+  "context_tags": ["rendering", "documents", "pdf", "frontend"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": [
+    "citation-dedupe",
+    "citation-cap-three",
+    "citation-run-separated",
+    "citation-dedupe-block",
+    "enum-marker-normalized",
+    "encoding-preserved",
+    "url-integrity",
+    "prose-preserved"
+  ],
+  "serialized_output_dimensions": [],
+  "local_source": {
+    "repo_dir": "VextrumFrontend",
+    "source_path": "src/lib/editionPdf.js",
+    "target_path": "src/editionPdf.js",
+    "before_ref": "778c755^",
+    "after_ref": "225e1ef",
+    "rework_commits": [
+      "778c755",
+      "707587c",
+      "225e1ef"
+    ],
+    "normalizations": [],
+    "normalization_note": "None needed: editionPdf.js has ZERO top-level imports (verified at both refs). Its only dependencies are lazy: `await import(\"jspdf\")`, which resolves to the fixture's recording stub in public/node_modules/jspdf, and `await import(\"./editionPdfAssets\")`, which the module already wraps in try/catch and treats as optional.",
+    "altformat_replace": [
+      {
+        "find": "return out.slice(0, 3).join(\", \")",
+        "replace": "return out.slice(0, 3).join(\" · \")"
+      }
+    ],
+    "altformat_note": "A genuinely different-but-valid solution: the same deduped, capped-at-3 citation run, separated with a middot instead of a comma. Nothing in the conventions mandates a comma -- they require the citations to be visually separated. If the grader rejects this, it is pinning one implementation's formatting rather than the documented behaviour. altformat_replace (not _append) because the choice lives in an INTERNAL function no wrapper can reach."
+  },
+  "materialize": {
+    "base": "before",
+    "hidden/reference": "after",
+    "hidden/reference-alt": "after-altformat",
+    "negative-controls/before-module": "before"
+  },
+  "grading_surface": {
+    "api": "buildEditionDoc(edition, meta)",
+    "why": "The reworked helpers are INTERNAL and unexported. Grading them by name would require telling the agent their names -- which is exactly the provenance leak repaired in medi-ny v2, where build_sample.py's docstring named the fix's own functions and handed every arm the shape of the fix. The agent gets discoverable CONVENTIONS and nothing else.",
+    "recording_stub": "public/node_modules/jspdf/ resolves instead of the real library (the module imports the bare specifier 'jspdf', and node resolves it from the module's own directory). It records every text() call: what the module DECIDED to emit. The stub publishes the record on globalThis, because a driver importing 'jspdf' from its own directory would get a second module instance and record nothing.",
+    "split_is_identity": "splitTextToSize is deliberately the identity function. The real one wraps by measured font width, which would let the STUB's approximation decide where lines break -- and then a 'URL was split' failure could be the stub's fault rather than the module's. Layout is not graded; behaviour is.",
+    "not_graded": "Long-paragraph chunking. Its only observable effect here is on line positions, which depend on the stub's text-width approximation, so the dimension would measure the STUB rather than the module. A dimension that cannot be attributed to the code under test is not a dimension."
+  },
+  "convention_anchors": [
+    {
+      "check_id": "citation-dedupe",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "A citation must not be rendered twice in the same run."
+    },
+    {
+      "check_id": "citation-cap-three",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "At most three citations are rendered in a run."
+    },
+    {
+      "check_id": "citation-run-separated",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "Citations in a run are visually separated"
+    },
+    {
+      "check_id": "citation-dedupe-block",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "These rules apply wherever prose is rendered"
+    },
+    {
+      "check_id": "enum-marker-normalized",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "The marker style\n  the source happened to use must not survive into the deliverable as literal text."
+    },
+    {
+      "check_id": "encoding-preserved",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "Accented Latin text, curly quotes and dashes must survive to\n  the page"
+    },
+    {
+      "check_id": "url-integrity",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "Not by wrapping, not by splitting, not by punctuation handling."
+    },
+    {
+      "check_id": "prose-preserved",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "Cleaning up how text is presented must never delete what it says."
+    }
+  ],
+  "expected_controls": [
+    {
+      "id": "before-module",
+      "min_score": 15,
+      "max_score": 40,
+      "note": "The REAL pre-rework module (778c755^). Passes the three green-before-green-after anchors (encoding-preserved, url-integrity, prose-preserved) because it never cleans anything, so it never over-cleans either; FAILS the five citation/enumeration dimensions because it has no text clean-up pass at all. Deterministic score 25 on the committed edition input — a history-grounded negative control."
+    },
+    {
+      "id": "reference",
+      "min_score": 100,
+      "max_score": 100
+    }
+  ],
+  "check_discrimination_evidence": {
+    "note": "Every declared dimension has a WITNESS that reddens it. Anchors that pass in both the before and after states would otherwise be decoration, and one of them was: url-integrity originally tested the URL against the CONCATENATION of all tokens, which reassembles a URL that was torn apart, so it was structurally incapable of failing. Mutation testing caught it (see benchmark-fixture / earned-green: a check must prove it discriminates before it counts).",
+    "witnesses": {
+      "citation-dedupe": "before (778c755^) renders ['1','1','2','3','4']",
+      "citation-cap-three": "before renders 4 distinct citations",
+      "citation-run-separated": "before renders the run with no separator",
+      "citation-dedupe-block": "before renders ['7','7'] in a section body",
+      "enum-marker-normalized": "before renders literal '(1)' '(2)' '(3)'",
+      "encoding-preserved": "mutant: normalize('NFD') + strip combining marks -> RED",
+      "url-integrity": "mutant: tokeniser splits on /[\\s.]+/ -> RED (only after the check was repaired)",
+      "prose-preserved": "mutant: safe() truncates every string to 30 chars -> RED"
+    }
+  },
+  "campaign_loop_overrides": {
+    "max_turns_per_call": 60,
+    "max_wall_minutes_per_call": 40,
+    "reason": "The editable workspace is a real ~291-line proprietary renderer whose correctness depends on documented house conventions; a raised turn/wall budget keeps the measured axis 'does the environment find the documented conventions' rather than 'who ran out of clock reading the module'.",
+    "turn_budget_evidence": "Raised from 30 to 60 on 2026-07-17 BEFORE the restart, because 30 was measured BINDING: vanilla finished at exactly 30 turns, one standard-loop trial died at 31 with terminal_reason=max_turns. At 30 the campaign measures 'who fits in the budget', which this override's own rationale exists to prevent. Arm-neutral; all runs made at 30 are discarded, never pooled. See evidence/step7-max-turns-decision.json, including the disclosure that two scores had already been seen when the call was made."
+  },
+  "interpretation": "Controls are deterministic capability proxies. The before-module control is the actual historical bug (no text clean-up pass), so it lands at 25 across five independent citation/enumeration dimensions while passing all three regression anchors — wide discriminating headroom on the exact axis the rework changed, with the ground truth taken from git history rather than authored. Because the task is underspecified BY DESIGN, admission verifies convention_anchors (every hidden expectation quoted from a discoverable in-workspace convention) instead of task-sentence pinning. HONEST CAVEAT to publish with any result: this task is text normalization, the SAME SHAPE as medi-ny. It varies three axes — different repo, different language, different runner — but not the kind of thinking required. It is a language-agnosticism test and a partial replication, not a fully independent second task family."
+}

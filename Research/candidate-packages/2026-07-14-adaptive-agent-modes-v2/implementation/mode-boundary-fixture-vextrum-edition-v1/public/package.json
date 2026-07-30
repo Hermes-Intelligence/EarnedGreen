@@ -1,0 +1,6 @@
+{
+  "name": "vextrum-edition-fixture",
+  "private": true,
+  "type": "module",
+  "description": "Isolated edition-document builder. Tests run with node's built-in runner: node --test"
+}

@@ -1,0 +1,18 @@
+{
+ "schema_version": 1,
+ "observed_at": "2026-07-20",
+ "companion_of": "dataflow3-verdict-predictions.json",
+ "campaign": "20260720 dataflow3-canary (1 call spent of the approved 13; 12 unspent — the registered brake mandates stopping)",
+ "result": {
+  "bare_vanilla_canary": {"score": 100, "valid": true,
+   "note": "one-shot, full convention set, under the FROZEN v2.3 instrument that graded the pre-era module 14 and three prior real solutions 43-100"}
+ },
+ "predictions_settled": {
+  "P-F1": "THE BRAKE FIRED AS REGISTERED — canary scored exactly 100, so the main stage was not run. The family SATURATES for one-shot under the valid instrument (at least at observable rates given the measured spread: fresh bare 100 here, prior bare samples 57/43-grade, configured 100/43/43, loop 100/100/100).",
+  "P-F2": "NOT MEASURABLE ON THIS FIXTURE — the verdict prediction never ran. The recipe's HARD-TASK leg failed on family 2: a task a bare frontier model can one-shot cannot host a forcing-value verdict (the hermes-etl lesson, reproduced at four-module scale).",
+  "P-F3/P-F4": "not run"
+ },
+ "family_2_final_verdict": "UNTESTABLE-AS-HARD: after three instrument generations made the family validly gradable, it turned out to sit inside (variance-dominated) one-shot competence. The 0.6.2 decisive claim REMAINS SCOPED TO FAMILY 1. The exploratory consistency signal (loop 3/3 = 100 vs configured 1/3 under the final instrument, from the v2 campaign's workspaces) stays on record as suggestive and unverdictable here.",
+ "programme_reading": "Coherent with the whole measured arc: easy/specified tasks saturate (hermes-etl, now dataflow-with-SCHEMA.md); the forcing value only shows on tasks that reliably break one-shot (the 470-churn underspecified JS era). Difficulty is the scarce ingredient, and ~190 churn across four modules with a documented schema is not enough of it for a frontier model. Candidate difficulty levers for a future family-2 attempt: wider eras, less schema disclosure (at the fairness boundary), or compound multi-era tasks.",
+ "spend_accounting_family_2_total": "27 calls spent across three campaigns (13 + 13 + 1); 12 approved-but-unspent lapse with this record"
+}

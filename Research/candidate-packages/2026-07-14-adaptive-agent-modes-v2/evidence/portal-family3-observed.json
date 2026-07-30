@@ -1,0 +1,30 @@
+{
+ "schema_version": 1,
+ "observed_at": "2026-07-20",
+ "companion_of": "portal-family3-predictions.json",
+ "campaigns": {"difficulty-canary": "portal-canary (1 call, bare vanilla 57 -> P-C2 gray zone -> owner chose main)", "main": "portal-main (12 calls)"},
+ "spend": "13 calls total on family 3 (of the 15 plan ceiling); every call inside per-stage approval records",
+ "results": {
+  "bare-vanilla-canary": 57,
+  "vanilla-configured": {"trials": [29, 71, 29], "mean": 43.0},
+  "oracle-loop": {"trials": [71, 86, 57], "mean": 71.3, "outcomes": ["iteration-budget", "iteration-budget", "no-progress"]},
+  "all_six_valid": true
+ },
+ "predictions_settled": {
+  "P-C2": "fired as registered (57 in the 56-99 band); the owner took the proceed decision explicitly",
+  "P-3V1": "CONFIRMED — THE REPLICATION VERDICT: oracle-loop mean 71.3 vs vanilla-configured mean 43.0; gap 28.3 > the 16-pt same-arm variance band; all six trials valid. The decisive recipe generalizes to a SECOND measured-hard family, on a third repo/domain, under an instrument that admitted PASS on its first build.",
+  "P-3V2": "partially confirmed — 2 of 3 loop trials progressed every iteration (iteration-budget outcomes, rising scores 71/86); one stalled no-progress at the bare-canary level (57)",
+  "P-3V3": "CONFIRMED — preserved-behaviour green in every trial of both arms"
+ },
+ "texture": {
+  "consistency_pattern_again": "no loop trial fell below the bare-canary level (57), while vanilla-configured fell BELOW bare vanilla in 2 of 3 trials (29, 29) — conventions in the workspace did not stabilize the unforced arm; the loop's floor is the measured value, exactly as on families 1 and 2-exploratory",
+  "forcing_visible": "matrix-enrichment: green in 2/3 loop trials vs 1/3 configured; the loop's iteration-budget trials climbed 57->71->86 territory against red predicates",
+  "universal_neglect_family": "coverage-tolerance red in all 7 runs incl. the canary — stream-diffed on the BEST loop trial: its get_coverage_report returns {} even for a dict result_summary (never reads the stored report) — a genuine, located defect, not an instrument wall; the family-1 citation-hygiene pattern repeated",
+  "difficulty_placement": "family 3 sits between the JS era (bare 14-33) and dataflow (bare 100): bare 57, configured mean 43 (high variance), loop mean 71.3 — hard enough to host a verdict, soft enough that the loop did not reach 100 within 3 iterations"
+ },
+ "honest_caveats": [
+  "gray-zone difficulty (P-C2) resolved by explicit owner decision, recorded in the approval",
+  "distributions overlap at 71; the claim rests on the pre-registered mean-gap rule, and the verdict-grade evidence base is 3 trials per arm",
+  "sources filtering/sorting/new_only remain UNGRADED AND NAMED; the loop ceiling of 3 iterations left headroom unclaimed (best loop trial 86)"
+ ]
+}

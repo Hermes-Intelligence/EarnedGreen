@@ -1,0 +1,88 @@
+{
+  "schema_version": 4,
+  "status": "candidate",
+  "principle": "Engineer the loop, not the prompt. Quality comes from the verification loop's independently executed checks, never from stacked prompt capabilities (measured: 6 fixtures / 17 calls, scaffolded arms never beat the unscaffolded control and cost 4-10.7x tokens). Modes therefore exist for COST and GOVERNANCE only: choose the cheapest mode, and only critical consequence buys the human gate.",
+  "measurement_basis": "adaptive-contract-evolution v2/v3/v4, implicit-conventions v1/scale, medi-ny-parser-rework-v1 (real task): best score always achieved by the cheapest arm; the one score-splitting regression was stochastic, not mode-driven; sub-requirements living in the DATA (paren-wrap) were missed by every prompt-scaffolded arm. Evidence: evidence/main-v4-semantic-regrade.json, evidence/main-medi-ny-campaign.json, workstreams/adaptive-agent-modes-eval-harness.md.",
+  "axes": {
+    "consequence": {
+      "description": "Blast radius if the in-scope work is wrong: what breaks, who is exposed, is it reversible. This is the ONLY axis that selects a mode above standard: critical consequence selects the critical mode and its human gate. Mentioning, explaining or planning a critical action is not execution intent and cannot select critical by itself.",
+      "levels": ["low", "medium", "high", "critical"],
+      "signals": {
+        "critical": ["external action (deploy, publish, send, push to remote)", "credential or secret rotation", "coordinated production data rollout (expand-migrate-contract + backfill)", "destructive production data change"],
+        "high": ["security-sensitive logic", "database migration"],
+        "medium": ["public API or serialization contract", "open-world parsing", "reliability/cache identity"],
+        "low": ["everything else"]
+      },
+      "note": "high/medium consequence no longer selects a heavier mode: the verification loop's independent checks cover it inside standard. The distinction is kept for routing (which knowledge modules load) and telemetry."
+    },
+    "clarity": {
+      "description": "Whether the task text pins its own acceptance criteria. An underspecified mutating task receives the spec-synthesis capability inside its selected mode: discover the implicit conventions first, produce a validated spec with acceptance tests, freeze the requirement ledger (anti-scope-shrink), and feed the acceptance tests into the verification loop's check suite. Clarity never changes the mode and never touches the human gate.",
+      "levels": ["well-specified", "underspecified"],
+      "signals": {
+        "underspecified": ["implied-scope phrase (new product/source/adapter/integration, like the existing X) with no pinned behavioral sentences", "compiler requirement_count low while breadth/impact phrases (across, end to end, production) are present", "material ambiguity terms with thin task text"],
+        "well-specified": ["explicit bullets or normative sentences pinning edge cases (exactly, must not, never, raises X)", "pinned decision points", "mechanical or documentation-only scope"]
+      }
+    },
+    "continuity": {
+      "description": "Whether the work must survive a session boundary. Multi-session work receives the durable-checkpoints and session-handoff-state capabilities inside its selected mode. Continuity never changes the mode and never touches the human gate.",
+      "levels": ["single-session", "multi-session"]
+    },
+    "breadth": {
+      "description": "Telemetry only. Width of change (files touched, requirement count) is recorded for observability and cost analysis but selects nothing: the measured benchmarks showed width does not predict where independent verification is needed, and the symbol sweep covers wide consumer surfaces mechanically.",
+      "levels": ["narrow", "moderate", "wide"]
+    }
+  },
+  "modes": [
+    {
+      "id": "lite",
+      "rank": 0,
+      "purpose": "Advisory/read-only work and trivial, narrow, reversible mutations (docs, typos, private local changes). No verification loop: the pre-submit gate's re-executed evidence is enough at this consequence level.",
+      "allowed_scope": ["read-only explanation", "status lookup", "advisory assessment", "documentation edit", "mechanical narrow change", "single-file low-risk fix"],
+      "capabilities": ["minimal-core", "compact-requirement-ledger", "focused-verification", "pre-submit-gate"],
+      "advisory_subcase": "A read-only task with no changed paths gets no mutation artifacts at all: answer with sources, mutate nothing.",
+      "trivial_boundary": {
+        "max_requirements": 4,
+        "max_changed_files": 2,
+        "note": "the single boundary between trivial and ordinary work; beyond it, escalate to standard before mutation. A heuristic, not a research-backed threshold."
+      },
+      "primary_profile": "fast-low-risk",
+      "verifier_profile": null,
+      "human_gate": false
+    },
+    {
+      "id": "standard",
+      "rank": 1,
+      "purpose": "The default for ALL non-trivial mutating work, including high/medium consequence contracts, open-world parsers, security-sensitive local changes, wide mechanical changes and multi-session work. Quality control is the verification loop: a harness-frozen check suite (acceptance, differential, symbol sweep, property checks) executed independently of the agent's claims, iterated to green within hard budgets.",
+      "allowed_scope": ["normal feature", "bug fix", "parser", "refactor", "public API change", "multi-module change", "security-sensitive local change", "bounded migration", "wide mechanical change", "multi-session implementation"],
+      "capabilities": ["minimal-core", "precision-router", "objective-ledger", "focused-verification", "pre-submit-gate", "verification-loop", "context-usage-telemetry"],
+      "primary_profile": "balanced-daily",
+      "verifier_profile": null,
+      "human_gate": false
+    },
+    {
+      "id": "critical",
+      "rank": 2,
+      "purpose": "Critical-consequence work only: outward-facing actions, credential rotation, coordinated production data rollouts, cross-system releases. Adds governance on top of standard: a human scope gate, an independent verifier whose findings are ingested into the verification loop as blocking checks, and bounded-loop automation ceilings. The gate exists for blast radius, not for size.",
+      "allowed_scope": ["critical security", "production migration rollout", "external side effect", "cross-system release"],
+      "capabilities": ["minimal-core", "precision-router", "objective-ledger", "focused-verification", "pre-submit-gate", "verification-loop", "context-usage-telemetry", "independent-verifier", "bounded-loop", "human-approval-boundaries"],
+      "primary_profile": "architecture-high-risk",
+      "verifier_profile": "adversarial-review",
+      "human_gate": true
+    }
+  ],
+  "conditional_capabilities": [
+    {"id": "spec-synthesis", "axis": "clarity", "condition": "underspecified AND mode rank >= standard", "adds": "validated spec, frozen requirement ledger (anti-scope-shrink), acceptance tests wired into the check suite"},
+    {"id": "durable-checkpoints", "axis": "continuity", "condition": "multi-session", "adds": "evidence-backed checkpoint gated before session end"},
+    {"id": "session-handoff-state", "axis": "continuity", "condition": "multi-session", "adds": "resumable handoff state gated before session end"}
+  ],
+  "selection_policy": "advisory read-only -> lite (no mutation artifacts). Trivial mutating work (mechanical/doc-only, within lite.trivial_boundary) -> lite. Critical consequence with execution intent -> critical (the only path to the human gate). Everything else -> standard. Clarity and continuity add conditional capabilities inside the selected mode; they never change the mode.",
+  "escalation_triggers": [
+    {"id": "consequence-discovery", "condition": "an executable in-scope signal from the critical consequence level becomes applicable (credentials, destructive data change, production action, publication, external message)", "action": "raise to critical immediately and require human approval; discussion, planning and dry-run intent alone do not trigger it"},
+    {"id": "scope-growth", "condition": "observed changed-file or requirement count exceeds lite's trivial boundary", "action": "raise lite to standard before further mutation; re-check consequence signals at the same time"},
+    {"id": "unresolved-ambiguity", "condition": "a material contract ambiguity has no authoritative resolution", "action": "block completion; obtain a decision or test both explicitly permitted interpretations"},
+    {"id": "loop-termination", "condition": "the verification loop terminates on iteration-budget or no-progress", "action": "stop mutating, checkpoint, and escalate to the owner with the remaining structured failures; never weaken or remove checks to exit the loop"},
+    {"id": "session-boundary", "condition": "work must continue in another session", "action": "activate durable-checkpoints and session-handoff-state; the mode does not change"}
+  ],
+  "downgrade_policy": "A mode may be lowered only before mutation when evidence disproves the triggering risk. Never downgrade merely to make a gate green, and never exit the verification loop by weakening its checks.",
+  "model_policy": "Modes select provider-independent capability profiles. A weekly expiring provider catalog resolves current model selectors; model IDs are never embedded in this policy."
+}

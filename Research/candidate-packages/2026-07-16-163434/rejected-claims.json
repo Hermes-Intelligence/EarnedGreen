@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-07-16-163434",
+  "principle": "A claim without an explicit verifier verdict is rejected from candidate guidance. The independent verifier was instructed to be adversarial and to refuse charitable readings. It downgraded or refuted 3 of the 7 high-consequence claims it was given, and the researchers themselves excluded fabricated citations. Both are recorded here.",
+  "rejected": [
+    {
+      "id": "R-2026-07-16-001",
+      "statement_as_offered": "Claude Code renamed the permission mode 'default' to 'Manual'; our docs/scripts using the old name need updating.",
+      "reason": "REFUTED IN PART - the word 'renamed' is wrong. The verifier quotes the permission-modes page: 'The mode that reviews every action is named Manual in the CLI... Its config value is `default`, which is what hooks and SDK integrations use. The CLI accepts `manual` as an alias.' Only the UI LABEL changed. `default` is not deprecated and works on every version, while the `manual` alias requires v2.1.200+.",
+      "consequence_avoided": "Acting on this would have been no-op churn at best and actively harmful if anything is pinned below v2.1.200. Scripts stay on `default`; only prose mentions the Manual label.",
+      "source_url": "https://code.claude.com/docs/en/permission-modes",
+      "verifier_verdict": "PARTIAL - claim overstated"
+    },
+    {
+      "id": "R-2026-07-16-002",
+      "statement_as_offered": "The effort parameter is NOT supported on Claude Haiku 4.5 (stated as settled fact, motivating an immediate code change to resolve_capability_profile).",
+      "reason": "DOWNGRADED TO INFERENCE FROM OMISSION. The verifier confirms the level set is closed ('the values documented on this page are the complete set the API accepts') and that Haiku 4.5 is absent from the affirmative supported-model list - but the page NEVER states Haiku is unsupported and documents no error behaviour. The claim is stated more firmly than the source supports.",
+      "consequence_avoided": "No code change ships on an argument from omission. The fix DIFFERS by outcome: HTTP 400 means our current haiku+effort=low recommendation is invalid (breaks runs); silently-ignored means it is merely inert (misleading, harmless). One verification call settles it. Recorded as MC-01 (blocked_on) in model-catalog.patch.json.",
+      "source_url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+      "verifier_verdict": "PARTIAL - requires one live call to settle"
+    },
+    {
+      "id": "R-2026-07-16-003",
+      "statement_as_offered": "Our knowledge base is wrong that `[tools] web_search=true` exists; web_search is an enum defaulting to cached.",
+      "reason": "OVERSTATED. The verifier found TWO distinct keys on the same page: a top-level `web_search` enum (mode) AND `[tools] web_search` whose 'legacy boolean form is still accepted'. Also, the enum default is conditional - it 'defaults to live' under --yolo or another full-access sandbox setting, not unconditionally cached.",
+      "consequence_avoided": "Deleting the [tools] entry from the KB would have introduced a new error while fixing an old one. The accepted, narrower defect is the DEFAULT ('off by default' is wrong). See C-2026-07-16-014.",
+      "source_url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "verifier_verdict": "CONFIRMED-BUT-OVERSTATED"
+    },
+    {
+      "id": "R-2026-07-16-004",
+      "statement_as_offered": "Our knowledge base's Codex profile documentation teaches the dead inline `[profiles.<name>]` pattern; the hook event list is incomplete; hooks.json is unknown to us.",
+      "reason": "FALSE ALARMS - checked against the KB itself. Research/knowledge-base/2026-07-12-findings.md line 6 already states 'in 0.134.0+ a profile is a separate $CODEX_HOME/<name>.config.toml overlaid on the base config (older CLIs used inline [profiles.<name>] tables...)'. Line 9 already lists PreToolUse/PostToolUse/PermissionRequest/UserPromptSubmit/Pre-PostCompact/SubagentStart-Stop/SessionStart/Stop AND already says '[[hooks.<Event>]] in config.toml or hooks.json'.",
+      "consequence_avoided": "Three unnecessary edits to correct documentation that was already correct.",
+      "source_url": "Research/knowledge-base/2026-07-12-findings.md",
+      "verifier_verdict": "REJECTED - the repo baseline is already accurate"
+    },
+    {
+      "id": "R-2026-07-16-005",
+      "statement_as_offered": "Findings attributed to 'Ndzomga (2026)' and 'Gringras (2026)' on scaffolding neutrality.",
+      "reason": "APPARENTLY FABRICATED. Surfaced by a search summarizer with no URLs; the researcher could not locate either and excluded them. Recorded so the same phantoms are recognised if they resurface.",
+      "consequence_avoided": "Citing non-existent sources in a candidate report.",
+      "source_url": null,
+      "verifier_verdict": "REJECTED - unlocatable"
+    },
+    {
+      "id": "R-2026-07-16-006",
+      "statement_as_offered": "Differential testing shows 7.8% of resolved SWE-bench patches fail developer-written tests and 29.6% diverge from gold-patch behaviour.",
+      "reason": "NO ATTRIBUTABLE SOURCE. Widely repeated without a traceable primary. Lead only.",
+      "consequence_avoided": "It would have strengthened our differential-check rationale on an unverifiable number.",
+      "source_url": null,
+      "verifier_verdict": "REJECTED - lead only, unverified"
+    },
+    {
+      "id": "R-2026-07-16-007",
+      "statement_as_offered": "LangChain moved from 30th to 5th on Terminal-Bench 2.0 through harness changes alone.",
+      "reason": "NO PRIMARY SOURCE REACHABLE. Recurs across tier-4/5 blogs only.",
+      "consequence_avoided": "A headline number supporting 'harness beats model' with no primary backing.",
+      "source_url": null,
+      "verifier_verdict": "REJECTED - tier 4/5 only"
+    },
+    {
+      "id": "R-2026-07-16-008",
+      "statement_as_offered": "Codex `turn.completed.usage` reliably carries input_tokens, cached_input_tokens, output_tokens and reasoning_output_tokens - usable for cost accounting.",
+      "reason": "SOURCED FROM THE ISSUE TRACKER, NOT DOCUMENTATION. openai/codex#19022 specifically argues reasoning_output_tokens is OMITTED from the --json stream despite being tracked internally.",
+      "consequence_avoided": "Building campaign cost accounting on a field that may not be emitted. Must be confirmed empirically against the installed CLI version first.",
+      "source_url": "https://github.com/openai/codex/issues/19022",
+      "verifier_verdict": "REJECTED for guidance - empirical confirmation required"
+    },
+    {
+      "id": "R-2026-07-16-009",
+      "statement_as_offered": "Claude Code `--output-format json` gives us total_cost_usd plus a per-model breakdown, so canaries can assert real spend.",
+      "reason": "CONFIRMED THINLY, INSUFFICIENT TO ACT ON. The verifier found exactly one supporting sentence, no example payload, and no documentation of the breakdown's field names, shape or nesting - 'you cannot write a jq path from this page alone'. The page is also silent on subscription vs API-key billing, which is precisely our open question.",
+      "consequence_avoided": "Rewriting the canary spend assertions against an undocumented payload shape.",
+      "source_url": "https://code.claude.com/docs/en/headless",
+      "verifier_verdict": "CONFIRMED-THIN - one call needed to learn the shape; also Codex, not Claude Code, is our benchmark provider"
+    },
+    {
+      "id": "R-2026-07-16-010",
+      "statement_as_offered": "Codex supports `max` reasoning effort (per the 0.143.0 Bedrock changelog entry).",
+      "reason": "DIRECT CONFLICT BETWEEN OFFICIAL SOURCES, UNRESOLVED. The config reference states the enum is minimal|low|medium|high|xhigh; the changelog announces 'first-class max reasoning effort support' for Bedrock GPT-5.6. No page reconciles them.",
+      "consequence_avoided": "Encoding an effort level that the configuration schema may reject. Only the config-file enum is encoded in the catalog patch; the contradiction is recorded (MC-05) for next week's recheck.",
+      "source_url": "https://learn.chatgpt.com/docs/changelog",
+      "verifier_verdict": "REJECTED - contradictory primaries"
+    },
+    {
+      "id": "R-2026-07-16-011",
+      "statement_as_offered": "LLMs cannot reliably self-correct without external feedback (used as support for our loop).",
+      "reason": "VERSION-EXPIRED. The primary is ICLR 2024 (arXiv 2310.01798); no current primary source re-tests it on 2026-class frontier models.",
+      "consequence_avoided": "Justifying a 2026 architecture with a 2023 result about weaker models - the same 'expiring assumption' error our own corpus warns about.",
+      "source_url": "https://arxiv.org/abs/2310.01798",
+      "verifier_verdict": "REJECTED for guidance - version-sensitive, cite as history only"
+    },
+    {
+      "id": "R-2026-07-16-012",
+      "statement_as_offered": "Input reduction (89.1% smaller failure-inducing input) improves pass@10 by up to 53.8% relative - support for guidance-on-failure.",
+      "reason": "ADJACENT AND VERSION-SENSITIVE. It tests input SIZE, not guidance PLACEMENT (at-failure vs in-prompt), and it is 2025 work (arXiv 2507.15251). It rhymes with our finding without testing our variable.",
+      "consequence_avoided": "Claiming external support for guidance-on-failure that does not exist. Our guidance-on-failure result remains UNREPLICATED externally - see the research gaps in the report.",
+      "source_url": "https://arxiv.org/abs/2507.15251",
+      "verifier_verdict": "REJECTED for direct support - adjacent only"
+    }
+  ],
+  "unreplicated_externally": [
+    "A measured head-to-head of agent-self-executed verification vs harness-executed verification with structured failures fed back. No study runs this comparison. Our benchmark may be the only measurement that exists - which is simultaneously a contribution and a replication risk.",
+    "Guidance-on-failure vs guidance-in-prompt as a controlled variable. No source at any tier.",
+    "Harness-generated evidence vs agent-transcribed evidence. No source at any tier.",
+    "No-progress / stall detection as a measured mechanism. Referenced in tier-4 blogs; no primary source. Our no-progress detection is UNVALIDATED.",
+    "A 2026 primary cost curve for verifier-guided iteration vs single-pass.",
+    "Validation of agent-generated checks (detecting vacuous, tautological or wrong properties). Not addressed by PBT-Bench's accessible material; no other source found."
+  ]
+}

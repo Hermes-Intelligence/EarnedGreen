@@ -1,0 +1,61 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-17T09:07:15.8583220+02:00",
+    "cases":  13,
+    "passed":  13,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "exclusive-campaign-lock",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "exclusive-provider-lock",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "closed-campaign-cannot-reopen",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "post-smoke-requires-explicit-models",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "calibration-manifest-exactly-two-pending-calls",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "provider-telemetry-token-and-cost-accounting",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "partial-quality-is-valid-scored-outcome",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "complex-screen-manifest-six-paired-calls",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "admission-refuses-unvalidated-fixture-then-admits",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "canary-cap-forced-for-zero-paid-history-fixture",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "stage2-refused-without-validated-canary-record",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "platform-lint-flags-injected-host-interpreter",
+                        "passed":  true
+                    },
+                    {
+                        "id":  "platform-lint-clean-on-stable-tree",
+                        "passed":  true
+                    }
+                ]
+}

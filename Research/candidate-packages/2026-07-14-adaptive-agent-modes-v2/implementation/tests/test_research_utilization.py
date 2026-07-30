@@ -38,7 +38,8 @@ class ClaimsLedgerTests(unittest.TestCase):
         self.assertGreaterEqual(result["links_total"], 20)
         self.assertGreater(result["rules_unsupported"], 0, "the honest unsupported list must not be empty-washed")
         self.assertEqual(result["rules_unsupported"], len(result["unsupported_rule_ids"]))
-        self.assertIn("RULE-MODE-NUMERIC-CEILINGS", result["unsupported_rule_ids"])
+        self.assertIn("RULE-MODE-TRIVIAL-BOUNDARY", result["unsupported_rule_ids"])
+        self.assertIn("RULE-BENCH-MULTI-TRIAL", result["unsupported_rule_ids"])
         self.assertEqual(result["rules_total"], result["rules_supported"] + result["rules_partial"] + result["rules_unsupported"])
 
     def test_unknown_claim_reference_is_structural_failure(self) -> None:

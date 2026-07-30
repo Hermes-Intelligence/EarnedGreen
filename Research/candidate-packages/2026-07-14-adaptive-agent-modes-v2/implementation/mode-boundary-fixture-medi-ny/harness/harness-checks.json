@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "purpose": "Fixture-level independent checks consumed by the HARNESS, never shipped in the public workspace: the unscaffolded control must stay genuinely bare. Scaffolded arms receive them inside .agentic (part of the scaffold); loop arms receive their results as structured feedback. Derived ONLY from the public task, CONVENTIONS.md and the sample data; the hidden grader stays hidden.",
+  "checks": [
+    {
+      "id": "bare-name-properties",
+      "kind": "property",
+      "script": "check_bare_names.py",
+      "note": "every emitted drug_name honors the documented house conventions on the real sample; requirements that live in the data are still requirements",
+      "guidance": "CONVENTIONS.md (in the workspace) documents the target: strip trailing strengths (duloxetine 20 mg -> duloxetine), drop (gen ...) annotations (Cymbalta (gen duloxetine) -> Cymbalta), strip trailing dosage-form/packaging words (Buphenyl powder, tablet -> Buphenyl), strip a device word bled in from an adjacent column (Diskus Depakote -> Depakote), drop footnote URLs. PRESERVE devices that are genuinely part of the marketed name: Advair Diskus, Trelegy Ellipta, Proventil HFA - and delivery forms like 'fentanyl patch'. CLEAN, never delete: when leading column-bleed precedes the real name (e.g. strengths bled in before a brand), the drug name is the brand-cased tail of the cell - recover it; a residue of unit tokens means the name was destroyed, not cleaned. Names must never keep an unbalanced parenthesis or stray trailing bracket from line wrapping."
+    },
+    {
+      "id": "row-field-differential",
+      "kind": "differential",
+      "script": "emit_rows.py",
+      "expected_change_patterns": ["\\.drug_name="],
+      "note": "the task changes drug_name ONLY: any status / therapeutic_class / subclass / row_count drift against the pre-change baseline is a silent regression",
+      "guidance": "Only drug_name may differ from the pre-change parser's output on the sample. If status, therapeutic_class, subclass or row_count changed, you altered the column/section logic - restore it; the rework is purely about what ends up in the name field."
+    }
+  ]
+}

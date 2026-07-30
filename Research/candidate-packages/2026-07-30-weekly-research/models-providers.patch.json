@@ -1,0 +1,515 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-07-30-weekly-research",
+  "candidate_only": true,
+  "apply_to": "Models/providers.json",
+  "current_catalog_expired": true,
+  "current_expires_at": "2026-07-26T21:30:00+02:00",
+  "verified_at": "2026-07-30",
+  "instructions": "CANDIDATE ONLY. Do NOT write these into Models/providers.json from research. At promotion, re-verify EACH fact against the cited official provider doc, then refresh the live catalog. Never fabricate a model id, alias, or number; anything not re-verifiable at promotion time is dropped.",
+  "headline_changes": [
+    "Claude flagship is now Opus 5 (claude-opus-5); Opus 4.8 (claude-opus-4-8) is now LEGACY; Opus 4.1 deprecated, retires 2026-08-05.",
+    "Claude effort levels: low|medium|high|xhigh|max (high=default). 'ultracode' is a Claude Code SESSION setting (sends xhigh + orchestrates dynamic workflows), NOT an API effort level.",
+    "OpenAI/Codex: GPT-5.6 Sol/Terra/Luna (1.05M ctx, 128K out); Codex CLI 0.146.0 (2026-07-29). platform.openai.com/docs/models now 301-redirects to developers.openai.com/api/docs/models."
+  ],
+  "claims": [
+    {
+      "id": "model-catalog-refresh-01",
+      "statement": "Claude Opus 5 is now the recommended current flagship for complex agentic coding: Claude API id and alias are both `claude-opus-5`, context window 1M tokens, max output 128k tokens, reliable knowledge cutoff May 2026, pricing $5 / input MTok and $25 / output MTok.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude models overview",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-02",
+      "statement": "Claude Sonnet 5 has Claude API id and alias `claude-sonnet-5`, context window 1M tokens (native), max output 128k tokens, knowledge cutoff Jan 2026, standard pricing $3 / input MTok and $15 / output MTok, with introductory pricing of $2 / $10 per MTok applying through August 31, 2026.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude models overview",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        },
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-03",
+      "statement": "Claude Haiku 4.5 has Claude API id `claude-haiku-4-5-20251001` and Claude API alias `claude-haiku-4-5`, context window 200k tokens, max output 64k tokens, knowledge cutoff Feb 2025, pricing $1 / input MTok and $5 / output MTok; it supports extended thinking but not adaptive thinking.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude models overview",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-04",
+      "statement": "Claude Fable 5 (`claude-fable-5`) is Anthropic's most capable widely released model, generally available since June 9, 2026: context window 1M tokens, max output 128k tokens, knowledge cutoff Jan 2026, pricing $10 / input MTok and $50 / output MTok, with adaptive thinking always on (thinking cannot be disabled).",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude models overview",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        },
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-05",
+      "statement": "Claude Mythos 5 (`claude-mythos-5`) shares Claude Fable 5's specs and pricing but is not generally available: it is invitation-only for approved customers under Project Glasswing (with `claude-mythos-preview`) for defensive cybersecurity workflows, with no self-serve sign-up.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude models overview",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-06",
+      "statement": "Claude Opus 4.8 (`claude-opus-4-8`) is now listed as a legacy model on the models overview (no longer the current 'opus'); it remains available at $5 / input MTok and $25 / output MTok with a 1M-token context window and 128k max output.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude models overview",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-07",
+      "statement": "Claude Opus 4.1 (`claude-opus-4-1-20250805`) is deprecated and will be retired on August 5, 2026; the overview directs migration to Claude Opus 5.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude models overview",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-05"
+    },
+    {
+      "id": "model-catalog-refresh-08",
+      "statement": "The Claude API `effort` parameter accepts exactly five levels — `low`, `medium`, `high`, `xhigh`, `max` — with `high` as the default; setting `effort` to `\"high\"` produces exactly the same behavior as omitting the parameter. `adaptive` is a thinking mode, not an effort value.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude effort parameter",
+          "url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-09",
+      "statement": "Per the Claude effort page, the effort parameter is supported (no beta header) by Claude Fable 5, Mythos 5, Opus 5, Opus 4.8, Mythos Preview, Opus 4.7, Opus 4.6, Sonnet 5, Sonnet 4.6, and Opus 4.5; Claude Haiku 4.5 is not in the supported list.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude effort parameter",
+          "url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-10",
+      "statement": "On the Claude API, the `xhigh` effort level is available only on Claude Fable 5, Mythos 5, Opus 5, Opus 4.8, Opus 4.7, and Sonnet 5; Opus 4.6 and Sonnet 4.6 support `max` but not `xhigh`.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude effort parameter",
+          "url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-11",
+      "statement": "In Claude Code's model-config effort table, Fable 5 / Opus 5 / Sonnet 5 / Opus 4.8 / Opus 4.7 support `low, medium, high, xhigh, max`, while Opus 4.6 and Sonnet 4.6 support `low, medium, high, max` (no xhigh); the default effort is `high` on every effort-supporting model except Opus 4.7, which defaults to `xhigh`.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-12",
+      "statement": "In Claude Code, `ultracode` is a Claude-Code session setting, not a model effort level: it sends `xhigh` to the model and additionally has Claude orchestrate dynamic workflows; it is session-only, is rejected by the persisted `effortLevel` setting and `CLAUDE_CODE_EFFORT_LEVEL`, and requires Claude Code v2.1.203+ for `--effort ultracode`.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-13",
+      "statement": "The Claude Code model-config effort table states 'Models not listed here do not support effort', and Claude Haiku is not listed, confirming Haiku 4.5 does not support the effort parameter in Claude Code.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        },
+        {
+          "title": "Claude effort parameter",
+          "url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-14",
+      "statement": "The Claude Code `opus` alias resolves per provider as: Anthropic API -> Opus 5, Claude Platform on AWS -> Opus 5, Amazon Bedrock and Google Cloud's Agent Platform -> Opus 5, Microsoft Foundry -> Opus 4.6. (Prior catalog's 'opus -> Opus 4.8 on Anthropic API, Opus 4.6 on Foundry' is now stale for the API surface.)",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-15",
+      "statement": "The Claude Code `sonnet` alias resolves per provider as: Anthropic API -> Sonnet 5, Claude Platform on AWS -> Sonnet 4.6, Amazon Bedrock and Google Cloud's Agent Platform -> Sonnet 4.5, Microsoft Foundry -> Sonnet 4.5.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-16",
+      "statement": "Claude Code CLI version gates: Opus 5 requires Claude Code v2.1.219 or later, Sonnet 5 requires v2.1.197 or later, Opus 4.8 requires v2.1.154 or later, and Fable 5 requires v2.1.170 or later.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-17",
+      "statement": "Claude Code adds a `best` model alias: it uses Claude Fable 5 where the organization has access to it, otherwise the latest Opus model.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-18",
+      "statement": "Claude Fable 5 is not the default model on any account type (select it with `/model fable`) and is not available under zero data retention, where the `/model` picker omits or disables it.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-19",
+      "statement": "The Claude Code `default` model resolves by account type to: Opus 5 for Max, Team Premium, Enterprise pay-as-you-go, the Anthropic API, Claude Platform on AWS, Amazon Bedrock, and Google Cloud's Agent Platform; Sonnet 5 for Pro, Team Standard, and Enterprise subscription seats; and Sonnet 4.5 for Microsoft Foundry.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-20",
+      "statement": "Claude Code content-based automatic model fallback (v2.1.219+): a biology-flagged Fable 5 request re-runs on Opus 5 and a cybersecurity-flagged Fable 5 request re-runs on Opus 4.8; a cybersecurity-flagged Opus 5 request re-runs on Opus 4.8, while a biology-flagged Opus 5 request ends in a refusal (Opus 5 has no biology fallback).",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude Code model configuration",
+          "url": "https://code.claude.com/docs/en/model-config",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-21",
+      "statement": "GPT-5.6 Sol is OpenAI's flagction frontier model with model id `gpt-5.6-sol` and alias `gpt-5.6`; the official API models page displays context window '1.05M', max output 128K tokens, input price $5 / MTok, output price $30 / MTok, and knowledge cutoff Feb 16, 2026.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "OpenAI API models",
+          "url": "https://developers.openai.com/api/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-22",
+      "statement": "GPT-5.6 Terra (model id `gpt-5.6-terra`) is the balanced GPT-5.6 model: the official API models page displays context window '1.05M', max output 128K tokens, input price $2.50 / MTok, output price $15 / MTok, knowledge cutoff Feb 16, 2026.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "OpenAI API models",
+          "url": "https://developers.openai.com/api/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-23",
+      "statement": "GPT-5.6 Luna (model id `gpt-5.6-luna`) is the cost-optimized GPT-5.6 model: the official API models page displays context window '1.05M', max output 128K tokens, input price $1 / MTok, output price $6 / MTok, knowledge cutoff Feb 16, 2026.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "OpenAI API models",
+          "url": "https://developers.openai.com/api/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-24",
+      "statement": "On the official OpenAI API models page, the reasoning levels displayed for gpt-5.6-sol, gpt-5.6-terra, and gpt-5.6-luna are: none, low, medium, high, xhigh, max.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "OpenAI API models",
+          "url": "https://developers.openai.com/api/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-25",
+      "statement": "The Codex config.toml `model_reasoning_effort` field accepts exactly `minimal | low | medium | high | xhigh` (Responses API only; xhigh is model-dependent); it does not include `none`, `max`, or `ultra`. The related `plan_mode_reasoning_effort` field accepts `none | minimal | low | medium | high | xhigh`.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Codex configuration reference",
+          "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-26",
+      "statement": "The Codex config.toml `model_verbosity` field accepts `low | medium | high` and is described as an optional GPT-5 Responses API verbosity override; when unset, the selected model/preset default is used.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Codex configuration reference",
+          "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-27",
+      "statement": "On the ChatGPT/Codex surface, the reasoning-effort controls are named Light (ChatGPT desktop app, Work web, IDE extension) or Low (CLI), Medium, High, Extra High, plus Max and Ultra; the default Power setting uses gpt-5.6-sol with medium reasoning, Max gives the selected model more time to reason on a single task, and Ultra uses subagents to parallelize a complex task.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Codex/ChatGPT models",
+          "url": "https://learn.chatgpt.com/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-28",
+      "statement": "GPT-5.3 Codex Spark (model id `gpt-5.3-codex-spark`) is a text-only research-preview model optimized for near-instant real-time coding iteration, available to ChatGPT Pro users only.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Codex/ChatGPT models",
+          "url": "https://learn.chatgpt.com/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-29",
+      "statement": "In Codex, when signing in with ChatGPT, the models `gpt-5.2` and `gpt-5.3-codex` are deprecated, and users are directed to update scripts/config/`codex exec --model` references to a current model.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Codex/ChatGPT models",
+          "url": "https://learn.chatgpt.com/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-30",
+      "statement": "The Codex configuration reference still gives `gpt-5.5` as the illustrative value for the `model` field ('Model to use (e.g., gpt-5.5)'), whereas the current recommended default resolves to gpt-5.6-sol and the ChatGPT models page config example uses `model = \"gpt-5.6\"`; GPT-5.5 remains a selectable older-generation model (not deprecated), so gpt-5.5 and the gpt-5.6 family are concurrently selectable.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Codex configuration reference",
+          "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        },
+        {
+          "title": "Codex/ChatGPT models",
+          "url": "https://learn.chatgpt.com/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-31",
+      "statement": "The Codex changelog records Codex CLI 0.146.0 released 2026-07-29 (session naming, thread pinning, multi-agent plugin support for Amazon Bedrock and Claude Code) and Codex CLI 0.145.0 released 2026-07-21 (paginated thread history, expanded /import, Amazon Bedrock login, audio I/O, multi-agent V2 stabilization).",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Codex/ChatGPT changelog",
+          "url": "https://learn.chatgpt.com/docs/changelog",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-32",
+      "statement": "The assigned OpenAI source URLs now cross-host redirect: https://platform.openai.com/docs/models returns 301 to https://developers.openai.com/api/docs/models (the API models page carrying numeric specs), and https://developers.openai.com/codex/changelog returns 308 to https://learn.chatgpt.com/docs/changelog (the canonical Codex changelog).",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "OpenAI API models (301 target of platform.openai.com/docs/models)",
+          "url": "https://developers.openai.com/api/docs/models",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        },
+        {
+          "title": "Codex/ChatGPT changelog (308 target of developers.openai.com/codex/changelog)",
+          "url": "https://learn.chatgpt.com/docs/changelog",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    },
+    {
+      "id": "model-catalog-refresh-33",
+      "statement": "On Claude Opus 4.8 the `effort` parameter defaults to `high` on all surfaces (Claude API, Claude Code, and claude.ai); on Claude Opus 5 and Claude Sonnet 5 it defaults to `high` on the Claude API and Claude Code, and must be set explicitly to use a different level.",
+      "version_sensitive": true,
+      "sources": [
+        {
+          "title": "Claude models overview",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        },
+        {
+          "title": "Claude effort parameter",
+          "url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "tier": 1,
+          "accessed_at": "2026-07-30"
+        }
+      ],
+      "expires_at": "2026-08-29"
+    }
+  ]
+}

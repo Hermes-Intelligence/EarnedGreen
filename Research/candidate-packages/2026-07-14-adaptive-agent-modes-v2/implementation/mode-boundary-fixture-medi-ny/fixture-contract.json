@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "id": "medi-ny-parser-rework-v1",
+  "version": 2,
+  "version_history": [
+    {"version": 1, "status": "LEAKED - do not compare against v2", "note": "public/sample/build_sample.py was inside the agent-visible workspace and its docstring named the rework's own functions (_clean_drug_name + _form_vocab), the Hermes commits, and stated that the sample rows are the noise patterns the fix was written to eliminate. Every arm saw it equally, so the DELTA measured on v1 (lean loop 100/100/100 vs unscaffolded control 77/77/77) stands; the ABSOLUTE scores were inflated and must not be published as clean."},
+    {"version": 2, "status": "repaired 2026-07-16", "note": "Builder moved to provenance/build_sample.py, outside public/. The agent now sees only the PDF, as a real engineer would. Verified: the builder still reproduces the committed PDF byte-for-byte (modulo PDF timestamps) and the admission gate still passes 7/7 with the before-parser control discriminating against the reference. v2 scores are NOT comparable with v1 scores: the workspace changed."}
+  ],
+  "status": "candidate-not-authoritative",
+  "fixture_class": "underspecified-by-design",
+  "proprietary": true,
+  "workspace_source": "hermes-local-copy",
+  "purpose": "History-grounded fixture: the REAL, underspecified NYRx PDL parser rework shipped in HermesAirflow commits 9835c408..a7ed0fd1 (2026-07-01). Five prior SYNTHETIC fixtures gave a decisive null (the model class aces in-context tasks unaided); this replaces the synthetic workspace with a genuine proprietary subtree and a ground truth derived from git history, not authored. The before-state parser (commit b0dcd182) already isolates the three PDL columns by font-size/x-band geometry and strips trailing coverage flags, but emits drug NAMES that carry strengths, dosage forms, generic-equivalent (gen ...) annotations, column/line bleed and footnote URLs; the rework added a deterministic drug-name cleaning pass (_clean_drug_name + an FDA-derived _form_vocab with an offline fallback). The task is to reproduce that cleanup. It is pure pdfplumber geometry + string logic: fully offline, zero provider/model calls. PROPRIETARY ISOLATION: the parser the agent edits is a real Hermes subtree and is NEVER committed to this package; the base workspace and every graded overlay materialize the parser at grade time from a LOCAL Hermes git ref (see hermes_local + materialize), and only the grader, task, conventions, a synthetic NY-template sample PDF and notes live here.",
+  "public_test": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_public.py", "-v"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": ["basic-functionality", "trailing-strength-strip", "gen-annotation-strip", "dosage-form-strip", "leading-bleed-strip", "brand-device-preserve", "paren-wrap-reassembly", "url-bleed-strip"],
+  "serialized_output_dimensions": [],
+  "hermes_local": {
+    "repo_dir": "HermesAirflow",
+    "parser_path": "hermes_intelligence/data_integration/market_intelligence/healthcare/medi_NY/pdl_parser.py",
+    "before_ref": "b0dcd182",
+    "after_ref": "a7ed0fd1",
+    "rework_commits": ["9835c408", "a7ed0fd1"],
+    "spec": "hermes_intelligence/data_integration/market_intelligence/healthcare/medi_NY/PARSER_REWRITE_SPEC.md",
+    "import_normalization": "the parser's `from hermes_intelligence...medi_NY import config` is rewritten to `import config` (it reads only config.PDL_CLASS_HEADER_REGEX; the isolated stub ships in public/config.py)",
+    "target_path": "src/pdl_parser.py",
+    "altformat_append": "\n\n# --- fixture reference-alt format variance (non-proprietary wrapper) ---\nimport re as _altre\n_orig_parse_pdl = parse_pdl\ndef parse_pdl(pdf_bytes, version_date=None):\n    _rows = _orig_parse_pdl(pdf_bytes, version_date)\n    for _r in _rows:\n        _r.drug_name = _altre.sub(r'\\s+', ' ', _r.drug_name).strip()\n        _r.status = _r.status.replace('_', '-')\n    return list(reversed(_rows))\n"
+  },
+  "materialize": {
+    "base": "before",
+    "hidden/reference": "after",
+    "hidden/reference-alt": "after-altformat",
+    "negative-controls/before-parser": "before"
+  },
+  "sample_pdf": {
+    "path": "public/sample/nyrx_sample_pdl.pdf",
+    "builder": "provenance/build_sample.py",
+    "builder_is_outside_public": "REQUIRED, and a repaired defect: the builder used to live in public/sample/, which prepare_adaptive_run copies wholesale into the agent's workspace. Its docstring named the rework's own functions (_clean_drug_name + _form_vocab) and the Hermes commits, and said the sample rows are 'the exact drug-name NOISE patterns the rework was written to eliminate' -- i.e. it handed every arm the SHAPE OF THE FIX. Because it was visible to all arms equally the measured DELTA stays unbiased, but the ABSOLUTE scores (including the 100/100/100) were inflated by it and must not be published as clean. The builder is retained here for reproducibility; it must never be reachable from public/.",
+    "note": "Synthetic reproduction of the NYRx FHSC/Magellan 3-column template at the real NY font geometry (18/12/11/8 pt). No real NY PDL is committed to HermesAirflow, and the committed SC backfill PDLs use a ~6.1pt geometry the NY-specific _header_anchors rejects (the shipped parser returns 0 rows on SCpdl_listing_20230101.pdf, verified). The oracle is the shipped parser's deterministic output on this PDF, not hand-authored values; both the shipped and before-state parsers emit 13 rows on it."
+  },
+  "convention_anchors": [
+    {"check_id": "basic-functionality", "evidence_file": "CONVENTIONS.md", "quote": "The parser emits one NyPdlRow per drug per column, with status preferred or non_preferred and the therapeutic class taken from the section header."},
+    {"check_id": "trailing-strength-strip", "evidence_file": "CONVENTIONS.md", "quote": "A drug name must not carry a dosage strength; strip trailing strength tails such as 20 mg, 30 mg, 60 mg so that duloxetine 20 mg becomes duloxetine."},
+    {"check_id": "gen-annotation-strip", "evidence_file": "CONVENTIONS.md", "quote": "Drop the generic-equivalent annotation in parentheses so that Cymbalta (gen duloxetine) becomes Cymbalta."},
+    {"check_id": "dosage-form-strip", "evidence_file": "CONVENTIONS.md", "quote": "Strip trailing dosage-form and packaging words so that Buphenyl powder, tablet becomes Buphenyl."},
+    {"check_id": "leading-bleed-strip", "evidence_file": "CONVENTIONS.md", "quote": "Strip a device or form word that bled in from an adjacent column so that Diskus Depakote becomes Depakote."},
+    {"check_id": "brand-device-preserve", "evidence_file": "CONVENTIONS.md", "quote": "Preserve a trailing delivery device that is genuinely part of the brand: keep Advair Diskus, Trelegy Ellipta and Proventil HFA intact."},
+    {"check_id": "paren-wrap-reassembly", "evidence_file": "CONVENTIONS.md", "quote": "A drug name must never contain an unbalanced parenthesis or a stray trailing bracket left by line wrapping."},
+    {"check_id": "url-bleed-strip", "evidence_file": "CONVENTIONS.md", "quote": "Drop any footnote URL that bled into a cell so that aspirin https://newyork.fhsc.com/x becomes aspirin."}
+  ],
+  "expected_controls": [
+    {"id": "before-parser", "min_score": 15, "max_score": 40, "note": "The REAL pre-rework parser (commit b0dcd182). Passes basic-functionality + brand-device-preserve (it never strips, so it never over-strips the brand device either) and FAILS the six strip/wrap dimensions because it has no drug-name cleaning pass. Deterministic score 27 on the committed sample PDL — a history-grounded negative control, not a synthetic cold-pass."},
+    {"id": "reference", "min_score": 100, "max_score": 100}
+  ],
+  "campaign_loop_overrides": {
+    "max_turns_per_call": 30,
+    "max_wall_minutes_per_call": 40,
+    "reason": "The editable workspace is a real ~373-line proprietary parser whose correctness depends on the documented PDL geometry and the pipeline's name-based guards; a raised turn/wall budget keeps the measured axis 'does scaffolding find the documented cleaning conventions' rather than 'who ran out of clock reading the module'."
+  },
+  "interpretation": "Controls are deterministic capability proxies. The before-parser control is the actual historical bug (no drug-name cleaning), so it lands at 27 across six independent strip/wrap dimensions while passing structure and the over-strip guard — wide discriminating headroom on the exact axis the five synthetic fixtures could not reach, because here the ground truth is git history, not authored. Because the task is underspecified BY DESIGN, admission verifies convention_anchors (every hidden expectation quoted from a discoverable in-workspace convention) instead of task-sentence pinning. A null (a strong single-pass agent also scoring 100 unaided) would confirm the repositioning toward guardrails + cost discipline; a gap would be the first correctness signal on real proprietary work."
+}

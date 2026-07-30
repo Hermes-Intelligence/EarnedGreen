@@ -1,0 +1,107 @@
+﻿{
+ "schema_version": 1,
+ "note": "Deterministic portal-state scenarios. DOMAIN knowledge only (tables/columns from DATA.md); no scenario names a convention. @dec:/@dt:/@uuid: prefixes decode to Decimal/datetime/UUID so serialization is exercised. Filter/sort params are NEVER passed — those behaviours are ungraded-named by design.",
+ "scenarios": [
+  {
+   "id": "buckets-rich",
+   "discovery_runs": [{"id": "r-1", "pipeline_run_id": "@uuid:00000000-0000-0000-0000-0000000000a1", "run_type": "initial", "follow_up_of": null}],
+   "source_buckets": [
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "beyond_80", "source_count": 80, "coverage_pct": "@dec:0.99", "question_coverage": {"q1": 1}, "geographic_assessment": "broad", "geographic_flags": ["no_latam_coverage"], "quality_gate": {"passed": true}, "builder_method": null, "llm_calls_used": 2},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "core_10", "source_count": 10, "coverage_pct": "@dec:0.42", "question_coverage": {"q1": 1, "q2": 0}, "geographic_assessment": "narrow", "geographic_flags": ["only_domestic"], "quality_gate": {"passed": true, "notes": "clean"}, "builder_method": null, "llm_calls_used": 7},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "extended_30", "source_count": 30, "coverage_pct": "@dec:0.61", "question_coverage": {"q2": 1}, "geographic_assessment": "regional", "geographic_flags": ["only_domestic", "no_latam_coverage"], "quality_gate": "not-a-dict", "builder_method": "llm", "llm_calls_used": 4},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "complete_50", "source_count": 50, "coverage_pct": "@dec:0.83", "question_coverage": {}, "geographic_assessment": "broad", "geographic_flags": [], "quality_gate": {"passed": false}, "builder_method": null, "llm_calls_used": "n/a"}
+   ],
+   "calls": [{"ep": "buckets", "run_id": "r-1"}]
+  },
+  {
+   "id": "buckets-agg",
+   "discovery_runs": [{"id": "r-1", "pipeline_run_id": "@uuid:00000000-0000-0000-0000-0000000000a1", "run_type": "initial", "follow_up_of": null}],
+   "source_buckets": [
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "core_10", "source_count": 10, "coverage_pct": "@dec:0.5", "question_coverage": {"q1": 1}, "geographic_assessment": "narrow", "geographic_flags": ["flag_a", "flag_b"], "quality_gate": {"passed": true}, "builder_method": "heuristic", "llm_calls_used": 3},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "extended_30", "source_count": 30, "coverage_pct": "@dec:0.7", "question_coverage": {}, "geographic_assessment": "regional", "geographic_flags": "not-a-list", "quality_gate": ["junk"], "builder_method": null, "llm_calls_used": 11},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "complete_50", "source_count": 50, "coverage_pct": "@dec:0.9", "question_coverage": {}, "geographic_assessment": "broad", "geographic_flags": ["flag_c"], "quality_gate": {"passed": false, "reason": "thin"}, "builder_method": "llm_verified", "llm_calls_used": 6}
+   ],
+   "calls": [{"ep": "buckets", "run_id": "r-1"}]
+  },
+  {
+   "id": "matrix-enriched",
+   "discovery_runs": [{"id": "r-1", "pipeline_run_id": "@uuid:00000000-0000-0000-0000-0000000000a1", "run_type": "initial", "follow_up_of": null}],
+   "question_source_matrix": [
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "question_number": 1, "domain": "acme.example", "bucket_label": "core_10", "strength": "strong", "reasoning": "primary regulator"},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "question_number": 1, "domain": "ghost.example", "bucket_label": "extended_30", "strength": "weak", "reasoning": "secondary"},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "question_number": 2, "domain": "beta.example", "bucket_label": "core_10", "strength": "medium", "reasoning": "tender board"}
+   ],
+   "sources": [
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "domain": "acme.example", "title": "ACME", "source_type": "government", "viability_score": "@dec:0.91", "country": "PL", "source_tier": 1, "is_relevant": true, "priority_label": "high", "intelligence_function": "regulatory", "content_originality": "primary", "bucket_label": "core_10", "topics": ["Area:Energy"], "config_tags": {}, "strategic_questions_served": [1], "reasoning": "reg", "id": "@uuid:00000000-0000-0000-0000-000000000a51", "created_at": "@dt:2026-04-20T10:00:00Z"},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "domain": "beta.example", "title": "Beta", "source_type": "news", "viability_score": "@dec:0.55", "country": "DE", "source_tier": 2, "is_relevant": true, "priority_label": "medium", "intelligence_function": "market", "content_originality": "aggregator", "bucket_label": "core_10", "topics": ["Area:Ports"], "config_tags": {}, "strategic_questions_served": [2], "reasoning": "mkt", "id": "@uuid:00000000-0000-0000-0000-000000000a52", "created_at": "@dt:2026-04-21T10:00:00Z"}
+   ],
+   "calls": [{"ep": "matrix", "run_id": "r-1"}]
+  },
+  {
+   "id": "coverage-dict",
+   "discovery_runs": [{"id": "r-1", "pipeline_run_id": "@uuid:00000000-0000-0000-0000-0000000000a1", "run_type": "initial", "follow_up_of": null, "result_summary": {"coverage_report": {"overall": 0.7, "gaps": ["latam"]}}}],
+   "source_buckets": [
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "extended_30", "source_count": 30, "coverage_pct": "@dec:0.61", "question_coverage": {"q2": 1}, "geographic_assessment": "regional", "geographic_flags": ["gap_latam"], "quality_gate": {"passed": true}, "builder_method": "llm", "llm_calls_used": 4},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "core_10", "source_count": 10, "coverage_pct": "@dec:0.42", "question_coverage": {"q1": 1}, "geographic_assessment": "narrow", "geographic_flags": ["only_domestic"], "quality_gate": {"passed": true}, "builder_method": null, "llm_calls_used": 1}
+   ],
+   "calls": [{"ep": "coverage", "run_id": "r-1"}]
+  },
+  {
+   "id": "coverage-stringified",
+   "discovery_runs": [{"id": "r-1", "pipeline_run_id": "@uuid:00000000-0000-0000-0000-0000000000a1", "run_type": "initial", "follow_up_of": null, "result_summary": "{\"coverage_report\": {\"overall\": 0.5, \"gaps\": [\"asia\"]}}"}],
+   "source_buckets": [
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "bucket_label": "core_10", "source_count": 10, "coverage_pct": "@dec:0.42", "question_coverage": {"q1": 1}, "geographic_assessment": "narrow", "geographic_flags": [], "quality_gate": {"passed": true}, "builder_method": null, "llm_calls_used": 1}
+   ],
+   "calls": [{"ep": "coverage", "run_id": "r-1"}]
+  },
+  {
+   "id": "empty-shapes",
+   "discovery_runs": [{"id": "r-2", "pipeline_run_id": null, "run_type": "initial", "follow_up_of": null, "result_summary": null}],
+   "calls": [
+    {"ep": "buckets", "run_id": "r-2"},
+    {"ep": "matrix", "run_id": "r-2"},
+    {"ep": "coverage", "run_id": "r-2"},
+    {"ep": "sources", "run_id": "r-2"},
+    {"ep": "countries", "run_id": "r-2"}
+   ]
+  },
+  {
+   "id": "missing-run",
+   "discovery_runs": [],
+   "calls": [
+    {"ep": "buckets", "run_id": "r-404"},
+    {"ep": "matrix", "run_id": "r-404"},
+    {"ep": "coverage", "run_id": "r-404"},
+    {"ep": "sources", "run_id": "r-404"},
+    {"ep": "countries", "run_id": "r-404"}
+   ]
+  },
+  {
+   "id": "sources-serialization",
+   "discovery_runs": [{"id": "r-1", "pipeline_run_id": "@uuid:00000000-0000-0000-0000-0000000000a1", "run_type": "initial", "follow_up_of": null}],
+   "sources": [
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "domain": "d01.example", "title": "S1", "source_type": "government", "viability_score": "@dec:0.91", "country": "PL", "source_tier": 1, "is_relevant": true, "priority_label": "high", "intelligence_function": "regulatory", "content_originality": "primary", "bucket_label": "core_10", "topics": ["Area:Energy"], "config_tags": {}, "strategic_questions_served": [1], "reasoning": "r", "id": "@uuid:00000000-0000-0000-0000-00000000c001", "created_at": "@dt:2026-04-20T10:00:00Z"},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "domain": "d02.example", "title": "S2", "source_type": "news", "viability_score": "@dec:0.88", "country": "DE", "source_tier": 2, "is_relevant": true, "priority_label": "medium", "intelligence_function": "market", "content_originality": "aggregator", "bucket_label": "extended_30", "topics": ["Area:Ports"], "config_tags": {}, "strategic_questions_served": [2], "reasoning": "r", "id": "@uuid:00000000-0000-0000-0000-00000000c002", "created_at": "@dt:2026-04-20T11:00:00Z"},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "domain": "d03.example", "title": "S3", "source_type": "ngo", "viability_score": "@dec:0.75", "country": "FR", "source_tier": 2, "is_relevant": true, "priority_label": "medium", "intelligence_function": "civil", "content_originality": "primary", "bucket_label": "extended_30", "topics": ["Area:Energy"], "config_tags": {}, "strategic_questions_served": [1], "reasoning": "r", "id": "@uuid:00000000-0000-0000-0000-00000000c003", "created_at": "@dt:2026-04-20T12:00:00Z"}
+   ],
+   "calls": [{"ep": "sources", "run_id": "r-1"}]
+  },
+  {
+   "id": "g-preserved",
+   "discovery_runs": [{"id": "r-1", "pipeline_run_id": "@uuid:00000000-0000-0000-0000-0000000000a1", "run_type": "initial", "follow_up_of": null, "portfolio_analysis": {"posture": "defensive", "score": 3}, "tag_taxonomy": {"Energy": ["grid", "solar"]}, "strategic_briefing": {"headline": "steady"}, "coverage_matrix": {"q1": {"core_10": 1}}}],
+   "sources": [
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "domain": "d01.example", "title": "S1", "source_type": "government", "viability_score": "@dec:0.91", "country": "PL", "source_tier": 1, "is_relevant": true, "priority_label": "high", "intelligence_function": "regulatory", "content_originality": "primary", "bucket_label": "core_10", "topics": ["Area:Energy"], "config_tags": {}, "strategic_questions_served": [1], "reasoning": "r", "id": "@uuid:00000000-0000-0000-0000-00000000c001", "created_at": "@dt:2026-04-20T10:00:00Z"},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "domain": "d02.example", "title": "S2", "source_type": "news", "viability_score": "@dec:0.88", "country": "PL", "source_tier": 2, "is_relevant": true, "priority_label": "medium", "intelligence_function": "market", "content_originality": "aggregator", "bucket_label": "extended_30", "topics": ["Area:Ports"], "config_tags": {}, "strategic_questions_served": [2], "reasoning": "r", "id": "@uuid:00000000-0000-0000-0000-00000000c002", "created_at": "@dt:2026-04-20T11:00:00Z"},
+    {"run_id": "00000000-0000-0000-0000-0000000000a1", "domain": "d03.example", "title": "S3", "source_type": "ngo", "viability_score": "@dec:0.75", "country": "DE", "source_tier": 2, "is_relevant": true, "priority_label": "low", "intelligence_function": "civil", "content_originality": "primary", "bucket_label": "extended_30", "topics": ["Area:Energy"], "config_tags": {}, "strategic_questions_served": [1], "reasoning": "r", "id": "@uuid:00000000-0000-0000-0000-00000000c003", "created_at": "@dt:2026-04-20T12:00:00Z"}
+   ],
+   "calls": [
+    {"ep": "portfolio", "run_id": "r-1"},
+    {"ep": "taxonomy", "run_id": "r-1"},
+    {"ep": "briefing", "run_id": "r-1"},
+    {"ep": "covmatrix", "run_id": "r-1"},
+    {"ep": "countries", "run_id": "r-1"}
+   ]
+  }
+ ]
+}
+

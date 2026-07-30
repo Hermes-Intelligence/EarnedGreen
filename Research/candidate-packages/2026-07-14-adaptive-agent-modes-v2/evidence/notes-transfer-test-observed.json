@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-19",
+  "campaign": "Evals/experiments/notes-transfer-test.json (approved exactly 2 calls; spent 1; 1 unspent)",
+  "predictions_registered_before_spend": "evidence/notes-transfer-test-predictions.json",
+
+  "verdict": "P-N1 FAILED as pre-registered. Style transferred; strength did not. Both seed notes RETIRED by the bank's own rule (measured non-transfer). The oracle-strength gap survives a third intervention.",
+
+  "what_happened_operationally": {
+    "run": "author call executed (exit 0); the campaign then hard-stopped with stopped-arm-carries-no-mechanism because zero checks were admitted",
+    "infrastructure_bug_found_and_fixed": "the authoring/admission baseline was the host-baseline SNAPSHOT, which strips node_modules (a Python-era exclusion) — so every authored check died on `Cannot find package 'jspdf'` at admission: error-red, nothing admitted, trial refused for the harness's fault. FIX: the authoring/admission baseline is now the PRISTINE WORKSPACE (runtime included), with pristineness PROVEN against the baseline inventory (author_role.verify_pristine) rather than assumed. Regression tests added.",
+    "honest_confound_noted": "this same missing-stub condition existed for ALL prior authors — which is why they hand-rolled jspdf mocks, and hand-rolled mocks invite exactly the geometry-approximation failure mode P1 diagnosed. Part of the earlier weak-observable mode was environment-induced. The P1 verdict stands (the author still chose geometry), but the environment made the right thing harder.",
+    "salvage_at_zero_calls": "re-admitted the recorded author reply against the corrected baseline; probed all 9 authored checks against (a) a prior 92-scoring solution workspace (defective ONLY on the contested dimension) and (b) the shipped reference."
+  },
+
+  "the_measurement": {
+    "P-N1": {
+      "registered": "at least one authored check RED on a prior 92-solution AND GREEN on the shipped reference; baseline 0/3 authors",
+      "result": "FAILED — no authored check discriminates. citation_separated is GREEN on the defective solution: it asserts NON-GLUING (pieces not concatenated into one token) where the documented rule requires SEPARATION (a separator between adjacent items). A weaker predicate than the rule, again.",
+      "full_probe": "9 checks: 4 GREEN/GREEN (guards, incl. the weak separation check), 2 enum GREEN/GREEN, 3 citation cap/dedupe RED on BOTH sides — over-constrained: the author invented a citation-label format outside the documented form, so those checks reject the shipped fix itself."
+    },
+    "P-N2": {
+      "registered": "explicit convention-to-check mapping OR explicit uncovered declaration",
+      "result": "PARTIAL — the reply maps 9 checks to 8 derived REQ ids (mapping present); REQ-6 is silently absent with no uncovered-declaration."
+    },
+    "what_DID_transfer": "the style. The author's shared harness is 100% grounded in emitted content and its header restates the lesson's reasoning almost verbatim ('stubbed geometry can pass while the emitted text is still wrong'). The geometry failure mode is GONE. Coverage improved (all 8 convention areas touched vs a whole dimension missing in main t1). What did not transfer: ORACLE-STRENGTH PREDICATES.",
+    "classifier_gap_found_and_fixed": "5 genuine assertion checks were refused as suspicious-red because the author caught assertions and printed tidy messages, and the marker-based classifier (Python vocabulary) saw 'unknown'. Fixed: ERR_ASSERTION added to markers; the brief now instructs authors to let assertions propagate raw. HONESTY NOTE: this gap did NOT mask a success — even with all 9 admitted, no check discriminates the defective solution from the reference (3 are over-constrained, the separation check is weak), so the P-N1 verdict is unchanged."
+  },
+
+  "protocol_executed_as_registered": {
+    "record_measurement": "transferred=false on both seed notes -> both RETIRED mechanically (the bank applied its own earned-persistence rule to itself, first live firing)",
+    "new_failure_modes_observed": ["weak-predicate (consequence asserted instead of the rule's own requirement)", "out-of-domain-inputs (invented inputs outside the documented feature domain -> checks reject the correct implementation)"],
+    "new_candidate_notes_added_provisional": ["predicate-from-the-conventions-words", "test-inputs-from-documented-examples"],
+    "their_status": "provisional — they route forward but are NOT trusted; testing them needs a separate owner-approved spend"
+  },
+
+  "what_this_means": {
+    "for_the_owner_question_is_there_something_novel_that_improves_quality": "Still NO, now measured one level deeper: even executable-routed institutional knowledge, phrased as error classes and demonstrably READ and APPLIED by the next author (style transfer is visible in the artifact), did not produce oracle-strength predicates in 1 trial. The gap is not delivery, not coverage, not observable choice — it is PREDICATE STRENGTH: a mind deriving a predicate from a rule's prose writes something weaker than the rule, in a different way each time (geometry, non-gluing, invented domains).",
+    "the_arrow_points_harder_at_history": "every intervention that failed (iteration, admission, notes) asked a mind to DERIVE the predicate. The only oracle that ever discriminated was derived from the DIFF (the shipped fix's observable behaviour change). Next honest bet: derive predicates mechanically from before/after behaviour differences (history/shadow-replay), not from prose comprehension.",
+    "mechanism_health": "the machinery itself behaved perfectly: hard stop refused a mechanism-less trial, the bank retired its own notes on measured non-transfer, pre-registered falsification was executed without goalpost movement, and both discovered infrastructure defects (baseline runtime, classifier vocabulary) were fixed with regression tests at zero calls."
+  },
+
+  "spend": {"approved_this_test": 2, "spent": 1, "unspent": 1,
+             "session_totals": "step7 21/28 + this 1/2; every call accounted"}
+}

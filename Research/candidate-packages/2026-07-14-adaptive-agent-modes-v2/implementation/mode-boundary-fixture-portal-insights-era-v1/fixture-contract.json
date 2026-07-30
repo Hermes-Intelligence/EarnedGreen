@@ -1,0 +1,132 @@
+{
+  "schema_version": 2,
+  "id": "portal-insights-era-v1",
+  "version": 1,
+  "status": "candidate-not-authoritative",
+  "fixture_class": "underspecified-by-design",
+  "proprietary": true,
+  "workspace_source": "local-git-copy",
+  "purpose": "THIRD TASK FAMILY for the decisive-recipe replication, built difficulty-first after family 2 closed as untestable-as-hard. Replays the HermesPortal insights era 7c77cb0^..1e762e5 (2026-04-15..29, 26 commits, +1341 lines on routes/vextrum.py, a ~10k-line module): the before-state lacks the buckets / question-source-matrix / coverage-report endpoints entirely, crashes on Decimal serialization, and the era adds canonical bucket ordering, page-level flag/quality-gate aggregation, bipartite-edge enrichment and stringified-summary tolerance. EVERY family-2 lesson built in from birth: the observable surface is the DELIVERABLE (emitted JSON payloads, semantic, value-bearing kinds); the graded slice's SQL is trivial (col = %s conjunctions only) so the stub never emulates rich SQL semantics; filters/sorting/new_only are UNGRADED AND NAMED and the corpus never exercises them; bucket order honoured by LITERAL RANKING (any ORDER BY spelling listing the labels works); SELECT-list projection and documented seams (DATA.md) throughout; read-only slice = the write-emulation class cannot exist.",
+  "context_tags": [
+    "api",
+    "analytics",
+    "json",
+    "portal",
+    "python"
+  ],
+  "public_test": [
+    "{python}",
+    "tests/public_test.py"
+  ],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": [
+    "buckets-canonical",
+    "bucket-aggregations",
+    "matrix-enrichment",
+    "coverage-tolerance",
+    "serialization-safety",
+    "empty-vs-404",
+    "preserved-behaviour"
+  ],
+  "serialized_output_dimensions": [],
+  "local_source": {
+    "repo_dir": "HermesPortal",
+    "before_ref": "7c77cb0^",
+    "after_ref": "1e762e5",
+    "rework_commits": [
+      "7c77cb0",
+      "a26e755",
+      "49dba86",
+      "276a409",
+      "804e7c1",
+      "85ad553",
+      "1e762e5"
+    ],
+    "files": [
+      {
+        "source_path": "src/hermes_intelligence/routes/vextrum.py",
+        "target_path": "hermes_intelligence/routes/vextrum.py",
+        "altformat_replace": [
+          {
+            "find": "ORDER BY CASE bucket_label\n               WHEN 'core_10' THEN 1\n               WHEN 'extended_30' THEN 2\n               WHEN 'complete_50' THEN 3\n               WHEN 'beyond_80' THEN 4\n               ELSE 5\n           END",
+            "replace": "ORDER BY array_position(ARRAY['core_10','extended_30','complete_50','beyond_80'], bucket_label) NULLS LAST"
+          }
+        ]
+      }
+    ],
+    "altformat_note": "The altformat variant spells the canonical bucket ordering as array_position instead of ORDER BY CASE - a different-but-valid SQL formulation. The driver's literal-ranking ORDER BY evaluation serves both; the variant proves at admission time that the grader never pins the spelling."
+  },
+  "materialize": {
+    "base": "before",
+    "hidden/reference": "after",
+    "hidden/reference-alt": "after-altformat",
+    "negative-controls/before-module": "before"
+  },
+  "grading_surface": {
+    "api": "the nine analytics endpoint functions called directly (get_run_buckets, get_question_source_matrix, get_coverage_report, get_run_sources, plus the five preserved endpoints); auth/access/db are sys.modules seams provided by the driver",
+    "recording_stub": "hidden/portal_driver.py: documented-function db seam (read_single_record / read_multiple_records) over canned tables with SELECT-list projection, col=%s-conjunction WHERE only, literal-ranking + plain-column ORDER BY, LIMIT/OFFSET, count(*), the countries GROUP BY shape, and LATERAL enrichment emulation for the SQL path (a python-side two-query merge is served equally by plain equality lookups). Unknown tables/columns and unsupported predicates are NAMED totality findings.",
+    "mechanical_grader": "hidden/grade.py executes hidden/derived-predicates.json: gen-4 relational predicates + count-equal on payload-fact kinds, exact seq guards on the five preserved endpoints; 7 families. Hand-made parts: corpus scenarios, family grouping, event normalization; every expectation VALUE mechanical."
+  },
+  "convention_anchors": [
+    {
+      "check_id": "buckets-canonical",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "Buckets are always presented in canonical size order"
+    },
+    {
+      "check_id": "bucket-aggregations",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "one flat list concatenating every bucket's\n    list-valued flags"
+    },
+    {
+      "check_id": "bucket-aggregations",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "the maximum across buckets' integer values"
+    },
+    {
+      "check_id": "matrix-enrichment",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "enriched with the matching\n  source's viability score and source type"
+    },
+    {
+      "check_id": "coverage-tolerance",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "stored either as\n  a JSON object or as\n  a JSON-encoded string"
+    },
+    {
+      "check_id": "serialization-safety",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "A response must never fail to\n  serialize because of a database type."
+    },
+    {
+      "check_id": "empty-vs-404",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "analytics\n  never 404 on a merely-unstarted run"
+    },
+    {
+      "check_id": "preserved-behaviour",
+      "evidence_file": "CONVENTIONS.md",
+      "quote": "Portfolio analysis, tag taxonomy, strategic briefing, coverage matrix and\n  countries answer exactly as they do today."
+    }
+  ],
+  "expected_controls": [
+    {
+      "id": "before-module",
+      "min_score": 5,
+      "max_score": 40,
+      "note": "The REAL pre-era module: the three new endpoints raise AttributeError, sources crashes on Decimal; preserved endpoints and parts of the empty/404 discipline pass."
+    },
+    {
+      "id": "reference",
+      "min_score": 100,
+      "max_score": 100
+    }
+  ],
+  "campaign_loop_overrides": {
+    "max_turns_per_call": 60,
+    "max_wall_minutes_per_call": 40,
+    "reason": "A ~10k-line module with a multi-endpoint underspecified rework; same budget rationale as the prior eras."
+  },
+  "interpretation": "Underspecified-by-design at scale on a DELIVERABLE surface: a symptom-level incident list plus payload conventions covering a 26-commit insights era. Score moves in steps of ~14 (7 families). HONEST CAVEATS to publish with any result: sources filtering/sorting/new_only and the count-consistency of filtered pages are UNGRADED AND NAMED (their SQL grammar is wide; the corpus never exercises them - the family-2 lesson applied by construction); the db stub serves col=%s-conjunction reads over canned rows, never SQL semantics; an implementation reading tables or columns outside DATA.md fails as a named totality finding."
+}

@@ -7,8 +7,14 @@ The gate does not trust recorded outcomes. It:
   * requires every ``verification_runs`` entry and every ``test``/``migration``
     evidence item to name a command AND record ``exit_code == 0``;
   * actually re-executes each recorded command via subprocess and compares the
-    observed exit code (and, when recorded, an output hash) against the claim.
+    observed exit code (and, when recorded, an output hash) against the claim;
+  * when the verification-loop capability is active, verifies the frozen check
+    suite's integrity and RE-RUNS the whole independent suite itself - a green
+    loop report written by the agent is never evidence, only the re-execution.
 Any missing, mismatched, or failing re-execution turns the verdict into FAIL.
+
+Requirements are CAPABILITY-driven (evidence.capabilities), not mode-rank
+driven: the mode string is informational.
 """
 from __future__ import annotations
 
@@ -213,7 +219,7 @@ def _spec_first_checks(spec: dict[str, Any], spec_freeze: dict[str, Any] | None,
 def validate(ledger: dict[str, Any], evidence: dict[str, Any], workspace: Path,
              baseline: dict[str, Any] | None = None, task_path: Path | None = None,
              schema: dict[str, Any] | None = None, reexecute: bool = True,
-             impact_map: dict[str, Any] | None = None,
+             check_suite: dict[str, Any] | None = None,
              checkpoint: dict[str, Any] | None = None,
              handoff: dict[str, Any] | None = None,
              spec: dict[str, Any] | None = None,
@@ -222,6 +228,7 @@ def validate(ledger: dict[str, Any], evidence: dict[str, Any], workspace: Path,
     warnings: list[dict[str, str]] = []
     workspace = Path(workspace)
     cache: dict[Any, tuple] = {}
+    harness_evidence: dict[str, Any] | None = None
 
     # (d) Ledger must be non-empty and structurally valid before anything is trusted.
     schema = schema if schema is not None else find_ledger_schema()
@@ -254,8 +261,18 @@ def validate(ledger: dict[str, Any], evidence: dict[str, Any], workspace: Path,
     else:
         warnings.append({"id": "task-sha256", "reason": "task file not resolvable; sha256 not independently verified"})
 
+    capabilities = set(evidence.get("capabilities") or [])
+    lean = "harness-evidence" in capabilities
+
+    # LEAN evidence (schema 4.1): the harness re-executes the frozen check
+    # suite itself, so per-requirement agent evidence rows, verification_runs
+    # and the completion claim are NOT demanded - transcribing what the
+    # harness already executed would be bureaucracy, not verification. The
+    # gate instead records its own re-run as the evidence (harness_evidence
+    # in the result). Agent-owned duties remain: material ambiguities and
+    # consumer inspections.
     evidence_rows = {row.get("requirement_id"): row for row in evidence.get("requirements", [])}
-    for req in ledger.get("requirements", []):
+    for req in [] if lean else ledger.get("requirements", []):
         row = evidence_rows.get(req["id"])
         if not row:
             failures.append({"id": req["id"], "reason": "missing evidence row"})
@@ -303,9 +320,11 @@ def validate(ledger: dict[str, Any], evidence: dict[str, Any], workspace: Path,
         if not resolution or not str(resolution.get("resolution", "")).strip() or not str(resolution.get("authority", "")).strip():
             failures.append({"id": ambiguity["id"], "reason": "material ambiguity lacks an authoritative resolution"})
 
-    # (a)+(b) Verification runs must be present, claim success, and re-execute successfully.
+    # (a)+(b) Verification runs must be present, claim success, and re-execute
+    # successfully. In lean mode the suite re-run replaces them (guarded below:
+    # a suite with no executable checks re-requires them).
     runs = evidence.get("verification_runs", [])
-    if not runs:
+    if not runs and not lean:
         failures.append({"id": "verification-runs", "reason": "no verification command recorded"})
     for run in runs:
         _verify_command_entry(run, "verification-runs", workspace, cache, failures, reexecute)
@@ -316,48 +335,67 @@ def validate(ledger: dict[str, Any], evidence: dict[str, Any], workspace: Path,
             if not target.exists() or sha256(target) != protected["sha256"]:
                 failures.append({"id": "protected-files", "reason": f"protected file changed: {protected['path']}"})
     claim = evidence.get("completion_claim", {})
-    if claim.get("status") != "ready":
+    if not lean and claim.get("status") != "ready":
         failures.append({"id": "completion-claim", "reason": "completion_claim.status must be ready"})
-    mode = evidence.get("mode")
-    mode_rank = {"vanilla": 0, "mode-1-lean": 1, "mode-2-routed": 2, "mode-3-assured": 3, "full": 4}.get(mode, -1)
-    if mode_rank >= 3:
-        if impact_map is None:
-            candidate = HERE / "impact-map.json"
-            impact_map = load(candidate) if candidate.is_file() else None
-        required_sections = {"definitions", "consumers", "tests", "compatibility", "documentation", "observability"}
-        sections = (impact_map or {}).get("sections", {})
-        for section in sorted(required_sections):
-            row = sections.get(section)
-            if not row:
-                failures.append({"id": f"impact-map:{section}", "reason": "required impact section missing"})
-            elif row.get("status") == "verified" and not row.get("evidence"):
-                failures.append({"id": f"impact-map:{section}", "reason": "verified impact section has no evidence"})
-            elif row.get("status") == "not_applicable" and not str(row.get("reason", "")).strip():
-                failures.append({"id": f"impact-map:{section}", "reason": "not_applicable impact section has no reason"})
-            elif row.get("status") not in {"verified", "not_applicable"}:
-                failures.append({"id": f"impact-map:{section}", "reason": "impact section is not complete"})
 
-        adversarial = evidence.get("adversarial_verification", {})
-        if adversarial.get("status") != "PASS" or not adversarial.get("threat_model"):
-            failures.append({"id": "adversarial-verification", "reason": "Mode 3+ requires PASS and a non-empty threat model"})
-        adversarial_runs = adversarial.get("verification_runs", [])
-        if not adversarial_runs:
-            failures.append({"id": "adversarial-verification", "reason": "no adversarial challenge command recorded"})
-        for run in adversarial_runs:
-            _verify_command_entry(run, "adversarial-verification", workspace, cache, failures, reexecute)
+    # Verification loop (forcing functions): the gate verifies the frozen
+    # suite's integrity and RE-RUNS every independent check itself. A green
+    # loop report the agent wrote is not evidence; only this re-execution is.
+    if "verification-loop" in capabilities:
+        if check_suite is None:
+            candidate = HERE / "check-suite.json"
+            check_suite = load(candidate) if candidate.is_file() else None
+        if check_suite is None:
+            failures.append({"id": "check-suite", "reason": "verification-loop capability active but no check-suite.json found"})
+        else:
+            if str(HERE) not in sys.path:
+                sys.path.insert(0, str(HERE))
+            try:
+                import harness_checks
+            except ImportError:
+                harness_checks = None
+                failures.append({"id": "check-suite", "reason": "check suite present but the harness_checks module is unavailable to the gate"})
+            if harness_checks is not None:
+                for problem in harness_checks.verify_suite_integrity(check_suite):
+                    failures.append({"id": "check-suite-integrity", "reason": problem})
+                expected_freeze = None
+                enforcement_path = HERE / "enforcement.json"
+                if enforcement_path.is_file():
+                    expected_freeze = load(enforcement_path).get("check_suite_freeze_sha256")
+                if expected_freeze and str(check_suite.get("harness_freeze_sha256", "")).upper() != str(expected_freeze).upper():
+                    failures.append({"id": "check-suite-integrity", "reason": "suite freeze digest does not match the enforcement record"})
+                integrity_broken = any(row["id"].startswith("check-suite") for row in failures)
+                executable_kinds = {"acceptance", "differential", "property", "finding"}
+                if lean and not any(row.get("kind") in executable_kinds for row in check_suite.get("checks", [])):
+                    # Lean evidence stands on the suite; a suite with nothing
+                    # executable proves nothing, so the classic requirement
+                    # returns: the agent must record at least one runnable
+                    # verification.
+                    if not evidence.get("verification_runs"):
+                        failures.append({"id": "verification-runs", "reason": "lean evidence requires an executable check in the suite or at least one recorded verification command"})
+                if reexecute and not integrity_broken:
+                    report = harness_checks.run_suite(check_suite, workspace, evidence=evidence)
+                    harness_evidence = {
+                        "source": "pre-submit-gate re-run of the frozen check suite",
+                        "green": report["green"],
+                        "checks": [{"id": row["id"], "kind": row["kind"], "verdict": row["verdict"]} for row in report["checks"]],
+                    }
+                    if not report["green"]:
+                        for row in report["checks"]:
+                            for failure in row["failures"]:
+                                failures.append({"id": f"check:{row['id']}", "reason": failure.get("reason", "check failed")})
 
+    if "durable-checkpoints" in capabilities or "session-handoff-state" in capabilities:
         if checkpoint is None:
             candidate = HERE / "checkpoint.json"
             checkpoint = load(candidate) if candidate.is_file() else None
         if handoff is None:
             candidate = HERE / "session-handoff.json"
             handoff = load(candidate) if candidate.is_file() else None
-        continuity_required = bool((checkpoint or {}).get("required") or (handoff or {}).get("required"))
-        if continuity_required:
-            if not checkpoint or checkpoint.get("status") != "ready" or not checkpoint.get("evidence_refs") or not str(checkpoint.get("next_action", "")).strip():
-                failures.append({"id": "durable-checkpoint", "reason": "required checkpoint is not ready, evidence-backed, and actionable"})
-            if not handoff or handoff.get("status") != "ready" or not handoff.get("verified_state") or not str(handoff.get("next_action", "")).strip():
-                failures.append({"id": "session-handoff", "reason": "required handoff is not ready, evidence-backed, and actionable"})
+        if not checkpoint or checkpoint.get("status") != "ready" or not checkpoint.get("evidence_refs") or not str(checkpoint.get("next_action", "")).strip():
+            failures.append({"id": "durable-checkpoint", "reason": "required checkpoint is not ready, evidence-backed, and actionable"})
+        if not handoff or handoff.get("status") != "ready" or not handoff.get("verified_state") or not str(handoff.get("next_action", "")).strip():
+            failures.append({"id": "session-handoff", "reason": "required handoff is not ready, evidence-backed, and actionable"})
     # Spec-first controls apply when the mode decision carried spec-synthesis
     # (recorded in evidence capabilities) or a spec.json exists beside the gate.
     if spec is None:
@@ -373,15 +411,79 @@ def validate(ledger: dict[str, Any], evidence: dict[str, Any], workspace: Path,
         else:
             _spec_first_checks(spec, spec_freeze, evidence, workspace, resolved_task, failures, cache, reexecute)
 
-    if mode == "full":
+    if "human-approval-boundaries" in capabilities:
         scope = evidence.get("scope_approval", {})
         if scope.get("status") != "approved" or not str(scope.get("approved_by", "")).strip():
-            failures.append({"id": "scope-approval", "reason": "full mode requires recorded human scope approval"})
+            failures.append({"id": "scope-approval", "reason": "critical mode requires recorded human scope approval"})
+    if "independent-verifier" in capabilities:
         verifier = evidence.get("independent_verification", {})
         if verifier.get("status") != "PASS" or not str(verifier.get("verifier_profile", "")).strip():
-            failures.append({"id": "independent-verification", "reason": "full mode requires an independent PASS with verifier profile"})
+            failures.append({"id": "independent-verification", "reason": "critical mode requires an independent PASS with verifier profile"})
+        # Inert-verdict fix: verifier findings must be ingested into the check
+        # suite (where they stay blocking until resolved with re-executable
+        # proof). A findings file that never reached the suite is a FAIL.
+        findings_path = HERE / "verifier-findings.json"
+        if findings_path.is_file():
+            finding_ids = {f"finding:{row.get('id')}" for row in load(findings_path).get("findings", [])}
+            suite_ids = {str(row.get("id")) for row in (check_suite or {}).get("checks", [])}
+            missing_ingest = sorted(finding_ids - suite_ids)
+            if missing_ingest:
+                failures.append({"id": "verifier-findings", "reason": "verifier findings not ingested into the check suite: " + ", ".join(missing_ingest)})
+    # THE TYPED VERDICT: what green means, and — louder — what it does not.
+    # Every silent defect this programme measured lived on a dimension nobody's
+    # check covered while the overall verdict said PASS. The manifest names the
+    # uncovered dimensions so green can never quietly claim them. Informational
+    # here (it does not flip completion_allowed): changing gate semantics
+    # mid-measurement would corrupt every running comparison; a later promoted
+    # schema may make uncovered-dimension a blocking state.
+    coverage = None
+    requirements = ledger.get("requirements", [])
+    if requirements and check_suite:
+        try:
+            import coverage_manifest
+            dimensions = [{"id": str(row.get("id")), "statement": str(row.get("statement", row.get("text", "")))}
+                          for row in requirements if row.get("id")]
+            manifest_checks = []
+            for row in check_suite.get("checks", []):
+                provenance = row.get("provenance")
+                if provenance not in coverage_manifest.VALID_PROVENANCE:
+                    if row.get("kind") == "derived":
+                        provenance = "diff-derived" if row.get("layer") == "diff" else "relation"
+                    elif row.get("id") == "public-tests":
+                        provenance = "repo-tests"
+                    else:
+                        provenance = "authored"
+                covers = row.get("covers") or ([row["requirement_ref"]] if row.get("requirement_ref") else [])
+                manifest_checks.append({"id": str(row.get("id")), "covers": covers, "provenance": provenance})
+            coverage = coverage_manifest.build(dimensions, manifest_checks)
+            coverage["rendered"] = coverage_manifest.render(coverage)
+        except (ImportError, ValueError) as error:
+            coverage = {"unavailable": f"{type(error).__name__}: {error}"}
+
+    # THE TIERED GATE (T2). Opt-in per task by the presence of .agentic/tiered.json:
+    # a repo that never created one is completely unaffected, so promoting this
+    # cannot disturb a running measurement. Where it IS enabled, the manifest's
+    # named-unverified dimensions require a RECORDED strong review before done —
+    # and that review still never certifies them (they stay in the unverified
+    # column). Without this call the escalation policy would be a library nobody
+    # invokes, which is the forms failure mode this repo exists to refuse.
+    tiered = None
+    tiered_state_path = (workspace / ".agentic/tiered.json") if workspace else None
+    if tiered_state_path and tiered_state_path.is_file() and coverage and "unverified" in coverage:
+        try:
+            import tiered_loop
+            state = tiered_loop.TieredState(tiered_state_path)
+            named = [row["id"] for row in coverage["unverified"]]
+            tiered = state.pre_done(named)
+            state.save()
+            if not tiered["ready"]:
+                failures.append({"id": "tiered-review",
+                                 "reason": tiered["reason"] + f" (dimensions: {', '.join(named)})"})
+        except (ImportError, ValueError, OSError) as error:
+            tiered = {"unavailable": f"{type(error).__name__}: {error}"}
     return {
-        "schema_version": 2,
+        "schema_version": 3,
+        "tiered_review": tiered,
         "verdict": "PASS" if not failures else "FAIL",
         "requirements": len(ledger.get("requirements", [])),
         "reexecuted_commands": len(cache),
@@ -389,6 +491,10 @@ def validate(ledger: dict[str, Any], evidence: dict[str, Any], workspace: Path,
         "warnings": warnings,
         "completion_allowed": not failures,
         "mode": evidence.get("mode"),
+        "capabilities": sorted(capabilities),
+        "evidence_model": "harness-generated" if lean else "agent-recorded",
+        "harness_evidence": harness_evidence,
+        "coverage_manifest": coverage,
     }
 
 
@@ -402,7 +508,7 @@ def main() -> None:
     parser.add_argument("--evidence", type=Path, required=True)
     parser.add_argument("--workspace", type=Path, required=True)
     parser.add_argument("--baseline", type=Path)
-    parser.add_argument("--impact-map", type=Path)
+    parser.add_argument("--check-suite", type=Path, help="frozen independent check suite (defaults to check-suite.json beside the gate)")
     parser.add_argument("--checkpoint", type=Path)
     parser.add_argument("--handoff", type=Path)
     parser.add_argument("--task", type=Path, help="task file to verify task_sha256 against")
@@ -418,7 +524,7 @@ def main() -> None:
         load(args.baseline) if args.baseline else None,
         task_path=args.task,
         reexecute=not args.no_reexecute,
-        impact_map=load(args.impact_map) if args.impact_map else None,
+        check_suite=load(args.check_suite) if args.check_suite else None,
         checkpoint=load(args.checkpoint) if args.checkpoint else None,
         handoff=load(args.handoff) if args.handoff else None,
         spec=load(args.spec) if args.spec else None,

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-17",
+  "campaign": "20260717-172714-adaptive-mode-ablation (Evals/experiments/step7-authoring-canary.json)",
+  "approved": "2 calls (author + 1 iteration), owner chose 'authoring-canary first'",
+  "spent": 1,
+  "final_status": "stopped-arm-carries-no-mechanism",
+  "verdict": "SUCCESS — the canary did exactly its job: it validated the authoring mechanism end-to-end with a live model AND caught a real delivery-contract bug BEFORE the full 18-call run, and the hard stop correctly refused to run a trial whose suite was empty.",
+
+  "what_the_live_author_produced": {
+    "author_call_cost_usd": 2.13,
+    "model": "claude-opus-4-8, effort medium, 60 turns",
+    "checks_written": ["citation-cap", "citation-dedup", "enum-markers", "long-prose-split",
+                        "encoding-preserved", "url-preserved"],
+    "quality": "high — 4 red-before checks each covering a distinct convention (cap/dedupe/enum/prose) and 2 green-before regression guards (encoding, url). The author factored setup into two shared helper modules (_env.mjs harness, _jspdf_mock.mjs) that every check imports.",
+    "run_dir": "Evals/runs/20260717-172814805-vextrum-edition-rework-v1-standard-loop-t1-author1"
+  },
+
+  "the_bug_the_canary_caught": {
+    "symptom": "AuthoringShortfall — no behavioural check admitted, so the trial was refused (correctly, by the hard stop).",
+    "cause": "collect_proposal captured only the files declared as a check's `script`. The author's two shared helpers (_env.mjs, _jspdf_mock.mjs) were NOT declared as checks, so they were dropped. Every check then died at admission on ERR_MODULE_NOT_FOUND importing ./_env.mjs — an error-red, never an assertion-red, so check_admission routed all six to suspicious-red and admitted none.",
+    "proof_it_was_only_the_contract": "Re-running admission with the helpers present (zero calls): all 6 admit — the 4 red-before fail on the baseline via ASSERTION (they discriminate), the 2 green-before pass. The author was right; my contract was wrong.",
+    "not_a_safety_failure": "The mechanism refused to spend the 2nd call on a trial with no working checks. A silent version would have run the loop against an empty suite and reported the score as the loop's — the exact defect that halted the campaign at 4/28. The hard stop is the feature working."
+  },
+
+  "the_fix": {
+    "collect_proposal": "captures the WHOLE checks/ subtree — scripts AND their shared helpers — because a check's dependencies must travel with it.",
+    "check_authoring.author": "carries auxiliary (helper) files into result['files'], frozen from the first admitting round via setdefault so a re-author cannot silently swap a helper the earlier checks were admitted against.",
+    "check_authoring.to_suite/merge": "pins every auxiliary file into EVERY check's integrity list (_auxiliary_files), so tampering with a shared helper fails closed.",
+    "install_checks": "installs ALL suite files (checks + helpers) into the solution workspace, not only the declared scripts — the same drop, one step later, would have broken every check at loop-run time.",
+    "brief": "now tells the author that helper modules must also live under checks/ and import by relative path.",
+    "regression_test": "tests/test_author_role.py::SharedHelper — a check importing a helper must admit, install and verify-pin; pins the exact defect at zero calls."
+  },
+
+  "deferred_proof_now_concrete": {
+    "claim": "arm_validity returns 'authored-at-run-time' for an authoring arm and explicitly does NOT prove discrimination itself — it defers to check_admission + the runner hard stop. This canary makes that proof concrete on a REAL live-authored suite.",
+    "method": "reconstruct the merged suite from the real canary author reply through the FIXED collect_proposal + author_into (zero calls), materialize the fixture's before/after variants, INSTALL the authored checks+helpers into each, run the suite.",
+    "result": {
+      "before_historical_bug": "RED on citation-cap, citation-dedup, enum-markers, long-prose-split (the 2 guards green)",
+      "after_shipped_fix": "GREEN on all six",
+      "conclusion": "the live-authored suite DISCRIMINATES: red on the historical bug, green on the shipped fix"
+    },
+    "probe_artifact_warning": "arm_validity.probe_suite run directly on this suite first reported 'over-constrained' — an ARTIFACT: probe_suite does not install workspace-relative authored scripts into its before/after workspaces, so every check failed 'script missing' on both sides. Real for authored suites, harmless for the campaign (arm_validity never probes authored suites — it returns authored-at-run-time). Corrected the probe by installing the scripts; the real verdict is 'discriminates'."
+  },
+
+  "spend_status": {
+    "approved_total": 28,
+    "spent_running_total": 5,
+    "breakdown": "4 on the halted invalid-design campaign + 1 author call here",
+    "remaining": 23,
+    "tree_state": "200/200 unit tests, candidate gate 36/36, zero further calls",
+    "next": "the fix is proven at zero calls on the real reply, but the FULL runner path (author -> admit -> merge -> install -> iterate -> grade) has not completed live with the fix. Recommend one more bounded 2-call authoring canary to see the full path green with a fresh author, THEN release the remaining ceiling."
+  }
+}

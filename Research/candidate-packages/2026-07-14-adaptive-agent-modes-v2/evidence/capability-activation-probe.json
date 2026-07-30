@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "verdict": "PASS",
   "provider_calls": 0,
   "checks": [
@@ -12,11 +12,27 @@
       "pass": true
     },
     {
-      "id": "impact-map",
+      "id": "verification-loop",
       "pass": true
     },
     {
-      "id": "adversarial-verification",
+      "id": "harness-evidence",
+      "pass": true
+    },
+    {
+      "id": "pre-submit-gate",
+      "pass": true
+    },
+    {
+      "id": "objective-ledger",
+      "pass": true
+    },
+    {
+      "id": "precision-router",
+      "pass": true
+    },
+    {
+      "id": "focused-verification",
       "pass": true
     },
     {
@@ -25,6 +41,22 @@
     },
     {
       "id": "session-handoff-state",
+      "pass": true
+    },
+    {
+      "id": "human-approval-boundaries",
+      "pass": true
+    },
+    {
+      "id": "independent-verifier",
+      "pass": true
+    },
+    {
+      "id": "bounded-loop",
+      "pass": true
+    },
+    {
+      "id": "spec-synthesis",
       "pass": true
     },
     {

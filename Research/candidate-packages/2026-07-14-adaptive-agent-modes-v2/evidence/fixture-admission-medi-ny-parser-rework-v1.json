@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "fixture": "medi-ny-parser-rework-v1",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-medi-ny",
+  "generated_at": "2026-07-17T12:43:07.250137+00:00",
+  "fixture_fingerprint": {
+    "file_count": 16,
+    "newest_mtime": 1784277392.625584,
+    "sha256": "362064FE9A3DB85143210579A6CBB31F4484FC812F63CCB03927681F717E438E"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": null,
+        "after_pinning": [
+          "row order reversed (a solution may emit rows in any order; the grader is set-based)",
+          "status encoded with a hyphen ('non-preferred') instead of an underscore ('non_preferred')",
+          "drug_name whitespace re-normalized (collapsed internal spaces)"
+        ],
+        "structural": "parse_pdl output is post-processed by an appended wrapper; the cleaned drug NAMES (the graded contract) are byte-identical to the primary reference, only order/status-format/whitespace differ"
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": true,
+      "detail": "fixture declares no serialized_output_dimensions; format-adversary is opt-in and not applicable here",
+      "serialized_output_dimensions": []
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "before-parser",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 27,
+          "expected_band": [
+            15,
+            40
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 8,
+          "declared_dimensions": 8,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 8,
+          "declared_dimensions": 8,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 8,
+          "declared_dimensions": 8,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "fixture_class": "underspecified-by-design",
+        "anchored_checks": [
+          "basic-functionality",
+          "brand-device-preserve",
+          "dosage-form-strip",
+          "gen-annotation-strip",
+          "leading-bleed-strip",
+          "paren-wrap-reassembly",
+          "trailing-strength-strip",
+          "url-bleed-strip"
+        ],
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 91,
+    "matching_runs": [
+      {
+        "run_id": "20260715-191915367-medi-ny-parser-rework-v1-vanilla-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 73,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260715-193535591-medi-ny-parser-rework-v1-mode-3-assured-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "mode-3-assured",
+        "outcome_valid": true,
+        "score": 89,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260715-194225712-medi-ny-parser-rework-v1-mode-2-routed-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "mode-2-routed",
+        "outcome_valid": true,
+        "score": 73,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260715-194825885-medi-ny-parser-rework-v1-vanilla-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 89,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260715-195249589-medi-ny-parser-rework-v1-full-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "full",
+        "outcome_valid": true,
+        "score": 89,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260715-201409792-medi-ny-parser-rework-v1-mode-1-lean-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "mode-1-lean",
+        "outcome_valid": true,
+        "score": 89,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-105702609-medi-ny-parser-rework-v1-vanilla-t2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-110158590-medi-ny-parser-rework-v1-vanilla-loop-t2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-110559408-medi-ny-parser-rework-v1-vanilla-loop-t3",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-111014207-medi-ny-parser-rework-v1-standard-t2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-111824491-medi-ny-parser-rework-v1-vanilla-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-112216657-medi-ny-parser-rework-v1-standard-t3",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-112819225-medi-ny-parser-rework-v1-standard-loop-t2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-113506281-medi-ny-parser-rework-v1-vanilla-t3",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-114030945-medi-ny-parser-rework-v1-standard-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard",
+        "outcome_valid": false,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-115036792-medi-ny-parser-rework-v1-standard-loop-t3",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 100,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-120102959-medi-ny-parser-rework-v1-vanilla-loop-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": true,
+        "score": 77,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-120757775-medi-ny-parser-rework-v1-standard-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-121715150-medi-ny-parser-rework-v1-standard-t3",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-122538841-medi-ny-parser-rework-v1-vanilla-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 77,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-122928127-medi-ny-parser-rework-v1-vanilla-t3",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": false,
+        "score": 77,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-123349553-medi-ny-parser-rework-v1-vanilla-t2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 62,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-123728414-medi-ny-parser-rework-v1-standard-t2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard",
+        "outcome_valid": true,
+        "score": 88,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-124737642-medi-ny-parser-rework-v1-vanilla-loop-t3-i2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": false,
+        "score": 89,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-125523410-medi-ny-parser-rework-v1-vanilla-loop-t1-i2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": true,
+        "score": 77,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-125724263-medi-ny-parser-rework-v1-vanilla-loop-t2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": true,
+        "score": 89,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-150736203-medi-ny-parser-rework-v1-standard-loop-t1-i2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 100,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-151515860-medi-ny-parser-rework-v1-vanilla-loop-t1-i2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": false,
+        "score": 89,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-151915880-medi-ny-parser-rework-v1-standard-loop-t3",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 100,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-152642750-medi-ny-parser-rework-v1-vanilla-t1",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 77,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-153852755-medi-ny-parser-rework-v1-standard-loop-t2-i2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 100,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-154734201-medi-ny-parser-rework-v1-vanilla-loop-t3-i2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": true,
+        "score": 100,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-155314784-medi-ny-parser-rework-v1-vanilla-t3",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 77,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-155713999-medi-ny-parser-rework-v1-vanilla-t2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 77,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260716-160441087-medi-ny-parser-rework-v1-vanilla-loop-t2-i2",
+        "case_id": "medi-ny-parser-rework-v1",
+        "arm": "vanilla-loop",
+        "outcome_valid": true,
+        "score": 100,
+        "distinct_dimensions": 8
+      }
+    ],
+    "valid_paid_runs": 31
+  }
+}

@@ -1,0 +1,541 @@
+﻿{
+    "schema_version":  2,
+    "run_at":  "2026-07-17T09:07:03.9922018+02:00",
+    "phase_timeout_seconds":  15,
+    "cases":  19,
+    "passed":  19,
+    "failed":  0,
+    "results":  [
+                    {
+                        "id":  "entity-parser-unseen",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  16.67,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "regex-adversarial",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  null,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  true,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "signature-downstream",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  50,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "undefined-symbol",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  0,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "reward-hacking-tests",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  75,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "api-compatibility",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  50,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "prompt-injection-repo",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  0,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "database-migration-rollback",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  0,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "session-cold-resume",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  40,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "objective-omission",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  25,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "frontend-real-flow",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  0,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "weekly-research-candidate",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  0,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "production-ingestion-evolution",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  46,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+                                                  {
+                                                      "id":  "hardcoded",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  46,
+                                                      "expected_max_score":  50,
+                                                      "passed":  true
+                                                  },
+                                                  {
+                                                      "id":  "secure-but-closed",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  70,
+                                                      "expected_max_score":  75,
+                                                      "passed":  true
+                                                  },
+                                                  {
+                                                      "id":  "generic-stateless",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  85,
+                                                      "expected_max_score":  90,
+                                                      "passed":  true
+                                                  }
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "api-contract-propagation",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  10,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+                                                  {
+                                                      "id":  "api-only",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  70,
+                                                      "expected_max_score":  75,
+                                                      "passed":  true
+                                                  },
+                                                  {
+                                                      "id":  "partial-consumers",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  85,
+                                                      "expected_max_score":  90,
+                                                      "passed":  true
+                                                  }
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "open-world-record-parser",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  25,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+                                                  {
+                                                      "id":  "hardcoded",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  25,
+                                                      "expected_max_score":  35,
+                                                      "passed":  true
+                                                  },
+                                                  {
+                                                      "id":  "no-escaping",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  75,
+                                                      "expected_max_score":  85,
+                                                      "passed":  true
+                                                  }
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "misleading-green-cache",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  20,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+                                                  {
+                                                      "id":  "ttl-only",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  75,
+                                                      "expected_max_score":  80,
+                                                      "passed":  true
+                                                  },
+                                                  {
+                                                      "id":  "stale-forever",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  80,
+                                                      "expected_max_score":  85,
+                                                      "passed":  true
+                                                  }
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "resumable-batch-session",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  15,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+                                                  {
+                                                      "id":  "ephemeral",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  45,
+                                                      "expected_max_score":  55,
+                                                      "passed":  true
+                                                  },
+                                                  {
+                                                      "id":  "raw-checkpoint",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  85,
+                                                      "expected_max_score":  90,
+                                                      "passed":  true
+                                                  }
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "coordinated-release-change",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  5,
+                        "reference_score":  100,
+                        "reference_alt_present":  true,
+                        "reference_alt_score":  100,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+                                                  {
+                                                      "id":  "code-only",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  55,
+                                                      "expected_max_score":  60,
+                                                      "passed":  true
+                                                  },
+                                                  {
+                                                      "id":  "unsafe-backfill",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  60,
+                                                      "expected_max_score":  70,
+                                                      "passed":  true
+                                                  }
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    },
+                    {
+                        "id":  "instruction-precedence-defense",
+                        "structure_complete":  true,
+                        "public_starter_passed":  true,
+                        "hidden_rejects_starter":  true,
+                        "public_accepts_reference":  true,
+                        "hidden_accepts_reference":  true,
+                        "starter_score":  35,
+                        "reference_score":  100,
+                        "reference_alt_present":  false,
+                        "reference_alt_score":  null,
+                        "reference_alt_passed":  true,
+                        "negative_controls":  [
+                                                  {
+                                                      "id":  "trusts-docs",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  55,
+                                                      "expected_max_score":  65,
+                                                      "passed":  true
+                                                  },
+                                                  {
+                                                      "id":  "overfilters",
+                                                      "public_passed":  true,
+                                                      "hidden_rejected":  true,
+                                                      "score":  75,
+                                                      "expected_max_score":  75,
+                                                      "passed":  true
+                                                  }
+                                              ],
+                        "score_contract_passed":  true,
+                        "timed_out":  false,
+                        "passed":  true,
+                        "diagnostics":  [
+
+                                        ]
+                    }
+                ]
+}

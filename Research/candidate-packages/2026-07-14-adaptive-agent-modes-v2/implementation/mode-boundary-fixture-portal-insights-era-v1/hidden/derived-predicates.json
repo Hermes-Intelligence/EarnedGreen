@@ -1,0 +1,956 @@
+{
+ "schema_version": 1,
+ "source": "GEN-4 relational + payload-fact count-equal, mechanically derived from HermesPortal 7c77cb0^..1e762e5 over hidden/corpus.json; altformat-filtered",
+ "rejected_by_variant": 0,
+ "dropped_by_family_policy": 0,
+ "upgraded_to_count_equal": 74,
+ "ungraded_named_dimensions": [
+  "sources-filtering-and-sorting (multi-select IN, tier casts, sort whitelist — wide SQL grammar; corpus never exercises it: the family-2 lesson applied by construction)",
+  "follow-up-new-only (same reason)",
+  "filtered-page-count-consistency (same reason)",
+  "keyset-cursor-pagination (helpers exist in the module; slice uses page numbers)"
+ ],
+ "discriminating": [
+  {
+   "id": "buckets-agg::kinds-gained",
+   "input_id": "buckets-agg",
+   "relation": "kinds-superset",
+   "expected": [
+    "bucket-0-core_10",
+    "bucket-1-extended_30",
+    "bucket-2-complete_50",
+    "bucketkeys-bucket_label+builder_method+coverage_pct+geographic_assessment+geographic_flags+llm_calls_used+quality_gate+question_coverage+source_count",
+    "end-buckets-ok",
+    "flag-buckets-flag_a",
+    "flag-buckets-flag_b",
+    "flag-buckets-flag_c",
+    "keys-buckets-buckets+builder_method+geographic_flags+llm_calls_used+quality_gate_results",
+    "q-discovery_runs",
+    "q-source_buckets",
+    "qg-alldict-True",
+    "qg-builder-llm_verified",
+    "qg-calls-11",
+    "qg-results-n2"
+   ],
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-bucket-0-core_10-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "bucket-0-core_10",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-bucket-1-extended_30-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "bucket-1-extended_30",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-bucket-2-complete_50-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "bucket-2-complete_50",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-bucketkeys-bucket_label+builder_method+coverage_pct+geographic_assessment+geographic_flags+llm_calls_used+quality_gate+question_coverage+source_count-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "bucketkeys-bucket_label+builder_method+coverage_pct+geographic_assessment+geographic_flags+llm_calls_used+quality_gate+question_coverage+source_count",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-end-buckets-ok-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "end-buckets-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-end-buckets-raise-AttributeError-eq0",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "end-buckets-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-flag-buckets-flag_a-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "flag-buckets-flag_a",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-flag-buckets-flag_b-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "flag-buckets-flag_b",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-flag-buckets-flag_c-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "flag-buckets-flag_c",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-keys-buckets-buckets+builder_method+geographic_flags+llm_calls_used+quality_gate_results-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "keys-buckets-buckets+builder_method+geographic_flags+llm_calls_used+quality_gate_results",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-q-discovery_runs-became-nonzero",
+   "input_id": "buckets-agg",
+   "relation": "count-direction",
+   "kind": "q-discovery_runs",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-q-source_buckets-became-nonzero",
+   "input_id": "buckets-agg",
+   "relation": "count-direction",
+   "kind": "q-source_buckets",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-qg-alldict-True-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "qg-alldict-True",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-qg-builder-llm_verified-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "qg-builder-llm_verified",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-qg-calls-11-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "qg-calls-11",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-agg::count-qg-results-n2-eq1",
+   "input_id": "buckets-agg",
+   "relation": "count-equal",
+   "kind": "qg-results-n2",
+   "expected": 1,
+   "baseline": 0,
+   "family": "bucket-aggregations"
+  },
+  {
+   "id": "buckets-rich::kinds-gained",
+   "input_id": "buckets-rich",
+   "relation": "kinds-superset",
+   "expected": [
+    "bucket-0-core_10",
+    "bucket-1-extended_30",
+    "bucket-2-complete_50",
+    "bucket-3-beyond_80",
+    "bucketkeys-bucket_label+builder_method+coverage_pct+geographic_assessment+geographic_flags+llm_calls_used+quality_gate+question_coverage+source_count",
+    "end-buckets-ok",
+    "flag-buckets-no_latam_coverage",
+    "flag-buckets-only_domestic",
+    "keys-buckets-buckets+builder_method+geographic_flags+llm_calls_used+quality_gate_results",
+    "q-discovery_runs",
+    "q-source_buckets",
+    "qg-alldict-True",
+    "qg-builder-llm",
+    "qg-calls-7",
+    "qg-results-n3"
+   ],
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-bucket-0-core_10-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "bucket-0-core_10",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-bucket-1-extended_30-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "bucket-1-extended_30",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-bucket-2-complete_50-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "bucket-2-complete_50",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-bucket-3-beyond_80-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "bucket-3-beyond_80",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-bucketkeys-bucket_label+builder_method+coverage_pct+geographic_assessment+geographic_flags+llm_calls_used+quality_gate+question_coverage+source_count-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "bucketkeys-bucket_label+builder_method+coverage_pct+geographic_assessment+geographic_flags+llm_calls_used+quality_gate+question_coverage+source_count",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-end-buckets-ok-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "end-buckets-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-end-buckets-raise-AttributeError-eq0",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "end-buckets-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-flag-buckets-no_latam_coverage-eq2",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "flag-buckets-no_latam_coverage",
+   "expected": 2,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-flag-buckets-only_domestic-eq2",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "flag-buckets-only_domestic",
+   "expected": 2,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-keys-buckets-buckets+builder_method+geographic_flags+llm_calls_used+quality_gate_results-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "keys-buckets-buckets+builder_method+geographic_flags+llm_calls_used+quality_gate_results",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-q-discovery_runs-became-nonzero",
+   "input_id": "buckets-rich",
+   "relation": "count-direction",
+   "kind": "q-discovery_runs",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-q-source_buckets-became-nonzero",
+   "input_id": "buckets-rich",
+   "relation": "count-direction",
+   "kind": "q-source_buckets",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-qg-alldict-True-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "qg-alldict-True",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-qg-builder-llm-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "qg-builder-llm",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-qg-calls-7-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "qg-calls-7",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "buckets-rich::count-qg-results-n3-eq1",
+   "input_id": "buckets-rich",
+   "relation": "count-equal",
+   "kind": "qg-results-n3",
+   "expected": 1,
+   "baseline": 0,
+   "family": "buckets-canonical"
+  },
+  {
+   "id": "coverage-dict::kinds-gained",
+   "input_id": "coverage-dict",
+   "relation": "kinds-superset",
+   "expected": [
+    "bucket-0-core_10",
+    "bucket-1-extended_30",
+    "bucketkeys-bucket_label+coverage_pct+geographic_assessment+geographic_flags+question_coverage+source_count",
+    "coverage-keys-gaps+overall",
+    "coverage-type-dict",
+    "end-coverage-ok",
+    "flag-coverage-gap_latam",
+    "flag-coverage-only_domestic",
+    "keys-coverage-buckets+coverage+geographic_flags",
+    "q-discovery_runs",
+    "q-source_buckets"
+   ],
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-bucket-0-core_10-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "bucket-0-core_10",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-bucket-1-extended_30-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "bucket-1-extended_30",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-bucketkeys-bucket_label+coverage_pct+geographic_assessment+geographic_flags+question_coverage+source_count-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "bucketkeys-bucket_label+coverage_pct+geographic_assessment+geographic_flags+question_coverage+source_count",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-coverage-keys-gaps+overall-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "coverage-keys-gaps+overall",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-coverage-type-dict-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "coverage-type-dict",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-end-coverage-ok-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "end-coverage-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-end-coverage-raise-AttributeError-eq0",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "end-coverage-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-flag-coverage-gap_latam-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "flag-coverage-gap_latam",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-flag-coverage-only_domestic-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "flag-coverage-only_domestic",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-keys-coverage-buckets+coverage+geographic_flags-eq1",
+   "input_id": "coverage-dict",
+   "relation": "count-equal",
+   "kind": "keys-coverage-buckets+coverage+geographic_flags",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-q-discovery_runs-became-nonzero",
+   "input_id": "coverage-dict",
+   "relation": "count-direction",
+   "kind": "q-discovery_runs",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-dict::count-q-source_buckets-became-nonzero",
+   "input_id": "coverage-dict",
+   "relation": "count-direction",
+   "kind": "q-source_buckets",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::kinds-gained",
+   "input_id": "coverage-stringified",
+   "relation": "kinds-superset",
+   "expected": [
+    "bucket-0-core_10",
+    "bucketkeys-bucket_label+coverage_pct+geographic_assessment+geographic_flags+question_coverage+source_count",
+    "coverage-keys-gaps+overall",
+    "coverage-type-dict",
+    "end-coverage-ok",
+    "keys-coverage-buckets+coverage+geographic_flags",
+    "q-discovery_runs",
+    "q-source_buckets"
+   ],
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-bucket-0-core_10-eq1",
+   "input_id": "coverage-stringified",
+   "relation": "count-equal",
+   "kind": "bucket-0-core_10",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-bucketkeys-bucket_label+coverage_pct+geographic_assessment+geographic_flags+question_coverage+source_count-eq1",
+   "input_id": "coverage-stringified",
+   "relation": "count-equal",
+   "kind": "bucketkeys-bucket_label+coverage_pct+geographic_assessment+geographic_flags+question_coverage+source_count",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-coverage-keys-gaps+overall-eq1",
+   "input_id": "coverage-stringified",
+   "relation": "count-equal",
+   "kind": "coverage-keys-gaps+overall",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-coverage-type-dict-eq1",
+   "input_id": "coverage-stringified",
+   "relation": "count-equal",
+   "kind": "coverage-type-dict",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-end-coverage-ok-eq1",
+   "input_id": "coverage-stringified",
+   "relation": "count-equal",
+   "kind": "end-coverage-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-end-coverage-raise-AttributeError-eq0",
+   "input_id": "coverage-stringified",
+   "relation": "count-equal",
+   "kind": "end-coverage-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-keys-coverage-buckets+coverage+geographic_flags-eq1",
+   "input_id": "coverage-stringified",
+   "relation": "count-equal",
+   "kind": "keys-coverage-buckets+coverage+geographic_flags",
+   "expected": 1,
+   "baseline": 0,
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-q-discovery_runs-became-nonzero",
+   "input_id": "coverage-stringified",
+   "relation": "count-direction",
+   "kind": "q-discovery_runs",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "coverage-stringified::count-q-source_buckets-became-nonzero",
+   "input_id": "coverage-stringified",
+   "relation": "count-direction",
+   "kind": "q-source_buckets",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "coverage-tolerance"
+  },
+  {
+   "id": "empty-shapes::kinds-gained",
+   "input_id": "empty-shapes",
+   "relation": "kinds-superset",
+   "expected": [
+    "coverage-type-dict",
+    "end-buckets-ok",
+    "end-coverage-ok",
+    "end-matrix-ok",
+    "keys-buckets-buckets",
+    "keys-coverage-coverage",
+    "keys-matrix-edges"
+   ],
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-coverage-type-dict-eq1",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "coverage-type-dict",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-end-buckets-ok-eq1",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "end-buckets-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-end-buckets-raise-AttributeError-eq0",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "end-buckets-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-end-coverage-ok-eq1",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "end-coverage-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-end-coverage-raise-AttributeError-eq0",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "end-coverage-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-end-matrix-ok-eq1",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "end-matrix-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-end-matrix-raise-AttributeError-eq0",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "end-matrix-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-keys-buckets-buckets-eq1",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "keys-buckets-buckets",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-keys-coverage-coverage-eq1",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "keys-coverage-coverage",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-keys-matrix-edges-eq1",
+   "input_id": "empty-shapes",
+   "relation": "count-equal",
+   "kind": "keys-matrix-edges",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "empty-shapes::count-q-discovery_runs-increased",
+   "input_id": "empty-shapes",
+   "relation": "count-direction",
+   "kind": "q-discovery_runs",
+   "baseline": 2,
+   "direction": "increased",
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "matrix-enriched::kinds-gained",
+   "input_id": "matrix-enriched",
+   "relation": "kinds-superset",
+   "expected": [
+    "edge-q1-acme.example-vs0.91-stgovernment",
+    "edge-q1-ghost.example-vsNone-stNone",
+    "edge-q2-beta.example-vs0.55-stnews",
+    "end-matrix-ok",
+    "keys-matrix-edges",
+    "q-discovery_runs",
+    "q-question_source_matrix"
+   ],
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "matrix-enriched::count-edge-q1-acme.example-vs0.91-stgovernment-eq1",
+   "input_id": "matrix-enriched",
+   "relation": "count-equal",
+   "kind": "edge-q1-acme.example-vs0.91-stgovernment",
+   "expected": 1,
+   "baseline": 0,
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "matrix-enriched::count-edge-q1-ghost.example-vsNone-stNone-eq1",
+   "input_id": "matrix-enriched",
+   "relation": "count-equal",
+   "kind": "edge-q1-ghost.example-vsNone-stNone",
+   "expected": 1,
+   "baseline": 0,
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "matrix-enriched::count-edge-q2-beta.example-vs0.55-stnews-eq1",
+   "input_id": "matrix-enriched",
+   "relation": "count-equal",
+   "kind": "edge-q2-beta.example-vs0.55-stnews",
+   "expected": 1,
+   "baseline": 0,
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "matrix-enriched::count-end-matrix-ok-eq1",
+   "input_id": "matrix-enriched",
+   "relation": "count-equal",
+   "kind": "end-matrix-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "matrix-enriched::count-end-matrix-raise-AttributeError-eq0",
+   "input_id": "matrix-enriched",
+   "relation": "count-equal",
+   "kind": "end-matrix-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "matrix-enriched::count-keys-matrix-edges-eq1",
+   "input_id": "matrix-enriched",
+   "relation": "count-equal",
+   "kind": "keys-matrix-edges",
+   "expected": 1,
+   "baseline": 0,
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "matrix-enriched::count-q-discovery_runs-became-nonzero",
+   "input_id": "matrix-enriched",
+   "relation": "count-direction",
+   "kind": "q-discovery_runs",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "matrix-enriched::count-q-question_source_matrix-became-nonzero",
+   "input_id": "matrix-enriched",
+   "relation": "count-direction",
+   "kind": "q-question_source_matrix",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "matrix-enrichment"
+  },
+  {
+   "id": "missing-run::kinds-gained",
+   "input_id": "missing-run",
+   "relation": "kinds-superset",
+   "expected": [
+    "http-buckets-404",
+    "http-coverage-404",
+    "http-matrix-404"
+   ],
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "missing-run::count-end-buckets-raise-AttributeError-eq0",
+   "input_id": "missing-run",
+   "relation": "count-equal",
+   "kind": "end-buckets-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "missing-run::count-end-coverage-raise-AttributeError-eq0",
+   "input_id": "missing-run",
+   "relation": "count-equal",
+   "kind": "end-coverage-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "missing-run::count-end-matrix-raise-AttributeError-eq0",
+   "input_id": "missing-run",
+   "relation": "count-equal",
+   "kind": "end-matrix-raise-AttributeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "missing-run::count-http-buckets-404-eq1",
+   "input_id": "missing-run",
+   "relation": "count-equal",
+   "kind": "http-buckets-404",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "missing-run::count-http-coverage-404-eq1",
+   "input_id": "missing-run",
+   "relation": "count-equal",
+   "kind": "http-coverage-404",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "missing-run::count-http-matrix-404-eq1",
+   "input_id": "missing-run",
+   "relation": "count-equal",
+   "kind": "http-matrix-404",
+   "expected": 1,
+   "baseline": 0,
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "missing-run::count-q-discovery_runs-increased",
+   "input_id": "missing-run",
+   "relation": "count-direction",
+   "kind": "q-discovery_runs",
+   "baseline": 2,
+   "direction": "increased",
+   "family": "empty-vs-404"
+  },
+  {
+   "id": "sources-serialization::kinds-gained",
+   "input_id": "sources-serialization",
+   "relation": "kinds-superset",
+   "expected": [
+    "end-sources-ok",
+    "keys-sources-page+pages+sources+total",
+    "sources-n3",
+    "sources-page-n1",
+    "sources-pages-n1",
+    "sources-total-n3"
+   ],
+   "family": "serialization-safety"
+  },
+  {
+   "id": "sources-serialization::count-end-sources-ok-eq1",
+   "input_id": "sources-serialization",
+   "relation": "count-equal",
+   "kind": "end-sources-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "serialization-safety"
+  },
+  {
+   "id": "sources-serialization::count-end-sources-raise-TypeError-eq0",
+   "input_id": "sources-serialization",
+   "relation": "count-equal",
+   "kind": "end-sources-raise-TypeError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "serialization-safety"
+  },
+  {
+   "id": "sources-serialization::count-keys-sources-page+pages+sources+total-eq1",
+   "input_id": "sources-serialization",
+   "relation": "count-equal",
+   "kind": "keys-sources-page+pages+sources+total",
+   "expected": 1,
+   "baseline": 0,
+   "family": "serialization-safety"
+  },
+  {
+   "id": "sources-serialization::count-sources-n3-eq1",
+   "input_id": "sources-serialization",
+   "relation": "count-equal",
+   "kind": "sources-n3",
+   "expected": 1,
+   "baseline": 0,
+   "family": "serialization-safety"
+  },
+  {
+   "id": "sources-serialization::count-sources-page-n1-eq1",
+   "input_id": "sources-serialization",
+   "relation": "count-equal",
+   "kind": "sources-page-n1",
+   "expected": 1,
+   "baseline": 0,
+   "family": "serialization-safety"
+  },
+  {
+   "id": "sources-serialization::count-sources-pages-n1-eq1",
+   "input_id": "sources-serialization",
+   "relation": "count-equal",
+   "kind": "sources-pages-n1",
+   "expected": 1,
+   "baseline": 0,
+   "family": "serialization-safety"
+  },
+  {
+   "id": "sources-serialization::count-sources-total-n3-eq1",
+   "input_id": "sources-serialization",
+   "relation": "count-equal",
+   "kind": "sources-total-n3",
+   "expected": 1,
+   "baseline": 0,
+   "family": "serialization-safety"
+  }
+ ],
+ "preserving": [
+  {
+   "id": "g-preserved::preserve-seq",
+   "input_id": "g-preserved",
+   "projection": "seq",
+   "expected": [
+    "q-discovery_runs",
+    "keys-portfolio-portfolio_analysis",
+    "payload-portfolio:{\"portfolio_analysis\": {\"posture\": \"defensive\", \"score\": 3}}",
+    "end-portfolio-ok",
+    "q-discovery_runs",
+    "keys-taxonomy-taxonomy",
+    "payload-taxonomy:{\"taxonomy\": {\"Energy\": [\"grid\", \"solar\"]}}",
+    "end-taxonomy-ok",
+    "q-discovery_runs",
+    "keys-briefing-strategic_briefing",
+    "payload-briefing:{\"strategic_briefing\": {\"headline\": \"steady\"}}",
+    "end-briefing-ok",
+    "q-discovery_runs",
+    "keys-covmatrix-coverage_matrix",
+    "payload-covmatrix:{\"coverage_matrix\": {\"q1\": {\"core_10\": 1}}}",
+    "end-covmatrix-ok",
+    "q-discovery_runs",
+    "q-sources",
+    "keys-countries-countries",
+    "payload-countries:{\"countries\": [{\"count\": 1, \"name\": \"DE\"}, {\"count\": 2, \"name\": \"PL\"}]}",
+    "end-countries-ok"
+   ],
+   "family": "preserved-behaviour"
+  }
+ ]
+}

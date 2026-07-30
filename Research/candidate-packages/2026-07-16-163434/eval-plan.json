@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "run_id": "2026-07-16-163434",
+  "status": "awaiting-eval",
+  "note": "This run proposes no runtime behaviour change, so it needs no arm ablation. The gates below cover the four proposals that touch anything executable. The scaffold's legacy arm names (vanilla/core/core-router/core-router-enforcement) are retired: the promoted architecture is lite/standard/critical with the verification loop (Stable 0.4.0).",
+  "gates": [
+    {
+      "id": "EV-01",
+      "gates": "P0 fixture-leak repair (medi-ny build_sample.py provenance docstring)",
+      "kind": "zero-provider",
+      "command": "python implementation/fixture_admission.py --fixture mode-boundary-fixture-medi-ny --output <evidence>",
+      "pass_condition": "admission PASS with reference=100, reference-alt=100, before-parser negative control=27 in band [15,40], grader isolation 8/8 under the hostile battery",
+      "blocks": "any re-run of the fixture"
+    },
+    {
+      "id": "EV-02",
+      "gates": "P0 fixture-leak repair - does the measured delta survive?",
+      "kind": "provider-calls",
+      "calls": "1-3, owner-approved, separate approval",
+      "design": "re-run one vanilla trial and one vanilla-loop trial on the repaired fixture",
+      "pass_condition": "vanilla stays at ~77 and the guided loop still reaches 100. If the loop collapses toward vanilla, the earlier result was partly measuring the leaked hint and the verification-loop claim must be re-scoped.",
+      "blocks": "any external publication of the 100/100/100 result as a clean shadow-replay",
+      "authorized": false
+    },
+    {
+      "id": "EV-03",
+      "gates": "MC-01 (haiku effort) - settle the argument from omission",
+      "kind": "provider-calls",
+      "calls": "1, owner-approved",
+      "design": "one API call: model=claude-haiku-4-5 with effort=low; observe HTTP 400 versus silently ignored",
+      "pass_condition": "outcome recorded either way. 400 -> resolve_capability_profile must omit effort for selectors declaring effort_support.supported=false, plus a regression test. Ignored -> catalog note only, no code change.",
+      "blocks": "MC-01's code change; the catalog patch's effort_support metadata is authored either way but only ENFORCED after this call",
+      "authorized": false
+    },
+    {
+      "id": "EV-04",
+      "gates": "Model catalog refresh (all of model-catalog.patch.json)",
+      "kind": "zero-provider",
+      "command": "deterministic model-profile suite + tools/agentic.ps1 model-recommend across every provider x profile pair",
+      "pass_condition": "10/10 model-profile cases still pass including risk-floor and incompatible-selector rejection; every provider x profile pair resolves; an expired catalog still blocks automation (automation_allowed=false)",
+      "blocks": "promotion of the refreshed catalog"
+    },
+    {
+      "id": "EV-05",
+      "gates": "P1 documentation edits (external citations, scope sentence) and the KB web_search correction",
+      "kind": "zero-provider",
+      "command": "python implementation/vault_hygiene.py --gate-package + tools/release-gate.ps1 -Mode infrastructure",
+      "pass_condition": "zero broken cross-references in the package; infrastructure gate 15/15; every added citation resolves to a live URL",
+      "blocks": "promotion of the documentation changes"
+    }
+  ],
+  "outstanding_obligation": {
+    "id": "OB-01",
+    "source": "https://arxiv.org/abs/2607.12227",
+    "statement": "The verification loop was tuned and evaluated on the same task family (medi-ny). Under the cited critique, harness gains evaluated on the tuning benchmark risk overfitting to that task set.",
+    "answered_half": "The matched-budget search baseline the paper demands is ANSWERED from existing paid data: best-of-3 vanilla = 77 at ~883k tokens versus a single guided loop = 100 at 647k-1.21M. The loop's gain is not extra search at equal spend.",
+    "outstanding_half": "Replication on a SECOND task family. Until then the loop's generalisation is asserted, not measured. This is the single largest open item in the benchmark program.",
+    "authorized": false
+  },
+  "provider_calls_authorized": 0,
+  "cost_controls": [
+    "No paid call in this plan is authorized; each needs separate explicit owner approval with an exact call count.",
+    "EV-02 and EV-03 are independent: EV-03 is one call settling a live automation defect; EV-02 is 1-3 calls settling fixture validity.",
+    "Any new campaign inherits the standing rules: admission gate, canary-first for unpaid fixtures, >=3 trials per arm for any verdict, every loop iteration counted as a call, Evals/local/STOP honoured."
+  ]
+}

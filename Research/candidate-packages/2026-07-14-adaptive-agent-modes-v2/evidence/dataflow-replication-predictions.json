@@ -1,0 +1,37 @@
+{
+ "schema_version": 1,
+ "registered_at": "2026-07-19",
+ "registered_before": "any provider call of the replication campaign",
+ "question": "Does the decisive recipe (hard task + valid gen-4 instrument + loop with frozen mechanical predicates) REPLICATE on a second, fully disjoint task family? Owner-approved 2026-07-19 ('zrobmy drugi zupelnie inny, ciezki i dlugi test').",
+ "family_disjointness": "different repo (VextrumDataFlow), different domain (DB-backed pipeline orchestration vs PDF rendering), different language surface (Python+SQL vs JS), MULTI-MODULE task (4 cooperating files vs 1), different failure texture (crash + quota burn + redo-everything vs visual output quality). Era: 9570b0b^..081b23d, 8 commits, ~190 churn.",
+ "design": {
+  "fixture": "vextrum-dataflow-era-v1 (admitted PASS; gen-4 grader from birth: before=14/after=100/alt=100; 87 discriminating + 3 guards, 7 families)",
+  "arms": {"vanilla-configured": "owner baseline: one call, conventions in workspace, no loop",
+           "oracle-loop": "full environment: loop + 90 frozen gen-4 pins, iteration ceiling 3, zero authoring calls"},
+  "trials": 3,
+  "spend": "1 canary (bare vanilla) + main 3 + 3x3 = at most 13 calls; owner blanket approval, number fixed by session and recorded per stage"
+ },
+ "predictions": [
+  {"id": "P-R1",
+   "claim": "Bare-vanilla canary lands in 14-60 with >=2 dimensions reported: a four-module underspecified orchestration rework breaks one-shot even under the partial-credit instrument.",
+   "falsified_if": "canary 100 -> REGISTERED BRAKE: stop before main, report saturation (the family is inside one-shot competence and the recipe's 'hard task' leg fails to replicate here)"},
+  {"id": "P-R2",
+   "claim": "REPLICATION VERDICT: oracle-loop mean > vanilla-configured mean by more than the 16-pt variance band, with all trials valid.",
+   "falsified_if": "gap <= 16 pts or reversed — the decisive win does NOT generalize to a second family and 0.6.2's claim gets scoped to the first family in the next manifest edit"},
+  {"id": "P-R3",
+   "claim": "The loop iterates with progress on at least one trial (green at iteration >= 2, or shrinking failure fingerprints), as on the first family.",
+   "falsified_if": "all oracle-loop trials green at iteration 1 (saturation for the loop arm) or all stall no-progress at the canary level (valid pins fail to force on this family)"},
+  {"id": "P-R4",
+   "claim": "The multi-module axis shows up: vanilla-configured fixes the crash (params-contract family GREEN in >=2 of 3 trials — it is the loudest symptom) but leaves at least one cross-module behaviour family (resume-reuse or incremental-materialization) RED in a majority of trials; oracle-loop greens those under forcing.",
+   "falsified_if": "vanilla-configured greens resume-reuse AND incremental-materialization in a majority of trials (the family is easier than designed), or oracle-loop cannot green them either (forcing fails on cross-module behaviours)"},
+  {"id": "P-R5",
+   "claim": "Envelope: every oracle-loop trial ends with preserved-behaviour GREEN; no arm regresses the no-op paths.",
+   "falsified_if": "any oracle-loop trial ends guard-red (the loop shipped an envelope break), reported as a loop failure"}
+ ],
+ "honest_framing_registered_up_front": [
+  "replay paradigm as before: pins derive from the era's own history; deployable where history provides before/after",
+  "the db stub emulates the %s contract and canned per-table state, not SQL semantics; planner pending-selection, UDS filter pushdown and retry-capping are UNGRADED AND NAMED",
+  "the gen-4 instrument's family policy here was set from before/after/alt derivation data only — no agent solutions existed for this fixture when the policy was set (unlike the first family, where the ladder analysis used probe solutions)",
+  "verdict rule pre-committed: replication holds ONLY IF P-R2; anything else is published at face value"
+ ]
+}

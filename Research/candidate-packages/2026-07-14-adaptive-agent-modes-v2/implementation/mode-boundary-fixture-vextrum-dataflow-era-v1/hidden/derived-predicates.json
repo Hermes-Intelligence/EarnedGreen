@@ -1,0 +1,886 @@
+{
+ "schema_version": 1,
+ "source": "GEN-4 relational + state-write count-equal, mechanically derived from VextrumDataFlow 9570b0b^..081b23d over hidden/corpus.json; altformat-filtered",
+ "rejected_by_variant": 0,
+ "dropped_by_family_policy": 0,
+ "upgraded_to_count_equal": 59,
+ "ungraded_named_dimensions": [
+  "planner-pending-selection (lives in SQL the stub serves permissively — fairness of the stub)",
+  "uds-filter-pushdown (source/topic/authority WHERE clauses served permissively)",
+  "retry-capping (FAILED >= 3 exclusion — same stub permissiveness)",
+  "db-connection-management-internals (db.py runs for real but its pooling/caching choices are free)"
+ ],
+ "discriminating": [
+  {
+   "id": "e2e-chain::kinds-gained",
+   "input_id": "e2e-chain",
+   "relation": "kinds-superset",
+   "expected": [
+    "end-execute-ok",
+    "end-materialize-ok",
+    "ret-exec-failed-n0",
+    "ret-exec-processed-n2",
+    "ret-exec-reused-n0",
+    "ret-exec-skipped-n0",
+    "ret-exec-succeeded-n2",
+    "ret-materialize-n2",
+    "ret-plan-n2",
+    "uds-q-events",
+    "vex-q-record",
+    "vex-q-steps",
+    "vex-q-watermark",
+    "vex-w-records-new",
+    "vex-w-run-COMPLETED",
+    "vex-w-run-PLANNED",
+    "vex-w-run-RUNNING",
+    "vex-w-step-SUCCEEDED",
+    "vex-w-step-new",
+    "vex-w-watermark"
+   ],
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-end-execute-ok-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "end-execute-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-end-materialize-ok-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "end-materialize-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-end-materialize-raise-ProgrammingError-eq0",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "end-materialize-raise-ProgrammingError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-err-params-eq0",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "err-params",
+   "expected": 0,
+   "baseline": 1,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-exec-failed-n0-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-exec-failed-n0",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-exec-noplan-eq0",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-exec-noplan",
+   "expected": 0,
+   "baseline": 1,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-exec-processed-n2-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-exec-processed-n2",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-exec-reused-n0-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-exec-reused-n0",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-exec-skipped-n0-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-exec-skipped-n0",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-exec-succeeded-n2-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-exec-succeeded-n2",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-materialize-n2-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-materialize-n2",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-plan-n2-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-plan-n2",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-ret-plan-none-eq0",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "ret-plan-none",
+   "expected": 0,
+   "baseline": 1,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-uds-q-events-became-nonzero",
+   "input_id": "e2e-chain",
+   "relation": "count-direction",
+   "kind": "uds-q-events",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-q-record-became-nonzero",
+   "input_id": "e2e-chain",
+   "relation": "count-direction",
+   "kind": "vex-q-record",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-q-steps-became-nonzero",
+   "input_id": "e2e-chain",
+   "relation": "count-direction",
+   "kind": "vex-q-steps",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-q-watermark-became-nonzero",
+   "input_id": "e2e-chain",
+   "relation": "count-direction",
+   "kind": "vex-q-watermark",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-w-records-new-eq2",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "vex-w-records-new",
+   "expected": 2,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-w-run-COMPLETED-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "vex-w-run-COMPLETED",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-w-run-PLANNED-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "vex-w-run-PLANNED",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-w-run-RUNNING-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "vex-w-run-RUNNING",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-w-step-SUCCEEDED-eq4",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "vex-w-step-SUCCEEDED",
+   "expected": 4,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-w-step-new-eq4",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "vex-w-step-new",
+   "expected": 4,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "e2e-chain::count-vex-w-watermark-eq1",
+   "input_id": "e2e-chain",
+   "relation": "count-equal",
+   "kind": "vex-w-watermark",
+   "expected": 1,
+   "baseline": 0,
+   "family": "e2e-chain"
+  },
+  {
+   "id": "exec-fail::kinds-gained",
+   "input_id": "exec-fail",
+   "relation": "kinds-superset",
+   "expected": [
+    "ret-exec-reused-n0",
+    "vex-q-steps"
+   ],
+   "family": "execution-robustness"
+  },
+  {
+   "id": "exec-fail::count-ret-exec-reused-n0-eq1",
+   "input_id": "exec-fail",
+   "relation": "count-equal",
+   "kind": "ret-exec-reused-n0",
+   "expected": 1,
+   "baseline": 0,
+   "family": "execution-robustness"
+  },
+  {
+   "id": "exec-fail::count-vex-q-steps-became-nonzero",
+   "input_id": "exec-fail",
+   "relation": "count-direction",
+   "kind": "vex-q-steps",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "execution-robustness"
+  },
+  {
+   "id": "exec-resume::kinds-gained",
+   "input_id": "exec-resume",
+   "relation": "kinds-superset",
+   "expected": [
+    "ret-exec-reused-n1",
+    "vex-q-steps"
+   ],
+   "family": "resume-reuse"
+  },
+  {
+   "id": "exec-resume::count-ret-exec-reused-n1-eq1",
+   "input_id": "exec-resume",
+   "relation": "count-equal",
+   "kind": "ret-exec-reused-n1",
+   "expected": 1,
+   "baseline": 0,
+   "family": "resume-reuse"
+  },
+  {
+   "id": "exec-resume::count-vex-q-steps-became-nonzero",
+   "input_id": "exec-resume",
+   "relation": "count-direction",
+   "kind": "vex-q-steps",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "resume-reuse"
+  },
+  {
+   "id": "exec-resume::count-vex-w-step-SUCCEEDED-eq3",
+   "input_id": "exec-resume",
+   "relation": "count-equal",
+   "kind": "vex-w-step-SUCCEEDED",
+   "expected": 3,
+   "baseline": 4,
+   "family": "resume-reuse"
+  },
+  {
+   "id": "exec-resume::count-vex-w-step-new-eq3",
+   "input_id": "exec-resume",
+   "relation": "count-equal",
+   "kind": "vex-w-step-new",
+   "expected": 3,
+   "baseline": 4,
+   "family": "resume-reuse"
+  },
+  {
+   "id": "exec-skip::kinds-gained",
+   "input_id": "exec-skip",
+   "relation": "kinds-superset",
+   "expected": [
+    "ret-exec-reused-n0",
+    "vex-q-steps"
+   ],
+   "family": "execution-robustness"
+  },
+  {
+   "id": "exec-skip::count-ret-exec-reused-n0-eq1",
+   "input_id": "exec-skip",
+   "relation": "count-equal",
+   "kind": "ret-exec-reused-n0",
+   "expected": 1,
+   "baseline": 0,
+   "family": "execution-robustness"
+  },
+  {
+   "id": "exec-skip::count-vex-q-steps-became-nonzero",
+   "input_id": "exec-skip",
+   "relation": "count-direction",
+   "kind": "vex-q-steps",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "execution-robustness"
+  },
+  {
+   "id": "exec-stale-hash::kinds-gained",
+   "input_id": "exec-stale-hash",
+   "relation": "kinds-superset",
+   "expected": [
+    "ret-exec-reused-n0",
+    "vex-q-steps"
+   ],
+   "family": "resume-reuse"
+  },
+  {
+   "id": "exec-stale-hash::count-ret-exec-reused-n0-eq1",
+   "input_id": "exec-stale-hash",
+   "relation": "count-equal",
+   "kind": "ret-exec-reused-n0",
+   "expected": 1,
+   "baseline": 0,
+   "family": "resume-reuse"
+  },
+  {
+   "id": "exec-stale-hash::count-vex-q-steps-became-nonzero",
+   "input_id": "exec-stale-hash",
+   "relation": "count-direction",
+   "kind": "vex-q-steps",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "resume-reuse"
+  },
+  {
+   "id": "mat-dedup::kinds-gained",
+   "input_id": "mat-dedup",
+   "relation": "kinds-superset",
+   "expected": [
+    "end-materialize-ok",
+    "ret-materialize-n2",
+    "uds-q-events",
+    "vex-q-watermark",
+    "vex-w-records-dup",
+    "vex-w-records-new",
+    "vex-w-watermark"
+   ],
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-end-materialize-ok-eq1",
+   "input_id": "mat-dedup",
+   "relation": "count-equal",
+   "kind": "end-materialize-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-end-materialize-raise-ProgrammingError-eq0",
+   "input_id": "mat-dedup",
+   "relation": "count-equal",
+   "kind": "end-materialize-raise-ProgrammingError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-err-params-eq0",
+   "input_id": "mat-dedup",
+   "relation": "count-equal",
+   "kind": "err-params",
+   "expected": 0,
+   "baseline": 1,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-ret-materialize-n2-eq1",
+   "input_id": "mat-dedup",
+   "relation": "count-equal",
+   "kind": "ret-materialize-n2",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-uds-q-events-became-nonzero",
+   "input_id": "mat-dedup",
+   "relation": "count-direction",
+   "kind": "uds-q-events",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-vex-q-watermark-became-nonzero",
+   "input_id": "mat-dedup",
+   "relation": "count-direction",
+   "kind": "vex-q-watermark",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-vex-w-records-dup-eq1",
+   "input_id": "mat-dedup",
+   "relation": "count-equal",
+   "kind": "vex-w-records-dup",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-vex-w-records-new-eq1",
+   "input_id": "mat-dedup",
+   "relation": "count-equal",
+   "kind": "vex-w-records-new",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-dedup::count-vex-w-watermark-eq1",
+   "input_id": "mat-dedup",
+   "relation": "count-equal",
+   "kind": "vex-w-watermark",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-filters::kinds-gained",
+   "input_id": "mat-filters",
+   "relation": "kinds-superset",
+   "expected": [
+    "end-materialize-ok",
+    "ret-materialize-n2",
+    "uds-q-events",
+    "vex-q-watermark",
+    "vex-w-records-new",
+    "vex-w-watermark"
+   ],
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-filters::count-end-materialize-ok-eq1",
+   "input_id": "mat-filters",
+   "relation": "count-equal",
+   "kind": "end-materialize-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-filters::count-end-materialize-raise-ProgrammingError-eq0",
+   "input_id": "mat-filters",
+   "relation": "count-equal",
+   "kind": "end-materialize-raise-ProgrammingError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-filters::count-err-params-eq0",
+   "input_id": "mat-filters",
+   "relation": "count-equal",
+   "kind": "err-params",
+   "expected": 0,
+   "baseline": 1,
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-filters::count-ret-materialize-n2-eq1",
+   "input_id": "mat-filters",
+   "relation": "count-equal",
+   "kind": "ret-materialize-n2",
+   "expected": 1,
+   "baseline": 0,
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-filters::count-uds-q-events-became-nonzero",
+   "input_id": "mat-filters",
+   "relation": "count-direction",
+   "kind": "uds-q-events",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-filters::count-vex-q-watermark-became-nonzero",
+   "input_id": "mat-filters",
+   "relation": "count-direction",
+   "kind": "vex-q-watermark",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-filters::count-vex-w-records-new-eq2",
+   "input_id": "mat-filters",
+   "relation": "count-equal",
+   "kind": "vex-w-records-new",
+   "expected": 2,
+   "baseline": 0,
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-filters::count-vex-w-watermark-eq1",
+   "input_id": "mat-filters",
+   "relation": "count-equal",
+   "kind": "vex-w-watermark",
+   "expected": 1,
+   "baseline": 0,
+   "family": "params-contract"
+  },
+  {
+   "id": "mat-first::kinds-gained",
+   "input_id": "mat-first",
+   "relation": "kinds-superset",
+   "expected": [
+    "end-materialize-ok",
+    "ret-materialize-n3",
+    "uds-q-events",
+    "vex-q-watermark",
+    "vex-w-records-new",
+    "vex-w-watermark"
+   ],
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-first::count-end-materialize-ok-eq1",
+   "input_id": "mat-first",
+   "relation": "count-equal",
+   "kind": "end-materialize-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-first::count-end-materialize-raise-ProgrammingError-eq0",
+   "input_id": "mat-first",
+   "relation": "count-equal",
+   "kind": "end-materialize-raise-ProgrammingError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-first::count-err-params-eq0",
+   "input_id": "mat-first",
+   "relation": "count-equal",
+   "kind": "err-params",
+   "expected": 0,
+   "baseline": 1,
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-first::count-ret-materialize-n3-eq1",
+   "input_id": "mat-first",
+   "relation": "count-equal",
+   "kind": "ret-materialize-n3",
+   "expected": 1,
+   "baseline": 0,
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-first::count-uds-q-events-became-nonzero",
+   "input_id": "mat-first",
+   "relation": "count-direction",
+   "kind": "uds-q-events",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-first::count-vex-q-watermark-became-nonzero",
+   "input_id": "mat-first",
+   "relation": "count-direction",
+   "kind": "vex-q-watermark",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-first::count-vex-w-records-new-eq3",
+   "input_id": "mat-first",
+   "relation": "count-equal",
+   "kind": "vex-w-records-new",
+   "expected": 3,
+   "baseline": 0,
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-first::count-vex-w-watermark-eq1",
+   "input_id": "mat-first",
+   "relation": "count-equal",
+   "kind": "vex-w-watermark",
+   "expected": 1,
+   "baseline": 0,
+   "family": "uds-routing"
+  },
+  {
+   "id": "mat-incremental::kinds-gained",
+   "input_id": "mat-incremental",
+   "relation": "kinds-superset",
+   "expected": [
+    "end-materialize-ok",
+    "ret-materialize-n1",
+    "uds-q-events",
+    "vex-q-watermark",
+    "vex-w-records-new",
+    "vex-w-watermark"
+   ],
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-incremental::count-end-materialize-ok-eq1",
+   "input_id": "mat-incremental",
+   "relation": "count-equal",
+   "kind": "end-materialize-ok",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-incremental::count-end-materialize-raise-ProgrammingError-eq0",
+   "input_id": "mat-incremental",
+   "relation": "count-equal",
+   "kind": "end-materialize-raise-ProgrammingError",
+   "expected": 0,
+   "baseline": 1,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-incremental::count-err-params-eq0",
+   "input_id": "mat-incremental",
+   "relation": "count-equal",
+   "kind": "err-params",
+   "expected": 0,
+   "baseline": 1,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-incremental::count-ret-materialize-n1-eq1",
+   "input_id": "mat-incremental",
+   "relation": "count-equal",
+   "kind": "ret-materialize-n1",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-incremental::count-uds-q-events-became-nonzero",
+   "input_id": "mat-incremental",
+   "relation": "count-direction",
+   "kind": "uds-q-events",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-incremental::count-vex-q-watermark-became-nonzero",
+   "input_id": "mat-incremental",
+   "relation": "count-direction",
+   "kind": "vex-q-watermark",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-incremental::count-vex-w-records-new-eq1",
+   "input_id": "mat-incremental",
+   "relation": "count-equal",
+   "kind": "vex-w-records-new",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-incremental::count-vex-w-watermark-eq1",
+   "input_id": "mat-incremental",
+   "relation": "count-equal",
+   "kind": "vex-w-watermark",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::kinds-gained",
+   "input_id": "mat-second",
+   "relation": "kinds-superset",
+   "expected": [
+    "end-materialize-ok",
+    "ret-materialize-n1",
+    "ret-materialize-n2",
+    "uds-q-events",
+    "vex-q-watermark",
+    "vex-w-records-dup",
+    "vex-w-records-new",
+    "vex-w-watermark"
+   ],
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-end-materialize-ok-eq2",
+   "input_id": "mat-second",
+   "relation": "count-equal",
+   "kind": "end-materialize-ok",
+   "expected": 2,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-end-materialize-raise-ProgrammingError-eq0",
+   "input_id": "mat-second",
+   "relation": "count-equal",
+   "kind": "end-materialize-raise-ProgrammingError",
+   "expected": 0,
+   "baseline": 2,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-err-params-eq0",
+   "input_id": "mat-second",
+   "relation": "count-equal",
+   "kind": "err-params",
+   "expected": 0,
+   "baseline": 2,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-ret-materialize-n1-eq1",
+   "input_id": "mat-second",
+   "relation": "count-equal",
+   "kind": "ret-materialize-n1",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-ret-materialize-n2-eq1",
+   "input_id": "mat-second",
+   "relation": "count-equal",
+   "kind": "ret-materialize-n2",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-uds-q-events-became-nonzero",
+   "input_id": "mat-second",
+   "relation": "count-direction",
+   "kind": "uds-q-events",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-vex-q-watermark-became-nonzero",
+   "input_id": "mat-second",
+   "relation": "count-direction",
+   "kind": "vex-q-watermark",
+   "baseline": 0,
+   "direction": "became-nonzero",
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-vex-w-records-dup-eq1",
+   "input_id": "mat-second",
+   "relation": "count-equal",
+   "kind": "vex-w-records-dup",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-vex-w-records-new-eq2",
+   "input_id": "mat-second",
+   "relation": "count-equal",
+   "kind": "vex-w-records-new",
+   "expected": 2,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  },
+  {
+   "id": "mat-second::count-vex-w-watermark-eq1",
+   "input_id": "mat-second",
+   "relation": "count-equal",
+   "kind": "vex-w-watermark",
+   "expected": 1,
+   "baseline": 0,
+   "family": "incremental-materialization"
+  }
+ ],
+ "preserving": [
+  {
+   "id": "g-no-criteria::preserve-seq",
+   "input_id": "g-no-criteria",
+   "projection": "seq",
+   "expected": [
+    "vex-q-criteria",
+    "ret-materialize-n0",
+    "end-materialize-ok"
+   ],
+   "family": "preserved-behaviour"
+  },
+  {
+   "id": "g-plan-noconfig::preserve-seq",
+   "input_id": "g-plan-noconfig",
+   "projection": "seq",
+   "expected": [
+    "vex-q-config",
+    "ret-plan-none",
+    "end-plan-ok"
+   ],
+   "family": "preserved-behaviour"
+  },
+  {
+   "id": "g-plan-nocomponents::preserve-seq",
+   "input_id": "g-plan-nocomponents",
+   "projection": "seq",
+   "expected": [
+    "vex-q-config",
+    "vex-q-components",
+    "vex-q-edges",
+    "ret-plan-none",
+    "end-plan-ok"
+   ],
+   "family": "preserved-behaviour"
+  }
+ ]
+}

@@ -1,0 +1,193 @@
+﻿{
+    "schema_version":  2,
+    "id":  "vextrum-dataflow-era-v2",
+    "version":  3,
+    "status":  "candidate-not-authoritative",
+    "fixture_class":  "underspecified-by-design",
+    "proprietary":  true,
+    "workspace_source":  "local-git-copy",
+    "purpose":  "SECOND TASK FAMILY for the decisive-recipe replication (owner-approved 2026-07-19). Replays the real VextrumDataFlow pipeline-core era 9570b0b^..081b23d (8 commits, ~190 churn across FOUR modules): before-state materialization crashes on misaligned SQL params and, when it ran, swept all of UDS every run; the after-state adds watermarked incremental materialization, two-database routing (UDS on its own connection), and configuration-aware resume that reuses succeeded steps. Differs from vextrum-era-v3-gen4 on every axis that matters: repo, domain (DB-backed orchestration vs PDF rendering), MULTI-MODULE task (4 files), and a psycopg2-level stub so any reshaping of the db seam executes for real - routing is observed at the true seam (connection DSN), not at a function-name surface. Grader is GEN-4 from birth (relational predicates + count-equal for state-write kinds where the altformat variant agrees exactly). V2 REPAIRS THE MEASURED v1 INSTRUMENT DEFECT (evidence/dataflow-replication-observed.json - 13 calls, every arm flat 43): the v1 stub served rows in the reference\u0027s column aliases and read insert params positionally, pinning invisible reference choices (over-constraint one layer down). v2: the stub PROJECTS rows onto each query\u0027s own column list and maps INSERT params BY COLUMN NAME; public/SCHEMA.md makes the schema (incl. materialization_watermark) a discoverable given instead of a fix-invented secret; and the altformat variant now ALSO varies column aliases (src_type/src_name) so alias-pinning predicates or surfaces die at the variant filter. V2.3 STUB REPAIRS (post-campaign, defects LOCATED in streams per the pre-committed rule, evidence/dataflow2-replication-observed.json): INSERT..RETURNING now returns the inserted row (and nothing on conflict) so implementations that count REAL inserts are readable; cursor.rowcount exists with psycopg2 semantics; the watermark comparison honours the query\u0027s own operator (\u003e= or \u003e) at the correct parameter position instead of pinning the reference\u0027s literal spelling.",
+    "context_tags":  [
+                         "data-pipeline",
+                         "orchestration",
+                         "database",
+                         "incremental",
+                         "python"
+                     ],
+    "public_test":  [
+                        "{python}",
+                        "tests/public_test.py"
+                    ],
+    "hidden_grader":  "hidden/grade.py",
+    "expected_reference_score":  100,
+    "checks":  [
+                   "uds-routing",
+                   "incremental-materialization",
+                   "params-contract",
+                   "resume-reuse",
+                   "execution-robustness",
+                   "e2e-chain",
+                   "preserved-behaviour"
+               ],
+    "serialized_output_dimensions":  [
+
+                                     ],
+    "local_source":  {
+                         "repo_dir":  "VextrumDataFlow",
+                         "before_ref":  "9570b0b^",
+                         "after_ref":  "081b23d",
+                         "rework_commits":  [
+                                                "9570b0b",
+                                                "8f5da67",
+                                                "d7e5d52",
+                                                "1ecaec7",
+                                                "1719168",
+                                                "fa96b88",
+                                                "af5927a",
+                                                "081b23d"
+                                            ],
+                         "files":  [
+                                       {
+                                           "source_path":  "pipeline/materializer.py",
+                                           "target_path":  "pipeline/materializer.py",
+                                           "altformat_replace":  [
+                                                                     {
+                                                                         "find":  "    if max_seen \u003e last_as_of:\n        db.execute(\n            \"\"\"INSERT INTO vextrum_v0.materialization_watermark (workspace_id, last_as_of, updated_at)\n               VALUES (%s, %s, now())\n               ON CONFLICT (workspace_id) DO UPDATE\n                 SET last_as_of = EXCLUDED.last_as_of, updated_at = now()\"\"\",\n            [workspace_id, max_seen])",
+                                                                         "replace":  "    if max_seen \u003e last_as_of:\n        moved = db.query(\n            \"\"\"UPDATE vextrum_v0.materialization_watermark\n               SET last_as_of = %s, updated_at = now()\n               WHERE workspace_id = %s\n               RETURNING workspace_id\"\"\",\n            [max_seen, workspace_id])\n        if not moved:\n            db.execute(\n                \"\"\"INSERT INTO vextrum_v0.materialization_watermark (workspace_id, last_as_of, updated_at)\n                   VALUES (%s, %s, now())\"\"\",\n                [workspace_id, max_seen])"
+                                                                     },
+                                                                     {
+                                                                         "find":  "ds.source_type::text AS data_source_type",
+                                                                         "replace":  "ds.source_type::text AS src_type"
+                                                                     },
+                                                                     {
+                                                                         "find":  "ds.source_name AS data_source_name",
+                                                                         "replace":  "ds.source_name AS src_name"
+                                                                     },
+                                                                     {
+                                                                         "find":  "ev[\"data_source_type\"], ev[\"data_source_name\"]",
+                                                                         "replace":  "ev[\"src_type\"], ev[\"src_name\"]"
+                                                                     }
+                                                                 ]
+                                       },
+                                       {
+                                           "source_path":  "pipeline/planner.py",
+                                           "target_path":  "pipeline/planner.py"
+                                       },
+                                       {
+                                           "source_path":  "pipeline/executor.py",
+                                           "target_path":  "pipeline/executor.py"
+                                       },
+                                       {
+                                           "source_path":  "pipeline/db.py",
+                                           "target_path":  "pipeline/db.py"
+                                       },
+                                       {
+                                           "source_path":  "pipeline/config_hash.py",
+                                           "target_path":  "pipeline/config_hash.py",
+                                           "before_ref":  "9570b0b^",
+                                           "after_ref":  "9570b0b^"
+                                       },
+                                       {
+                                           "source_path":  "pipeline/components/base.py",
+                                           "target_path":  "pipeline/components/base.py",
+                                           "before_ref":  "9570b0b^",
+                                           "after_ref":  "9570b0b^"
+                                       },
+                                       {
+                                           "source_path":  "pipeline/__init__.py",
+                                           "target_path":  "pipeline/__init__.py",
+                                           "before_ref":  "9570b0b^",
+                                           "after_ref":  "9570b0b^"
+                                       },
+                                       {
+                                           "source_path":  "pipeline/components/__init__.py",
+                                           "target_path":  "pipeline/components/__init__.py",
+                                           "before_ref":  "9570b0b^",
+                                           "after_ref":  "9570b0b^"
+                                       }
+                                   ],
+                         "altformat_note":  "The altformat variant advances the watermark via UPDATE-then-INSERT instead of a single upsert - a genuinely different-but-valid write pattern. It kills exact-count pinning on the watermark write while presence (became-nonzero) survives; the stub normalizes all watermark writes to one event kind so the verb choice itself is never graded. V2 addition: the variant also renames the event-row aliases (data_source_type/name -\u003e src_type/src_name) - an alias-varying valid member, the lesson of the v1 campaign."
+                     },
+    "materialize":  {
+                        "base":  "before",
+                        "hidden/reference":  "after",
+                        "hidden/reference-alt":  "after-altformat",
+                        "negative-controls/before-module":  "before"
+                    },
+    "grading_surface":  {
+                            "api":  "materialize_workspace(workspace_id) / plan_workspace(workspace_id) / execute_run(plan) - the entry points present at every era ref",
+                            "recording_stub":  "hidden/dataflow_driver.py stubs psycopg2 itself: the workspace\u0027s own db.py (and any reshaping of it) executes for real; two databases distinguished by connection DSN; %s paramstyle emulated; canned per-table state. V2: SELECT/RETURNING rows are PROJECTED onto the query\u0027s own column list and INSERT params are mapped BY COLUMN NAME - the stub behaves like a database about names, never like the reference. Unknown tables/columns and unmappable inserts are NAMED totality findings (SCHEMA.md documents what exists).",
+                            "mechanical_grader":  "hidden/grade.py executes hidden/derived-predicates.json: GEN-4 relational predicates (kinds-superset, count-direction, count-equal where the alt variant agrees exactly) + exact seq preservation guards; 7 families. Hand-made parts: the corpus scenarios, the family grouping, the event normalization; every expectation VALUE and baseline is mechanical."
+                        },
+    "convention_anchors":  [
+                               {
+                                   "check_id":  "uds-routing",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "every read of them goes through\n  a connection opened from `UDS_DATABASE_URL`"
+                               },
+                               {
+                                   "check_id":  "incremental-materialization",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "events that were already\n  materialized in an earlier run must not be re-fetched wholesale from UDS on\n  later runs"
+                               },
+                               {
+                                   "check_id":  "incremental-materialization",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "A record that already exists for a workspace is never duplicated"
+                               },
+                               {
+                                   "check_id":  "params-contract",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "every placeholder is\n  matched by exactly one parameter, in order"
+                               },
+                               {
+                                   "check_id":  "resume-reuse",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "its\n  stored output is loaded and handed to downstream components"
+                               },
+                               {
+                                   "check_id":  "resume-reuse",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "work done under a different workspace\n  configuration hash is stale and is redone, never reused"
+                               },
+                               {
+                                   "check_id":  "execution-robustness",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "A component failure fails that record"
+                               },
+                               {
+                                   "check_id":  "execution-robustness",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "A record rejected by an upstream filter is recorded as SKIPPED"
+                               },
+                               {
+                                   "check_id":  "e2e-chain",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "Execution runs record their lifecycle"
+                               },
+                               {
+                                   "check_id":  "preserved-behaviour",
+                                   "evidence_file":  "CONVENTIONS.md",
+                                   "quote":  "A workspace with no active selection criteria materializes nothing"
+                               }
+                           ],
+    "expected_controls":  [
+                              {
+                                  "id":  "before-module",
+                                  "min_score":  5,
+                                  "max_score":  30,
+                                  "note":  "The REAL pre-era pipeline: guards pass (no-op paths identical), every change family fails (materializer crashes on params; executor lacks reuse; single-connection world)."
+                              },
+                              {
+                                  "id":  "reference",
+                                  "min_score":  100,
+                                  "max_score":  100
+                              }
+                          ],
+    "campaign_loop_overrides":  {
+                                    "max_turns_per_call":  60,
+                                    "max_wall_minutes_per_call":  40,
+                                    "reason":  "Same rationale as the vextrum era: a four-module underspecified rework; the raised budget keeps the measured axis the work, not the clock."
+                                },
+    "interpretation":  "Underspecified-by-design at scale, across modules: a symptom-level incident list plus discoverable operational conventions covering an 8-commit rework of four cooperating modules. Every graded family is anchored to a CONVENTIONS.md sentence. Score moves in steps of ~14 (7 families). HONEST CAVEATS to publish with any result: the db stub emulates the %s contract and canned per-table state, not SQL semantics - the planner\u0027s pending-record SELECTION lives in SQL the stub deliberately serves permissively, so planner selection quality is UNGRADED AND NAMED; UDS filter pushdown is likewise served permissively and ungraded; retry capping (FAILED \u003e= 3) is ungraded for the same reason. An implementation that abandons psycopg2 or invents tables the stub does not know fails as a totality finding - the psycopg2 seam and the schema are declared workspace facts, and CONVENTIONS pins the paramstyle. V2 caveat update: INSERT..SELECT (single-statement cross-table insert) remains unmappable by the stub and fails as a named totality finding; SCHEMA.md declares the schema so this is a documented workspace fact, not a trap."
+}

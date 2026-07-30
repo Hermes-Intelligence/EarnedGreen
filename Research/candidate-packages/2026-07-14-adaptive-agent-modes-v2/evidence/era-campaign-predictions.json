@@ -1,0 +1,24 @@
+{
+ "schema_version": 1,
+ "registered_at": "2026-07-19",
+ "registered_before_any_spend_on_this_fixture": true,
+ "fixture": "vextrum-era-v2 (gen-3 difficulty: 4-commit era, ~470 churn, underspecified-by-design at scale; admitted 7/7; mechanical grader, before=14/after=100/alt=100)",
+ "design": "staged, mirroring the owner's ETL pattern: canary (1 call, bare vanilla) then probe --trials 1 (vanilla-configured 1 + relation-loop <=3 + oracle-loop <=3). Full 3-trial verdict run ONLY as a separate approval if headroom appears.",
+ "planned_calls": {
+  "canary": 1,
+  "probe_ceiling": 7,
+  "total_ask": 8
+ },
+ "predictions": {
+  "P-R1_headroom": "bare vanilla does NOT hit 100: predicted 40-75 (3-5 of 7 families). The era demands a full vector-chart subsystem plus citation/block/ordering rework from a symptom-level task; one-shotting all seven is beyond what the saturation precedents showed for WELL-SPECIFIED tasks. If vanilla hits 100 anyway, the difficulty hypothesis itself is falsified at this scale and we say so.",
+  "P-R2_oracle_forcing": "oracle-loop scores strictly higher than vanilla-configured, using its iterations (not green at i1) - the first real test of the loop's forcing ability on a task with headroom.",
+  "P-R3_guards": "relation-loop matches vanilla-configured on score (its pins cannot see the new behaviour) with zero preserved-behaviour failures.",
+  "P-R4_saturation_containment": "if the canary lands 100, STOP before the probe (owner informed, calls preserved) - the standing brake, pre-registered this time."
+ },
+ "falsification": "P-R1 wrong (vanilla 100) -> difficulty-by-underspecified-scale is falsified on this module and the axis must move to multi-repo/multi-module; P-R2 wrong with headroom present -> the loop machinery cannot exploit even perfect predicates: the programme's ceiling finding.",
+ "honesty_notes": [
+  "same module/repo as vextrum-v1: this measures the DIFFICULTY axis, not family independence",
+  "7 families, score steps ~14",
+  "citation-hygiene rides a piece-count projection (granularity assumption, flagged in the contract)"
+ ]
+}

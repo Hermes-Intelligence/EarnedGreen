@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "what_this_variant_is": "The shipped fix (37423b0) with the end-of-run failure message reworded and the failed-file list sorted instead of insertion-ordered (altformat_replace in fixture-contract.json). Same semantics on every ticket requirement; different implementation choices nothing in the ticket mandates.",
+  "pre_reconciliation_result": {
+    "interpretations": "identical to the reference on all five decision_points; the variant varies only choices the ticket leaves free (exception message wording, ordering of the reported failed-file list)"
+  },
+  "interpretation_differences_after_pinning": [],
+  "structural_differences": [
+    "RuntimeError message wording differs from the shipped fix",
+    "failed files reported sorted rather than in processing order"
+  ],
+  "why_it_must_score_100": "A grader red on this variant would be pinning the shipped implementation's phrasing rather than the required behaviour — the exact over-constraint class the altformat filter exists to kill, both at predicate derivation time and here at fixture admission."
+}

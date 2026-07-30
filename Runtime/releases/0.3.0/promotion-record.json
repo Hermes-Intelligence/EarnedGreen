@@ -1,0 +1,1808 @@
+﻿{
+    "schema_version":  1,
+    "release":  "0.3.0",
+    "candidate":  "2026-07-14-adaptive-agent-modes-v2",
+    "promoted_at":  "2026-07-16T13:12:27.3765155+02:00",
+    "approved_by":  "owner (chat 2026-07-16: promocja schema 4 do Stable - tak jest lecimy; executed by Claude after the clean loop campaign completed and validated the promoted loop mechanisms live)",
+    "release_gate":  {
+                         "enforced":  false,
+                         "passed":  null,
+                         "report":  null,
+                         "skipped_reason":  "release-gate -Mode full fails only the pre-existing objective-complete check (24 open requirements unrelated to this increment; same recorded operator skip as release 0.2.0); infrastructure mode is 15/15 fresh",
+                         "note":  "skipped by operator"
+                     },
+    "files":  [
+                  {
+                      "target":  "Claude/commands/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Claude/commands/README.md",
+                      "promoted_sha256":  "58761EF13E0F7C881533D1FBDB09E841290DDA13478F59F373042726CE35E332",
+                      "previous_sha256":  "58761EF13E0F7C881533D1FBDB09E841290DDA13478F59F373042726CE35E332"
+                  },
+                  {
+                      "target":  "Claude/commands/weekly-hygiene.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Claude/commands/weekly-hygiene.md",
+                      "promoted_sha256":  "4FFADA82C1BCF48B3A30FB13E1A4CCB26BE57E2F9C22F1F1B8BAEF5EED828CD7",
+                      "previous_sha256":  "4FFADA82C1BCF48B3A30FB13E1A4CCB26BE57E2F9C22F1F1B8BAEF5EED828CD7"
+                  },
+                  {
+                      "target":  "Core/knowledge-modules/objective-integrity.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Core/knowledge-modules/objective-integrity.md",
+                      "promoted_sha256":  "38DA978F8759D340C107E65159EC49D321440BE264E61828060CFFC08CBDCB45",
+                      "previous_sha256":  "38DA978F8759D340C107E65159EC49D321440BE264E61828060CFFC08CBDCB45"
+                  },
+                  {
+                      "target":  "Core/knowledge-modules/reliability-contract.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Core/knowledge-modules/reliability-contract.md",
+                      "promoted_sha256":  "972AB14F461BA0AADD39C5FE2CCB9B166F6A1C12E272C77FA6EA2347214D7A98",
+                      "previous_sha256":  "972AB14F461BA0AADD39C5FE2CCB9B166F6A1C12E272C77FA6EA2347214D7A98"
+                  },
+                  {
+                      "target":  "Core/knowledge-modules/risk-discovery.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Core/knowledge-modules/risk-discovery.md",
+                      "promoted_sha256":  "54712B7EEC3ADD21708FE1559B9656A4EAA9EC4FCABD44F275B24BD647D31E48",
+                      "previous_sha256":  "54712B7EEC3ADD21708FE1559B9656A4EAA9EC4FCABD44F275B24BD647D31E48"
+                  },
+                  {
+                      "target":  "Core/knowledge-modules/verification-loop.md",
+                      "existed_before":  false,
+                      "restore_source":  null,
+                      "promoted_sha256":  "B3551733D7473E33B9C32FB100D153897172FF03C78ECCF892D2B57B30DA5CC0",
+                      "previous_sha256":  null
+                  },
+                  {
+                      "target":  "Core/schemas/objective-ledger.schema.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Core/schemas/objective-ledger.schema.json",
+                      "promoted_sha256":  "607C548CA0B3858A372A4FAA976BD30CA04948DFA43068FD159B8F88CF13F0BF",
+                      "previous_sha256":  "607C548CA0B3858A372A4FAA976BD30CA04948DFA43068FD159B8F88CF13F0BF"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/README.md",
+                      "promoted_sha256":  "EA277AEFA84901AA580768423751B404A78A3BF5554283BBE5CF928376A56B01",
+                      "previous_sha256":  "EA277AEFA84901AA580768423751B404A78A3BF5554283BBE5CF928376A56B01"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/fixture-contract.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/fixture-contract.json",
+                      "promoted_sha256":  "40908701A2912D0C886190D1E9C7B1EAF799A64A22D098516CDCD2CD32D72BEC",
+                      "previous_sha256":  "40908701A2912D0C886190D1E9C7B1EAF799A64A22D098516CDCD2CD32D72BEC"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/grade.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/grade.py",
+                      "promoted_sha256":  "780772BBE20CA80240E49D8FC62B0DC01D214D39898B327783BEF3AB28802697",
+                      "previous_sha256":  "780772BBE20CA80240E49D8FC62B0DC01D214D39898B327783BEF3AB28802697"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference-alt/ALT-NOTES.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference-alt/ALT-NOTES.json",
+                      "promoted_sha256":  "08414885CFA3E82B70057E1FAE0B1AD92CAA57C21F3FB5548C3BBE9CDFB6C6CB",
+                      "previous_sha256":  "08414885CFA3E82B70057E1FAE0B1AD92CAA57C21F3FB5548C3BBE9CDFB6C6CB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference-alt/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference-alt/README.md",
+                      "promoted_sha256":  "E7EA1E1BEB51A089581EF662D9947D6C1D928B6934983B1DD66066C0F48F0405",
+                      "previous_sha256":  "E7EA1E1BEB51A089581EF662D9947D6C1D928B6934983B1DD66066C0F48F0405"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference-alt/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference-alt/src/consumers.py",
+                      "promoted_sha256":  "7C48D7ADA21F01D3BD0BBE28609D0F82CA40A0366C80B177AADE7DD8B9A4A322",
+                      "previous_sha256":  "7C48D7ADA21F01D3BD0BBE28609D0F82CA40A0366C80B177AADE7DD8B9A4A322"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference-alt/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference-alt/src/contracts.py",
+                      "promoted_sha256":  "2E0F6F064A9C3137A06919566A5EC7A47CBA8B061547621DF073CABA05C942A9",
+                      "previous_sha256":  "2E0F6F064A9C3137A06919566A5EC7A47CBA8B061547621DF073CABA05C942A9"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference/README.md",
+                      "promoted_sha256":  "6B57B4BF667B5F6FEF9B1011872D6DD2AA4A5C92BD16B5D112EEA4106E6353AB",
+                      "previous_sha256":  "6B57B4BF667B5F6FEF9B1011872D6DD2AA4A5C92BD16B5D112EEA4106E6353AB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference/src/consumers.py",
+                      "promoted_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366",
+                      "previous_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/hidden/reference/src/contracts.py",
+                      "promoted_sha256":  "53A4387DF29E1D4471647FEE34A9F89EB9D999772FCCDD9C297F1D4C867A3999",
+                      "previous_sha256":  "53A4387DF29E1D4471647FEE34A9F89EB9D999772FCCDD9C297F1D4C867A3999"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/mode-1-local/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/mode-1-local/src/contracts.py",
+                      "promoted_sha256":  "09EE06B7F058B8C89D174E28D4EFDC9E924DEF2836771518156D103AAA03193D",
+                      "previous_sha256":  "09EE06B7F058B8C89D174E28D4EFDC9E924DEF2836771518156D103AAA03193D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/mode-2-routed/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/mode-2-routed/src/consumers.py",
+                      "promoted_sha256":  "B4EA095A06B49D67891C05F4DDF2D15E327BDB330360FBFDB2722BEB802402DC",
+                      "previous_sha256":  "B4EA095A06B49D67891C05F4DDF2D15E327BDB330360FBFDB2722BEB802402DC"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/mode-2-routed/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/mode-2-routed/src/contracts.py",
+                      "promoted_sha256":  "297A88C97EFFDA2B3024B11E36A44D1F155801542553EA3C3DDE2011007933B3",
+                      "previous_sha256":  "297A88C97EFFDA2B3024B11E36A44D1F155801542553EA3C3DDE2011007933B3"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/reject-on-miss/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/reject-on-miss/README.md",
+                      "promoted_sha256":  "23A3002975A33A51B23D4BAD6889E31761CABB03C91F7D5F0B91A0BF9428BCE3",
+                      "previous_sha256":  "23A3002975A33A51B23D4BAD6889E31761CABB03C91F7D5F0B91A0BF9428BCE3"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/reject-on-miss/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/reject-on-miss/src/consumers.py",
+                      "promoted_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366",
+                      "previous_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/reject-on-miss/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/negative-controls/reject-on-miss/src/contracts.py",
+                      "promoted_sha256":  "8DE8BA0CAABE256145B6CB9C59928777D485B9D1B1A7961DE9CCA73F57F98565",
+                      "previous_sha256":  "8DE8BA0CAABE256145B6CB9C59928777D485B9D1B1A7961DE9CCA73F57F98565"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/README.md",
+                      "promoted_sha256":  "A2C4E7B404DF3BB80CC92BE2DC5C047D7F6784BBDE926DA7A1EAB3BBA0E8C299",
+                      "previous_sha256":  "A2C4E7B404DF3BB80CC92BE2DC5C047D7F6784BBDE926DA7A1EAB3BBA0E8C299"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/src/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/src/__init__.py",
+                      "promoted_sha256":  "FA82406BFF18475F3AC583DC18EAB4B30777845F8BE29B288870C1B9F0FEEB56",
+                      "previous_sha256":  "FA82406BFF18475F3AC583DC18EAB4B30777845F8BE29B288870C1B9F0FEEB56"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/src/consumers.py",
+                      "promoted_sha256":  "FD9925CA46EB0E496F8B61B4C5AD0A41EB2E80D8BD6158B1D31B173D7A32F051",
+                      "previous_sha256":  "FD9925CA46EB0E496F8B61B4C5AD0A41EB2E80D8BD6158B1D31B173D7A32F051"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/src/contracts.py",
+                      "promoted_sha256":  "36CC39798777D7DC87719516D3380786C6908FD32AA651B9162E56A854C1CE0D",
+                      "previous_sha256":  "36CC39798777D7DC87719516D3380786C6908FD32AA651B9162E56A854C1CE0D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/src/metrics.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/src/metrics.py",
+                      "promoted_sha256":  "207274A920F1835CD903320D04B36EE2902527F554B0CC1FF76F70336CD353B6",
+                      "previous_sha256":  "207274A920F1835CD903320D04B36EE2902527F554B0CC1FF76F70336CD353B6"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/task.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/task.md",
+                      "promoted_sha256":  "0F14E1559B885CF2B36E64028A54126994AB12872C0F5FFAF6DF91C7D7C88D06",
+                      "previous_sha256":  "0F14E1559B885CF2B36E64028A54126994AB12872C0F5FFAF6DF91C7D7C88D06"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/tests/test_public.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v2/public/tests/test_public.py",
+                      "promoted_sha256":  "F9379A92BE4CC3F5490CE7025A1029CABE6D117CE0E16EB2286DD5FAC09C2580",
+                      "previous_sha256":  "F9379A92BE4CC3F5490CE7025A1029CABE6D117CE0E16EB2286DD5FAC09C2580"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/fixture-contract.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/fixture-contract.json",
+                      "promoted_sha256":  "331A1E7BB8949BE39849D1C58D09A02030171CF169045C0101B0132DAE8A6CEF",
+                      "previous_sha256":  "331A1E7BB8949BE39849D1C58D09A02030171CF169045C0101B0132DAE8A6CEF"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/grade.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/grade.py",
+                      "promoted_sha256":  "115774B327E5823D32D96C112CA7C90450A5DB5B85F3168CFC1F3812F1A12C7D",
+                      "previous_sha256":  "115774B327E5823D32D96C112CA7C90450A5DB5B85F3168CFC1F3812F1A12C7D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/ALT-NOTES.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/ALT-NOTES.json",
+                      "promoted_sha256":  "3245BAEA7A9C05ACA5618DDEABEC581431A01A7A5B53A87A56390AF0E3D87405",
+                      "previous_sha256":  "3245BAEA7A9C05ACA5618DDEABEC581431A01A7A5B53A87A56390AF0E3D87405"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/README.md",
+                      "promoted_sha256":  "27FD73254D5723353E500B19BF3C2BA467B0F54BAF02CEF8A4902D9C30962FC0",
+                      "previous_sha256":  "27FD73254D5723353E500B19BF3C2BA467B0F54BAF02CEF8A4902D9C30962FC0"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/src/consumers.py",
+                      "promoted_sha256":  "7C48D7ADA21F01D3BD0BBE28609D0F82CA40A0366C80B177AADE7DD8B9A4A322",
+                      "previous_sha256":  "7C48D7ADA21F01D3BD0BBE28609D0F82CA40A0366C80B177AADE7DD8B9A4A322"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/src/contracts.py",
+                      "promoted_sha256":  "4376D779B7DC415CFF9096E0841D50E5461D2B5CDA15EC9B7CAADB9C28C5D840",
+                      "previous_sha256":  "4376D779B7DC415CFF9096E0841D50E5461D2B5CDA15EC9B7CAADB9C28C5D840"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/src/exporter.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/src/exporter.py",
+                      "promoted_sha256":  "45539024793B2ED13B8210F06371269FF96C98770A70097C7C1378F630105664",
+                      "previous_sha256":  "45539024793B2ED13B8210F06371269FF96C98770A70097C7C1378F630105664"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/src/serializer.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference-alt/src/serializer.py",
+                      "promoted_sha256":  "704F4F63D3AFFDAB66F13FB28FE481F32824B5DB63202F4F2E08034A3A212521",
+                      "previous_sha256":  "704F4F63D3AFFDAB66F13FB28FE481F32824B5DB63202F4F2E08034A3A212521"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/README.md",
+                      "promoted_sha256":  "2A2F60DC54D7827BECA4EF8E0A7C6CF3E314E3B91DE08A854F60D14DABF079F8",
+                      "previous_sha256":  "2A2F60DC54D7827BECA4EF8E0A7C6CF3E314E3B91DE08A854F60D14DABF079F8"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/src/consumers.py",
+                      "promoted_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366",
+                      "previous_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/src/contracts.py",
+                      "promoted_sha256":  "A66D56BB4B97EA761A0AF4B9629791D69EFBC909C3CC8EA40775BCC12621FA16",
+                      "previous_sha256":  "A66D56BB4B97EA761A0AF4B9629791D69EFBC909C3CC8EA40775BCC12621FA16"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/src/exporter.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/src/exporter.py",
+                      "promoted_sha256":  "32BA6C09A45ADF7EC76F97B38A52C5737122982D82C9455FA61B5C050B5AF176",
+                      "previous_sha256":  "32BA6C09A45ADF7EC76F97B38A52C5737122982D82C9455FA61B5C050B5AF176"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/src/serializer.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/hidden/reference/src/serializer.py",
+                      "promoted_sha256":  "AB8526A224DF56839C686306A852EFE8B42A43199C5EA3FC2AEA84081ECEC8DD",
+                      "previous_sha256":  "AB8526A224DF56839C686306A852EFE8B42A43199C5EA3FC2AEA84081ECEC8DD"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/negative-controls/mode-1-local/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/negative-controls/mode-1-local/src/contracts.py",
+                      "promoted_sha256":  "AAB2BBEE3D102D094E8E56931E2809AA93CA1A94703E9AB1FCF848A99ED666AB",
+                      "previous_sha256":  "AAB2BBEE3D102D094E8E56931E2809AA93CA1A94703E9AB1FCF848A99ED666AB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/negative-controls/plausible-cold-pass/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/negative-controls/plausible-cold-pass/README.md",
+                      "promoted_sha256":  "7097AC62D2F2BDBA25C2FC2C820843DD634002A5FFC514BAD5D695F389DF9D7F",
+                      "previous_sha256":  "7097AC62D2F2BDBA25C2FC2C820843DD634002A5FFC514BAD5D695F389DF9D7F"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/negative-controls/plausible-cold-pass/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/negative-controls/plausible-cold-pass/src/consumers.py",
+                      "promoted_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366",
+                      "previous_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/negative-controls/plausible-cold-pass/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/negative-controls/plausible-cold-pass/src/contracts.py",
+                      "promoted_sha256":  "19FCC684FC673B01B44A942A5F74A7FD7E0DD0105A85994A6E731CB2A51E3D1A",
+                      "previous_sha256":  "19FCC684FC673B01B44A942A5F74A7FD7E0DD0105A85994A6E731CB2A51E3D1A"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/README.md",
+                      "promoted_sha256":  "D0A1672674EE81F18F6F33BC0E09F3F03E9233978D27C0BFCC7B95F2A63E3612",
+                      "previous_sha256":  "D0A1672674EE81F18F6F33BC0E09F3F03E9233978D27C0BFCC7B95F2A63E3612"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/__init__.py",
+                      "promoted_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+                      "previous_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/consumers.py",
+                      "promoted_sha256":  "FD9925CA46EB0E496F8B61B4C5AD0A41EB2E80D8BD6158B1D31B173D7A32F051",
+                      "previous_sha256":  "FD9925CA46EB0E496F8B61B4C5AD0A41EB2E80D8BD6158B1D31B173D7A32F051"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/contracts.py",
+                      "promoted_sha256":  "36CC39798777D7DC87719516D3380786C6908FD32AA651B9162E56A854C1CE0D",
+                      "previous_sha256":  "36CC39798777D7DC87719516D3380786C6908FD32AA651B9162E56A854C1CE0D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/exporter.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/exporter.py",
+                      "promoted_sha256":  "D9ACF64845D3E04CF0A65C10E577B5DD8A27CD3AE741C3E842643FB9EF8F7AB7",
+                      "previous_sha256":  "D9ACF64845D3E04CF0A65C10E577B5DD8A27CD3AE741C3E842643FB9EF8F7AB7"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/metrics.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/metrics.py",
+                      "promoted_sha256":  "207274A920F1835CD903320D04B36EE2902527F554B0CC1FF76F70336CD353B6",
+                      "previous_sha256":  "207274A920F1835CD903320D04B36EE2902527F554B0CC1FF76F70336CD353B6"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/serializer.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/src/serializer.py",
+                      "promoted_sha256":  "6F0FD16B65B0D926ED661A581836987131E0A611CF17D4CCCC81A76D21BD1F08",
+                      "previous_sha256":  "6F0FD16B65B0D926ED661A581836987131E0A611CF17D4CCCC81A76D21BD1F08"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/task.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/task.md",
+                      "promoted_sha256":  "F5CC6AF39578736D7D14295AFF7CC21E22EF545C81E0842F3FE3E9CB125E82B9",
+                      "previous_sha256":  "F5CC6AF39578736D7D14295AFF7CC21E22EF545C81E0842F3FE3E9CB125E82B9"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/tests/test_public.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v3/public/tests/test_public.py",
+                      "promoted_sha256":  "E3C2EA7EAFD3A3A63ED946AD3B9A4C23E1EA7C7D9591FC1335F834BB4F47AC8D",
+                      "previous_sha256":  "E3C2EA7EAFD3A3A63ED946AD3B9A4C23E1EA7C7D9591FC1335F834BB4F47AC8D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/fixture-contract.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/fixture-contract.json",
+                      "promoted_sha256":  "FDA582628DEE9CB74B49D988FAEEDAF21D2FE620CDB7220D662E0098FA0A3492",
+                      "previous_sha256":  "FDA582628DEE9CB74B49D988FAEEDAF21D2FE620CDB7220D662E0098FA0A3492"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/grade.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/grade.py",
+                      "promoted_sha256":  "5A7EA59741FCADB89EC571F1B019CC1D2F365FFED41D038F5F2C088891190497",
+                      "previous_sha256":  "5A7EA59741FCADB89EC571F1B019CC1D2F365FFED41D038F5F2C088891190497"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/ALT-NOTES.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/ALT-NOTES.json",
+                      "promoted_sha256":  "50097D0CEC1D4450893CA070C02CAC3D3AB195B0D22235D67E4CBF21A8512C9C",
+                      "previous_sha256":  "50097D0CEC1D4450893CA070C02CAC3D3AB195B0D22235D67E4CBF21A8512C9C"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/README.md",
+                      "promoted_sha256":  "9CF594AC3D1D9FC238F17AEA9C6F3D31D21CEFE9FA0166E297400B635C291FBA",
+                      "previous_sha256":  "9CF594AC3D1D9FC238F17AEA9C6F3D31D21CEFE9FA0166E297400B635C291FBA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/consumers.py",
+                      "promoted_sha256":  "7C48D7ADA21F01D3BD0BBE28609D0F82CA40A0366C80B177AADE7DD8B9A4A322",
+                      "previous_sha256":  "7C48D7ADA21F01D3BD0BBE28609D0F82CA40A0366C80B177AADE7DD8B9A4A322"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/contracts.py",
+                      "promoted_sha256":  "66A4FE6B90CEA9C80AB20BD30C76EF38402D00A7527CA300DF108F38AF78509B",
+                      "previous_sha256":  "66A4FE6B90CEA9C80AB20BD30C76EF38402D00A7527CA300DF108F38AF78509B"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/digest_helper.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/digest_helper.py",
+                      "promoted_sha256":  "0926F79D770E416BEC2B11F05CE78579064BAD2E5CD98C13903B9051788C917B",
+                      "previous_sha256":  "0926F79D770E416BEC2B11F05CE78579064BAD2E5CD98C13903B9051788C917B"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/exporter.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/exporter.py",
+                      "promoted_sha256":  "45539024793B2ED13B8210F06371269FF96C98770A70097C7C1378F630105664",
+                      "previous_sha256":  "45539024793B2ED13B8210F06371269FF96C98770A70097C7C1378F630105664"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/serializer.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/serializer.py",
+                      "promoted_sha256":  "704F4F63D3AFFDAB66F13FB28FE481F32824B5DB63202F4F2E08034A3A212521",
+                      "previous_sha256":  "704F4F63D3AFFDAB66F13FB28FE481F32824B5DB63202F4F2E08034A3A212521"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/snapshot.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-alt/src/snapshot.py",
+                      "promoted_sha256":  "11777837B2393F89B1612928BEC96FEE78FA26C5F1FE1316D7D27F4D3E756C8D",
+                      "previous_sha256":  "11777837B2393F89B1612928BEC96FEE78FA26C5F1FE1316D7D27F4D3E756C8D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/FORMAT-NOTES.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/FORMAT-NOTES.json",
+                      "promoted_sha256":  "E049845FB25E875448603FE94A4CF20C46083F58D60E48BF26A83B1CE7A6629C",
+                      "previous_sha256":  "E049845FB25E875448603FE94A4CF20C46083F58D60E48BF26A83B1CE7A6629C"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/README.md",
+                      "promoted_sha256":  "429DC416AB78E3F74CCC8A88A7D061CB9DDDBFBD1FA1B3E53368F81BE576FDE5",
+                      "previous_sha256":  "429DC416AB78E3F74CCC8A88A7D061CB9DDDBFBD1FA1B3E53368F81BE576FDE5"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/consumers.py",
+                      "promoted_sha256":  "ADF2C957F225A47886572E320BAE355EC1C2B67EB8AAE5356237E404F2D33F48",
+                      "previous_sha256":  "ADF2C957F225A47886572E320BAE355EC1C2B67EB8AAE5356237E404F2D33F48"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/contracts.py",
+                      "promoted_sha256":  "C21B3BB1EA125527843CF7F6379F7C44EF33DD4D58D87C19118ED61309CB9C87",
+                      "previous_sha256":  "C21B3BB1EA125527843CF7F6379F7C44EF33DD4D58D87C19118ED61309CB9C87"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/digest_helper.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/digest_helper.py",
+                      "promoted_sha256":  "A540D70DD8EABAFA01C0CE69C95BF98549B9D1C263CE60863B97AB7CC2C2F011",
+                      "previous_sha256":  "A540D70DD8EABAFA01C0CE69C95BF98549B9D1C263CE60863B97AB7CC2C2F011"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/exporter.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/exporter.py",
+                      "promoted_sha256":  "23B6B73AE4F60650473C1F51884B9090D0A553FE8FBF4A5354A1CD66E7C194F8",
+                      "previous_sha256":  "23B6B73AE4F60650473C1F51884B9090D0A553FE8FBF4A5354A1CD66E7C194F8"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/serializer.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/serializer.py",
+                      "promoted_sha256":  "704088A4099D8AA4B865A338577300675280C088A34F888E09CB64D51FDB801D",
+                      "previous_sha256":  "704088A4099D8AA4B865A338577300675280C088A34F888E09CB64D51FDB801D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/snapshot.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference-format-alt/src/snapshot.py",
+                      "promoted_sha256":  "97A536D654FEF2F9D1E89435F821440BD528291A3F37BDEA2E554EC00A24A0BE",
+                      "previous_sha256":  "97A536D654FEF2F9D1E89435F821440BD528291A3F37BDEA2E554EC00A24A0BE"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/README.md",
+                      "promoted_sha256":  "3B97BD4B996B9E9455C16571909A86370BC9A27FD12CD4C7748E07B921D97CA2",
+                      "previous_sha256":  "3B97BD4B996B9E9455C16571909A86370BC9A27FD12CD4C7748E07B921D97CA2"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/consumers.py",
+                      "promoted_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366",
+                      "previous_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/contracts.py",
+                      "promoted_sha256":  "5EB890D60AC60688D99AC579DCB61DB9CCDBFB42082100645512707966CD7558",
+                      "previous_sha256":  "5EB890D60AC60688D99AC579DCB61DB9CCDBFB42082100645512707966CD7558"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/digest_helper.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/digest_helper.py",
+                      "promoted_sha256":  "0FEB132A7DE549BC707E12BBB56DD759E507BD61AD208EE0774CED37C2214232",
+                      "previous_sha256":  "0FEB132A7DE549BC707E12BBB56DD759E507BD61AD208EE0774CED37C2214232"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/exporter.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/exporter.py",
+                      "promoted_sha256":  "32BA6C09A45ADF7EC76F97B38A52C5737122982D82C9455FA61B5C050B5AF176",
+                      "previous_sha256":  "32BA6C09A45ADF7EC76F97B38A52C5737122982D82C9455FA61B5C050B5AF176"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/serializer.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/serializer.py",
+                      "promoted_sha256":  "AB8526A224DF56839C686306A852EFE8B42A43199C5EA3FC2AEA84081ECEC8DD",
+                      "previous_sha256":  "AB8526A224DF56839C686306A852EFE8B42A43199C5EA3FC2AEA84081ECEC8DD"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/snapshot.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/hidden/reference/src/snapshot.py",
+                      "promoted_sha256":  "26FDADB566593B4188ECB364F940662B8042A229F69590CA711D8322C5FCC448",
+                      "previous_sha256":  "26FDADB566593B4188ECB364F940662B8042A229F69590CA711D8322C5FCC448"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/negative-controls/mode-1-local/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/negative-controls/mode-1-local/src/contracts.py",
+                      "promoted_sha256":  "5A4653BDB860BA2CBF5B655397925B4C044444B70C8B22AAACC78194C8179661",
+                      "previous_sha256":  "5A4653BDB860BA2CBF5B655397925B4C044444B70C8B22AAACC78194C8179661"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/negative-controls/plausible-cold-pass/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/negative-controls/plausible-cold-pass/README.md",
+                      "promoted_sha256":  "311FC3DFD64131D1DBD7EE2C40C11484F3BF62F7DCAD339F83620CBC06BF96CD",
+                      "previous_sha256":  "311FC3DFD64131D1DBD7EE2C40C11484F3BF62F7DCAD339F83620CBC06BF96CD"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/negative-controls/plausible-cold-pass/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/negative-controls/plausible-cold-pass/src/consumers.py",
+                      "promoted_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366",
+                      "previous_sha256":  "054694A230DA33F0800B18B6CC05D1BAFC6B10562CBAA31A6EFF89FD8D107366"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/negative-controls/plausible-cold-pass/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/negative-controls/plausible-cold-pass/src/contracts.py",
+                      "promoted_sha256":  "6B367B74E7C0F72D115118D0401D70ED633CD4256957ABCACE66A1FDF37A6052",
+                      "previous_sha256":  "6B367B74E7C0F72D115118D0401D70ED633CD4256957ABCACE66A1FDF37A6052"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/README.md",
+                      "promoted_sha256":  "D0A1672674EE81F18F6F33BC0E09F3F03E9233978D27C0BFCC7B95F2A63E3612",
+                      "previous_sha256":  "D0A1672674EE81F18F6F33BC0E09F3F03E9233978D27C0BFCC7B95F2A63E3612"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/__init__.py",
+                      "promoted_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+                      "previous_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/consumers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/consumers.py",
+                      "promoted_sha256":  "FD9925CA46EB0E496F8B61B4C5AD0A41EB2E80D8BD6158B1D31B173D7A32F051",
+                      "previous_sha256":  "FD9925CA46EB0E496F8B61B4C5AD0A41EB2E80D8BD6158B1D31B173D7A32F051"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/contracts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/contracts.py",
+                      "promoted_sha256":  "36CC39798777D7DC87719516D3380786C6908FD32AA651B9162E56A854C1CE0D",
+                      "previous_sha256":  "36CC39798777D7DC87719516D3380786C6908FD32AA651B9162E56A854C1CE0D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/digest_helper.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/digest_helper.py",
+                      "promoted_sha256":  "CB6D1EF5CFC4D2541E2A74D9BCBFD6F7C5A7CCB9AC2F752ABAB019D0BA269ACB",
+                      "previous_sha256":  "CB6D1EF5CFC4D2541E2A74D9BCBFD6F7C5A7CCB9AC2F752ABAB019D0BA269ACB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/exporter.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/exporter.py",
+                      "promoted_sha256":  "D9ACF64845D3E04CF0A65C10E577B5DD8A27CD3AE741C3E842643FB9EF8F7AB7",
+                      "previous_sha256":  "D9ACF64845D3E04CF0A65C10E577B5DD8A27CD3AE741C3E842643FB9EF8F7AB7"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/metrics.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/metrics.py",
+                      "promoted_sha256":  "207274A920F1835CD903320D04B36EE2902527F554B0CC1FF76F70336CD353B6",
+                      "previous_sha256":  "207274A920F1835CD903320D04B36EE2902527F554B0CC1FF76F70336CD353B6"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/serializer.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/serializer.py",
+                      "promoted_sha256":  "6F0FD16B65B0D926ED661A581836987131E0A611CF17D4CCCC81A76D21BD1F08",
+                      "previous_sha256":  "6F0FD16B65B0D926ED661A581836987131E0A611CF17D4CCCC81A76D21BD1F08"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/snapshot.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/src/snapshot.py",
+                      "promoted_sha256":  "B071C72B7B98AE6D5FD116B93CBD93AE061C062E3F025411B98930AD7FD6F7B8",
+                      "previous_sha256":  "B071C72B7B98AE6D5FD116B93CBD93AE061C062E3F025411B98930AD7FD6F7B8"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/task.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/task.md",
+                      "promoted_sha256":  "67E1789773EB1FB3AE2AF3E73F128732BA3E36CACC739DAF228151E26E04C889",
+                      "previous_sha256":  "67E1789773EB1FB3AE2AF3E73F128732BA3E36CACC739DAF228151E26E04C889"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/tests/test_public.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/adaptive-contract-evolution-v4/public/tests/test_public.py",
+                      "promoted_sha256":  "E3C2EA7EAFD3A3A63ED946AD3B9A4C23E1EA7C7D9591FC1335F834BB4F47AC8D",
+                      "previous_sha256":  "E3C2EA7EAFD3A3A63ED946AD3B9A4C23E1EA7C7D9591FC1335F834BB4F47AC8D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/fixture-contract.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/fixture-contract.json",
+                      "promoted_sha256":  "B811AFC55AEDE16A2E71A2AC489356F7FC02E41DF7CB3E400D08EE1AA58526BB",
+                      "previous_sha256":  "B811AFC55AEDE16A2E71A2AC489356F7FC02E41DF7CB3E400D08EE1AA58526BB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/grade.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/grade.py",
+                      "promoted_sha256":  "E8C370A15372736EC1E394AA48243773BD31E8747A045BECE470522817312A5D",
+                      "previous_sha256":  "E8C370A15372736EC1E394AA48243773BD31E8747A045BECE470522817312A5D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/ALT-NOTES.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/ALT-NOTES.json",
+                      "promoted_sha256":  "29524ECC7FDDD20903216E06262F776F87291702CDA90D323995C1FDF14EF67D",
+                      "previous_sha256":  "29524ECC7FDDD20903216E06262F776F87291702CDA90D323995C1FDF14EF67D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/README.md",
+                      "promoted_sha256":  "AD722F1EC48C4DEBF982822558EB0D405045830C14C4B32F3812D1F524AC8FFF",
+                      "previous_sha256":  "AD722F1EC48C4DEBF982822558EB0D405045830C14C4B32F3812D1F524AC8FFF"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/consumers/alerts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/consumers/alerts.py",
+                      "promoted_sha256":  "613A538274CB1399C36BCEA15F4D898386C389C1D31B1D91CCB0F95F72516FFD",
+                      "previous_sha256":  "613A538274CB1399C36BCEA15F4D898386C389C1D31B1D91CCB0F95F72516FFD"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/consumers/exposure_export.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/consumers/exposure_export.py",
+                      "promoted_sha256":  "3E4A4BD80BEB0FF2C40FBCB3740A6ED5D5D74DB7F2B8B9816407FD988B4D1472",
+                      "previous_sha256":  "3E4A4BD80BEB0FF2C40FBCB3740A6ED5D5D74DB7F2B8B9816407FD988B4D1472"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/pipeline.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/pipeline.py",
+                      "promoted_sha256":  "9BAE7B680F998763DF3C37CC097D901865CE0CBE767DE7AE4C027449EB21ABDA",
+                      "previous_sha256":  "9BAE7B680F998763DF3C37CC097D901865CE0CBE767DE7AE4C027449EB21ABDA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/reference/venues.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/reference/venues.py",
+                      "promoted_sha256":  "D027179BE62A0D015BE0CA6F53808171B510CF73085DBF3900518DBEE7C7E9D5",
+                      "previous_sha256":  "D027179BE62A0D015BE0CA6F53808171B510CF73085DBF3900518DBEE7C7E9D5"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/scheduler/registry.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/scheduler/registry.py",
+                      "promoted_sha256":  "875F4B5B98086C174CC7BC98C628CE7E96ADC369A5E842726C5E589E11377369",
+                      "previous_sha256":  "875F4B5B98086C174CC7BC98C628CE7E96ADC369A5E842726C5E589E11377369"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/scheduler/run_epsilon.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/scheduler/run_epsilon.py",
+                      "promoted_sha256":  "88564B225B909E014640C07C72FB94BE762823C433F4CA9EBF6ECBBC2C751BCE",
+                      "previous_sha256":  "88564B225B909E014640C07C72FB94BE762823C433F4CA9EBF6ECBBC2C751BCE"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/sources/epsilon_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-alt/src/sources/epsilon_feed.py",
+                      "promoted_sha256":  "07AEAA48E47DB92FAD4CEEC5E86A1EDACE2C2148D58491BD305CABC5ADD8D4AC",
+                      "previous_sha256":  "07AEAA48E47DB92FAD4CEEC5E86A1EDACE2C2148D58491BD305CABC5ADD8D4AC"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/FORMAT-NOTES.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/FORMAT-NOTES.json",
+                      "promoted_sha256":  "E591A0EA84133AFA2789169F649A602BB4749D1A27CDF094BC2D7A8BA3E46359",
+                      "previous_sha256":  "E591A0EA84133AFA2789169F649A602BB4749D1A27CDF094BC2D7A8BA3E46359"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/README.md",
+                      "promoted_sha256":  "09A2EC108865E2D3C4B63807395469309A28CBA45451F6E2C753CA0A1FA5F8FB",
+                      "previous_sha256":  "09A2EC108865E2D3C4B63807395469309A28CBA45451F6E2C753CA0A1FA5F8FB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/consumers/alerts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/consumers/alerts.py",
+                      "promoted_sha256":  "66A077E90992DDDB227DAB150CD185D3A2D8FD6C027D89734489047CC980C0FC",
+                      "previous_sha256":  "66A077E90992DDDB227DAB150CD185D3A2D8FD6C027D89734489047CC980C0FC"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/consumers/exposure_export.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/consumers/exposure_export.py",
+                      "promoted_sha256":  "66C373488A198BCA8BA71A725E10B2E4BAF5BAF5474F60BDD19EF56BD82788BA",
+                      "previous_sha256":  "66C373488A198BCA8BA71A725E10B2E4BAF5BAF5474F60BDD19EF56BD82788BA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/pipeline.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/pipeline.py",
+                      "promoted_sha256":  "9BAE7B680F998763DF3C37CC097D901865CE0CBE767DE7AE4C027449EB21ABDA",
+                      "previous_sha256":  "9BAE7B680F998763DF3C37CC097D901865CE0CBE767DE7AE4C027449EB21ABDA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/reference/venues.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/reference/venues.py",
+                      "promoted_sha256":  "B5A61FD7B04076BCDAB93AE73EF7F188E0844B8BF6FB8C49647F04B2C4DA1C26",
+                      "previous_sha256":  "B5A61FD7B04076BCDAB93AE73EF7F188E0844B8BF6FB8C49647F04B2C4DA1C26"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/scheduler/registry.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/scheduler/registry.py",
+                      "promoted_sha256":  "A3F1768970CD30AA73E6C3E55623C39FEE3D9952BC7E632C7A79421AD18E06B5",
+                      "previous_sha256":  "A3F1768970CD30AA73E6C3E55623C39FEE3D9952BC7E632C7A79421AD18E06B5"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/scheduler/run_epsilon.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/scheduler/run_epsilon.py",
+                      "promoted_sha256":  "BCA9786CD79D1A3AF55FB5247F29F8666FD4A4B05B220CB6A640D4297DB92748",
+                      "previous_sha256":  "BCA9786CD79D1A3AF55FB5247F29F8666FD4A4B05B220CB6A640D4297DB92748"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/sources/epsilon_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference-format-alt/src/sources/epsilon_feed.py",
+                      "promoted_sha256":  "FB91A4C3BDD937FCE62E594F13FDF6D01A8382B144C9CF3C0FA4E8A6ED84114A",
+                      "previous_sha256":  "FB91A4C3BDD937FCE62E594F13FDF6D01A8382B144C9CF3C0FA4E8A6ED84114A"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/README.md",
+                      "promoted_sha256":  "B1BAE62DB7F64BD92F1876DD71EFB394C7176181BE7C403E73BE76C839B3927F",
+                      "previous_sha256":  "B1BAE62DB7F64BD92F1876DD71EFB394C7176181BE7C403E73BE76C839B3927F"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/consumers/alerts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/consumers/alerts.py",
+                      "promoted_sha256":  "2B358C2A1BD75DDC19761F2D302708EDA76D483A782478791274A289DF0B51A2",
+                      "previous_sha256":  "2B358C2A1BD75DDC19761F2D302708EDA76D483A782478791274A289DF0B51A2"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/consumers/exposure_export.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/consumers/exposure_export.py",
+                      "promoted_sha256":  "89BB00BE4D68C59846D14706BA78D20CDB532F2F29076443FB89BEBB305C2A04",
+                      "previous_sha256":  "89BB00BE4D68C59846D14706BA78D20CDB532F2F29076443FB89BEBB305C2A04"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/pipeline.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/pipeline.py",
+                      "promoted_sha256":  "9BAE7B680F998763DF3C37CC097D901865CE0CBE767DE7AE4C027449EB21ABDA",
+                      "previous_sha256":  "9BAE7B680F998763DF3C37CC097D901865CE0CBE767DE7AE4C027449EB21ABDA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/reference/venues.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/reference/venues.py",
+                      "promoted_sha256":  "B5A61FD7B04076BCDAB93AE73EF7F188E0844B8BF6FB8C49647F04B2C4DA1C26",
+                      "previous_sha256":  "B5A61FD7B04076BCDAB93AE73EF7F188E0844B8BF6FB8C49647F04B2C4DA1C26"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/scheduler/registry.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/scheduler/registry.py",
+                      "promoted_sha256":  "A3F1768970CD30AA73E6C3E55623C39FEE3D9952BC7E632C7A79421AD18E06B5",
+                      "previous_sha256":  "A3F1768970CD30AA73E6C3E55623C39FEE3D9952BC7E632C7A79421AD18E06B5"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/scheduler/run_epsilon.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/scheduler/run_epsilon.py",
+                      "promoted_sha256":  "BCA9786CD79D1A3AF55FB5247F29F8666FD4A4B05B220CB6A640D4297DB92748",
+                      "previous_sha256":  "BCA9786CD79D1A3AF55FB5247F29F8666FD4A4B05B220CB6A640D4297DB92748"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/sources/epsilon_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/hidden/reference/src/sources/epsilon_feed.py",
+                      "promoted_sha256":  "FB91A4C3BDD937FCE62E594F13FDF6D01A8382B144C9CF3C0FA4E8A6ED84114A",
+                      "previous_sha256":  "FB91A4C3BDD937FCE62E594F13FDF6D01A8382B144C9CF3C0FA4E8A6ED84114A"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/mode-1-local/src/pipeline.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/mode-1-local/src/pipeline.py",
+                      "promoted_sha256":  "9BAE7B680F998763DF3C37CC097D901865CE0CBE767DE7AE4C027449EB21ABDA",
+                      "previous_sha256":  "9BAE7B680F998763DF3C37CC097D901865CE0CBE767DE7AE4C027449EB21ABDA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/mode-1-local/src/sources/epsilon_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/mode-1-local/src/sources/epsilon_feed.py",
+                      "promoted_sha256":  "91FEE2B7AF24251F21E3969890587ACA584F241AA0749F6CFA2CFF609F6C2379",
+                      "previous_sha256":  "91FEE2B7AF24251F21E3969890587ACA584F241AA0749F6CFA2CFF609F6C2379"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/plausible-cold-pass/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/plausible-cold-pass/README.md",
+                      "promoted_sha256":  "A6EB207B82C2802F4C07602B6AEAF7ABB98B3A20AB0BC664DEB7F70B3499C513",
+                      "previous_sha256":  "A6EB207B82C2802F4C07602B6AEAF7ABB98B3A20AB0BC664DEB7F70B3499C513"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/plausible-cold-pass/src/pipeline.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/plausible-cold-pass/src/pipeline.py",
+                      "promoted_sha256":  "ED3863D1D3807CA2009AF50665B40241A7EEDD2149C77C5F523AA2C6865885CA",
+                      "previous_sha256":  "ED3863D1D3807CA2009AF50665B40241A7EEDD2149C77C5F523AA2C6865885CA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/plausible-cold-pass/src/sources/epsilon_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/negative-controls/plausible-cold-pass/src/sources/epsilon_feed.py",
+                      "promoted_sha256":  "E627BA44D906F5A235019B68D8FF6131C9E25BAD3BFE53FDA8162616F897F0E2",
+                      "previous_sha256":  "E627BA44D906F5A235019B68D8FF6131C9E25BAD3BFE53FDA8162616F897F0E2"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/PLAN.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/PLAN.md",
+                      "promoted_sha256":  "49D8162733E0A2C6C7C661C908130F3BAC917DF654034D47898E0F8D4B08018D",
+                      "previous_sha256":  "49D8162733E0A2C6C7C661C908130F3BAC917DF654034D47898E0F8D4B08018D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/README.md",
+                      "promoted_sha256":  "23EFD5EFC40CEA789223BDC5FBE89AE473E84D298CBAC646D92A5E55FC62469E",
+                      "previous_sha256":  "23EFD5EFC40CEA789223BDC5FBE89AE473E84D298CBAC646D92A5E55FC62469E"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/RELEASES.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/RELEASES.md",
+                      "promoted_sha256":  "2AE457FE2080B6C782888CEC6E152E6E77E1021C43ADE5A714BDF207C6ACCACF",
+                      "previous_sha256":  "2AE457FE2080B6C782888CEC6E152E6E77E1021C43ADE5A714BDF207C6ACCACF"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/alpha-sample.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/alpha-sample.json",
+                      "promoted_sha256":  "AD5818FB4BE81C8EF00AACD52184DB30C41B5A95FB6CD17A366C5831D8061E8C",
+                      "previous_sha256":  "AD5818FB4BE81C8EF00AACD52184DB30C41B5A95FB6CD17A366C5831D8061E8C"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/beta-sample.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/beta-sample.json",
+                      "promoted_sha256":  "29D1034A9904BE250E0DA2AE6EA4AC21A8764BBF30A665F2CEB09F1DE57F3C1B",
+                      "previous_sha256":  "29D1034A9904BE250E0DA2AE6EA4AC21A8764BBF30A665F2CEB09F1DE57F3C1B"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/delta-sample.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/delta-sample.json",
+                      "promoted_sha256":  "83DB01B1FC035B6F1F42FC83F6654A3F08EEEAA9AF5DEB9AB2F27A275325A8B1",
+                      "previous_sha256":  "83DB01B1FC035B6F1F42FC83F6654A3F08EEEAA9AF5DEB9AB2F27A275325A8B1"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/epsilon-sample.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/epsilon-sample.json",
+                      "promoted_sha256":  "CC0070DC57A0F7990A7F7EF7192C4BB4D0901A637E158C9041BC7F673B9149C7",
+                      "previous_sha256":  "CC0070DC57A0F7990A7F7EF7192C4BB4D0901A637E158C9041BC7F673B9149C7"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/gamma-sample.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/gamma-sample.json",
+                      "promoted_sha256":  "1A5B714BAFA854701C5AD0F5109B83516265C742D97241E059B61864B251FEC1",
+                      "previous_sha256":  "1A5B714BAFA854701C5AD0F5109B83516265C742D97241E059B61864B251FEC1"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/epsilon/2026-06-30.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/epsilon/2026-06-30.json",
+                      "promoted_sha256":  "720D12F0947BF5EC3918C86AFEEE3D799C7E1E3151E975C67985A6A2FFEAD454",
+                      "previous_sha256":  "720D12F0947BF5EC3918C86AFEEE3D799C7E1E3151E975C67985A6A2FFEAD454"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/index.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/index.json",
+                      "promoted_sha256":  "0B9A935DF4C8483FA85BB6CD34C73F1D34F08890E4F5B49FFFA9172AB0FDCFE4",
+                      "previous_sha256":  "0B9A935DF4C8483FA85BB6CD34C73F1D34F08890E4F5B49FFFA9172AB0FDCFE4"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/kappa/2026-06-30.csv",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/kappa/2026-06-30.csv",
+                      "promoted_sha256":  "FEF588D164571724F8AB4A73B2DDD331D0290312D72DFF862405DBD4DC121CAC",
+                      "previous_sha256":  "FEF588D164571724F8AB4A73B2DDD331D0290312D72DFF862405DBD4DC121CAC"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/mu/2026-06-30.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/mu/2026-06-30.json",
+                      "promoted_sha256":  "93023F35FD1ECBE1E4F4D5718BF3060CA3CA9728D0E46F3444359DA65C76EAD0",
+                      "previous_sha256":  "93023F35FD1ECBE1E4F4D5718BF3060CA3CA9728D0E46F3444359DA65C76EAD0"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/theta/2026-06-30.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/data/raw/theta/2026-06-30.json",
+                      "promoted_sha256":  "B148FA39A924C1C757F0517025774A05BD06A9ADC5756D47C4DBA969370E9D0D",
+                      "previous_sha256":  "B148FA39A924C1C757F0517025774A05BD06A9ADC5756D47C4DBA969370E9D0D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/docs/RUNBOOK.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/docs/RUNBOOK.md",
+                      "promoted_sha256":  "BD11BD79F7238A7CF20B8E8E351281C6A0DB3F0578D21A41999FF4D0758A5B53",
+                      "previous_sha256":  "BD11BD79F7238A7CF20B8E8E351281C6A0DB3F0578D21A41999FF4D0758A5B53"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/__init__.py",
+                      "promoted_sha256":  "81B3301139CC941AAFDDD3397F7AD36DC29F42C5F5D5572873C19CD9E78A9393",
+                      "previous_sha256":  "81B3301139CC941AAFDDD3397F7AD36DC29F42C5F5D5572873C19CD9E78A9393"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/__init__.py",
+                      "promoted_sha256":  "730356D6817FECD21AF917F93F042F1352D1B05FB1BBE38BC7BE8B5E54819B7D",
+                      "previous_sha256":  "730356D6817FECD21AF917F93F042F1352D1B05FB1BBE38BC7BE8B5E54819B7D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/alerts.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/alerts.py",
+                      "promoted_sha256":  "B40D2D0A60DD9A95134097875CB9F881B8BA9F4BD4599502C6E6C2FAD364FC0D",
+                      "previous_sha256":  "B40D2D0A60DD9A95134097875CB9F881B8BA9F4BD4599502C6E6C2FAD364FC0D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/audit_trail.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/audit_trail.py",
+                      "promoted_sha256":  "058BAC7D6EB44C7310EF30A62CB25FA3591E2095084BFF24B31B20FDE5AC20BB",
+                      "previous_sha256":  "058BAC7D6EB44C7310EF30A62CB25FA3591E2095084BFF24B31B20FDE5AC20BB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/exposure_export.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/exposure_export.py",
+                      "promoted_sha256":  "645520503AB98B5C4BD9011D76E003237BA7D868BC5087FDA1E1E22BCA9DB43F",
+                      "previous_sha256":  "645520503AB98B5C4BD9011D76E003237BA7D868BC5087FDA1E1E22BCA9DB43F"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/latency_kpis.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/latency_kpis.py",
+                      "promoted_sha256":  "0D0A509A9446E00A63F23C2E18581BE7E3FA4A47A74A0FF3257CB114CBAA3EB8",
+                      "previous_sha256":  "0D0A509A9446E00A63F23C2E18581BE7E3FA4A47A74A0FF3257CB114CBAA3EB8"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/positions_report.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/positions_report.py",
+                      "promoted_sha256":  "7C6A570E96EBC348B0FB700B8743AD52F71F3039ABB3CF34727EF54AAF819F48",
+                      "previous_sha256":  "7C6A570E96EBC348B0FB700B8743AD52F71F3039ABB3CF34727EF54AAF819F48"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/regional_rollup.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/regional_rollup.py",
+                      "promoted_sha256":  "36B11833A2C103B829AE91B5836797F72E32153B22F4B7EB9D2E7A5F7A7A7DA0",
+                      "previous_sha256":  "36B11833A2C103B829AE91B5836797F72E32153B22F4B7EB9D2E7A5F7A7A7DA0"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/run_health.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/run_health.py",
+                      "promoted_sha256":  "5B068819030D91C8399001ABC03D0AFFF7F89B55EE3619B12A80791493F08463",
+                      "previous_sha256":  "5B068819030D91C8399001ABC03D0AFFF7F89B55EE3619B12A80791493F08463"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/summary_digest.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/summary_digest.py",
+                      "promoted_sha256":  "48E64B0F4BB0E410EBCAC22C2273772B780A91E1CFBB7031846F4D98944CA574",
+                      "previous_sha256":  "48E64B0F4BB0E410EBCAC22C2273772B780A91E1CFBB7031846F4D98944CA574"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/venue_dashboard.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/consumers/venue_dashboard.py",
+                      "promoted_sha256":  "170325B2FE76385DD5349B86920E716C74950667A62943377F0C0C86B65D38A3",
+                      "previous_sha256":  "170325B2FE76385DD5349B86920E716C74950667A62943377F0C0C86B65D38A3"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/__init__.py",
+                      "promoted_sha256":  "5C008971503842A8389B1D927426A0CA19DBAFD44CF219BBDA863160153FF39F",
+                      "previous_sha256":  "5C008971503842A8389B1D927426A0CA19DBAFD44CF219BBDA863160153FF39F"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/changelog.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/changelog.py",
+                      "promoted_sha256":  "98997B2D4B82F57A38B451229FAE977D44B1E272C139AC05217AD7258BFC25BF",
+                      "previous_sha256":  "98997B2D4B82F57A38B451229FAE977D44B1E272C139AC05217AD7258BFC25BF"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/dates.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/dates.py",
+                      "promoted_sha256":  "6D59C5275FDC07AF14D36A193C11D0F3FF050F4526F06517C69F6E60BFE5F6DB",
+                      "previous_sha256":  "6D59C5275FDC07AF14D36A193C11D0F3FF050F4526F06517C69F6E60BFE5F6DB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/feed_errors.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/feed_errors.py",
+                      "promoted_sha256":  "45D0979F3EC9CA90E244584CE8A89C2D2D2784872D1A286D4AEC359578C88857",
+                      "previous_sha256":  "45D0979F3EC9CA90E244584CE8A89C2D2D2784872D1A286D4AEC359578C88857"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/guard.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/guard.py",
+                      "promoted_sha256":  "08AF3768D80E5313DBA5AFC731997079EE6D45E72D0336A4B2370FC3F01F9D6A",
+                      "previous_sha256":  "08AF3768D80E5313DBA5AFC731997079EE6D45E72D0336A4B2370FC3F01F9D6A"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/identity.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/identity.py",
+                      "promoted_sha256":  "8D2C48569F1BAF9EB4906FD4AEEAE3F8DCD22C278F3E02C54891C4188897819B",
+                      "previous_sha256":  "8D2C48569F1BAF9EB4906FD4AEEAE3F8DCD22C278F3E02C54891C4188897819B"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/normalize.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/normalize.py",
+                      "promoted_sha256":  "80BF69DCDFA36EA39C06B9B9F5375B395748E038388BFD444DC09AFE9028E998",
+                      "previous_sha256":  "80BF69DCDFA36EA39C06B9B9F5375B395748E038388BFD444DC09AFE9028E998"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/resolve.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/resolve.py",
+                      "promoted_sha256":  "1F2762A9093CCF4034E16D65D1B0EC59017F11B7C3B8184FF07BE86B9DFAB72E",
+                      "previous_sha256":  "1F2762A9093CCF4034E16D65D1B0EC59017F11B7C3B8184FF07BE86B9DFAB72E"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/rows.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/rows.py",
+                      "promoted_sha256":  "73770D783A7A61FD3C501AC2CD0E8045424C8E9706DC83A0BE6DB37FD0563B06",
+                      "previous_sha256":  "73770D783A7A61FD3C501AC2CD0E8045424C8E9706DC83A0BE6DB37FD0563B06"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/text.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/core/text.py",
+                      "promoted_sha256":  "0C0752C71EAB62339E45BC74385EEC370A0F5FD8583EE908E1DD2F51771B154D",
+                      "previous_sha256":  "0C0752C71EAB62339E45BC74385EEC370A0F5FD8583EE908E1DD2F51771B154D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/pipeline.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/pipeline.py",
+                      "promoted_sha256":  "5E5E067F7474C8ECE5AFC0A4AE5CC01E415B5DDE454C545753E09F95EE1F8EAA",
+                      "previous_sha256":  "5E5E067F7474C8ECE5AFC0A4AE5CC01E415B5DDE454C545753E09F95EE1F8EAA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/__init__.py",
+                      "promoted_sha256":  "ED073FD61A44A7C29EC1E1D67454463D96235E129D626C0725D8EA8C4E2D737A",
+                      "previous_sha256":  "ED073FD61A44A7C29EC1E1D67454463D96235E129D626C0725D8EA8C4E2D737A"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/ambiguity.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/ambiguity.py",
+                      "promoted_sha256":  "39996C3BA986A860E3566CF8963725120D4D572EFBEBC6CFE508F2D7DD5A15E4",
+                      "previous_sha256":  "39996C3BA986A860E3566CF8963725120D4D572EFBEBC6CFE508F2D7DD5A15E4"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/calendars.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/calendars.py",
+                      "promoted_sha256":  "E00CDDC772755F8F6A8DD533A05A49A00D6C601E036D046579DA29890293843C",
+                      "previous_sha256":  "E00CDDC772755F8F6A8DD533A05A49A00D6C601E036D046579DA29890293843C"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/instruments.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/instruments.py",
+                      "promoted_sha256":  "B7D62955B88E9C6389EBC8AC97974A3588161CC1E92C490DBAA1ABEB068173C2",
+                      "previous_sha256":  "B7D62955B88E9C6389EBC8AC97974A3588161CC1E92C490DBAA1ABEB068173C2"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/issuers.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/issuers.py",
+                      "promoted_sha256":  "7067348C7C096AA547141861533DD79E24D8659891C55F21429F2BB47B38768F",
+                      "previous_sha256":  "7067348C7C096AA547141861533DD79E24D8659891C55F21429F2BB47B38768F"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/symbology.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/symbology.py",
+                      "promoted_sha256":  "3B895AF3D486868C04FAB4EB54D6E6ADF3347924FD9898904D76BD17C0976661",
+                      "previous_sha256":  "3B895AF3D486868C04FAB4EB54D6E6ADF3347924FD9898904D76BD17C0976661"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/venues.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/reference/venues.py",
+                      "promoted_sha256":  "08F634290EF910CE429D489BB7A86B48FE4AD5D2BF49E1E8F744E202304936D3",
+                      "previous_sha256":  "08F634290EF910CE429D489BB7A86B48FE4AD5D2BF49E1E8F744E202304936D3"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/__init__.py",
+                      "promoted_sha256":  "C74212B3F29FD469D0B01EA08CE48349A6E0FE869B79ED9DEB35E05A6A00311C",
+                      "previous_sha256":  "C74212B3F29FD469D0B01EA08CE48349A6E0FE869B79ED9DEB35E05A6A00311C"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/backfill.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/backfill.py",
+                      "promoted_sha256":  "45122D34BA0BC3FF16E27EAEC8DF3C4D9A466DA9BBB87DAA77A3677A1BDEE75B",
+                      "previous_sha256":  "45122D34BA0BC3FF16E27EAEC8DF3C4D9A466DA9BBB87DAA77A3677A1BDEE75B"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/driver.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/driver.py",
+                      "promoted_sha256":  "5D0573FB181690564BB5B90030700F9E61671563EE5BF902D78D2D9A91214892",
+                      "previous_sha256":  "5D0573FB181690564BB5B90030700F9E61671563EE5BF902D78D2D9A91214892"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/registry.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/registry.py",
+                      "promoted_sha256":  "2DC87E3B3361993E9C881A63CF665930524AB67E3EAF9171AE97B4350D2085A0",
+                      "previous_sha256":  "2DC87E3B3361993E9C881A63CF665930524AB67E3EAF9171AE97B4350D2085A0"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_alpha.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_alpha.py",
+                      "promoted_sha256":  "F3F0978AED875CFDF75FCC28FF8C4E36492B50E4AC2AB26D2D2B7B5B3C8E3DF4",
+                      "previous_sha256":  "F3F0978AED875CFDF75FCC28FF8C4E36492B50E4AC2AB26D2D2B7B5B3C8E3DF4"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_audit.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_audit.py",
+                      "promoted_sha256":  "86D5947E09F82C811E23F43FE5C31D7A234131AE88726830346802880306CC0C",
+                      "previous_sha256":  "86D5947E09F82C811E23F43FE5C31D7A234131AE88726830346802880306CC0C"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_beta.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_beta.py",
+                      "promoted_sha256":  "829A2C0CDA51AF359AB4381911349228A49B3621DBECD639A6D2EC8D73F48A5B",
+                      "previous_sha256":  "829A2C0CDA51AF359AB4381911349228A49B3621DBECD639A6D2EC8D73F48A5B"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_delta.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_delta.py",
+                      "promoted_sha256":  "B9E5828A2B2DCA3B4752966B510DDB02153570F140A0A2660E84F32DEB15EAEE",
+                      "previous_sha256":  "B9E5828A2B2DCA3B4752966B510DDB02153570F140A0A2660E84F32DEB15EAEE"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_exports.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_exports.py",
+                      "promoted_sha256":  "C8A2D405E8951AE3AC71D5CF0EB4922103C8555228DC76CED3D49EC6E500FA84",
+                      "previous_sha256":  "C8A2D405E8951AE3AC71D5CF0EB4922103C8555228DC76CED3D49EC6E500FA84"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_gamma.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_gamma.py",
+                      "promoted_sha256":  "3BB0A53A016417E8F51CA1DAB236D601235345AA2C18AB3F749B9A21EF672A11",
+                      "previous_sha256":  "3BB0A53A016417E8F51CA1DAB236D601235345AA2C18AB3F749B9A21EF672A11"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_resolution.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/scheduler/run_resolution.py",
+                      "promoted_sha256":  "A104D554F3B4B46D337F87F120F8B238C5564DF361F44F6A0EC450E844B034C6",
+                      "previous_sha256":  "A104D554F3B4B46D337F87F120F8B238C5564DF361F44F6A0EC450E844B034C6"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/__init__.py",
+                      "promoted_sha256":  "F13B85B1B554CE01949D2CA78171AAEDE852A2894235C37A893A2675EF930F96",
+                      "previous_sha256":  "F13B85B1B554CE01949D2CA78171AAEDE852A2894235C37A893A2675EF930F96"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/alpha_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/alpha_feed.py",
+                      "promoted_sha256":  "EAF2389DA7F7A08172826D8F7EC1A9C101BE386361DE571D6B30C0675BE96A2A",
+                      "previous_sha256":  "EAF2389DA7F7A08172826D8F7EC1A9C101BE386361DE571D6B30C0675BE96A2A"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/beta_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/beta_feed.py",
+                      "promoted_sha256":  "3717080255F915AC5C5D62DADECC018F131A3E494FF53AE273D054450613207F",
+                      "previous_sha256":  "3717080255F915AC5C5D62DADECC018F131A3E494FF53AE273D054450613207F"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/delta_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/delta_feed.py",
+                      "promoted_sha256":  "5102356D6A81AACEE04149786E94A9C5A1141435433C3A619FF59A0185F27AEF",
+                      "previous_sha256":  "5102356D6A81AACEE04149786E94A9C5A1141435433C3A619FF59A0185F27AEF"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/epsilon_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/epsilon_feed.py",
+                      "promoted_sha256":  "A13B53FBED52C664E957D102BE449A507ED00077C614E8DF2F3741CA67EFFD1D",
+                      "previous_sha256":  "A13B53FBED52C664E957D102BE449A507ED00077C614E8DF2F3741CA67EFFD1D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/eta_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/eta_feed.py",
+                      "promoted_sha256":  "AFFCDAF3C1359B50E86944615B860A19933B44F70197CF7933FAF0D961617D9A",
+                      "previous_sha256":  "AFFCDAF3C1359B50E86944615B860A19933B44F70197CF7933FAF0D961617D9A"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/gamma_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/gamma_feed.py",
+                      "promoted_sha256":  "1DC6A53DC54201C4971528879642F077B028F9824EF22A0ECC7FB43E2C8D7BC2",
+                      "previous_sha256":  "1DC6A53DC54201C4971528879642F077B028F9824EF22A0ECC7FB43E2C8D7BC2"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/iota_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/iota_feed.py",
+                      "promoted_sha256":  "2620AD611B86BA1640A9C098D10A22F3DEADDCC9D36D086C47ED72538BA23E46",
+                      "previous_sha256":  "2620AD611B86BA1640A9C098D10A22F3DEADDCC9D36D086C47ED72538BA23E46"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/kappa_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/kappa_feed.py",
+                      "promoted_sha256":  "B8C05F473F2866370E000E64AE51E8750017AC69788FE8E970CA79DA6B98DE99",
+                      "previous_sha256":  "B8C05F473F2866370E000E64AE51E8750017AC69788FE8E970CA79DA6B98DE99"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/mu_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/mu_feed.py",
+                      "promoted_sha256":  "D36AD5544EFBC89A347DFB3F142D1EB5FB855798492C0BF177F70B81570FB284",
+                      "previous_sha256":  "D36AD5544EFBC89A347DFB3F142D1EB5FB855798492C0BF177F70B81570FB284"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/nu_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/nu_feed.py",
+                      "promoted_sha256":  "1FF8ABB0A465D713FCF98FF51A8F7550CE34E31DE371E48D1733D15CA7911FC2",
+                      "previous_sha256":  "1FF8ABB0A465D713FCF98FF51A8F7550CE34E31DE371E48D1733D15CA7911FC2"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/omicron_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/omicron_feed.py",
+                      "promoted_sha256":  "33BB508659774C2685C8DFC765E62BD197383D5DF948164EEB64E5957F3C9A05",
+                      "previous_sha256":  "33BB508659774C2685C8DFC765E62BD197383D5DF948164EEB64E5957F3C9A05"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/sigma_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/sigma_feed.py",
+                      "promoted_sha256":  "2050D3FE6B5B03187A0A78110BDDAC4B264E071608756F1E4C5586D5D905C328",
+                      "previous_sha256":  "2050D3FE6B5B03187A0A78110BDDAC4B264E071608756F1E4C5586D5D905C328"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/theta_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/theta_feed.py",
+                      "promoted_sha256":  "C34553B1ACE4FD89D104039E57F42A4B460B20D41836E4A955ACB72EE0F66BB8",
+                      "previous_sha256":  "C34553B1ACE4FD89D104039E57F42A4B460B20D41836E4A955ACB72EE0F66BB8"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/xi_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/xi_feed.py",
+                      "promoted_sha256":  "25E4DA55B5CECDFEDA3936B1865B2D251ED7E79EEEF8B2A76772FE706220C976",
+                      "previous_sha256":  "25E4DA55B5CECDFEDA3936B1865B2D251ED7E79EEEF8B2A76772FE706220C976"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/zeta_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/src/sources/zeta_feed.py",
+                      "promoted_sha256":  "DDE06848635C629B6A058A98F6BE4A1B9A410A7AB241577BD22D57ECD5CF169D",
+                      "previous_sha256":  "DDE06848635C629B6A058A98F6BE4A1B9A410A7AB241577BD22D57ECD5CF169D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/task.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/task.md",
+                      "promoted_sha256":  "6C49AAA1C0F93348C29419FCBF69679FEF13F66F44993F38E2BF9D66AE9230F4",
+                      "previous_sha256":  "6C49AAA1C0F93348C29419FCBF69679FEF13F66F44993F38E2BF9D66AE9230F4"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/tests/test_public.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-scale-v1/public/tests/test_public.py",
+                      "promoted_sha256":  "A61DFA5DC7D0556A0140A067E05104D2DAC804B1F040728CCCB2B8825436AA1D",
+                      "previous_sha256":  "A61DFA5DC7D0556A0140A067E05104D2DAC804B1F040728CCCB2B8825436AA1D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/fixture-contract.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/fixture-contract.json",
+                      "promoted_sha256":  "680BB172241548A0844575264442006DB352D6E4DF017F69CA9360096B56C10C",
+                      "previous_sha256":  "680BB172241548A0844575264442006DB352D6E4DF017F69CA9360096B56C10C"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/hidden/grade.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/hidden/grade.py",
+                      "promoted_sha256":  "EB7CF77B2D4DFD952AA5A33CB295E8F79A3E651F4A5CD87E69EE52D61CDE406B",
+                      "previous_sha256":  "EB7CF77B2D4DFD952AA5A33CB295E8F79A3E651F4A5CD87E69EE52D61CDE406B"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference-alt/ALT-NOTES.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference-alt/ALT-NOTES.json",
+                      "promoted_sha256":  "E005A8D937429819D21BAF187A897671A1C117FDDB17EC2037976E3ABFC47A45",
+                      "previous_sha256":  "E005A8D937429819D21BAF187A897671A1C117FDDB17EC2037976E3ABFC47A45"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference-alt/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference-alt/README.md",
+                      "promoted_sha256":  "9B91EDE80B7DDA5FF39D2E21B97428075C2A6466F371926C2A95381AA5980376",
+                      "previous_sha256":  "9B91EDE80B7DDA5FF39D2E21B97428075C2A6466F371926C2A95381AA5980376"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference-alt/src/sources/gamma_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference-alt/src/sources/gamma_feed.py",
+                      "promoted_sha256":  "064361F50574CCBBAF2BF5E0E32AD583F7376421DDD4E202E7A5E46EDFC0990B",
+                      "previous_sha256":  "064361F50574CCBBAF2BF5E0E32AD583F7376421DDD4E202E7A5E46EDFC0990B"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference/README.md",
+                      "promoted_sha256":  "F7CA8781606E2D340C1D82BBE8FA84545B6FBCAFBEF16A169C92C5BB5788238D",
+                      "previous_sha256":  "F7CA8781606E2D340C1D82BBE8FA84545B6FBCAFBEF16A169C92C5BB5788238D"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference/src/sources/gamma_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/hidden/reference/src/sources/gamma_feed.py",
+                      "promoted_sha256":  "0FCA4469F6E260038F10C28EE2F3959FA67819FD7C9174AD9541029AEC769CF7",
+                      "previous_sha256":  "0FCA4469F6E260038F10C28EE2F3959FA67819FD7C9174AD9541029AEC769CF7"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/negative-controls/mode-1-local/src/sources/gamma_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/negative-controls/mode-1-local/src/sources/gamma_feed.py",
+                      "promoted_sha256":  "9C2BA57F96DF8CFBF2AC05C7E29A6FFE1271DCB4BE204175BC497D132BC8C759",
+                      "previous_sha256":  "9C2BA57F96DF8CFBF2AC05C7E29A6FFE1271DCB4BE204175BC497D132BC8C759"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/negative-controls/plausible-cold-pass/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/negative-controls/plausible-cold-pass/README.md",
+                      "promoted_sha256":  "FE583B2ACF2400ED8A7BF930613BA5F7BB5BC1CF1CCB16A55BE734C7D3796B63",
+                      "previous_sha256":  "FE583B2ACF2400ED8A7BF930613BA5F7BB5BC1CF1CCB16A55BE734C7D3796B63"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/negative-controls/plausible-cold-pass/src/sources/gamma_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/negative-controls/plausible-cold-pass/src/sources/gamma_feed.py",
+                      "promoted_sha256":  "529E0CB9564F725705734934D8ACC6BB88AA1F3E66AAACB8F957EADCB370F8AB",
+                      "previous_sha256":  "529E0CB9564F725705734934D8ACC6BB88AA1F3E66AAACB8F957EADCB370F8AB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/README.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/README.md",
+                      "promoted_sha256":  "C534F2935B0461CB31BC76401D46A32C6FD0FA3B5D369E39A52708F8248AB9AA",
+                      "previous_sha256":  "C534F2935B0461CB31BC76401D46A32C6FD0FA3B5D369E39A52708F8248AB9AA"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/data/gamma-sample.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/data/gamma-sample.json",
+                      "promoted_sha256":  "AC327B568269669D4A11C4B669426A0475BDA1EC5B5A4CC74C1FC623B86749E2",
+                      "previous_sha256":  "AC327B568269669D4A11C4B669426A0475BDA1EC5B5A4CC74C1FC623B86749E2"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/__init__.py",
+                      "promoted_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+                      "previous_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/changelog.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/changelog.py",
+                      "promoted_sha256":  "BA1E4FFCB1283E2F67B3DD9F1E46A9E8D6928D083B17C53DCE0858B62CCE1819",
+                      "previous_sha256":  "BA1E4FFCB1283E2F67B3DD9F1E46A9E8D6928D083B17C53DCE0858B62CCE1819"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/dates.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/dates.py",
+                      "promoted_sha256":  "A21536C824E633DC2CCA62DA15E68BB86F77594DFEE6174F9FBC16972194F6D1",
+                      "previous_sha256":  "A21536C824E633DC2CCA62DA15E68BB86F77594DFEE6174F9FBC16972194F6D1"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/feed_errors.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/feed_errors.py",
+                      "promoted_sha256":  "45D0979F3EC9CA90E244584CE8A89C2D2D2784872D1A286D4AEC359578C88857",
+                      "previous_sha256":  "45D0979F3EC9CA90E244584CE8A89C2D2D2784872D1A286D4AEC359578C88857"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/guard.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/guard.py",
+                      "promoted_sha256":  "6CAB077B9500D134825E4F8A9278D0B3D03F735A9FD3048439CD648615A3DBDB",
+                      "previous_sha256":  "6CAB077B9500D134825E4F8A9278D0B3D03F735A9FD3048439CD648615A3DBDB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/pipeline.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/pipeline.py",
+                      "promoted_sha256":  "ED6B5B97980A4FFE9E66E3C05F6F755CDBF2A3821C84A08CC344394960FE7397",
+                      "previous_sha256":  "ED6B5B97980A4FFE9E66E3C05F6F755CDBF2A3821C84A08CC344394960FE7397"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/resolve.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/resolve.py",
+                      "promoted_sha256":  "65E0059A39393AABB36BA2811F9F85572884CBD729A4DC906D01B46CA6690447",
+                      "previous_sha256":  "65E0059A39393AABB36BA2811F9F85572884CBD729A4DC906D01B46CA6690447"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/rows.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/rows.py",
+                      "promoted_sha256":  "67F6CD73C26D74B8BA5FB20A4ED92C7B586369068AB11A39E1C163FA5A8313AB",
+                      "previous_sha256":  "67F6CD73C26D74B8BA5FB20A4ED92C7B586369068AB11A39E1C163FA5A8313AB"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/sources/__init__.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/sources/__init__.py",
+                      "promoted_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+                      "previous_sha256":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/sources/alpha_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/sources/alpha_feed.py",
+                      "promoted_sha256":  "3C4CCDDE4107C5390975C9742C5EBAA33ECC6D0777346809B634EEF7E473EBD5",
+                      "previous_sha256":  "3C4CCDDE4107C5390975C9742C5EBAA33ECC6D0777346809B634EEF7E473EBD5"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/sources/beta_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/sources/beta_feed.py",
+                      "promoted_sha256":  "8130C432CFC82DA940FB9A68FFF064DE06985454F4773D7AD42B4FFC0459A5E8",
+                      "previous_sha256":  "8130C432CFC82DA940FB9A68FFF064DE06985454F4773D7AD42B4FFC0459A5E8"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/src/sources/gamma_feed.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/src/sources/gamma_feed.py",
+                      "promoted_sha256":  "A0EA6DD0C7F6392D93F6FD3033013134BA48A5CE688894731CFE90720B0F56B0",
+                      "previous_sha256":  "A0EA6DD0C7F6392D93F6FD3033013134BA48A5CE688894731CFE90720B0F56B0"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/task.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/task.md",
+                      "promoted_sha256":  "5BBF7DD0F6A288A80C84ADB115DBC572AEB0E4281865B7A2D4C7291124537663",
+                      "previous_sha256":  "5BBF7DD0F6A288A80C84ADB115DBC572AEB0E4281865B7A2D4C7291124537663"
+                  },
+                  {
+                      "target":  "Evals/adaptive-fixtures/implicit-conventions-v1/public/tests/test_public.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Evals/adaptive-fixtures/implicit-conventions-v1/public/tests/test_public.py",
+                      "promoted_sha256":  "DB347E5616839DCE2D19B4039EA367F4FF6AAD43018A073FE916D952052E631E",
+                      "previous_sha256":  "DB347E5616839DCE2D19B4039EA367F4FF6AAD43018A073FE916D952052E631E"
+                  },
+                  {
+                      "target":  "Research/claims/claims-rules-map.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Research/claims/claims-rules-map.json",
+                      "promoted_sha256":  "5B6235A74E6B58BCAE16C918937DCC0BCF451DB2CEF103FCD4449F6C1481E9C4",
+                      "previous_sha256":  "5B6235A74E6B58BCAE16C918937DCC0BCF451DB2CEF103FCD4449F6C1481E9C4"
+                  },
+                  {
+                      "target":  "Research/knowledge-base/findings-index.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Research/knowledge-base/findings-index.json",
+                      "promoted_sha256":  "006279FB8B55916B1789D9694D5820FAB19A07227BBDD9093851ABE3B4C479C6",
+                      "previous_sha256":  "006279FB8B55916B1789D9694D5820FAB19A07227BBDD9093851ABE3B4C479C6"
+                  },
+                  {
+                      "target":  "Router/catalog/adaptive-modules.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Router/catalog/adaptive-modules.json",
+                      "promoted_sha256":  "3D6D5FA1E271051C6F2F77DB88C30C257D3B62C836C1AE6A610E4D441607301D",
+                      "previous_sha256":  "44C795CECE30474DB5DB56AFCD6D6FC495E3A3B033A4FB9A605BF0CBAE480A1C"
+                  },
+                  {
+                      "target":  "Runtime/adaptive-modes.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Runtime/adaptive-modes.json",
+                      "promoted_sha256":  "289DF40AB4D3FA1B8918AACEECEAD41954503B5C303E10A26CBB1AC6B8B4030D",
+                      "previous_sha256":  "2C212A11D31A44FB554193D3A29B08B011A17F5E0382B1A4F1D732ACADD69DF3"
+                  },
+                  {
+                      "target":  "Runtime/stable/manifest.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Runtime/stable/manifest.json",
+                      "promoted_sha256":  "195AE4011A2C2B22083103F163E6B9441D1A156A2DC196BE3ADFED5EA7C75C4D",
+                      "previous_sha256":  "A350FEBB8D6618CC17E6F10FCA35E7980BB0F4A9B750EB71FC856307FE789CD1"
+                  },
+                  {
+                      "target":  "Setup/adaptive-modes.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Setup/adaptive-modes.md",
+                      "promoted_sha256":  "A0D4ECD564FF409217EF238A5E6E4D399857522B03FC198DF58F8B160E9DB9E9",
+                      "previous_sha256":  "967F710EFBB917E4E91A24A4E7EAD3270D2D6096E1300928FEF649E4442FB02C"
+                  },
+                  {
+                      "target":  "Setup/adaptive-modes.pdf",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/Setup/adaptive-modes.pdf",
+                      "promoted_sha256":  "AD68E92F88BF5646D7FD0D5154A52A7EAD0F4DFABAFDDB499E685E77645BB445",
+                      "previous_sha256":  "150EEADEF4FBB8F13DEA1109AC659B9F67F129AE833D6AEDD677C9913133E264"
+                  },
+                  {
+                      "target":  "tools/adaptive/adaptive_router.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/adaptive_router.py",
+                      "promoted_sha256":  "3FD8EFA0E0156E2B243558081D02E3678B5D74F12A3D58D7E43E38819F85CDB3",
+                      "previous_sha256":  "1AB31A4615E2B61C1DBCC2AC7EBF1AA487C85DBEAEB1C4BD3F14ED33F1FA949F"
+                  },
+                  {
+                      "target":  "tools/adaptive/claims_ledger.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/claims_ledger.py",
+                      "promoted_sha256":  "F64878451B15AE44B680F2CDF7AC42C8E376A5B98B5A363FC8356B5998B741CE",
+                      "previous_sha256":  "F64878451B15AE44B680F2CDF7AC42C8E376A5B98B5A363FC8356B5998B741CE"
+                  },
+                  {
+                      "target":  "tools/adaptive/findings-index.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/findings-index.json",
+                      "promoted_sha256":  "006279FB8B55916B1789D9694D5820FAB19A07227BBDD9093851ABE3B4C479C6",
+                      "previous_sha256":  "006279FB8B55916B1789D9694D5820FAB19A07227BBDD9093851ABE3B4C479C6"
+                  },
+                  {
+                      "target":  "tools/adaptive/fixture_admission.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/fixture_admission.py",
+                      "promoted_sha256":  "43D5D29EB755378C57991F6C4FC46383FA98F66D86F988D008FA9B762684846F",
+                      "previous_sha256":  "43D5D29EB755378C57991F6C4FC46383FA98F66D86F988D008FA9B762684846F"
+                  },
+                  {
+                      "target":  "tools/adaptive/harness_checks.py",
+                      "existed_before":  false,
+                      "restore_source":  null,
+                      "promoted_sha256":  "44EC220A7B48A39CDD8F1C49BA82A3FA94A19FEEE0343D2EBF233F0C9C811019",
+                      "previous_sha256":  null
+                  },
+                  {
+                      "target":  "tools/adaptive/modules/objective-integrity.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/modules/objective-integrity.md",
+                      "promoted_sha256":  "38DA978F8759D340C107E65159EC49D321440BE264E61828060CFFC08CBDCB45",
+                      "previous_sha256":  "38DA978F8759D340C107E65159EC49D321440BE264E61828060CFFC08CBDCB45"
+                  },
+                  {
+                      "target":  "tools/adaptive/modules/reliability-contract.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/modules/reliability-contract.md",
+                      "promoted_sha256":  "972AB14F461BA0AADD39C5FE2CCB9B166F6A1C12E272C77FA6EA2347214D7A98",
+                      "previous_sha256":  "972AB14F461BA0AADD39C5FE2CCB9B166F6A1C12E272C77FA6EA2347214D7A98"
+                  },
+                  {
+                      "target":  "tools/adaptive/modules/risk-discovery.md",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/modules/risk-discovery.md",
+                      "promoted_sha256":  "54712B7EEC3ADD21708FE1559B9656A4EAA9EC4FCABD44F275B24BD647D31E48",
+                      "previous_sha256":  "54712B7EEC3ADD21708FE1559B9656A4EAA9EC4FCABD44F275B24BD647D31E48"
+                  },
+                  {
+                      "target":  "tools/adaptive/modules/verification-loop.md",
+                      "existed_before":  false,
+                      "restore_source":  null,
+                      "promoted_sha256":  "B3551733D7473E33B9C32FB100D153897172FF03C78ECCF892D2B57B30DA5CC0",
+                      "previous_sha256":  null
+                  },
+                  {
+                      "target":  "tools/adaptive/objective_compiler.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/objective_compiler.py",
+                      "promoted_sha256":  "CABCDDBC07B53CB56A8F4C16B49B4E22D6927B60E804342F25E4997B027EB115",
+                      "previous_sha256":  "DB1CF73A9B8FC82117945230888B74B1FF4DB8643E80EFAF78CCF3FCB32E9A56"
+                  },
+                  {
+                      "target":  "tools/adaptive/pre_submit_gate.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/pre_submit_gate.py",
+                      "promoted_sha256":  "465448C38A23D9E89E101C4CDDD90C0E1776D33F0B1B73E5B562A40313C68628",
+                      "previous_sha256":  "D472B5A469F298C6B8ED84506504327CA56DB5964989B2F6163B495E9AB580DD"
+                  },
+                  {
+                      "target":  "tools/adaptive/prepare_context.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/prepare_context.py",
+                      "promoted_sha256":  "FBAECF0E93B5C522D1AD89A95F43DA6FD04C10E0195C49D7BCC86453656CF9F7",
+                      "previous_sha256":  "E7AE29621F125CE7AF1656FA7B43E833B5850E72FF5FAB68EBE6744D4665AC26"
+                  },
+                  {
+                      "target":  "tools/adaptive/prepare_or_route.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/prepare_or_route.py",
+                      "promoted_sha256":  "10FAB0E8F26EE683DF4638CF60320753E5C7A1445AC2EFEB9510493E92518488",
+                      "previous_sha256":  "10FAB0E8F26EE683DF4638CF60320753E5C7A1445AC2EFEB9510493E92518488"
+                  },
+                  {
+                      "target":  "tools/adaptive/process_metrics.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/process_metrics.py",
+                      "promoted_sha256":  "2A1CFF7F9A0ED0248653BEF51B308047D1CD26FE45F7E268CFC2FB7A7FE6E139",
+                      "previous_sha256":  "2A1CFF7F9A0ED0248653BEF51B308047D1CD26FE45F7E268CFC2FB7A7FE6E139"
+                  },
+                  {
+                      "target":  "tools/adaptive/resolve_capability_profile.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/resolve_capability_profile.py",
+                      "promoted_sha256":  "7FE37A31B18863912AA51574D10A85E6C865E1465542334FCEA881A3699B63EE",
+                      "previous_sha256":  "7FE37A31B18863912AA51574D10A85E6C865E1465542334FCEA881A3699B63EE"
+                  },
+                  {
+                      "target":  "tools/adaptive/schemas/objective-ledger.schema.json",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/schemas/objective-ledger.schema.json",
+                      "promoted_sha256":  "607C548CA0B3858A372A4FAA976BD30CA04948DFA43068FD159B8F88CF13F0BF",
+                      "previous_sha256":  "607C548CA0B3858A372A4FAA976BD30CA04948DFA43068FD159B8F88CF13F0BF"
+                  },
+                  {
+                      "target":  "tools/adaptive/spec_synthesis.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/spec_synthesis.py",
+                      "promoted_sha256":  "A2F6BE5C554D32FF3A08A6ED7902A124FD6382D9E3E8A34AC44C15DC2B2A41A5",
+                      "previous_sha256":  "A2F6BE5C554D32FF3A08A6ED7902A124FD6382D9E3E8A34AC44C15DC2B2A41A5"
+                  },
+                  {
+                      "target":  "tools/adaptive/vault_hygiene.py",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/adaptive/vault_hygiene.py",
+                      "promoted_sha256":  "5EE30D982A011E087DBBC6850BE904C21E09AF03A821E8C02F81C66ED7C7602A",
+                      "previous_sha256":  "5EE30D982A011E087DBBC6850BE904C21E09AF03A821E8C02F81C66ED7C7602A"
+                  },
+                  {
+                      "target":  "tools/adaptive/verification_loop.py",
+                      "existed_before":  false,
+                      "restore_source":  null,
+                      "promoted_sha256":  "5FBE29B13D40094B0739FFF270DCAFA7BB8801A4E0306E329F468FF8C5AAF39B",
+                      "previous_sha256":  null
+                  },
+                  {
+                      "target":  "tools/route.ps1",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/route.ps1",
+                      "promoted_sha256":  "B7E2CAD55427CDC938B488BC906EF908528CA44C3123135CA455C924E1827D5F",
+                      "previous_sha256":  "B7E2CAD55427CDC938B488BC906EF908528CA44C3123135CA455C924E1827D5F"
+                  },
+                  {
+                      "target":  "tools/spec-synthesis.ps1",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/spec-synthesis.ps1",
+                      "promoted_sha256":  "AACA06317C06093877F046A05614318C0179CCE50CC87417CA716A48C660B343",
+                      "previous_sha256":  "AACA06317C06093877F046A05614318C0179CCE50CC87417CA716A48C660B343"
+                  },
+                  {
+                      "target":  "tools/vault-hygiene.ps1",
+                      "existed_before":  true,
+                      "restore_source":  "rollback/tools/vault-hygiene.ps1",
+                      "promoted_sha256":  "099954DD8BCED372C88D226BD2415FFDED205B09736361A1B1909AF7A8F2B714",
+                      "previous_sha256":  "099954DD8BCED372C88D226BD2415FFDED205B09736361A1B1909AF7A8F2B714"
+                  }
+              ]
+}

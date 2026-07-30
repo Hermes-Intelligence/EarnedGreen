@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "what_this_variant_is": "The era's after-state (225e1ef) with the citation-run separator changed from a comma to a middot (altformat_replace in fixture-contract.json). Same semantics on every convention; a formatting choice nothing in CONVENTIONS.md mandates.",
+  "pre_reconciliation_result": {
+    "interpretations": "identical to the reference on every anchored convention; the variant varies only the separator glyph, which the conventions deliberately do not specify"
+  },
+  "interpretation_differences_after_pinning": [],
+  "structural_differences": [
+    "citation runs separated with a middot instead of a comma"
+  ],
+  "why_it_must_score_100": "A grader red on this variant would be pinning separator identity rather than separator PRESENCE — the exact class the derivation-time altformat filter kills; this admission check proves the shipped grader inherits that agnosticism."
+}

@@ -3,7 +3,7 @@ param(
     [Parameter(ValueFromRemainingArguments = $true)][string[]]$RemainingArgs = @()
 )
 # Thin launcher for the spec-first planning tool. All arguments pass straight
-# through to tools/adaptive/spec_synthesis.py (subcommands: compile, validate).
+# through to awbp/spec_synthesis.py (subcommands: compile, validate).
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $python = Get-Command python -ErrorAction SilentlyContinue
@@ -16,5 +16,5 @@ if ($python) {
     $pythonExe = $py.Source
     $prefix = @('-3')
 }
-& $pythonExe @prefix (Join-Path $root 'tools/adaptive/spec_synthesis.py') @RemainingArgs
+& $pythonExe @prefix (Join-Path $root 'awbp/spec_synthesis.py') @RemainingArgs
 exit $LASTEXITCODE

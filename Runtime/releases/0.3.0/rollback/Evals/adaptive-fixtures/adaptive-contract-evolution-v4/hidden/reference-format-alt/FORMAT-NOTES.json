@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "purpose": "Format-adversary reference for the fixture admission gate. Semantically identical to hidden/reference, but every serialized consumer uses a DIFFERENT delimiter/prefix/placement, chosen to differ from BOTH hidden/reference AND the live main-stage arms. If the hidden grader scores this below 100, the grader is format-brittle and admission FAILS.",
+  "why": "The v4 main-stage ablation was invalidated because the grader hard-compared serialized strings against three arbitrary formats the task never pins; five arms that did the work in substance all scored an identical 70. This adversary proves the semantic grader measures content, not formatting.",
+  "format_matrix": {
+    "render_primary": {
+      "reference": "customer:2",
+      "arms_a": "customer:2:3",
+      "arms_b": "customer:2:v3",
+      "format_alt": "entity[customer]#2"
+    },
+    "render_audit": {
+      "reference": "AUDIT customer ['b']",
+      "arms_a": "AUDIT customer ['b'] 3",
+      "arms_b": "AUDIT customer v3 ['b']",
+      "format_alt": "<audit type=customer attrs=b>"
+    },
+    "serializer_exporter_line": {
+      "reference": "3:customer:1:['n']",
+      "arms_a": "customer:1:['n']:3",
+      "arms_b": "customer:1:v3:['n']",
+      "format_alt": "customer@1 keys=[n] schema=3"
+    },
+    "digest_snapshot_line": {
+      "reference": "v3|account|7|['m']",
+      "arms_a": "account|7|['m']|3",
+      "arms_b": "account|7|v3|['m']",
+      "format_alt": "[3] account -> 7 :: m"
+    }
+  },
+  "substance_preserved": [
+    "every consumer routes through normalize_event (registry handler applied: resolved events gain key 'n'/'m')",
+    "schema_version 3 carried on every serialized/snapshot line",
+    "correct entity_type, entity_id and attribute keys encoded on every line",
+    "identical contracts.py semantics: validation, telemetry, degraded fallback, re-run dedup ledger"
+  ]
+}

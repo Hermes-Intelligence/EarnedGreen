@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "candidate_only": true,
+  "status": "awaiting-eval",
+  "target": "Models/providers.json",
+  "generated_at": "2026-07-16",
+  "rationale": "The live catalog expires 2026-07-19T20:00:00+02:00, so a refresh is due. Verification against official sources on 2026-07-16 found NO Anthropic or OpenAI model released, renamed or deprecated between 2026-07-12 and 2026-07-16: every selector in the live catalog remains valid. The refresh is therefore not a model swap; it fixes two source defects, one automation-breaking capability gap and one unbacked selector, and records availability gates that fall inside the next catalog window.",
+  "forbidden": [
+    "Research must not modify Models/providers.json; this is a proposal for a separate human-approved promotion.",
+    "No volatile model ID is written into Models/profiles.json or any stable capability profile."
+  ],
+  "findings": [
+    {
+      "id": "MC-01",
+      "severity": "medium-unconfirmed",
+      "title": "Haiku may not support the effort parameter, and the resolver emits one (INFERENCE FROM OMISSION - not settled)",
+      "detail": "Models/profiles.json gives `fast-low-risk` effort=low; Models/providers.json lists the `haiku` selector under that profile. `resolve('anthropic-claude-code','fast-low-risk','low')` therefore returns selector=haiku + effort=low + automation_allowed=true. Official documentation states the effort parameter is not supported on Claude Haiku 4.5 (it is absent from the supported-model list; it uses extended thinking, not adaptive effort). A recommendation followed literally would emit an unsupported parameter.",
+      "reproduced_locally": "python tools/adaptive/resolve_capability_profile.py --provider anthropic-claude-code --profile fast-low-risk --risk low -> selector 'haiku', effort 'low'",
+      "sources": [
+        "https://platform.claude.com/docs/en/build-with-claude/effort"
+      ],
+      "proposed_fix": "DO NOT ship the code change on an argument from omission. Gate it on one cheap verification call: send model=claude-haiku-4-5 with effort=low and observe. If it returns HTTP 400 the current recommendation is INVALID (breaks runs) and resolve_capability_profile must omit effort for selectors declaring effort_support.supported=false. If the parameter is silently ignored the recommendation is merely INERT (misleading, harmless) and a catalog note suffices. The fix differs by outcome; the catalog's effort_support block is authored either way but is only ENFORCED after the call.",
+      "requires_code_change": true,
+      "verifier_verdict": "PARTIAL",
+      "verifier_note": "The independent verifier confirmed the effort level set is exactly low|medium|high|xhigh|max ('the values documented on this page are the complete set the API accepts') and that Haiku 4.5 is ABSENT from the affirmative supported-model list. But the page NEVER states Haiku is unsupported and documents no error behaviour: the claim rests on an argument from omission. It is stated more firmly in the original research than the source supports.",
+      "blocked_on": "one verification call (owner-approved); until then this finding is advisory and no code changes"
+    },
+    {
+      "id": "MC-02",
+      "severity": "medium",
+      "title": "Both openai-codex official_sources are stale (308 redirects)",
+      "detail": "https://developers.openai.com/api/docs/models and https://developers.openai.com/codex/models both now 308-redirect to learn.chatgpt.com. The catalog's own discovery contract points at redirecting URLs.",
+      "sources": [
+        "https://learn.chatgpt.com/docs/models"
+      ],
+      "proposed_fix": "Rewrite official_sources to https://learn.chatgpt.com/docs/models and https://learn.chatgpt.com/docs/config-file/config-reference.",
+      "requires_code_change": false
+    },
+    {
+      "id": "MC-03",
+      "severity": "medium",
+      "title": "`current-frontier-creative` has no official backing on OpenAI",
+      "detail": "OpenAI publishes no creative-tier model. The selector's only honest resolution today is the frontier coding model (gpt-5.6-sol), i.e. it silently duplicates `current-frontier-coding` while implying a distinct capability. The `creative-design` profile would resolve to a selector whose distinctness is unverified.",
+      "sources": [
+        "https://learn.chatgpt.com/docs/models",
+        "https://developers.openai.com/api/docs/models"
+      ],
+      "proposed_fix": "Either (a) remove the selector and let `creative-design` be unsatisfiable on openai-codex (resolve already raises 'no current selector satisfies the capability profile'), or (b) keep it with an explicit `aliases_of: current-frontier-coding` + `distinctness: unverified` note. Recommendation: (b), because (a) silently loses provider coverage; the owner decides.",
+      "requires_code_change": false
+    },
+    {
+      "id": "MC-04",
+      "severity": "medium",
+      "title": "Availability gates that bite inside the next catalog window",
+      "detail": "Fable 5 is unavailable under zero data retention (requires 30-day retention). Claude Code version gates: Fable 5 >= v2.1.170, Sonnet 5 >= v2.1.197, Opus 4.8 >= v2.1.154. Alias resolution is provider-dependent: on the Anthropic API `opus`->Opus 4.8 and `sonnet`->Sonnet 5, but on Bedrock/Google Vertex `sonnet`->Sonnet 4.5 and on Foundry `opus`->Opus 4.6 - so a 'provider-current-alias' means different models on different platforms. Fast mode for claude-opus-4-7 is deprecated and `speed:\"fast\"` errors after 2026-07-24, inside the proposed window.",
+      "sources": [
+        "https://code.claude.com/docs/en/model-config",
+        "https://platform.claude.com/docs/en/release-notes/api"
+      ],
+      "proposed_fix": "Record gates per selector as machine-readable `availability_gates`; keep them advisory (documented, surfaced) rather than enforced, until an eval proves enforcement is safe.",
+      "requires_code_change": false
+    },
+    {
+      "id": "MC-05",
+      "severity": "low",
+      "title": "Codex effort levels contradict across two official pages",
+      "detail": "learn.chatgpt.com config-reference states model_reasoning_effort accepts exactly minimal|low|medium|high|xhigh; learn.chatgpt.com/docs/models shows a six-item interactive selector including Max and Ultra. Neither page reconciles them. Most defensible reading: xhigh is the config-file ceiling; Max/Ultra are CLI-surface controls (mirroring Anthropic documenting `ultracode` as NOT an API effort level).",
+      "sources": [
+        "https://learn.chatgpt.com/docs/config-file/config-reference",
+        "https://learn.chatgpt.com/docs/models"
+      ],
+      "proposed_fix": "Encode ONLY the config-file enum (minimal..xhigh). Record the contradiction; do not encode Max/Ultra as config values. Re-check next week.",
+      "requires_code_change": false
+    }
+  ],
+  "verified_no_change": [
+    "No Claude model released or deprecated 2026-07-12..2026-07-16 (latest release-note entry 2026-07-14 is a non-model Admin API change).",
+    "No new Codex model after 2026-07-12; latest CLI 0.144.5 (2026-07-16) is a safety-detection change.",
+    "All four Anthropic selectors (haiku, sonnet, opus, fable) remain valid current aliases.",
+    "No model referenced by the live catalog appears in any deprecation or retirement table."
+  ],
+  "proposed_providers_json": {
+    "schema_version": 1,
+    "generated_at": "2026-07-16T17:00:00+02:00",
+    "expires_at": "2026-07-23T17:00:00+02:00",
+    "policy": {
+      "volatile_data_only": true,
+      "recommendation_only": true,
+      "never_persist_user_default": true,
+      "require_actual_model_logging": true,
+      "expired_catalog_behavior": "warn-and-use-provider-current-alias-or-explicit-user-choice"
+    },
+    "providers": [
+      {
+        "id": "anthropic-claude-code",
+        "official_sources": [
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://code.claude.com/docs/en/model-config",
+          "https://platform.claude.com/docs/en/build-with-claude/effort"
+        ],
+        "discovery": {
+          "method": "official-models-api-and-docs",
+          "refresh_days": 7
+        },
+        "effort_levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "effort_notes": "Verified 2026-07-16: `high` is the documented default on current frontier models and equals omitting the parameter. `ultracode` is not an API effort level.",
+        "selectors": [
+          {
+            "id": "haiku",
+            "kind": "provider-current-alias",
+            "traits": [
+              "tool-use",
+              "coding",
+              "low-latency",
+              "low-cost",
+              "high-throughput"
+            ],
+            "profiles": [
+              "fast-low-risk",
+              "research-worker"
+            ],
+            "effort_support": {
+              "supported": false,
+              "reason": "the effort parameter is not supported on Claude Haiku 4.5",
+              "source": "https://platform.claude.com/docs/en/build-with-claude/effort"
+            }
+          },
+          {
+            "id": "sonnet",
+            "kind": "provider-current-alias",
+            "traits": [
+              "tool-use",
+              "coding",
+              "strong-reasoning",
+              "balanced",
+              "agentic-coding"
+            ],
+            "profiles": [
+              "balanced-daily",
+              "deep-implementation",
+              "research-synthesizer"
+            ],
+            "effort_support": {
+              "supported": true,
+              "levels": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ],
+              "default": "high"
+            },
+            "availability_gates": [
+              {
+                "kind": "cli-version",
+                "requirement": "Claude Code >= v2.1.197 for Sonnet 5",
+                "source": "https://code.claude.com/docs/en/model-config"
+              },
+              {
+                "kind": "alias-resolution",
+                "requirement": "alias resolves to Sonnet 5 on the Anthropic API but to Sonnet 4.5 on Bedrock/Google Vertex",
+                "source": "https://code.claude.com/docs/en/model-config"
+              }
+            ]
+          },
+          {
+            "id": "opus",
+            "kind": "provider-current-alias",
+            "traits": [
+              "tool-use",
+              "coding",
+              "frontier-reasoning",
+              "highest-reliability",
+              "critique"
+            ],
+            "profiles": [
+              "deep-implementation",
+              "architecture-high-risk",
+              "adversarial-review",
+              "research-synthesizer"
+            ],
+            "effort_support": {
+              "supported": true,
+              "levels": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ],
+              "default": "high"
+            },
+            "availability_gates": [
+              {
+                "kind": "cli-version",
+                "requirement": "Claude Code >= v2.1.154 for Opus 4.8",
+                "source": "https://code.claude.com/docs/en/model-config"
+              },
+              {
+                "kind": "alias-resolution",
+                "requirement": "alias resolves to Opus 4.8 on the Anthropic API but to Opus 4.6 on Foundry",
+                "source": "https://code.claude.com/docs/en/model-config"
+              },
+              {
+                "kind": "parameter-constraint",
+                "requirement": "temperature/top_p/top_k return HTTP 400 on Opus 4.7+ and Sonnet 5",
+                "source": "https://platform.claude.com/docs/en/about-claude/model-deprecations"
+              }
+            ]
+          },
+          {
+            "id": "fable",
+            "kind": "provider-current-alias",
+            "traits": [
+              "tool-use",
+              "coding",
+              "frontier-reasoning",
+              "creative-reasoning",
+              "multimodal"
+            ],
+            "profiles": [
+              "creative-design",
+              "architecture-high-risk"
+            ],
+            "effort_support": {
+              "supported": true,
+              "levels": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ],
+              "default": "high"
+            },
+            "availability_gates": [
+              {
+                "kind": "data-retention",
+                "requirement": "Fable 5 is unavailable under zero data retention; requires 30-day retention",
+                "source": "https://code.claude.com/docs/en/model-config"
+              },
+              {
+                "kind": "cli-version",
+                "requirement": "Claude Code >= v2.1.170 for Fable 5",
+                "source": "https://code.claude.com/docs/en/model-config"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "openai-codex",
+        "official_sources": [
+          "https://learn.chatgpt.com/docs/models",
+          "https://learn.chatgpt.com/docs/config-file/config-reference"
+        ],
+        "discovery": {
+          "method": "official-model-catalog-and-runtime-availability",
+          "refresh_days": 7
+        },
+        "effort_levels": [
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "effort_notes": "Verified 2026-07-16 from the config reference; `xhigh` is documented as model-dependent and the CLI default is medium. CONTRADICTION: docs/models shows an interactive selector with additional Max/Ultra entries that the config reference does not list. Only the config-file enum is encoded here; re-check next week.",
+        "selectors": [
+          {
+            "id": "current-fast",
+            "kind": "capability-selector",
+            "traits": [
+              "tool-use",
+              "coding",
+              "low-latency",
+              "low-cost",
+              "high-throughput"
+            ],
+            "profiles": [
+              "fast-low-risk",
+              "research-worker"
+            ],
+            "effort_support": {
+              "supported": true,
+              "levels": [
+                "minimal",
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "default": "medium"
+            },
+            "resolution_note": "cost-sensitive tier, currently gpt-5.6-luna (verified 2026-07-16); the ID is deliberately NOT authoritative here - the selector is."
+          },
+          {
+            "id": "current-balanced",
+            "kind": "capability-selector",
+            "traits": [
+              "tool-use",
+              "coding",
+              "strong-reasoning",
+              "balanced",
+              "agentic-coding"
+            ],
+            "profiles": [
+              "balanced-daily",
+              "deep-implementation",
+              "research-synthesizer"
+            ],
+            "effort_support": {
+              "supported": true,
+              "levels": [
+                "minimal",
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "default": "medium"
+            },
+            "resolution_note": "balanced tier, currently gpt-5.6-terra (verified 2026-07-16)."
+          },
+          {
+            "id": "current-frontier-coding",
+            "kind": "capability-selector",
+            "traits": [
+              "tool-use",
+              "coding",
+              "frontier-reasoning",
+              "highest-reliability",
+              "agentic-coding",
+              "critique"
+            ],
+            "profiles": [
+              "deep-implementation",
+              "architecture-high-risk",
+              "adversarial-review",
+              "research-synthesizer"
+            ],
+            "effort_support": {
+              "supported": true,
+              "levels": [
+                "minimal",
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "default": "medium"
+            },
+            "resolution_note": "frontier tier, currently gpt-5.6-sol (verified 2026-07-16)."
+          },
+          {
+            "id": "current-frontier-creative",
+            "kind": "capability-selector",
+            "traits": [
+              "frontier-reasoning",
+              "creative-reasoning",
+              "multimodal"
+            ],
+            "profiles": [
+              "creative-design"
+            ],
+            "effort_support": {
+              "supported": true,
+              "levels": [
+                "minimal",
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "default": "medium"
+            },
+            "aliases_of": "current-frontier-coding",
+            "distinctness": "unverified",
+            "resolution_note": "OpenAI publishes no creative-tier model (verified 2026-07-16): this selector currently resolves to the same frontier model as current-frontier-coding. Kept for provider coverage of the creative-design profile, explicitly marked non-distinct. Owner decision: keep-as-alias or remove."
+          }
+        ]
+      }
+    ]
+  },
+  "evals_required_before_promotion": [
+    "SETTLE MC-01 FIRST: one API call (claude-haiku-4-5 + effort=low) to determine 400 vs inert. No code change ships before it.",
+    "tools/agentic.ps1 model-recommend across every provider x profile pair: no unsupported effort is emitted (MC-01 regression, only if MC-01 resolves to 400).",
+    "Deterministic model-profile suite (10/10) stays green, including risk-floor and incompatible-selector rejection.",
+    "Expired-catalog behavior still blocks automation (resolve with a past expires_at -> automation_allowed=false)."
+  ]
+}

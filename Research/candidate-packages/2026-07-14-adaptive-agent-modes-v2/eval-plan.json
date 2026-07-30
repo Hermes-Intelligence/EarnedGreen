@@ -1,11 +1,54 @@
 {
-  "schema_version": 2,
-  "status": "boundary-screen-invalid-zero-provider-repair-required",
+  "schema_version": 3,
+  "status": "schema-4-loop-experiment-ready",
   "experiments": [
-    {"id":"mode-boundary-ablation","arms":["vanilla","mode-1-lean","mode-2-routed","mode-3-assured","full"],"fixture":"adaptive-contract-evolution","provider_calls":6,"model_policy":"same resolved model and effort; Full verifier is a fresh independent call","authorized":false},
-    {"id":"adaptive-policy-eval","entry":"only after a useful scaffolding signal and fresh provider catalog","provider_calls":"separate approval","authorized":false}
+    {
+      "id": "verification-loop-lift",
+      "arms": [
+        "vanilla",
+        "vanilla-loop",
+        "standard",
+        "standard-loop"
+      ],
+      "trials_per_arm_for_verdict": 3,
+      "loop_iteration_ceiling_per_trial": 3,
+      "fixture_families": "history-grounded first (medi-ny-parser-rework-v1), synthetic replication second",
+      "model_policy": "same resolved model and effort across all arms and iterations",
+      "primary_metrics": [
+        "iterations_to_green",
+        "silent_errors_en_route",
+        "score",
+        "tokens"
+      ],
+      "authorized": false,
+      "note": "supersedes mode-boundary-ablation: the prompt-scaffolding question is settled (6 fixtures / 17 calls, no correctness lift, 4-10.7x cost); the open question is whether an INDEPENDENT verification loop buys correctness or faster convergence, for scaffolded and bare agents given identical feedback"
+    },
+    {
+      "id": "adaptive-policy-eval",
+      "entry": "only after a verification-loop signal and fresh provider catalog",
+      "provider_calls": "separate approval",
+      "authorized": false
+    }
   ],
-  "zero_provider_gates":{"candidate_suite":"10/10","unit_tests":"15/15","capability_activation":"14/14","fixture_validity":"6/6 plus boundary fixture","boundary_controls":"50/78/100 ordered","references":"7 at 100%","negative_controls":"14/14 rejected","arm_preflight":"5/5 on adaptive-contract-evolution","provider_calls":0},
-  "decision_rule":"Prefer the lowest mode within 3 points of the best score with no additional critical failure. Change boundaries only after replicated evidence on at least two task families.",
-  "cost_controls":["validity before spend","exact call count","no replacements","no automatic follow-up","separate approval per stage","actual time and tokens recorded","USD unavailable when subscription CLI does not expose it"]
+  "zero_provider_gates": {
+    "candidate_suite": "run_candidate_evals.py (see evidence/candidate-eval-summary.json for the current count)",
+    "unit_tests": "15/15",
+    "capability_activation": "14/14",
+    "fixture_validity": "6/6 plus boundary fixture",
+    "boundary_controls": "50/78/100 ordered",
+    "references": "7 at 100%",
+    "negative_controls": "14/14 rejected",
+    "arm_preflight": "4 runtime arms (vanilla/lite/standard/critical) on adaptive-contract-evolution-v2",
+    "provider_calls": 0
+  },
+  "decision_rule": "Verdicts require >=3 trials per arm (exploratory otherwise). Prefer the cheapest arm whose score distribution is within 3 points median of the best with no additional critical failure. Change boundaries only after replicated evidence on at least two task families.",
+  "cost_controls": [
+    "validity before spend",
+    "exact call count",
+    "no replacements",
+    "no automatic follow-up",
+    "separate approval per stage",
+    "actual time and tokens recorded",
+    "USD unavailable when subscription CLI does not expose it"
+  ]
 }

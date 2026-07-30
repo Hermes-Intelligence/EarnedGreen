@@ -1,0 +1,21 @@
+﻿{
+    "schema_version":  1,
+    "run_at":  "2026-07-16T10:24:03.3726340+02:00",
+    "root":  "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices",
+    "patterns":  [
+                     "python3-host-alias",
+                     "env-python3-shebang",
+                     "jq-host-dependency",
+                     "npx-host-dependency",
+                     "bash-dash-c-host-shell"
+                 ],
+    "cases":  41,
+    "passed":  41,
+    "failed":  0,
+    "findings":  [
+
+                 ],
+    "wsl_context_notes":  [
+
+                          ]
+}

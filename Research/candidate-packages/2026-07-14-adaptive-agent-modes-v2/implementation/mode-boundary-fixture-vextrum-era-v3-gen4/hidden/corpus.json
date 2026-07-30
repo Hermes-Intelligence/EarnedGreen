@@ -1,0 +1,523 @@
+{
+ "schema_version": 1,
+ "inputs": [
+  {
+   "id": "cite-run",
+   "edition": {
+    "title": "Era cite-run",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "Findings [1](https://s1.example/r/1)[1](https://s1.example/r/1)[2](https://s2.example/r/2)[3](https://s3.example/r/3)[4](https://s4.example/r/4) close.",
+     "blocks": []
+    }
+   }
+  },
+  {
+   "id": "enum-list",
+   "edition": {
+    "title": "Era enum-list",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "Steps:\n1. First.\n2. Second.\n(3) Third.",
+     "blocks": []
+    }
+   }
+  },
+  {
+   "id": "unicode",
+   "edition": {
+    "title": "Era unicode",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "Zażółć gęślą jaźń — „quotes”, café, KGHM Polska Miedź.",
+     "blocks": []
+    }
+   }
+  },
+  {
+   "id": "bare-url",
+   "edition": {
+    "title": "Era bare-url",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "See https://example.org/long/path?q=1&r=2 now.",
+     "blocks": []
+    }
+   }
+  },
+  {
+   "id": "long-prose",
+   "edition": {
+    "title": "Era long-prose",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "Sentence 1 holds. Sentence 2 holds. Sentence 3 holds. Sentence 4 holds. Sentence 5 holds. Sentence 6 holds. Sentence 7 holds. Sentence 8 holds. Sentence 9 holds. Sentence 10 holds. Sentence 11 holds. Sentence 12 holds. Sentence 13 holds. Sentence 14 holds. Sentence 15 holds. Sentence 16 holds. Sentence 17 holds. Sentence 18 holds. Sentence 19 holds. Sentence 20 holds. Sentence 21 holds. Sentence 22 holds. Sentence 23 holds. Sentence 24 holds. Sentence 25 holds. Sentence 26 holds. Sentence 27 holds. Sentence 28 holds. Sentence 29 holds. Sentence 30 holds. Sentence 31 holds. Sentence 32 holds. Sentence 33 holds. Sentence 34 holds. Sentence 35 holds. Sentence 36 holds. Sentence 37 holds. Sentence 38 holds. Sentence 39 holds. Sentence 40 holds. Sentence 41 holds. Sentence 42 holds. Sentence 43 holds. Sentence 44 holds.",
+     "blocks": []
+    }
+   }
+  },
+  {
+   "id": "block-cites",
+   "edition": {
+    "title": "Era block-cites",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "Lead.",
+     "blocks": [
+      {
+       "heading": "Findings",
+       "prose": "Body text here.",
+       "citations": [
+        {
+         "title": "Source 1",
+         "source": "outlet1",
+         "url": "https://s1.example/r/1",
+         "published": "2026-06-02"
+        },
+        {
+         "title": "Source 2",
+         "source": "outlet2",
+         "url": "https://s2.example/r/2",
+         "published": "2026-06-03"
+        },
+        {
+         "title": "Source 3",
+         "source": "outlet3",
+         "url": "https://s3.example/r/3",
+         "published": "2026-06-04"
+        },
+        {
+         "title": "Source 4",
+         "source": "outlet4",
+         "url": "https://s4.example/r/4",
+         "published": "2026-06-05"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "block-many",
+   "edition": {
+    "title": "Era block-many",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "Intro.",
+     "blocks": [
+      {
+       "heading": "A",
+       "prose": "First block prose.",
+       "citations": [
+        {
+         "title": "Source 1",
+         "source": "outlet1",
+         "url": "https://s1.example/r/1",
+         "published": "2026-06-02"
+        },
+        {
+         "title": "Source 2",
+         "source": "outlet2",
+         "url": "https://s2.example/r/2",
+         "published": "2026-06-03"
+        }
+       ]
+      },
+      {
+       "heading": "B",
+       "prose": "Second block prose.",
+       "citations": []
+      },
+      {
+       "heading": "C",
+       "prose": "Third block prose.",
+       "citations": [
+        {
+         "title": "Source 1",
+         "source": "outlet1",
+         "url": "https://s1.example/r/1",
+         "published": "2026-06-02"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "sources",
+   "edition": {
+    "title": "Era sources",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "S.",
+     "blocks": [],
+     "sources": [
+      {
+       "title": "Source 1",
+       "source": "outlet1",
+       "url": "https://s1.example/r/1",
+       "published": "2026-06-02"
+      },
+      {
+       "title": "Source 2",
+       "source": "outlet2",
+       "url": "https://s2.example/r/2",
+       "published": "2026-06-03"
+      },
+      {
+       "title": "Source 3",
+       "source": "outlet3",
+       "url": "https://s3.example/r/3",
+       "published": "2026-06-04"
+      },
+      {
+       "title": "Source 4",
+       "source": "outlet4",
+       "url": "https://s4.example/r/4",
+       "published": "2026-06-05"
+      },
+      {
+       "title": "Source 5",
+       "source": "outlet5",
+       "url": "https://s5.example/r/5",
+       "published": "2026-06-06"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "gaps",
+   "edition": {
+    "title": "Era gaps",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "G.",
+     "blocks": [],
+     "coverage_gaps": [
+      "No data for region X",
+      "Missing Q2 filings"
+     ]
+    }
+   }
+  },
+  {
+   "id": "legacy",
+   "edition": {
+    "title": "Era legacy",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "sections": [
+      {
+       "heading": "Old Shape",
+       "body": "Legacy body text."
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "vis-bars",
+   "edition": {
+    "title": "Era vis-bars",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "V.",
+     "blocks": [],
+     "visuals": [
+      {
+       "type": "bars",
+       "title": "Revenue",
+       "spec": {
+        "title": "Revenue",
+        "bars": [
+         {
+          "label": "A",
+          "value": 40
+         },
+         {
+          "label": "B",
+          "value": 75
+         },
+         {
+          "label": "C",
+          "value": -12
+         }
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "vis-progress",
+   "edition": {
+    "title": "Era vis-progress",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "V.",
+     "blocks": [],
+     "visuals": [
+      {
+       "type": "progress_bars",
+       "title": "Done",
+       "spec": {
+        "title": "Done",
+        "bars": [
+         {
+          "label": "X",
+          "value": 30
+         },
+         {
+          "label": "Y",
+          "value": 90
+         }
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "vis-trend",
+   "edition": {
+    "title": "Era vis-trend",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "V.",
+     "blocks": [],
+     "visuals": [
+      {
+       "type": "trend",
+       "title": "Trend",
+       "spec": {
+        "title": "Trend",
+        "points": [
+         {
+          "x": "Jan",
+          "y": 5
+         },
+         {
+          "x": "Feb",
+          "y": 9
+         },
+         {
+          "x": "Mar",
+          "y": 4
+         },
+         {
+          "x": "Apr",
+          "y": 12
+         }
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "vis-multiline",
+   "edition": {
+    "title": "Era vis-multiline",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "V.",
+     "blocks": [],
+     "visuals": [
+      {
+       "type": "multi_line",
+       "title": "Two",
+       "spec": {
+        "title": "Two",
+        "series": [
+         {
+          "label": "S1",
+          "points": [
+           {
+            "x": 1,
+            "y": 2
+           },
+           {
+            "x": 2,
+            "y": 5
+           }
+          ]
+         },
+         {
+          "label": "S2",
+          "points": [
+           {
+            "x": 1,
+            "y": 7
+           },
+           {
+            "x": 2,
+            "y": 3
+           }
+          ]
+         }
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "vis-table",
+   "edition": {
+    "title": "Era vis-table",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "V.",
+     "blocks": [],
+     "visuals": [
+      {
+       "type": "table",
+       "title": "T",
+       "spec": {
+        "title": "T",
+        "columns": [
+         "Col1",
+         "Col2"
+        ],
+        "rows": [
+         [
+          "a",
+          "1"
+         ],
+         [
+          "b",
+          "2"
+         ]
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "vis-ratio",
+   "edition": {
+    "title": "Era vis-ratio",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "V.",
+     "blocks": [],
+     "visuals": [
+      {
+       "type": "ratio",
+       "title": "Share",
+       "spec": {
+        "title": "Share",
+        "value": 62
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "vis-unknown",
+   "edition": {
+    "title": "Era vis-unknown",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "V.",
+     "blocks": [],
+     "visuals": [
+      {
+       "type": "sankey",
+       "title": "Flow",
+       "spec": {
+        "title": "Flow"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "mixed",
+   "edition": {
+    "title": "Era mixed",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "M.",
+     "blocks": [
+      {
+       "heading": "H",
+       "prose": "P.",
+       "citations": [
+        {
+         "title": "Source 1",
+         "source": "outlet1",
+         "url": "https://s1.example/r/1",
+         "published": "2026-06-02"
+        },
+        {
+         "title": "Source 2",
+         "source": "outlet2",
+         "url": "https://s2.example/r/2",
+         "published": "2026-06-03"
+        }
+       ],
+       "order": 2
+      }
+     ],
+     "visuals": [
+      {
+       "type": "bars",
+       "title": "B",
+       "order": 1,
+       "spec": {
+        "bars": [
+         {
+          "label": "K",
+          "value": 10
+         }
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "empty",
+   "edition": {
+    "title": "Era empty",
+    "output_kind": "report",
+    "generated_at": "2026-07-01T09:00:00Z",
+    "content_json": {
+     "summary": "",
+     "blocks": []
+    }
+   }
+  }
+ ]
+}

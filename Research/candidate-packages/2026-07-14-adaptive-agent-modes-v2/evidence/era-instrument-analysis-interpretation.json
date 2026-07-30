@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-19",
+  "companion_of": "era-instrument-analysis.json (the raw ladder map; exploratory, zero calls, no re-grading)",
+
+  "finding_1_drawing_behaviours_have_a_valid_mid_level": "For the chart family the abstraction ladder contains a mechanical level that BOTH separates before from the valid lineage AND rewards real work: `gains-superset` / `kindset-superset` (the solution's event kinds contain every kind the reference gained over before). At that level the era probe's arms order exactly as the loop hypothesis predicts: oracle-loop (superset — true through kindset-superset) > vanilla-configured (any-gain only: drew fill/rect charts, no point markers) > vanilla = relation-loop (no gain: no vector charts at all). The gen-4 instrument fix for drawing dimensions is mechanical and already derivable from a single reference: pin the GAINED kinds as a subset requirement, never set equality.",
+
+  "finding_2_text_behaviours_have_no_generic_mid_level": "For every text family the ladder is EMPTY between `moved` and `textseq-equal`: kind-based levels are vacuous (no kinds change when only wording changes), so the only discriminating generic level pins the reference's exact text. Valid text instruments need PER-RULE predicates (the v1 pattern: `count` for citation runs — separator PRESENCE without identity) or a genuinely diverse valid-variant pool. This is the method's real boundary, now located precisely: it is not 'wide tasks' per se — it is text-semantic dimensions on wide tasks.",
+
+  "finding_3_honest_agent_work_map": "The ladder also shows what the agents actually did, without assigning scores: (a) oracle-loop did the most real chart work of any arm — its charts carry every reference kind plus extras; (b) NO agent touched summary-run citation hygiene at all (cite-run stream identical to before across all four arms — `count`, the one properly-calibrated per-rule predicate in the grader, graded honest zeros there); (c) every arm moved block/enum/table/ordering text but none matched the reference's exact wording — undecidable as compliant/non-compliant from one reference.",
+
+  "gen4_instrument_design_notes": [
+    "drawing dimensions: derive gained-kinds subset predicates (mechanical, single-reference-sufficient)",
+    "text dimensions: derive per-rule counts/presence predicates where the rule has a countable observable (the v1 `count` pattern generalized); otherwise NAME the dimension unverified in the manifest and route it to human acceptance",
+    "any re-scored comparison of the four era solutions under a gen-4 grader is a NEW experiment on OLD material and must be labeled exploratory; verdict-grade claims need fresh runs under the fixed instrument"
+  ]
+}

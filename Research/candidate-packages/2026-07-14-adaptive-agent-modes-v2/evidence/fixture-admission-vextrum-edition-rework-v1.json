@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "fixture": "vextrum-edition-rework-v1",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-vextrum-edition-v1",
+  "generated_at": "2026-07-18T22:58:26.900377+00:00",
+  "fixture_fingerprint": {
+    "file_count": 14,
+    "newest_mtime": 1784415406.5093427,
+    "sha256": "54B7EAE1F59AD16984576B8C55C4B54C7C846523C8FE3F3ECA6F61F83B108FCD"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": [],
+        "after_pinning": [],
+        "structural": [
+          "citation run separator: ', ' -> ' · '"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": true,
+      "detail": "fixture declares no serialized_output_dimensions; format-adversary is opt-in and not applicable here",
+      "serialized_output_dimensions": []
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "before-module",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 25,
+          "expected_band": [
+            15,
+            40
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 8,
+          "declared_dimensions": 8,
+          "dimension_diff": [],
+          "score": 25,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 8,
+          "declared_dimensions": 8,
+          "dimension_diff": [],
+          "score": 25,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 8,
+          "declared_dimensions": 8,
+          "dimension_diff": [],
+          "score": 25,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "fixture_class": "underspecified-by-design",
+        "anchored_checks": [
+          "citation-cap-three",
+          "citation-dedupe",
+          "citation-dedupe-block",
+          "citation-run-separated",
+          "encoding-preserved",
+          "enum-marker-normalized",
+          "prose-preserved",
+          "url-integrity"
+        ],
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 114,
+    "matching_runs": [
+      {
+        "run_id": "20260717-145520610-vextrum-edition-rework-v1-vanilla-t1",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-150650318-vextrum-edition-rework-v1-vanilla-t3",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-151832982-vextrum-edition-rework-v1-standard-loop-t2",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-175109779-vextrum-edition-rework-v1-standard-loop-t1",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-182603833-vextrum-edition-rework-v1-vanilla-configured-t1",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "vanilla-configured",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-183235022-vextrum-edition-rework-v1-vanilla-configured-t3",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "vanilla-configured",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-183828796-vextrum-edition-rework-v1-vanilla-t1",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-184849439-vextrum-edition-rework-v1-vanilla-t3",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-191348596-vextrum-edition-rework-v1-standard-loop-t1-i2",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-191827276-vextrum-edition-rework-v1-standard-loop-t3",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 25,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-192926159-vextrum-edition-rework-v1-standard-loop-t3",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-194656497-vextrum-edition-rework-v1-vanilla-t2",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "vanilla",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-195304473-vextrum-edition-rework-v1-standard-loop-t2",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "standard-loop",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      },
+      {
+        "run_id": "20260717-201111911-vextrum-edition-rework-v1-vanilla-configured-t2",
+        "case_id": "vextrum-edition-rework-v1",
+        "arm": "vanilla-configured",
+        "outcome_valid": true,
+        "score": 92,
+        "distinct_dimensions": 8
+      }
+    ],
+    "valid_paid_runs": 14
+  }
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "release": "0.2.0",
+  "release": "0.5.0",
   "status": "stable-minimal",
-  "promoted_at": "2026-07-12T18:00:00+02:00",
-  "promoted_by": "user-directed-rebuild",
+  "promoted_at": "2026-07-16T22:40:00+02:00",
+  "promoted_by": "owner-approved (chat 2026-07-16)",
   "core": "Core/runtime.md",
   "objective": "Objectives/active/OBJ-20260712-agentic-work-best-practices.json",
   "router_catalog": "Router/catalog/modules.json",
@@ -16,5 +16,7 @@
     "codex": "Codex/BOOTSTRAP.md"
   },
   "candidate_rules_are_authoritative": false,
-  "notes": "Only the minimal Core is stable. Existing long contracts remain research/reference material until evaluated and promoted. Release 0.2.0 adds the adaptive mode layer as a COST ladder plus governance controls (human gate on critical consequence, durable checkpoints, spec-freeze anti-scope-shrink); it is explicitly NOT a correctness-lift claim - a 5-fixture/10-call screen measured a decisive null on correctness lift while scaffolded arms cost 5-8x tokens (see Setup/adaptive-modes.md). The classic router (Router/catalog/modules.json + tools/route.ps1 default path) is unchanged; the adaptive layer is additive and opt-in via tools/route.ps1 -Adaptive. Runtime/releases/0.2.0/promotion-record.json is the authoritative promotion timestamp and approver."
+  "notes": "Only the minimal Core is stable. Release 0.5.0 adds EARNED GREEN on top of 0.4.0's measured verification loop: the loop is worth exactly the quality of its checks, so the checks must now prove themselves before they count. (1) VACUITY GATE: a proposed check is admitted only if it FAILS on the pre-change baseline snapshot via an ASSERTION - a check that passes before the feature exists proves nothing, and an import-error red goes green as soon as an empty stub exists, so it is 'suspicious-red' and not admitted alone. (2) NECESSITY PROBE: after green, each substantive hunk of the diff is reverted and some behavioural check must redden; an uncovered hunk is unnecessary code or untested code. Hunk-revert (not PIT/Stryker/mutmut) is deliberate: diff-based, language-agnostic, dependency-free. (3) ADVERSARIAL REVIEW with a DIVERGENCE WITNESS: 'write a wrong implementation that passes' needs an oracle, which a real repo does not have, so an attack counts only when the frozen suite is GREEN on it AND a deterministic witness shows it behaving differently from the real implementation - a mechanically demonstrated hole, with no oracle and no judgement about which side is correct. Checks are AUTHORED by a clean-context subagent (F-2026-07-12-018) rather than hand-written per fixture, which is what makes a fresh clone usable; awbp NEVER calls a model (it emits briefs and judges responses), so the agent driving the session spawns those subagents itself and spend stays where the approval ceiling lives. ONBOARDING: point an agent at START-HERE.md; nothing is installed, no PATH change, no network, and nothing is written into the user's repo except .agentic/. project_detect.py replaces 0.4.0's hardcoded tests/ + python3 -m unittest, which was always-green on any repo using a different runner. EVIDENCE: release 0.4.0's own 100/100/100 was retroactively confirmed EARNED (necessity_ratio 1.0 x3 trials, zero uncovered hunks, zero calls); and end-to-end on an unseen repo with real subagents, an admitted author check went GREEN and EARNED, after which a real adversary DEFEATED that same suite via a witness divergence. NOT YET MEASURED: silent_defect_rate, and any comparison against a well-configured vanilla agent - 0.5.0 is a mechanism release, not a comparative-outcome release, and the medi-ny fixture's known provenance leak must be repaired before that experiment runs. See Setup/earned-green.md. 0.4.0's architecture is unchanged and still authoritative: harness-generated evidence, guidance attached to FAILING checks, three consequence-gated modes, >=3 trials/arm for any benchmark verdict.",
+  "onboarding_entry_point": "START-HERE.md",
+  "earned_green_entry_point": "tools/adaptive/awbp.py"
 }

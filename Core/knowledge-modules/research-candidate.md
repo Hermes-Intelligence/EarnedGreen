@@ -1,6 +1,6 @@
 # Research Candidate Governance
 
-Research may write only inside a new `Research/candidate-packages/<run-id>/` directory and dated Research Outputs. It must not modify Stable, Core, platform bootstrap, global pointers, sibling repositories, Git history or remote systems.
+Research may write only inside a new `Research/candidate-packages/<run-id>/` directory and dated research-outputs. It must not modify Stable, Core, platform bootstrap, global pointers, sibling repositories, Git history or remote systems.
 
 Every candidate contains:
 

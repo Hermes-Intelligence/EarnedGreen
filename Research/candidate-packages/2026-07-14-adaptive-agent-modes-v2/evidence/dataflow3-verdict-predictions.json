@@ -1,0 +1,29 @@
+{
+ "schema_version": 1,
+ "registered_at": "2026-07-20",
+ "registered_before": "any provider call of the verdict campaign",
+ "question": "The family-2 replication VERDICT, third and final campaign, under the FROZEN v2.3 instrument (no further instrument edits are permitted for this campaign's grading — any newly suspected defect must be published as a finding and the campaign result stands as-graded alongside it).",
+ "instrument_provenance": "v2.3 admitted PASS (before=14/after=100/alt=100); validated exploratorily against three generations of real solutions (v1 KeyError victim readable end-to-end; the six v2 workspaces grade 100/100/100 loop vs 100/43/43 configured under it). 84 frozen pins; quirk policy documented in build_dataflow_oracle_gen4.py.",
+ "design": {
+  "fixture": "vextrum-dataflow-era-v2 (contract version 3)",
+  "arms": {"vanilla-configured": "one call, conventions + SCHEMA.md, no loop",
+           "oracle-loop": "full environment: loop + 84 frozen pins, ceiling 3, zero authoring calls"},
+  "trials": 3,
+  "spend": "1 canary + 12 main = exactly 13, owner approval 'odpalaj' (chat 2026-07-20)"
+ },
+ "predictions": [
+  {"id": "P-F1",
+   "claim": "Bare-vanilla canary lands in 14-85 with >=2 dimensions reported (the exploratory spread of bare/configured samples under this instrument was 43-100, so the band is wide; the brake stays at exactly 100).",
+   "falsified_if": "canary 100 -> REGISTERED BRAKE: stop before main, report that the family saturates for one-shot under the valid instrument"},
+  {"id": "P-F2",
+   "claim": "REPLICATION VERDICT: oracle-loop mean > vanilla-configured mean by more than the 16-pt band, all six trials valid. Expected shape from the exploratory signal: loop at or near 100 in >=2 of 3 trials; configured variance-limited.",
+   "falsified_if": "gap <= 16 or reversed: the recipe does NOT replicate on family 2 — published as the final family-2 verdict, 0.6.2 stays scoped to family 1, NO instrument appeals this time"},
+  {"id": "P-F3",
+   "claim": "The loop now iterates PRODUCTIVELY where it iterates: any non-first-iteration green shows a strictly shrinking failure set (valid pins give usable feedback, unlike the walls of campaigns 1-2).",
+   "falsified_if": "a loop trial stalls no-progress at the bare-canary level despite valid pins"},
+  {"id": "P-F4",
+   "claim": "Envelope: every trial in both arms ends preserved-behaviour GREEN.",
+   "falsified_if": "any trial ends guard-red at claimed-done"}
+ ],
+ "verdict_rule": "Pre-committed: family-2 replication holds ONLY IF P-F2. Whatever happens goes verbatim into the next manifest edit as the family-2 verdict. Total family-2 spend after this campaign: 39 calls across three instrument generations — also published."
+}

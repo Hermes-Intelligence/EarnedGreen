@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "registered_at": "2026-07-19",
+  "registered_before_any_spend": true,
+  "test": "NOTES-AS-CODE TRANSFER TEST — the first measurement of the institutional learning loop. Re-run the vextrum authoring trial with two seed notes routed into the author's brief, against the measured baseline: 0 of 3 prior authors produced a check that catches the dimension the held-out oracle kept failing (citation-run-separated), and 1 of 1 canary author grounded it in geometry instead of emitted text.",
+  "approved_calls": 2,
+  "approval_source": "owner in chat 2026-07-19: quoted the 2-call test plan verbatim and said 'zróbmy to w takim razie'",
+
+  "what_is_injected": {
+    "notes": ["ground-assertions-in-emitted-content (weak-observable)", "one-check-per-documented-convention (missing-coverage)"],
+    "phrasing_constraint": "error CLASSES only — the notes never mention citations, separators, or any dimension name. Verified by test: the rendered brief must not contain 'citation-run-separated'."
+  },
+
+  "predictions": {
+    "P-N1": "The author's suite will contain a separation-covering check grounded in EMITTED TEXT (not geometry). Operationalized: at least one authored check goes RED on a prior 92-scoring solution workspace (all of which the oracle failed only on citation-run-separated) while staying GREEN on the shipped reference. Baseline: 0/3 authors produced any such check.",
+    "P-N2": "The author's reply will contain an explicit convention-to-check mapping, or an explicit declaration of uncovered dimensions (the missing-coverage note's observable).",
+    "P-N3_secondary": "If P-N1 holds, the loop trial's final solution scores 100 on the held-out oracle (the strong check forces the fix within the iteration budget)."
+  },
+
+  "falsification": "If the authored suite again fails to catch the hard dimension (no authored check reddens a prior 92-workspace), the notes did NOT transfer: record_measurement(transferred=false) RETIRES both notes per the bank's own rule, and we publish that executable-routed institutional knowledge failed its first transfer test. That is a real result, not a failure to be reworded.",
+
+  "honest_scope_limitation": "This is a WITHIN-TASK transfer test: the seed notes were derived from oracle feedback on THIS fixture (phrased as classes, never as answers — but derived there). A positive result therefore claims 'encoded institutional knowledge transfers to a fresh clean-context author and changes what it writes', measured against a 0/3 baseline on the same task. It does NOT claim clean benchmark lift on a held-out task; cross-task generalization needs the next task family (shadow-replay). We publish this limitation with any positive result.",
+
+  "measurement_protocol_zero_extra_calls": [
+    "1. After the author call: read author-notes.json (attribution: which notes were injected).",
+    "2. Probe the authored suite: install authored checks+helpers into (a) a prior 92-run's final workspace, (b) the shipped reference materialization. P-N1 = some authored check RED on (a), GREEN on (b).",
+    "3. Read the author's reply for the P-N2 mapping.",
+    "4. Grade the trial's final solution (free) for P-N3.",
+    "5. record_measurement on both notes with the evidence; statuses settle to measured/retired mechanically."
+  ]
+}

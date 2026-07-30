@@ -1,0 +1,16 @@
+{
+ "schema_version": 1,
+ "observed_at": "2026-07-19",
+ "companion_of": "gen4-era-validation-observed.json (raw verdict map; exploratory, zero calls, no re-grading)",
+ "predictions_settled": {
+  "P-G1": "CONFIRMED — kinds-gained admitted for both vis-trend and vis-multiline (27 relational predicates total, rejected_by_variant=0)",
+  "P-G2": "CONFIRMED EXACTLY — chart kinds-superset: oracle-loop GREEN on both, vanilla/configured/relation-loop RED; the per-kind counts even resolve WHY: configured passes fill/rect became-nonzero but fails circle became-nonzero (drew filled charts, no point markers — the ladder's any-gain diagnosis, now visible predicate-by-predicate)",
+  "P-G3": "CONFIRMED — cite-run admitted three count-direction predicates (line/link/stroke decreased) and all four agents are RED on all of them: the honest zeros survive partial credit",
+  "P-G4": "CONFIRMED — zero relational predicates on guard inputs (structural)",
+  "P-G5": "CONFIRMED — before is RED on all 27 admitted predicates (structural red-on-before held on real material)"
+ },
+ "bonus_finding_1_ungraded_dimension_recovered": "The `sources` input — DROPPED from the shipped grader as sources-section-layout (kindset and textseq identical before/after, no valid exact projection) — admits two count-direction predicates (line/stroke increased) that separate before from the valid lineage without pinning geometry. Gen-4 mechanically recovers a dimension the gen-3 instrument had to name unverified. All four agents RED there (real, previously invisible, now measurable).",
+ "bonus_finding_2_partial_credit_gradient": "GREEN counts per implementation (exploratory, not scores): oracle-loop 14 > vanilla-configured 12 > vanilla 9 = relation-loop 9 (of 27). The full-environment arm tops the ordering and the gradient is monotone in the arms' measured chart work — the loop hypothesis ordering, now visible on old material through a valid instrument. Verdict-grade claims still require fresh runs.",
+ "boundary_confirmed": "Every text-family predicate (block-cites, block-many, mixed, cite-run) is RED across all four agents: count-direction gives text dimensions countable observables where they exist, but no agent moved text in the reference's direction — and where no countable observable exists the dimension stays NAMED unverified. The text-semantic boundary from finding_2 stands; gen-4 narrows it, does not close it.",
+ "gen4_status": "VALID for the decisive test's drawing/structural dimensions: admitted-under-variant-filter, structural red-on-before, rewards partial real work, preserves honest zeros, recovers one previously ungraded dimension. Implementation: diff_oracle.derive_relational + evaluate dispatch (candidate-side; Stable copy untouched pending a 0.6.1 nod)."
+}

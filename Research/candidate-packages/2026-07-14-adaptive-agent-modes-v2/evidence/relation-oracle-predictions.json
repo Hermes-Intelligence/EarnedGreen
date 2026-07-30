@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "registered_at": "2026-07-19",
+  "registered_before_any_live_mining": true,
+  "provider_calls": 0,
+
+  "what_layer_2_is": "Relation predicates for code with NO history: properties that need no answer-oracle, only a RELATION between runs — determinism (same input twice, same emissions), co-variation (inputs differing in field X must yield differing emissions: the mechanical definition of not-hardcoded), sentinel preservation (a unique token planted in the input must reach the output: no silent data loss), totality (inputs the implementation handles today must not start crashing). Mined FROM the current implementation: we never demand more than the code already does — we pin its envelope forward, so over-constraint (the out-of-domain-inputs failure class) is structurally impossible. Violations found DURING mining are reported as FINDINGS (suspected defects now) — which is what a broken-code-no-diff case needs first.",
+
+  "vacuity_rule_one_level_up": "A predicate class that cannot fail is decoration. Each class must redden on a CONSTRUCTIVE MUTANT embodying its defect class (a hardcode wrapper that ignores input, a lossy wrapper that drops half the emissions, a nondeterministic wrapper that injects noise) while staying green on the real module. Machinery admission, mechanical, zero judgement.",
+
+  "predictions": {
+    "R-1_machinery_vacuity": "Every relation class reddens its own constructive mutant and greens the real (after) module: hardcode wrapper caught by co-variation AND sentinel; lossy wrapper caught by sentinel; nondet wrapper caught by determinism.",
+    "R-2_specificity": "Relation pins mined from the after module hold GREEN on ALL 12 real implementations (before, altformat, and the nine 92-solutions): relations are implementation-agnostic, so this layer must NOT re-litigate the citation defect — it is orthogonal to convention semantics by design. Any violation is either a real latent defect in that implementation (diff the data first) or an over-eager predicate; both get triaged openly.",
+    "R-3_findings_on_shipped_code": "Mining the shipped after module yields ZERO findings (it is graded 100 and in production). Any finding would be a real discovery to triage honestly, not to suppress."
+  },
+
+  "falsification": "If a relation class cannot redden its own mutant, the class is decoration and is dropped. If pins violate on real implementations for benign reasons, the mining is over-eager and the class is weakened or dropped — reported either way. No goalpost moves after contact with the material.",
+
+  "coverage_manifest": "Built alongside: the suite's verified dimensions (each backed by >=1 admitted check, with provenance diff/relation/authored) versus NAMED unverified dimensions — the gate stops saying PASS and starts saying what green does and does NOT mean. Structural build; its measurement is downstream."
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-19",
+  "campaign": "Evals/experiments/etl-probe.json (staged probe after the saturation-signalling canary; owner-chosen)",
+  "spend": {"canary": 1, "probe": 3, "of_approved": 16, "unspent": 12,
+             "note": "probe ceiling was 5; loops went green on iteration 1 so 2 reserved iteration calls were never spent"},
+
+  "verdict": "SATURATION CONFIRMED on the second task family (registered condition if_all_arms_saturate fires). vanilla (canary) = vanilla-configured = relation-loop = oracle-loop = 100, every dimension, first attempt, zero loop iterations needed. A well-specified single-file ticket — even a robustness one with subtle interactions — is inside a frontier model's one-shot competence. The correctness null now stands on BOTH families at full strength: no arm, including one carrying PERFECT mechanical predicates, had anything to add, because there was nothing left to force.",
+
+  "what_the_4_calls_bought": [
+    "the saturation fact itself, cheaply: the staged probe (owner's call) confirmed at 4 of 16 what the full 15 would have confirmed at 16 of 16",
+    "OPERATIONAL PROOF OF THE FULLY MECHANICAL STACK, LIVE: both derived-suite loop arms ran end-to-end with frozen mechanical suites (zero authoring calls), the self-describing pins (capture_command) executed against real agent workspaces, the host loop consumed derived verdicts as feedback plumbing, and the mechanical grader graded 4 live runs coherently — grader and loop-suite, derived from the same diff, agreed on every run. The machinery is deployment-ready; the task was just too easy to need it.",
+    "P-E2 answered vacuously-positively: the loop reached green immediately; the machinery-ceiling question remains genuinely open only on a task where iteration is actually required"
+  ],
+
+  "predictions_settled": {
+    "P-E1": "WRONG in the informative direction: even bare vanilla hit 100 (predicted 60-80 for configured). Registered before spend; reported as registered.",
+    "P-E2": "trivially satisfied (green at iteration 1) — not a real test of forcing ability",
+    "P-E3": "satisfied trivially (relation-loop 100, no regressions — but nothing stressed the guards)",
+    "P-E4": "unfalsifiable at saturation: oracle-loop could only tie. No lift claim is made."
+  },
+
+  "the_programme_conclusion_this_sharpens": "Two task families, five arms, three predicate sources (authored, notes-guided, mechanical) and a mechanical grader later: for frontier models on well-specified single-file in-context tasks THERE IS NO CORRECTNESS HEADROOM for any environment machinery — the model one-shots the task. Every measured failure lived on UNDER-specified dimensions (vextrum's discoverable conventions), and there the bottleneck was predicate strength, where only diff-derived predicates discriminated. The next measurable axis is therefore task DIFFICULTY: multi-file, cross-module, longer-horizon mined commits (candidates already ranked in workstreams/diff-derived-oracles/artifacts/mined-*.json), where one-shot competence breaks and the derived-oracle loop gets a real chance to matter.",
+
+  "recommendation_to_owner": "Spend nothing further here (12 of 16 stay unspent). Next zero-call work: pick a 3-4-file, high-churn mined commit and build the third-generation fixture around genuine difficulty. The mechanical stack (miner -> materialize -> derive -> altformat-filter -> mechanical grader -> derived-suite loop) is now proven end-to-end and reusable as-is."
+}

@@ -11,10 +11,10 @@ copies this file manually into `.claude/commands/weekly-hygiene.md` (see
 Run the zero-provider vault hygiene scan:
 
 ```
-powershell -ExecutionPolicy Bypass -File tools/vault-hygiene.ps1 --output-dir "Research Outputs/hygiene"
+powershell -ExecutionPolicy Bypass -File tools/vault-hygiene.ps1 --output-dir "research-outputs/hygiene"
 ```
 
-(Equivalent direct call: `python tools/adaptive/vault_hygiene.py`.)
+(Equivalent direct call: `python awbp/vault_hygiene.py`.)
 
 The scan covers the repo's knowledge surfaces - `Core/`, the Router catalogs
 (classic `Router/catalog/modules.json` and adaptive `Router/catalog/adaptive-modules.json`),
@@ -35,7 +35,7 @@ and candidate package docs - and reports four classes of drift:
 Then run the claims-rules validator so claim expiry flags dependent rules:
 
 ```
-python tools/adaptive/claims_ledger.py --map Research/claims/claims-rules-map.json
+python awbp/claims_ledger.py --map Research/claims/claims-rules-map.json
 ```
 
 Hard rules for this command:

@@ -1,0 +1,100 @@
+[
+  {
+    "id": "codex-exec-automation-15",
+    "bucket": "codex-exec-automation",
+    "statement": "Because exec mode is non-interactive, approval requests cause the run to fail immediately unless the configured policy auto-approves them.",
+    "applicability": "Codex CLI 0.144.x",
+    "version_sensitive": true,
+    "candidate_guidance": "LOW-CONFIDENCE on the exact failure semantics: asserted by a tier-5 wiki over the repo and consistent with tier-1 docs stating scheduled tasks set approval_policy=\"never\", but not confirmed verbatim in tier-1 CLI docs. Verify against the CLI before relying on the exit behaviour.",
+    "sources": [
+      {
+        "title": "Headless Execution Mode (codex exec) | openai/codex | DeepWiki",
+        "url": "https://deepwiki.com/openai/codex/4.2-headless-execution-mode-(codex-exec)",
+        "tier": 5,
+        "accessed_at": "2026-07-20"
+      },
+      {
+        "title": "Agent approvals & security | ChatGPT Learn",
+        "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+        "tier": 1,
+        "accessed_at": "2026-07-20"
+      },
+      {
+        "title": "Configuration Reference | ChatGPT Learn",
+        "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+        "tier": 1,
+        "accessed_at": "2026-07-20"
+      }
+    ],
+    "verdict": "unsupported",
+    "confidence": "high",
+    "reason": "Version_sensitive with tier-1 backing absent, so the rule forces unsupported. I went looking specifically: the two tier-1 pages that would state this — the dedicated agent-approvals-security page and the config reference — both decline to describe what happens when a non-interactive run hits an approval request, and the non-interactive page has no approval section at all. Only DeepWiki (tier 5, auto-generated) asserts 'approval requests cause immediate failure'. Useful side-findings for whoever re-runs this: --ask-for-approval / -a DOES exist with values untrusted | on-request | never | {granular={...}}, on-failure is deprecated, and the config reference recommends never for non-interactive runs. That resolves the bucket's open question about the flag, and gives a safe instruction (set -a never explicitly) that does not depend on the unverified failure semantics.",
+    "expires_at": "2026-08-19"
+  },
+  {
+    "id": "codex-exec-automation-43",
+    "bucket": "codex-exec-automation",
+    "statement": "The `codex exec` headless mode is implemented over the same core engine as the TUI and app server via an `InProcessAppServerClient` managing a `ThreadManager`, with two output processors: `EventProcessorWithHumanOutput` and `EventProcessorWithJsonOutput`.",
+    "applicability": "openai/codex repository, codex-rs",
+    "version_sensitive": true,
+    "candidate_guidance": "LOW-CONFIDENCE / architectural lead only: sourced from an auto-generated wiki over the repo (tier 5). The externally observable consequence — that exec and TUI share semantics and differ only in the event renderer — matches tier-1 docs, but internal type names should be verified in-repo before being cited.",
+    "sources": [
+      {
+        "title": "Headless Execution Mode (codex exec) | openai/codex | DeepWiki",
+        "url": "https://deepwiki.com/openai/codex/4.2-headless-execution-mode-(codex-exec)",
+        "tier": 5,
+        "accessed_at": "2026-07-20"
+      }
+    ],
+    "verdict": "unsupported",
+    "confidence": "high",
+    "reason": "Version_sensitive claim with tier-5 sole backing, so the rule forces unsupported regardless of plausibility. DeepWiki does assert exactly what the claim says (InProcessAppServerClient managing a ThreadManager, plus EventProcessorWithHumanOutput and EventProcessorWithJsonOutput), and the researcher's own low-confidence flag is appropriate. The externally observable consequence — exec and TUI share the engine and differ in the event renderer — is consistent with tier-1 docs, but internal Rust type names must be verified against codex-rs source before being cited anywhere. Do not promote on web evidence; this one needs an in-repo read.",
+    "expires_at": "2026-08-19"
+  },
+  {
+    "id": "security-sandboxing-injection-17",
+    "bucket": "security-sandboxing-injection",
+    "statement": "Two competing vendor comparison pages independently agree on the isolation-mechanism taxonomy for hosted agent code-execution sandboxes: Modal uses gVisor containers, E2B and Vercel Sandbox use Firecracker microVMs, and Northflank uses Kata Containers / Cloud Hypervisor with gVisor. Both pages also list Daytona; Modal's page additionally lists Blaxel (microVM) and Cloudflare Sandboxes (isolated Linux containers).",
+    "applicability": "Hosted code-execution sandbox products as described by vendors in 2026; mechanism taxonomy only",
+    "version_sensitive": true,
+    "candidate_guidance": "LOW CONFIDENCE on everything except the mechanism mapping. Both sources are vendor-authored competitive comparisons in which the authoring vendor wins every axis, so cold-start figures (Northflank ~97ms, E2B ~150ms), session caps, concurrency ('50,000+ concurrent sessions') and pricing tables are self-reported marketing numbers with no neutral replication — do not put them in stable guidance. The mechanism taxonomy survives only because two competitors independently assert the same mapping. For the repo's actual use case (local agent runs), the built-in OS-primitive sandbox of claims 01-09 is the relevant control, not a hosted sandbox product.",
+    "sources": [
+      {
+        "title": "Best code execution sandbox for AI agents (Northflank, vendor-authored comparison)",
+        "url": "https://northflank.com/blog/best-code-execution-sandbox-for-ai-agents",
+        "tier": 5,
+        "accessed_at": "2026-07-20"
+      },
+      {
+        "title": "Best code execution sandboxes for AI agents (Modal, vendor-authored comparison)",
+        "url": "https://modal.com/resources/best-code-execution-sandboxes-ai-agents",
+        "tier": 5,
+        "accessed_at": "2026-07-20"
+      }
+    ],
+    "verdict": "unsupported",
+    "confidence": "medium",
+    "reason": "Marked unsupported on the tier rule, not on falsity — the distinction matters, so recording it precisely. I opened both pages and the mechanism taxonomy is asserted as described. Northflank's table: Modal 'gVisor containers', E2B 'MicroVM (Firecracker)', Vercel Sandbox 'MicroVM (Firecracker)', Northflank 'MicroVM (Kata/CLH) + gVisor', Daytona 'Docker (Kata optional)'. Modal's page: Modal 'gVisor container isolation', E2B 'Firecracker microVMs', Vercel 'Firecracker microVMs', Northflank 'Kata Containers and Cloud Hypervisor alongside gVisor-based isolation', plus Blaxel 'microVM isolation' and Cloudflare Sandboxes 'Isolated Linux containers'. So the claim accurately reports what both pages say. However, the claim is registered version_sensitive:true and its only two sources are tier 5, which under the bucket's own evidence rule forces unsupported regardless of plausibility. That rule is doing real work here rather than being a technicality: these are competitive marketing pages describing competitors' internal infrastructure, neither vendor is authoritative about the others' architecture, and hosted-sandbox implementations change without notice — exactly the drift a version_sensitive flag is meant to catch. Two-competitors-agree raises confidence but does not make either a primary. To promote this, cite each vendor's own official documentation for its own mechanism (tier 1 per vendor) and drop the cross-vendor comparison pages entirely. I also confirmed the researcher's retiering rationale: both pages self-rank their authors first on every axis, and the self-reported figures (Northflank ~97ms median TTI / 167ms burst, E2B ~150ms, Daytona ~90ms, Modal '50,000+ concurrent sessions', session caps) have no neutral replication and must stay out of stable guidance. The guidance's closing point is the operative one and survives independently of this verdict: for local agent runs, the built-in OS-primitive sandbox of claims 01-09 is the relevant control, not a hosted sandbox product — which makes this claim low-value for the repo even if it were properly sourced.",
+    "expires_at": "2026-08-19"
+  },
+  {
+    "id": "evals-judging-20",
+    "bucket": "evals-judging",
+    "statement": "On CodeScaleBench with Claude Code plus Haiku 4.5, adding Sourcegraph MCP retrieval versus a local-tools baseline measured up to 11.2 percent reward improvement on Org incident-debugging tasks and 11.5 percent on the SDLC Understand suite, alongside roughly 30 percent lower cost per task (0.73 to 0.51 US dollars) and 38 percent faster agent execution.",
+    "applicability": "Claude Code harness with Haiku 4.5 and Sourcegraph MCP, as reported 2026-03-03; single-harness single-model result",
+    "version_sensitive": true,
+    "candidate_guidance": "Retrieval quality moved correctness, cost and latency together on large codebases. Treat as a single-harness, single-model data point from the tool vendor: the direction is credible and the arms are separated, but the magnitude is not independently replicated and the vendor benefits from the result.",
+    "sources": [
+      {
+        "title": "CodeScaleBench: Testing coding agents on large codebases and multi-repo software engineering tasks (Sourcegraph)",
+        "url": "https://sourcegraph.com/blog/codescalebench-testing-coding-agents-on-large-codebases-and-multi-repo-software-engineering-tasks",
+        "tier": 3,
+        "accessed_at": "2026-07-20"
+      }
+    ],
+    "verdict": "unsupported",
+    "confidence": "medium",
+    "reason": "Marked unsupported on the tiering rule, not on accuracy. The claim is flagged version_sensitive and its only backing is the vendor's own tier-3 blog; a version-sensitive claim requires current tier-1 primary support, and I could not confirm these specific deltas in the tier-1 repository. For the record, the blog does state every figure as claimed: Understand +11.5 percent, incident debugging +11.2 percent (also refactor +10.3, security +10.6, fix +9.9), cost 0.73 to 0.51 US dollars at roughly 30 percent lower, and 38 percent faster agent execution. Three independent reasons to withhold promotion: the result is vendor-authored and vendor-favourable (Sourcegraph MCP is the treatment arm), it is a single-harness single-model measurement (Claude Code + Haiku 4.5 only, with five further harnesses supported but unreported), and the underlying retrieval metrics move so sharply (precision@5 0.140 to 0.478) that the effect is plausibly specific to how weak the local-tools baseline is. Do not cite the magnitudes as established; the direction is credible.",
+    "expires_at": "2026-08-19"
+  }
+]

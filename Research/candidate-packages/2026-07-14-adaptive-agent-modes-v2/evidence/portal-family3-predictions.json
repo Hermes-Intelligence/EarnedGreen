@@ -1,0 +1,20 @@
+{
+ "schema_version": 1,
+ "registered_at": "2026-07-20",
+ "registered_before": "any provider call on family 3",
+ "question": "FAMILY-3 replication of the decisive recipe (owner: 'to tak zrobmy' / 'to daawaj'; plan budget max 15 calls). Difficulty-first protocol: a 1-call bare-vanilla difficulty canary GATES the fixture before the 12-call verdict campaign.",
+ "family_disjointness": "HermesPortal (third repo), API/analytics-aggregation domain, FastAPI/JSON surface, ~10k-line module, 26-commit era (+1341 lines on the file), three endpoints born mid-era. Instrument is SEMANTIC-SURFACE from birth (JSON payloads = the deliverable); the graded slice's SQL is trivial by construction; filters/sorting/new_only are UNGRADED AND NAMED and never exercised by the corpus.",
+ "instrument_provenance": "admitted PASS on the FIRST build (before=14/after=100/alt=100; 94 discriminating + 1 guard, 7 families; alt varies the ORDER BY spelling) — the family-2 lessons (alias projection, literal-ranking order, subquery masking, Query-default unwrapping) pre-empted every known wall; three driver defects were caught by dry-run stream diffs at zero calls (lateral LIMIT bleed, lateral WHERE trip, Query objects as values).",
+ "difficulty_canary_rule_pre_committed": {
+  "P-C1": "bare vanilla scores <= 55 -> family qualifies as HARD, proceed to the 12-call verdict campaign",
+  "P-C2": "56-99 -> AMBIGUOUS difficulty: STOP, report, owner decides",
+  "P-C3": "100 -> saturation brake as in family 2: STOP, family closed as untestable-as-hard, 12 calls saved"
+ },
+ "verdict_campaign_predictions_conditional_on_P_C1": [
+  {"id": "P-3V1", "claim": "oracle-loop mean > vanilla-configured mean by more than the 16-pt band, all six trials valid (the family-1 pattern replicates on a valid semantic-surface instrument).",
+   "falsified_if": "gap <= 16 or reversed: the decisive claim does NOT generalize; published verbatim in the next manifest edit, no instrument appeals unless a defect is LOCATED in streams"},
+  {"id": "P-3V2", "claim": "the loop iterates productively where it iterates (any non-first-iteration green shows a shrinking failure set)."},
+  {"id": "P-3V3", "claim": "every trial in both arms ends preserved-behaviour GREEN."}
+ ],
+ "spend": "exactly 13 of the approved 15 ceiling: 1 difficulty canary + 12 main (2 arms x 3 trials, loop reserves 3 iterations/trial, zero authoring calls); per-stage approval records as always"
+}

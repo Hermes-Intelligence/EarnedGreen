@@ -15,7 +15,7 @@ def main() -> None:
     arm = manifest["arm"]
     failures = []
     result_path = args.run / "workspace" / ".agentic" / "pre-submit-result.json"
-    if arm != "vanilla":
+    if manifest.get("completion_gate"):
         if not result_path.exists():
             failures.append("missing pre-submit-result.json")
         else:

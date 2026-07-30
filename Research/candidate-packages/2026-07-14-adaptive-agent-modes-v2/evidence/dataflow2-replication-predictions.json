@@ -1,0 +1,35 @@
+{
+ "schema_version": 1,
+ "registered_at": "2026-07-20",
+ "registered_before": "any provider call of the v2 replication campaign",
+ "question": "Same replication question as dataflow-replication-predictions.json, now under a VALID instrument: v2 stub projects rows onto each query's aliases, maps INSERT params by column name, SCHEMA.md makes the schema discoverable, and the altformat variant varies aliases. Owner approved the v2 rebuild + fresh 13 calls ('tak jest dawaj').",
+ "instrument_repair_evidence": "v1 defect located in dataflow-replication-observed.json; v2 validated: the v1 oracle-loop solution that died on KeyError now runs END-TO-END under the v2 driver (streams show its real work and real defects; exploratory, not re-graded as a result); admission PASS before=14/after=100/alt=100; dry-run also caught and fixed a greedy-regex insert-parse bug BEFORE any spend (the reference itself failed to insert under the first v2 parser — the self-consistency trap named in memory, caught by diffing the after stream).",
+ "design": {
+  "fixture": "vextrum-dataflow-era-v2 (87 discriminating + 3 guards, 7 families)",
+  "arms": {"vanilla-configured": "one call, conventions + SCHEMA.md in workspace, no loop",
+           "oracle-loop": "full environment: loop + 90 frozen v2 pins, ceiling 3, zero authoring calls"},
+  "trials": 3,
+  "spend": "1 canary + main 12 = exactly 13 calls, recorded per stage"
+ },
+ "predictions": [
+  {"id": "P-V1",
+   "claim": "Bare-vanilla canary lands in 14-70 with >=2 dimensions reported (SCHEMA.md may lift it above v1's 43 — the schema is now discoverable — but the four-module behavioural surface still breaks one-shot).",
+   "falsified_if": "canary 100 -> REGISTERED BRAKE: stop before main, report saturation"},
+  {"id": "P-V2",
+   "claim": "REPLICATION VERDICT: oracle-loop mean > vanilla-configured mean by more than the 16-pt band, all trials valid.",
+   "falsified_if": "gap <= 16 or reversed UNDER A VALID INSTRUMENT: then the decisive recipe does NOT generalize to this family and 0.6.2 stays scoped to family 1 — published as the honest outcome, no further instrument excuses unless a defect is again LOCATED in the streams (not presumed)"},
+  {"id": "P-V3",
+   "claim": "The loop iterates with progress on at least one trial (green at iteration >=2 or strictly shrinking failure sets).",
+   "falsified_if": "all trials green at iteration 1, or all stall with identical failure sets at the canary level"},
+  {"id": "P-V4",
+   "claim": "Family texture: vanilla-configured greens params-contract (loudest symptom, now schema-supported) in >=2 of 3 trials but leaves incremental-materialization (watermark discipline: second-run n0, no dups) red in >=2 of 3; oracle-loop greens incremental-materialization in >=2 of 3 (count-equal predicates force the absence properties).",
+   "falsified_if": "configured greens incremental in a majority unforced, or oracle-loop cannot green it in any trial"},
+  {"id": "P-V5",
+   "claim": "Envelope: every oracle-loop trial ends preserved-behaviour GREEN.",
+   "falsified_if": "any oracle-loop trial ends guard-red"}
+ ],
+ "honest_framing": [
+  "replay paradigm; pins from history; stub emulates the %s contract + canned state, never SQL semantics; planner pending-selection, filter pushdown, retry-cap remain UNGRADED AND NAMED; INSERT..SELECT is a documented totality finding",
+  "verdict rule pre-committed: replication holds ONLY IF P-V2; the family-2 verdict (either way) goes into the next manifest edit"
+ ]
+}

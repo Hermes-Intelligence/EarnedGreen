@@ -10,7 +10,11 @@ from pathlib import Path
 from typing import Any
 
 HERE = Path(__file__).resolve().parent
-MODE_RANK = {"vanilla": 0, "mode-1-lean": 1, "mode-2-routed": 2, "mode-3-assured": 3, "full": 4}
+MODE_RANK = {"lite": 0, "standard": 1, "critical": 2}
+# Historical mode/arm ids (schema <= 3 runs, saved campaign evidence). Analyzers
+# that parse old run manifests map them through this table; new selection never
+# produces them.
+LEGACY_MODE_RANK = {"vanilla": 0, "mode-1-lean": 0, "mode-2-routed": 1, "mode-3-assured": 1, "full": 2}
 
 # A "single-token" phrase is one contiguous word (letters/digits/underscore) with no
 # spaces or hyphens. Those are matched with word boundaries so short anchors like
@@ -199,16 +203,15 @@ def analyze(task: str, changed_paths: list[str]) -> dict[str, Any]:
             ambiguous.append(f"subjective scope term: {phrase}")
     reqs = requirement_count(task)
 
-    # Two-axis selection (modes.json schema 3). Consequence (blast radius) is the
-    # only axis that can reach `full`: the human gate and independent verifier exist
-    # for irreversibility, not for size. Breadth (width of change) and continuity
-    # (session boundaries) each cap at mode-3-assured, whose durable checkpoints,
-    # impact map and adversarial verification absorb wide or resumable work.
-    # cross_system counts toward breadth via multi_file, not consequence: spanning
-    # frontend+backend is width. A cross-system *release* reaches critical through
-    # its external_action signals (deploy/publish), not through span alone.
+    # Selection (modes.json schema 4). Consequence (blast radius) is the only
+    # axis that changes the mode: critical consequence with execution intent
+    # selects the critical mode and its human gate. High/medium consequence
+    # stays in standard - the verification loop's independently executed checks
+    # cover it; the measured benchmarks showed heavier prompt scaffolding never
+    # bought correctness. Clarity and continuity add conditional capabilities
+    # inside the selected mode; breadth is telemetry only.
     # A high-blast-radius phrase is not itself authorization to perform the action.
-    # Planning, explanation and dry-run tasks must not acquire Full's human gate merely
+    # Planning, explanation and dry-run tasks must not acquire the human gate merely
     # because they mention deployment or credential rotation. Execution intent and
     # consequence are recorded separately so the decision remains auditable.
     non_executing_action = bool(matched["read_only"] or matched["non_executing_action"])
@@ -232,31 +235,26 @@ def analyze(task: str, changed_paths: list[str]) -> dict[str, Any]:
 
     continuity = "multi-session" if matched["multi_session"] else "single-session"
 
-    # Fourth axis: specification clarity. Underspecified mutating work floors at
-    # mode-2 (spec synthesis needs the objective ledger and pre-submit gate; it
-    # cannot run in vanilla/mode-1). Clarity never touches the human gate and
-    # never selects full: that stays consequence-only.
+    # Clarity axis: an underspecified mutating task receives the spec-synthesis
+    # capability inside its selected mode (spec synthesis needs the objective
+    # ledger and gate, so it never activates in lite). Clarity never changes
+    # the mode and never touches the human gate.
     clarity_signals = specification_clarity(text, reqs, ambiguous, matched, doc_only)
     clarity = clarity_signals["clarity"]
 
-    consequence_floor = {"critical": 4, "high": 3, "medium": 3, "low": 0}[consequence]
-    breadth_floor = 3 if breadth == "wide" else 0
-    continuity_floor = 3 if continuity == "multi-session" else 0
-    clarity_floor = 2 if clarity == "underspecified" else 0
-
-    if matched["read_only"] and consequence == "low" and not changed_paths:
-        base_rank = 0
+    advisory = bool(matched["read_only"]) and consequence == "low" and not changed_paths
+    if advisory:
+        mode, selection_reason = "lite", "advisory read-only work"
     elif matched["non_executing_action"] and matched["external_action"]:
-        # A plan/runbook is real work and should receive routed topical guidance, but
-        # it is not the outward-facing action itself and therefore cannot select Full.
-        base_rank = 2
+        # A plan/runbook is real work and should receive routed topical guidance,
+        # but it is not the outward-facing action itself: no human gate.
+        mode, selection_reason = "standard", "plan/runbook about a critical action (non-executing)"
+    elif consequence == "critical":
+        mode, selection_reason = "critical", "critical consequence with execution intent"
     elif (matched["mechanical"] or doc_only) and breadth == "narrow" and reqs <= 4:
-        base_rank = 1
+        mode, selection_reason = "lite", "trivial narrow mechanical/documentation change"
     else:
-        base_rank = 2
-
-    rank_to_mode = {value: key for key, value in MODE_RANK.items()}
-    mode = rank_to_mode[max(base_rank, consequence_floor, breadth_floor, continuity_floor, clarity_floor)]
+        mode, selection_reason = "standard", "default: non-trivial mutating work"
 
     risk = consequence
 
@@ -271,7 +269,8 @@ def analyze(task: str, changed_paths: list[str]) -> dict[str, Any]:
         "axes": {"consequence": consequence, "breadth": breadth, "continuity": continuity, "clarity": clarity},
         "clarity_signals": clarity_signals,
         "action_intent": "non-executing" if non_executing_action else ("execution" if matched["external_action"] or migration_rollout else "not-applicable"),
-        "mode_floors": {"base": base_rank, "consequence": consequence_floor, "breadth": breadth_floor, "continuity": continuity_floor, "clarity": clarity_floor},
+        "advisory": advisory,
+        "selection_reason": selection_reason,
         "risk": risk,
         "mode": mode,
     }
@@ -324,18 +323,19 @@ def route(task: str, changed_paths: list[str] | None = None, forced_mode: str | 
     strong_signals = sum(len(values) for values in analysis["matched_signals"].values())
     if analysis["ambiguities"]:
         confidence = "medium"
-    elif strong_signals >= 2 or analysis["mode"] in ("vanilla", "mode-1-lean"):
+    elif strong_signals >= 2 or analysis["mode"] == "lite":
         confidence = "high"
     else:
         confidence = "medium"
-    # Spec synthesis activates on the CLARITY axis: an underspecified mutating
-    # task at mode-2 or above must produce a validated spec (surface inventory,
-    # pinned decision points, risk register, acceptance tests, frozen ledger)
-    # before implementation. Never added below mode-2 (including benchmark-forced
-    # vanilla/mode-1 arms): those arms have no ledger or gate to freeze against.
+    # Conditional capabilities (modes.json schema 4): clarity and continuity
+    # add capabilities INSIDE the selected mode instead of changing it.
+    # Spec synthesis needs the objective ledger and gate, so it never activates
+    # in lite (including benchmark-forced lite arms).
     capabilities = list(mode_def["capabilities"])
-    if analysis["axes"].get("clarity") == "underspecified" and MODE_RANK[analysis["mode"]] >= 2:
+    if analysis["axes"].get("clarity") == "underspecified" and MODE_RANK[analysis["mode"]] >= 1:
         capabilities.append("spec-synthesis")
+    if analysis["axes"].get("continuity") == "multi-session" and MODE_RANK[analysis["mode"]] >= 1:
+        capabilities += ["durable-checkpoints", "session-handoff-state"]
     # Decision-time research surfacing: a design/benchmark/architecture decision
     # gets the top topic-matched findings from the knowledge-base index attached
     # to the Context Pack, so prior research is load-bearing at decision time.
@@ -378,7 +378,7 @@ def main() -> None:
     source.add_argument("--task")
     source.add_argument("--task-file", type=Path)
     parser.add_argument("--changed-path", action="append", default=[])
-    parser.add_argument("--force-mode", choices=list(MODE_RANK))
+    parser.add_argument("--force-mode", choices=sorted(MODE_RANK))
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     task = args.task if args.task is not None else args.task_file.read_text(encoding="utf-8-sig")

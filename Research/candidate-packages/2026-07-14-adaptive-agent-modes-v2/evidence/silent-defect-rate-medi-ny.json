@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "arms": {
+    "full": {
+      "trials": 1,
+      "undefined_oracle_runs": 0,
+      "claimed_done": 0,
+      "claimed_done_with_silent_defects": 0,
+      "silent_defect_rate_mean": 0.0,
+      "silent_defect_rate_per_trial": [
+        0.0
+      ],
+      "distinct_silent_dimensions": []
+    },
+    "mode-1-lean": {
+      "trials": 1,
+      "undefined_oracle_runs": 0,
+      "claimed_done": 1,
+      "claimed_done_with_silent_defects": 0,
+      "silent_defect_rate_mean": 0.0,
+      "silent_defect_rate_per_trial": [
+        0.0
+      ],
+      "distinct_silent_dimensions": []
+    },
+    "mode-2-routed": {
+      "trials": 1,
+      "undefined_oracle_runs": 0,
+      "claimed_done": 1,
+      "claimed_done_with_silent_defects": 0,
+      "silent_defect_rate_mean": 0.0,
+      "silent_defect_rate_per_trial": [
+        0.0
+      ],
+      "distinct_silent_dimensions": []
+    },
+    "mode-3-assured": {
+      "trials": 1,
+      "undefined_oracle_runs": 0,
+      "claimed_done": 1,
+      "claimed_done_with_silent_defects": 0,
+      "silent_defect_rate_mean": 0.0,
+      "silent_defect_rate_per_trial": [
+        0.0
+      ],
+      "distinct_silent_dimensions": []
+    },
+    "vanilla": {
+      "trials": 1,
+      "undefined_oracle_runs": 0,
+      "claimed_done": 1,
+      "claimed_done_with_silent_defects": 1,
+      "silent_defect_rate_mean": 0.75,
+      "silent_defect_rate_per_trial": [
+        0.75
+      ],
+      "distinct_silent_dimensions": [
+        "escaped-components",
+        "linear-batch",
+        "malformed-isolation",
+        "unicode",
+        "unseen-fields",
+        "unseen-kind"
+      ]
+    }
+  },
+  "runs": [
+    {
+      "run_id": "20260714-115907280-open-world-record-parser-mode-2-routed-t1",
+      "arm": "mode-2-routed",
+      "case_id": "open-world-record-parser",
+      "claimed_done": true,
+      "visible_signal": "pre-submit-gate",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm claimed done and the oracle agrees"
+    },
+    {
+      "run_id": "20260714-120255754-open-world-record-parser-vanilla-t1",
+      "arm": "vanilla",
+      "case_id": "open-world-record-parser",
+      "claimed_done": true,
+      "visible_signal": "public-tests",
+      "oracle_dimensions": 8,
+      "oracle_failing": [
+        "unseen-kind",
+        "unseen-fields",
+        "escaped-components",
+        "unicode",
+        "malformed-isolation",
+        "linear-batch"
+      ],
+      "silent_defects": [
+        "unseen-kind",
+        "unseen-fields",
+        "escaped-components",
+        "unicode",
+        "malformed-isolation",
+        "linear-batch"
+      ],
+      "silent_defect_rate": 0.75,
+      "oracle_score": 25,
+      "note": "claimed done while the oracle sees failures: these are silent defects"
+    },
+    {
+      "run_id": "20260714-120323599-open-world-record-parser-full-t1",
+      "arm": "full",
+      "case_id": "open-world-record-parser",
+      "claimed_done": false,
+      "visible_signal": "pre-submit-gate",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm did NOT claim done: its failures are honest, not silent"
+    },
+    {
+      "run_id": "20260714-120853609-open-world-record-parser-mode-3-assured-t1",
+      "arm": "mode-3-assured",
+      "case_id": "open-world-record-parser",
+      "claimed_done": true,
+      "visible_signal": "pre-submit-gate",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm claimed done and the oracle agrees"
+    },
+    {
+      "run_id": "20260714-121232896-open-world-record-parser-mode-1-lean-t1",
+      "arm": "mode-1-lean",
+      "case_id": "open-world-record-parser",
+      "claimed_done": true,
+      "visible_signal": "pre-submit-gate",
+      "oracle_dimensions": 8,
+      "oracle_failing": [],
+      "silent_defects": [],
+      "silent_defect_rate": 0.0,
+      "oracle_score": 100,
+      "note": "the arm claimed done and the oracle agrees"
+    }
+  ],
+  "rule": "a defect is SILENT only when the arm's own evidence said done; an arm that reported red has an honest failure, not a silent defect"
+}

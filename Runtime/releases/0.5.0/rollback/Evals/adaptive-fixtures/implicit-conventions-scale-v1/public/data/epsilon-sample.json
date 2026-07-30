@@ -1,0 +1,73 @@
+{
+  "envelope": {
+    "status": "OK",
+    "generated": "2026-07-01T06:10:00Z",
+    "feed": "epsilon-notices-v2",
+    "events": [
+      {
+        "ric": "QRV",
+        "category": "halt",
+        "text": "Trading halted pending news",
+        "released": "2026-07-01",
+        "in_force": "2026-07-02",
+        "ref": "EPS-1001"
+      },
+      {
+        "ric": "ZMT",
+        "category": "halt",
+        "text": "Volatility pause on ZMT",
+        "released": "2026-07-01",
+        "in_force": "2026-07-01",
+        "ref": "EPS-1002"
+      },
+      {
+        "ric": "ZMT",
+        "category": "correction",
+        "text": "Corrected: pause extended to Friday",
+        "released": "2026-07-02",
+        "in_force": "2026-07-03",
+        "ref": "EPS-1002"
+      },
+      {
+        "ric": "HLB",
+        "category": "resume",
+        "text": "Trading resumed",
+        "released": "2026-07-02",
+        "in_force": "2026-07-02",
+        "ref": "EPS-1003"
+      },
+      {
+        "ric": "NDR",
+        "category": "halt",
+        "text": "MARKET NOTICE: halt pending GLX disclosure review",
+        "released": "2026-07-02",
+        "in_force": "2026-07-03",
+        "ref": "EPS-1004"
+      },
+      {
+        "ric": "PXT",
+        "category": "halt",
+        "text": "APEX volatility pause on PXT",
+        "released": "2026-07-02",
+        "in_force": "2026-07-02",
+        "ref": "EPS-1005"
+      },
+      {
+        "ric": "HLB",
+        "category": "halt",
+        "text": "Halt re-imposed pending MERIDIAN statement",
+        "released": "2026-07-03",
+        "in_force": "2026-07-03",
+        "ref": "EPS-1006"
+      },
+      {
+        "ric": "QRV",
+        "category": "resume",
+        "text": "Resumption scheduled",
+        "released": "2026-07-03",
+        "in_force": "2026-07-06",
+        "ref": "EPS-1007"
+      }
+    ]
+  }
+}

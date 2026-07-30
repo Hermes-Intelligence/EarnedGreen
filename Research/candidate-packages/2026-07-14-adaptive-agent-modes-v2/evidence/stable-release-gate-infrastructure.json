@@ -2,7 +2,7 @@
   "schema_version": 1,
   "purpose": "Promotion evidence: the stable release-gate infrastructure suite run on the CURRENT repo (candidate package present) that must remain green post-promotion. passed/failed are the check counts in the promote-candidate numeric contract.",
   "source_tool": "tools/release-gate.ps1 -Mode infrastructure",
-  "run_at": "2026-07-15T16:26:20.2807065+02:00",
+  "run_at": "2026-07-16",
   "passed": 15,
   "failed": 0,
   "gate_passed": true,
@@ -10,78 +10,92 @@
     {
       "id": "json-parse",
       "passed": true,
-      "summary": "472 files, 0 errors"
+      "exit_code": 0,
+      "summary": "627 files, 0 errors"
     },
     {
       "id": "powershell-parse",
       "passed": true,
-      "summary": "63 files, 0 errors"
+      "exit_code": 0,
+      "summary": "69 files, 0 errors"
     },
     {
       "id": "knowledge-routing",
       "passed": true,
+      "exit_code": 0,
       "summary": "12/12"
     },
     {
       "id": "model-routing",
       "passed": true,
+      "exit_code": 0,
       "summary": "10/10"
     },
     {
       "id": "runtime-controls",
       "passed": true,
+      "exit_code": 0,
       "summary": "5/5"
     },
     {
       "id": "fixture-discrimination",
       "passed": true,
+      "exit_code": 0,
       "summary": "19/19"
     },
     {
       "id": "run-lifecycle",
       "passed": true,
+      "exit_code": 0,
       "summary": "3/3"
     },
     {
       "id": "real-world-battery-lifecycle",
       "passed": true,
+      "exit_code": 0,
       "summary": "9/9"
     },
     {
       "id": "benchmark-safety",
       "passed": true,
+      "exit_code": 0,
       "summary": "13/13"
     },
     {
       "id": "security-hooks",
       "passed": true,
+      "exit_code": 0,
       "summary": "25/25"
     },
     {
       "id": "windows-platform",
       "passed": true,
+      "exit_code": 0,
       "summary": "5/5"
     },
     {
       "id": "wsl-isolation",
       "passed": true,
+      "exit_code": 0,
       "summary": "True/"
     },
     {
       "id": "secret-hygiene",
       "passed": true,
-      "summary": "1228/1228"
+      "exit_code": 0,
+      "summary": "1857/1857"
     },
     {
       "id": "platform-portability",
       "passed": true,
+      "exit_code": 0,
       "summary": "41/41"
     },
     {
       "id": "doctor",
       "passed": true,
+      "exit_code": 0,
       "summary": "failures=0, warnings=3"
     }
-  ],
-  "raw_report": "evidence/stable-release-gate-infrastructure-raw.json"
+  ]
 }

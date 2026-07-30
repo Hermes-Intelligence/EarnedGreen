@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "decided_at": "2026-07-17",
+  "campaign": "20260717-182519-adaptive-mode-ablation (Evals/experiments/step7-main-run.json)",
+  "fixture": "vextrum-edition-rework-v1 (second task family, first non-Python, full authoring mechanism)",
+  "design": "3 arms x 3 trials, 60 turns/call; arms chosen to answer P1: vanilla (bare control), vanilla-configured (a competent engineer's setup WITHOUT this environment), standard-loop (scaffold + iteration + check authoring + admission).",
+  "spend": {"this_campaign": 14, "step7_running_total": 21, "approved": 28, "unused": 7},
+
+  "P1_as_registered_before_spend": "if standard-loop's silent_defect_rate is not below vanilla-configured's, check admission is theatre and we say so in those words.",
+
+  "verdict": "P1 FALSIFIED on this fixture. Check admission bought no measurable correctness advantage over a well-configured vanilla.",
+
+  "the_measurement": {
+    "scores": "ALL 9 runs scored exactly 92, ALL failing exactly citation-run-separated. Perfect uniformity across vanilla, vanilla-configured and standard-loop.",
+    "silent_defect_rate_honest": {
+      "definition_used": "an arm claims done when its OWN completion signal fires; for the loop arm that is loop_outcome=green (the loop terminates because its host check suite went green and it submits).",
+      "vanilla": 0.125,
+      "vanilla-configured": 0.125,
+      "standard-loop": 0.125,
+      "reading": "identical. Every arm claimed done on every trial with citation-run-separated (1 of 8 dimensions) broken."
+    },
+    "silent_defect_rate_module_raw": {
+      "standard-loop_mean": 0.0833,
+      "why_it_differs": "the silent_defect_rate module reads the run-record's pre_submit_gate.completion_allowed as 'claimed done'. On standard-loop t3 that gate recorded public-tests exit 5 (FAIL) at grade time, so the module scored t3 as an honest failure (sdr 0.0), pulling the mean to 0.0833.",
+      "why_it_is_NOT_a_loop_advantage": [
+        "The public-tests failure is UNRELATED to the measured silent defect: it is not citation-run-separated. The loop's citation_separated check PASSED on t3 while the oracle failed citation-run-separated.",
+        "It is NOT REPRODUCIBLE: re-running `node --test tests/public.test.js` in t3's final workspace now passes cleanly (2 pass, 0 fail, exit 0). The grade-time exit 5 was a transient flake.",
+        "It is on the ONE trial that was operator-reset and re-run (see step7-main-run.json methodology_notes). Crediting the loop for a transient, unrelated gate flake on the reset trial would be exactly the kind of laundering the metric exists to prevent.",
+        "By the loop's OWN completion signal (loop_outcome=green, which fired on all three loop trials), standard-loop's silent_defect_rate is 0.125 — identical to both controls."
+      ]
+    },
+    "the_dimension_that_matters": "citation-run-separated was caught by 0 of 3 loop trials — the same 0 of 3 as each control. The loop had no advantage on the one contested dimension."
+  },
+
+  "diagnosed_cause": {
+    "headline": "The clean-context author does not reliably produce a check that catches the hardest dimension, and when it does, the check is weaker than the held-out oracle.",
+    "three_failure_modes_observed": [
+      "canary (author #2): wrote a citations-separated check grounded in LAYOUT GEOMETRY (link x-positions don't overlap) rather than the oracle's emitted-TEXT separator. A solution satisfies the geometry while the rendered text glues the citations. Too weak.",
+      "main standard-loop t1 (author #3): wrote NO citations-separated check at all (only dedupe + cap for citations). The loop had nothing covering the dimension.",
+      "main standard-loop t3 (author #5): wrote a citations-separated check that PASSED, yet the oracle still failed citation-run-separated — the author's observable again weaker than the oracle's."
+    ],
+    "the_loop_mechanism_itself_works": "Not a plumbing failure. On t1 the loop caught 3 real failures on iteration 1 (citation-dedupe, citation-cap, long-prose-split) and forced fixes to green on iteration 2. The loop forces fixes for exactly what its authored checks can see. The ceiling is authored-check COVERAGE and STRENGTH on the hard dimension, not the iteration machinery."
+  },
+
+  "caveats_to_publish_with_this": [
+    "SCORE AXIS NEAR-SATURATED: every arm hit 92 with ~8 points of headroom, and the fixture has effectively ONE contested dimension (citation-run-separated). This is a low-resolution test — a single hard dimension where the author's natural observable is weaker than the oracle's.",
+    "ONE FIXTURE, ONE TASK FAMILY: text normalization, the same shape as medi-ny. The correctness null now holds across BOTH task families with the full authoring mechanism, but neither is a fully independent second family.",
+    "OPERATOR METHODOLOGY SLIP, disclosed: a --max-calls 8 first invocation truncated standard-loop t3 mid-trial (author call spent, zero solution iterations, graded at the before-state = 25). It was reset and re-run cleanly; the wasted author call is counted. See step7-main-run.json methodology_notes. The reset trial is also the one carrying the transient gate flake above, which is why it gets extra scrutiny rather than credit."
+  ],
+
+  "what_this_means_for_the_programme": "Consistent with the standing finding (memory: benchmark-findings-adaptive-modes): scaffolding buys process/governance/cost-discipline, not correctness, for a frontier model on in-context tasks. This campaign adds the sharpest version yet: even self-AUTHORED checks admitted by the vacuity gate do not beat a well-configured vanilla, because a clean-context author's checks can be weaker than the held-out oracle on the hardest dimension. 'Author your own checks' has a measured ceiling. The honest repositioning of check admission: it makes failures LOUD for the dimensions the author covers well (real value for governance/audit), but it is not a correctness multiplier and must not be sold as one."
+}

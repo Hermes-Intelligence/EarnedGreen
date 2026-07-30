@@ -1,0 +1,168 @@
+{
+  "ok": true,
+  "fetched": "2026-07-01T10:02:11Z",
+  "items": [
+    {
+      "ticker": "AAX",
+      "event": "halt",
+      "note": "Trading halted pending news",
+      "published": "2026-06-10",
+      "effective": "2026-06-11",
+      "rev": 0,
+      "key": "ALP-83400"
+    },
+    {
+      "ticker": "BRNT",
+      "event": "resume",
+      "note": "Volatility pause triggered",
+      "published": "2026-06-11",
+      "effective": "2026-06-12",
+      "rev": 0,
+      "key": "ALP-83401"
+    },
+    {
+      "ticker": "CLDN",
+      "event": "listing",
+      "note": "Halt extended pending review",
+      "published": "2026-06-12",
+      "effective": "2026-06-13",
+      "rev": 0,
+      "key": "ALP-83402"
+    },
+    {
+      "ticker": "DRV",
+      "event": "halt",
+      "note": "Trading resumed after halt",
+      "published": "2026-06-13",
+      "effective": "2026-06-14",
+      "rev": 0,
+      "key": "ALP-83403"
+    },
+    {
+      "ticker": "FSTL",
+      "event": "delisting",
+      "note": "New listing admitted to trading",
+      "published": "2026-06-14",
+      "effective": "2026-06-15",
+      "rev": 0,
+      "key": "ALP-83404"
+    },
+    {
+      "ticker": "GRNW",
+      "event": "halt",
+      "note": "MARKET NOTICE: circuit breaker engaged",
+      "published": "2026-06-15",
+      "effective": "2026-06-16",
+      "rev": 1,
+      "key": "ALP-83405"
+    },
+    {
+      "ticker": "HXM",
+      "event": "resume",
+      "note": "Delisting effective next week",
+      "published": "2026-06-16",
+      "effective": "2026-06-17",
+      "rev": 0,
+      "key": "ALP-83406"
+    },
+    {
+      "ticker": "JLT",
+      "event": "listing",
+      "note": "Resumption scheduled",
+      "published": "2026-06-17",
+      "effective": "2026-06-18",
+      "rev": 0,
+      "key": "ALP-83407"
+    },
+    {
+      "ticker": "KSTL",
+      "event": "halt",
+      "note": "Trading halted pending news",
+      "published": "2026-06-18",
+      "effective": "2026-06-19",
+      "rev": 0,
+      "key": "ALP-83408"
+    },
+    {
+      "ticker": "LMB",
+      "event": "delisting",
+      "note": "Volatility pause triggered",
+      "published": "2026-06-19",
+      "effective": "2026-06-20",
+      "rev": 0,
+      "key": "ALP-83409"
+    },
+    {
+      "ticker": "MRD",
+      "event": "halt",
+      "note": "Halt extended pending review",
+      "published": "2026-06-20",
+      "effective": "2026-06-21",
+      "rev": 0,
+      "key": "ALP-83410"
+    },
+    {
+      "ticker": "NVX",
+      "event": "halt",
+      "note": "Trading resumed after halt",
+      "published": "2026-06-21",
+      "effective": "2026-06-22",
+      "rev": 1,
+      "key": "ALP-83411"
+    },
+    {
+      "ticker": "PLT",
+      "event": "listing",
+      "note": "New listing admitted to trading",
+      "published": "2026-06-22",
+      "effective": "2026-06-23",
+      "rev": 0,
+      "key": "ALP-83412"
+    },
+    {
+      "ticker": "QRN",
+      "event": "halt",
+      "note": "MARKET NOTICE: circuit breaker engaged",
+      "published": "2026-06-23",
+      "effective": "2026-06-24",
+      "rev": 0,
+      "key": "ALP-83413"
+    },
+    {
+      "ticker": "RVN",
+      "event": "delisting",
+      "note": "Delisting effective next week",
+      "published": "2026-06-24",
+      "effective": "2026-06-25",
+      "rev": 0,
+      "key": "ALP-83414"
+    },
+    {
+      "ticker": "STM",
+      "event": "halt",
+      "note": "Resumption scheduled",
+      "published": "2026-06-25",
+      "effective": "2026-06-26",
+      "rev": 0,
+      "key": "ALP-83415"
+    },
+    {
+      "ticker": "TRW",
+      "event": "resume",
+      "note": "Trading halted pending news",
+      "published": "2026-06-26",
+      "effective": "2026-06-27",
+      "rev": 0,
+      "key": "ALP-83416"
+    },
+    {
+      "ticker": "VLX",
+      "event": "halt",
+      "note": "Volatility pause triggered",
+      "published": "2026-06-27",
+      "effective": "2026-06-28",
+      "rev": 1,
+      "key": "ALP-83417"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-19",
+  "provider_calls": 0,
+  "predictions": "evidence/relation-oracle-predictions.json (registered before any live mining)",
+
+  "verdict": "R-1, R-2, R-3 ALL CONFIRMED. Layer 2 of the oracle stack (relations + constructive mutants) works as registered: every predicate class proves it can fail, the shipped module carries zero findings, and the pins hold green on all 11 other real implementations — relations are implementation-agnostic and do not re-litigate convention semantics.",
+
+  "results": {
+    "R-1_machinery_vacuity": {
+      "verdict": "PASS",
+      "detail": "hardcode wrapper caught by co-variation AND sentinel (as registered); lossy wrapper caught by sentinel (plus co-variation, a bonus catch); nondet wrapper caught by determinism. 33 pins mined from the shipped module; all green on the real module."
+    },
+    "R-2_specificity": {
+      "verdict": "PASS",
+      "detail": "pins mined from the after module hold GREEN on before, altformat, and all nine 92-solutions (11 of 11 real implementations). Zero false positives; the layer measures robustness relations, not convention semantics."
+    },
+    "R-3_findings_on_shipped_code": {
+      "verdict": "PASS",
+      "detail": "zero findings on the shipped module — consistent with its production status and oracle score of 100."
+    }
+  },
+
+  "coverage_manifest_first_light": {
+    "built": "coverage_manifest.py — the typed verdict: EARNED GREEN on named dimensions (with provenance diff-derived/relation/authored/repo-tests) vs NAMED unverified dimensions; dangling claims (a check covering an undeclared dimension) are surfaced as bookkeeping defects.",
+    "immediate_honest_catch": "the first live render NAMED a gap the operator had not noticed: url-integrity is uncovered — diff derives nothing there (before==after on URLs, correctly) and the relation corpus plants no URL sentinel. The fix is one corpus input (a URL sentinel pin). The manifest exists precisely to make this sentence unavoidable."
+  },
+
+  "the_three_layer_stack_now_stands": {
+    "layer_1_diff": "history's before/after -> projection predicates; measured: perfect separation (9/9 defective red, both valid green)",
+    "layer_2_relations": "no history needed -> determinism/co-variation/sentinel/totality mined from the current implementation (findings NOW, pins FORWARD), classes admitted via constructive mutants; measured: R-1/R-2/R-3 all pass",
+    "layer_3_notes": "process/style lessons with earned persistence; measured: style transfers, predicate strength does not — notes are never a source of green",
+    "top": "coverage manifest: green speaks only for named, backed dimensions; everything else is NAMED as unverified"
+  },
+
+  "not_yet": [
+    "relation corpus lacks a URL sentinel (the manifest's own first catch) — one input away",
+    "neither layer is wired into campaign loop arms as harness check kinds yet",
+    "cross-task generalization (shadow-replay on real Hermes/Vextrum history) still pending",
+    "the decisive paid measurement remains: a loop arm fed by layer-1+2 predicates vs vanilla-configured on a fresh task family"
+  ]
+}

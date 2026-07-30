@@ -1,0 +1,102 @@
+{
+  "schema_version": 2,
+  "id": "hermes-etl-skip-v1",
+  "version": 1,
+  "status": "candidate-not-authoritative",
+  "fixture_class": "specified-ticket",
+  "proprietary": true,
+  "workspace_source": "local-git-copy",
+  "purpose": "The FIRST truly independent second task family, and the FIRST fixture with a fully MECHANICAL held-out grader. Task: the real robustness fix shipped in HermesAirflow 37423b0 ('fix(etl_base): skip and archive bad files instead of crashing entire run') — different repo, different language (Python) and a different KIND of thinking (error-handling/robustness) than the text-normalization family (medi-ny, vextrum). The grader executes predicates derived mechanically from the real before/after behaviour diff over a scenario corpus (build_etl_oracle.py), with an altformat variant filtering implementation-pinning candidates — the pipeline measured to achieve perfect separation on vextrum (evidence/diff-oracle-observed.json). PROPRIETARY ISOLATION: the module the agent edits is a real HermesAirflow subtree, never committed here; every variant materializes at grade time from the LOCAL git ref. Only the recording aws stub, task, tests, scenarios and derived predicates live in the package.",
+  "context_tags": ["etl", "pipelines", "robustness", "python", "backend"],
+  "public_test": ["{python}", "-m", "unittest", "discover", "-s", "tests"],
+  "hidden_grader": "hidden/grade.py",
+  "expected_reference_score": 100,
+  "checks": [
+    "default-unchanged",
+    "continue-after-failure",
+    "bad-file-archived",
+    "upload-not-called-for-bad",
+    "fails-at-end"
+  ],
+  "serialized_output_dimensions": [],
+  "local_source": {
+    "repo_dir": "HermesAirflow",
+    "source_path": "hermes_intelligence/hermes_tools/flows/etl_base.py",
+    "target_path": "src/etl_base.py",
+    "before_ref": "37423b0^",
+    "after_ref": "37423b0",
+    "rework_commits": ["37423b0"],
+    "normalizations": [],
+    "normalization_note": "None needed: etl_base.py's only project import (hermes_intelligence.hermes_tools.cloud.aws) is satisfied by the fixture's public recording stub at the identical package path, exactly as vextrum's jspdf stub satisfies the module's bare import.",
+    "altformat_replace": [
+      {
+        "find": "raise RuntimeError(f\"ETL finished with {len(failed)} failed file(s): {failed}\")",
+        "replace": "raise RuntimeError(f\"{len(failed)} file(s) failed during ETL run: {sorted(failed)}\")"
+      }
+    ],
+    "altformat_note": "A genuinely different-but-valid solution: same semantics (raise at the end, mention the failures), different message wording and a sorted rather than insertion-ordered file list. Nothing in the ticket mandates the message text; a grader red on this variant would be pinning the shipped implementation's phrasing rather than the required behaviour. Every derived predicate must survive this variant to be admitted."
+  },
+  "materialize": {
+    "base": "before",
+    "hidden/reference": "after",
+    "hidden/reference-alt": "after-altformat",
+    "negative-controls/before-module": "before"
+  },
+  "grading_surface": {
+    "api": "run_etl(prefix, transformation_function, upload_function, no_archive=False, match_phrase=None, skip_on_error=False)",
+    "why": "The ticket names the required parameter (as real tickets do); everything else is behaviour. The observable is the EVENT STREAM the orchestration produced through the recording aws stub (list/fetch/transform/upload/archive and how the run ENDED) — what the code DECIDED to do, not any cloud side effect.",
+    "recording_stub": "public/hermes_intelligence/hermes_tools/cloud/aws.py serves a scripted in-memory drop folder and records every call; the runner (hidden/etl_runner.py) adds transform/upload/end events. Fully offline.",
+    "mechanical_grader": "hidden/grade.py executes hidden/derived-predicates.json — predicates derived from the real 37423b0 diff by build_etl_oracle.py, altformat-filtered. Dimensions are scenario FAMILIES (one per ticket requirement); a family passes iff all its predicates hold. The only hand-made parts are the corpus scenarios and the family grouping; every expectation value is mechanical."
+  },
+  "decision_points": [
+    {
+      "id": "failed-file-upload",
+      "options": ["upload the transform's partial result anyway", "never upload a failed file"],
+      "pinned": "never upload a failed file",
+      "pinned_by": "A file whose transform failed must not be uploaded."
+    },
+    {
+      "id": "failed-file-archival",
+      "options": ["leave the failed file in the drop folder", "archive the failed file out of the queue"],
+      "pinned": "archive the failed file out of the queue",
+      "pinned_by": "A file whose transform failed must be archived, so it leaves the drop folder and cannot block the queue again."
+    },
+    {
+      "id": "no-archive-interaction",
+      "options": ["archive failed files even under no_archive", "respect no_archive for failed files too"],
+      "pinned": "respect no_archive for failed files too",
+      "pinned_by": "When `no_archive` is true, failed files are not archived either."
+    },
+    {
+      "id": "end-of-run-signal",
+      "options": ["end the run normally after skipping", "still end the run in failure when anything failed"],
+      "pinned": "still end the run in failure when anything failed",
+      "pinned_by": "After all files are processed, the run must still end in failure when any file failed, so the orchestrator marks the task failed and someone looks at the skipped files."
+    },
+    {
+      "id": "default-behaviour",
+      "options": ["make skipping the new default", "keep the default exactly as today"],
+      "pinned": "keep the default exactly as today",
+      "pinned_by": "With `skip_on_error` left at its default, behaviour must remain exactly as it is today: the first transform error stops the run immediately."
+    }
+  ],
+  "expected_controls": [
+    {
+      "id": "before-module",
+      "min_score": 10,
+      "max_score": 30,
+      "note": "The REAL pre-fix module (37423b0^). Passes default-unchanged (the preserving predicates pin its own behaviour) and fails the four change families (it crashes at the first bad file: with skip_on_error it does not even accept the parameter). Expected deterministic score 20."
+    },
+    {
+      "id": "reference",
+      "min_score": 100,
+      "max_score": 100
+    }
+  ],
+  "campaign_loop_overrides": {
+    "max_turns_per_call": 60,
+    "max_wall_minutes_per_call": 40,
+    "reason": "Same rationale and value as vextrum (evidence/step7-max-turns-decision.json): 30 was measured BINDING there; 60 keeps the measured axis the work, not the clock. Set BEFORE any spend on this fixture."
+  },
+  "interpretation": "Specified-ticket fixture: the five ticket requirements are pinned by decision_points sentences in task.md, so the grader's expectations are all traceable to the task the agent actually read. The mechanical grader inherits the measured caveat of a 1-variant over-constraint filter (evidence/diff-oracle-observed.json): predicates surviving one altformat variant may still pin incidental choices; the reference-alt admission check is the fixture-level guard. HONEST NOTE for any published result: dimensions are counted per family (5), so scores move in steps of 20."
+}

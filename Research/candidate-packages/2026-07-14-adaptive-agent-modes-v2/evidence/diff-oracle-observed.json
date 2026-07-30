@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-19",
+  "provider_calls": 0,
+  "predictions": "evidence/diff-oracle-predictions.json (registered before any contact with the solutions)",
+
+  "verdict": "D-1 CONFIRMED, D-2 PRIMARY CONFIRMED, D-3 CONFIRMED for the core family. Mechanically diff-derived predicates achieved PERFECT SEPARATION on the exact material three generations of mind-derived predicates failed on: all nine 92-scoring defective solutions RED, the shipped reference and the altformat valid variant both GREEN — at zero provider calls.",
+
+  "derivation": {
+    "corpus": "20 deterministic generic-markdown inputs (link runs 1-6, duplication patterns, spread links, three list-marker styles, unicode, long prose, bare URL, block prose, plain control) — domain knowledge, no answer knowledge (tested: no input names any convention)",
+    "pipeline": "run before & after on the corpus via a driver built from PUBLIC surface only (buildEditionDoc + the stub's global, both visible in tests/public.test.js); compare emitted streams under 7 generic projections (seq, multiset, uniq, bigrams, joined, count, charset); admit a predicate only if red-on-before, green-on-after AND green-on-altformat",
+    "admitted": 30,
+    "rejected_by_valid_variant_filter": 40,
+    "note_on_filter": "the altformat variant killed 40 format-pinning candidates mechanically — the over-constraint failure class that took down 3 of 9 authored checks in the notes-transfer test, handled here with zero judgement"
+  },
+
+  "the_measurement": {
+    "per_implementation_red_counts": {
+      "vanilla-t1": 11, "vanilla-t2": 22, "vanilla-t3": 22,
+      "vanilla-configured-t1": 11, "vanilla-configured-t2": 11, "vanilla-configured-t3": 11,
+      "standard-loop-t1": 24, "standard-loop-t2": 24, "standard-loop-t3": 11,
+      "REFERENCE": 0, "ALTFORMAT": 0
+    },
+    "predicates_red_on_all_nine": ["run-unique-2::count", "run-unique-3::count", "run-unique-4::count", "run-unique-6::count", "run-dup-heavy::count", "list-parens::seq", "list-parens::multiset", "list-parens::uniq", "list-parens::bigrams", "list-parens::joined", "list-parens::charset"],
+    "interpretability": {
+      "run-unique-N::count family (CLEAN WIN)": "the piece COUNT on a run of adjacent citations captures the PRESENCE of separator material without pinning its identity — comma and middot change the count identically, so the predicate survives the altformat filter while every solution that emits no separator goes red. This is precisely the run-separation behaviour, derived mechanically; no mind in three generations wrote this predicate.",
+      "list-parens::* family (HONEST FLAG)": "likely pins the shipped fix's specific (N)-marker normalization beyond what the conventions document requires: the held-out oracle deemed all nine solutions' enum handling acceptable, and the valid-variant pool (n=1, differing ONLY in separator) cannot kill list-behaviour pinning. A richer valid-variant pool would probably retire these. Reported as a measured limitation of a 1-variant filter, not hidden."
+    }
+  },
+
+  "what_this_is_and_is_not": {
+    "is": "the first mechanism in this repository that measurably discriminates where minds failed, produced at zero provider calls from git history + a generic corpus + generic projections. The hypothesis 'predicates must come from the diff, not from prose comprehension' now has direct supporting evidence on real material.",
+    "is_not": [
+      "a cross-task result: one fixture, one behaviour family (within-task, like every result on vextrum)",
+      "free of input-provisioning dependency: the corpus generator embeds domain knowledge (markdown primitives); a different domain needs a different generator or mined inputs",
+      "a complete over-constraint solution: the valid-variant filter is only as strong as the variant pool (see the list-parens flag); real deployments should mine multiple valid variants from history when they exist",
+      "wired into the campaign loop yet: the derived suite is not yet a harness check kind consumed by loop arms — that is the next build step"
+    ]
+  },
+
+  "next_steps_zero_calls_first": [
+    "wire derived predicates into the harness as a check kind (they are exact-match projections: trivially executable, sha-pinned)",
+    "shadow-replay generalization: commit mining on real Hermes/Vextrum history (select fix commits, materialize before/after, mine inputs from repo samples/tests), which turns this from a fixture proof into the product mechanism",
+    "the decisive NEXT measurement (needs spend approval): a loop arm whose suite is DIFF-DERIVED instead of authored, on a fresh task family — does the loop with mechanical predicates beat vanilla-configured where the authored loop could not?"
+  ]
+}

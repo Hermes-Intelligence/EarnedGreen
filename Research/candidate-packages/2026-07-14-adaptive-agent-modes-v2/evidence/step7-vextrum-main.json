@@ -1,0 +1,253 @@
+{
+  "schema_version": 4,
+  "campaign_id": "20260717-150606-adaptive-mode-ablation",
+  "status": "halted-invalid-design",
+  "stage": "main",
+  "provider_calls": 3,
+  "fixture": "vextrum-edition-rework-v1",
+  "trials": 3,
+  "trial_policy": {
+    "min_trials_per_arm_for_verdict": 3,
+    "single_trial_status": "exploratory-no-verdict",
+    "rationale": "~16pt same-arm run-to-run variance measured on medi-ny-parser-rework-v1 (vanilla scored 73 and 89 across runs); a single trial cannot detect a mode-sized effect and must never be reported as a verdict"
+  },
+  "loop_arm_policy": {
+    "max_iterations_per_trial": 3,
+    "feedback": "structured failures from the harness-run check suite, returned verbatim and identically to scaffolded and bare loop arms",
+    "no_progress_rule": "an iteration whose failure fingerprint equals the previous one ends the trial early (no-progress)",
+    "call_accounting": "every iteration is a provider call and counts toward campaign ceilings; planned ceilings reserve max_iterations_per_trial per loop-arm trial",
+    "primary_metrics": [
+      "iterations_to_green",
+      "silent_errors_en_route (regressions caught by checks the agent never self-reported)",
+      "final score",
+      "tokens"
+    ]
+  },
+  "verdict_eligible": true,
+  "fixture_admission": {
+    "admitted": true,
+    "record_path": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\evidence\\fixture-admission-vextrum-edition-rework-v1.json",
+    "reason": null,
+    "generated_at": "2026-07-17T12:54:57.974457+00:00",
+    "paid_history": {
+      "runs_scanned": 91,
+      "matching_runs": [],
+      "valid_paid_runs": 0
+    },
+    "gate": "fixture-admission"
+  },
+  "paid_history": {
+    "valid_paid_runs": 1,
+    "matching_runs": 1,
+    "runs_dir_overridden": false
+  },
+  "canary_policy": {
+    "applies_when": "the fixture has no prior paid run whose Evals/runs run-record.json shows outcome_valid=true",
+    "first_stage": {
+      "calls": 1,
+      "arm": "cheapest (vanilla)",
+      "approval": "separate explicit approval for exactly one call"
+    },
+    "main_stage_requires": {
+      "separate_approval": true,
+      "canary_outcome_valid": true,
+      "min_distinct_hidden_dimensions": 2,
+      "all_declared_dimensions_reported": true,
+      "note": "floor/ceiling collapse (a single reported dimension) blocks the remaining arms; the canary validates the fixture and is NOT counted as a trial"
+    },
+    "admission_gate": "every campaign additionally requires a fresh Fixture Admission Gate record (candidate fixtures) or fresh eval-validity PASS (contracted fixtures)"
+  },
+  "canary_evidence": null,
+  "provider_snapshot": {
+    "generated_at": "2026-07-13T15:10:46.4282540+02:00",
+    "expires_at": "2026-07-20T15:10:46.4282540+02:00",
+    "distro": "AgenticBench",
+    "provider": {
+      "id": "claude",
+      "model": "claude-opus-4-8",
+      "effort": "medium",
+      "cli_version": "2.1.207 (Claude Code)"
+    }
+  },
+  "model_policy": "same resolved provider model and effort across arms",
+  "runs": [
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::vanilla::t3",
+      "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 3,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260717-150650318-vextrum-edition-rework-v1-vanilla-t3",
+      "iterations": []
+    },
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::standard-loop::t2",
+      "arm": "standard-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "max_iterations": 3,
+      "trial": 2,
+      "role": "solution",
+      "status": "graded",
+      "run_id": "20260717-151832982-vextrum-edition-rework-v1-standard-loop-t2",
+      "iterations": [
+        {
+          "iteration": 1,
+          "run_id": "20260717-151832982-vextrum-edition-rework-v1-standard-loop-t2",
+          "green": true,
+          "failing_check_ids": [],
+          "failure_fingerprint": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945"
+        }
+      ],
+      "loop_outcome": "green"
+    },
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::standard-loop::t1",
+      "arm": "standard-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "max_iterations": 3,
+      "trial": 1,
+      "role": "solution",
+      "status": "provider-failed",
+      "run_id": "20260717-152635752-vextrum-edition-rework-v1-standard-loop-t1",
+      "iterations": []
+    },
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::vanilla::t1",
+      "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 1,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::vanilla-configured::t1",
+      "arm": "vanilla-configured",
+      "context_arm": "vanilla-configured",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 1,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::standard-loop::t3",
+      "arm": "standard-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "max_iterations": 3,
+      "trial": 3,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::vanilla-configured::t2",
+      "arm": "vanilla-configured",
+      "context_arm": "vanilla-configured",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 2,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::vanilla-configured::t3",
+      "arm": "vanilla-configured",
+      "context_arm": "vanilla-configured",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 3,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::vextrum-edition-rework-v1::vanilla::t2",
+      "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 2,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    }
+  ],
+  "independent_verifier_runs": [],
+  "loop": {
+    "max_total_provider_calls": 15,
+    "max_calls_per_invocation": 15,
+    "max_replacements": 0,
+    "max_turns_per_call": 30,
+    "max_wall_minutes_per_call": 40,
+    "kill_switch": "Evals/local/STOP",
+    "automatic_followup": false
+  },
+  "loop_overrides": {
+    "max_turns_per_call": 30,
+    "max_wall_minutes_per_call": 40,
+    "reason": "The editable workspace is a real ~291-line proprietary renderer whose correctness depends on documented house conventions; a raised turn/wall budget keeps the measured axis 'does the environment find the documented conventions' rather than 'who ran out of clock reading the module'."
+  },
+  "harness_snapshot": [
+    {
+      "path": "implementation/modes.json",
+      "sha256": "43E7C10118FEA30F2C75B44BCAA36B9E9A773E9805A5A58A371A083A4DB6C5DE"
+    },
+    {
+      "path": "implementation/router-catalog.json",
+      "sha256": "1EA8C87F0F05E4D0E340960A4B31E0C5C2775F2B0E31EA9133B576D024662B0E"
+    },
+    {
+      "path": "implementation/adaptive_router.py",
+      "sha256": "F62D08135099230A281318389695C4CCDD136B7BE25DE1DD9479826DCE4E47EB"
+    },
+    {
+      "path": "implementation/objective_compiler.py",
+      "sha256": "CABCDDBC07B53CB56A8F4C16B49B4E22D6927B60E804342F25E4997B027EB115"
+    },
+    {
+      "path": "implementation/pre_submit_gate.py",
+      "sha256": "DC4282687F16C62A123558F3B41DDC5877C1A4794BEC963FF418BEDCA63472ED"
+    },
+    {
+      "path": "implementation/harness_checks.py",
+      "sha256": "C85216F7FD67CA8D5177840B0EEDC605A4A14B6ECBBA79CF0BBB2F71450A98AA"
+    },
+    {
+      "path": "implementation/verification_loop.py",
+      "sha256": "5DF05000905F79A5F67B17F39B6D48896FF4BD124CBAECBD1498CA7F5C8FD75D"
+    },
+    {
+      "path": "implementation/eval_validity.py",
+      "sha256": "06F0EDFFF1D4E207CB29E64037A1A6BE0AD2CFFCA5BD601C755D51CD6B641AAA"
+    },
+    {
+      "path": "implementation/fixture_admission.py",
+      "sha256": "6CE721C8E484CD4BC6154A328454E5B5AC91738A3AE471DDF24D56DEE0E23100"
+    }
+  ],
+  "approval": {
+    "approved_at": "2026-07-17T13:06:40.618107+00:00",
+    "approved_by": "owner (chat 2026-07-17): 'zatwierdzam dokładnie 28'. Canary spent 1; this main stage ceiling is 15 (9 solution runs + up to 6 loop iterations), so total spend 16 of the 28 approved. Predictions recorded before spend in evidence/step7-predictions.json; canary observed separately in step7-canary-observed.json (vanilla scored 92 vs a predicted 25-70 -- prediction MISSED and recorded, not rewritten).",
+    "scope": "at most 15 provider calls: 3 arms x 3 trial(s); 1 loop arm(s) reserve 3 iteration calls per trial and may use fewer",
+    "exact_calls": 15,
+    "stage": "main"
+  },
+  "halt_reason": "The standard-loop arm's frozen suite is ['symbol-sweep', 'public-tests'] only. The vextrum fixture has no harness/harness-checks.json (medi-ny's are HAND-WRITTEN, the very no-go this programme set out to remove), and check_authoring is NOT wired into the campaign. So the loop arm carries NO check capable of covering the conventions, and the campaign cannot test its own hypothesis. Halted at 4 of 28 approved calls rather than spending 12 more on a result that would mean nothing."
+}

@@ -16,7 +16,7 @@ This file preserves the user intent that the normalized objective ledger must co
 - Continuously research current practices using official documentation, primary academic work, benchmarks, postmortems, YouTube, podcasts and social profiles, while treating weaker sources as discovery signals rather than truth.
 - Preserve discovered sources in a durable registry, recheck them over time and avoid rediscovering the same source list every week.
 - Research must produce an isolated candidate package and report. It must never directly modify stable rules, global pointers, commit or push.
-- Research Outputs must be dated, detailed Markdown and visually verified PDFs with clickable hyperlinks to sources.
+- research-outputs must be dated, detailed Markdown and visually verified PDFs with clickable hyperlinks to sources.
 - Setup must contain continuously updated human cheatsheets in Markdown and PDF.
 - Account explicitly for Windows, PowerShell, WSL and OneDrive behavior, security, cost, latency, model drift, governance, rollback and dogfooding.
 

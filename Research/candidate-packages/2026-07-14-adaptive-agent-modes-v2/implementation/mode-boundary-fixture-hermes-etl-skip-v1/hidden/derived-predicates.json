@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "source": "mechanically derived from HermesAirflow 37423b0^..37423b0 over hidden/scenarios.json; altformat variant filtered implementation-pinning candidates",
+  "rejected_format_pinning": 35,
+  "discriminating": [
+    {
+      "id": "skip-allgood-ok::seq",
+      "input_id": "skip-allgood-ok",
+      "projection": "seq",
+      "expected": [
+        "list:drop/",
+        "fetch:p.json",
+        "transform:p.json",
+        "upload:T(pp)",
+        "archive:p.json",
+        "fetch:q.json",
+        "transform:q.json",
+        "upload:T(qq)",
+        "archive:q.json",
+        "end:ok"
+      ],
+      "expected_sha256": "0ECD6272D093C58DE00F080418C3A85A45C6D1CFCBC57539D504CB601834E110",
+      "family": "fails-at-end"
+    },
+    {
+      "id": "skip-allgood-ok::multiset",
+      "input_id": "skip-allgood-ok",
+      "projection": "multiset",
+      "expected": [
+        "archive:p.json",
+        "archive:q.json",
+        "end:ok",
+        "fetch:p.json",
+        "fetch:q.json",
+        "list:drop/",
+        "transform:p.json",
+        "transform:q.json",
+        "upload:T(pp)",
+        "upload:T(qq)"
+      ],
+      "expected_sha256": "397D029A7395770754FBEACA1569C2CDDDC51991F9141209FD586D85B693C44D",
+      "family": "fails-at-end"
+    },
+    {
+      "id": "skip-allgood-ok::uniq",
+      "input_id": "skip-allgood-ok",
+      "projection": "uniq",
+      "expected": [
+        "archive:p.json",
+        "archive:q.json",
+        "end:ok",
+        "fetch:p.json",
+        "fetch:q.json",
+        "list:drop/",
+        "transform:p.json",
+        "transform:q.json",
+        "upload:T(pp)",
+        "upload:T(qq)"
+      ],
+      "expected_sha256": "397D029A7395770754FBEACA1569C2CDDDC51991F9141209FD586D85B693C44D",
+      "family": "fails-at-end"
+    },
+    {
+      "id": "skip-allgood-ok::bigrams",
+      "input_id": "skip-allgood-ok",
+      "projection": "bigrams",
+      "expected": [
+        "archive:p.json␟fetch:q.json",
+        "archive:q.json␟end:ok",
+        "fetch:p.json␟transform:p.json",
+        "fetch:q.json␟transform:q.json",
+        "list:drop/␟fetch:p.json",
+        "transform:p.json␟upload:T(pp)",
+        "transform:q.json␟upload:T(qq)",
+        "upload:T(pp)␟archive:p.json",
+        "upload:T(qq)␟archive:q.json"
+      ],
+      "expected_sha256": "FDEE5F822FE9FF59F03669E584D67CFD24BCCF17142B2C5C8721DFAFBF5C7D9F",
+      "family": "fails-at-end"
+    },
+    {
+      "id": "skip-allgood-ok::joined",
+      "input_id": "skip-allgood-ok",
+      "projection": "joined",
+      "expected": "list:drop/ fetch:p.json transform:p.json upload:T(pp) archive:p.json fetch:q.json transform:q.json upload:T(qq) archive:q.json end:ok",
+      "expected_sha256": "98383D25727748C75CD9BFAF65D97CFFDF63653E9868F3373C84263B0463A1A8",
+      "family": "fails-at-end"
+    },
+    {
+      "id": "skip-allgood-ok::count",
+      "input_id": "skip-allgood-ok",
+      "projection": "count",
+      "expected": 10,
+      "expected_sha256": "4A44DC15364204A80FE80E9039455CC1608281820FE2B24F1E5233ADE6AF1DD5",
+      "family": "fails-at-end"
+    },
+    {
+      "id": "skip-allgood-ok::charset",
+      "input_id": "skip-allgood-ok",
+      "projection": "charset",
+      "expected": [
+        "(",
+        ")",
+        ".",
+        "/",
+        ":",
+        "T",
+        "a",
+        "c",
+        "d",
+        "e",
+        "f",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v"
+      ],
+      "expected_sha256": "5685E06E0C311122CCC758D6D2ADF3D10BAEEEF342816AE52C8912D29D48B73C",
+      "family": "fails-at-end"
+    },
+    {
+      "id": "skip-archive-bad::count",
+      "input_id": "skip-archive-bad",
+      "projection": "count",
+      "expected": 9,
+      "expected_sha256": "19581E27DE7CED00FF1CE50B2047E7A567C76B1CBAEBABE5EF03F7C3017BB5B7",
+      "family": "bad-file-archived"
+    },
+    {
+      "id": "skip-continue::count",
+      "input_id": "skip-continue",
+      "projection": "count",
+      "expected": 13,
+      "expected_sha256": "3FDBA35F04DC8C462986C992BCF875546257113072A909C162F7E470E581E278",
+      "family": "continue-after-failure"
+    },
+    {
+      "id": "skip-continue::charset",
+      "input_id": "skip-continue",
+      "projection": "charset",
+      "expected": [
+        " ",
+        "'",
+        "(",
+        ")",
+        ".",
+        "/",
+        "1",
+        "2",
+        ":",
+        "E",
+        "L",
+        "R",
+        "T",
+        "[",
+        "]",
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w"
+      ],
+      "expected_sha256": "9E4C59F69D93B2C46DF9FFE5A44F46D0FCCEF94BB25021355C0D533D1F769EE1",
+      "family": "continue-after-failure"
+    },
+    {
+      "id": "skip-endfail::count",
+      "input_id": "skip-endfail",
+      "projection": "count",
+      "expected": 9,
+      "expected_sha256": "19581E27DE7CED00FF1CE50B2047E7A567C76B1CBAEBABE5EF03F7C3017BB5B7",
+      "family": "fails-at-end"
+    },
+    {
+      "id": "skip-multi-bad::count",
+      "input_id": "skip-multi-bad",
+      "projection": "count",
+      "expected": 12,
+      "expected_sha256": "6B51D431DF5D7F141CBECECCF79EDF3DD861C3B4069F0B11661A3EEFACBBA918",
+      "family": "continue-after-failure"
+    },
+    {
+      "id": "skip-noarchive-bad::count",
+      "input_id": "skip-noarchive-bad",
+      "projection": "count",
+      "expected": 4,
+      "expected_sha256": "4B227777D4DD1FC61C6F884F48641D02B4D121D3FD328CB08B5531FCACDABF8A",
+      "family": "bad-file-archived"
+    },
+    {
+      "id": "skip-upload-skip::count",
+      "input_id": "skip-upload-skip",
+      "projection": "count",
+      "expected": 9,
+      "expected_sha256": "19581E27DE7CED00FF1CE50B2047E7A567C76B1CBAEBABE5EF03F7C3017BB5B7",
+      "family": "upload-not-called-for-bad"
+    }
+  ],
+  "preserving": [
+    {
+      "id": "default-allgood::preserve-seq",
+      "input_id": "default-allgood",
+      "projection": "seq",
+      "expected": [
+        "list:drop/",
+        "fetch:a.json",
+        "transform:a.json",
+        "upload:T(alpha)",
+        "archive:a.json",
+        "fetch:b.json",
+        "transform:b.json",
+        "upload:T(beta)",
+        "archive:b.json",
+        "fetch:c.json",
+        "transform:c.json",
+        "upload:T(gamma)",
+        "archive:c.json",
+        "end:ok"
+      ],
+      "family": "default-unchanged"
+    },
+    {
+      "id": "default-badfile::preserve-seq",
+      "input_id": "default-badfile",
+      "projection": "seq",
+      "expected": [
+        "list:drop/",
+        "fetch:g1.json",
+        "transform:g1.json",
+        "upload:T(one)",
+        "archive:g1.json",
+        "fetch:bad.json",
+        "transform:bad.json",
+        "end:raise:ValueError:malformed drop: bad.json"
+      ],
+      "family": "default-unchanged"
+    },
+    {
+      "id": "default-noarchive::preserve-seq",
+      "input_id": "default-noarchive",
+      "projection": "seq",
+      "expected": [
+        "list:drop/",
+        "fetch:a.json",
+        "transform:a.json",
+        "upload:T(alpha)",
+        "end:ok"
+      ],
+      "family": "default-unchanged"
+    },
+    {
+      "id": "default-match::preserve-seq",
+      "input_id": "default-match",
+      "projection": "seq",
+      "expected": [
+        "list:drop/",
+        "fetch:x_report.json",
+        "transform:x_report.json",
+        "upload:T(rep)",
+        "archive:x_report.json",
+        "end:ok"
+      ],
+      "family": "default-unchanged"
+    }
+  ]
+}

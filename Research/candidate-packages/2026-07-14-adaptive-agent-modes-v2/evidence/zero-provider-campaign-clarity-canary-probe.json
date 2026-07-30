@@ -1,17 +1,36 @@
 {
-  "schema_version": 3,
-  "campaign_id": "20260715-162825-adaptive-mode-ablation",
+  "schema_version": 4,
+  "campaign_id": "20260717-144302-adaptive-mode-ablation",
   "status": "awaiting-explicit-approval",
   "stage": "main",
   "provider_calls": 0,
   "fixture": "implicit-conventions-v1",
+  "trials": 3,
+  "trial_policy": {
+    "min_trials_per_arm_for_verdict": 3,
+    "single_trial_status": "exploratory-no-verdict",
+    "rationale": "~16pt same-arm run-to-run variance measured on medi-ny-parser-rework-v1 (vanilla scored 73 and 89 across runs); a single trial cannot detect a mode-sized effect and must never be reported as a verdict"
+  },
+  "loop_arm_policy": {
+    "max_iterations_per_trial": 3,
+    "feedback": "structured failures from the harness-run check suite, returned verbatim and identically to scaffolded and bare loop arms",
+    "no_progress_rule": "an iteration whose failure fingerprint equals the previous one ends the trial early (no-progress)",
+    "call_accounting": "every iteration is a provider call and counts toward campaign ceilings; planned ceilings reserve max_iterations_per_trial per loop-arm trial",
+    "primary_metrics": [
+      "iterations_to_green",
+      "silent_errors_en_route (regressions caught by checks the agent never self-reported)",
+      "final score",
+      "tokens"
+    ]
+  },
+  "verdict_eligible": true,
   "fixture_admission": {
     "admitted": true,
     "record_path": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\evidence\\fixture-admission-implicit-conventions-v1.json",
     "reason": null,
-    "generated_at": "2026-07-15T14:28:25.254481+00:00",
+    "generated_at": "2026-07-17T12:43:02.599952+00:00",
     "paid_history": {
-      "runs_scanned": 47,
+      "runs_scanned": 91,
       "matching_runs": [
         {
           "run_id": "20260715-110524196-implicit-conventions-v1-vanilla-t1",
@@ -35,7 +54,7 @@
     "applies_when": "the fixture has no prior paid run whose Evals/runs run-record.json shows outcome_valid=true",
     "first_stage": {
       "calls": 1,
-      "arm": "cheapest (rank 0: vanilla)",
+      "arm": "cheapest (vanilla)",
       "approval": "separate explicit approval for exactly one call"
     },
     "main_stage_requires": {
@@ -43,7 +62,7 @@
       "canary_outcome_valid": true,
       "min_distinct_hidden_dimensions": 2,
       "all_declared_dimensions_reported": true,
-      "note": "floor/ceiling collapse (a single reported dimension) blocks the remaining arms"
+      "note": "floor/ceiling collapse (a single reported dimension) blocks the remaining arms; the canary validates the fixture and is NOT counted as a trial"
     },
     "admission_gate": "every campaign additionally requires a fresh Fixture Admission Gate record (candidate fixtures) or fresh eval-validity PASS (contracted fixtures)"
   },
@@ -62,60 +81,154 @@
   "model_policy": "same resolved provider model and effort across arms",
   "runs": [
     {
-      "run_key": "screen::implicit-conventions-v1::mode-2-routed::t1",
-      "arm": "mode-2-routed",
+      "run_key": "screen::implicit-conventions-v1::vanilla-loop::t1",
+      "arm": "vanilla-loop",
+      "context_arm": "vanilla",
+      "loop": true,
+      "max_iterations": 3,
       "trial": 1,
       "role": "solution",
       "status": "pending",
-      "run_id": null
+      "run_id": null,
+      "iterations": []
     },
     {
-      "run_key": "screen::implicit-conventions-v1::mode-1-lean::t1",
-      "arm": "mode-1-lean",
-      "trial": 1,
+      "run_key": "screen::implicit-conventions-v1::vanilla::t3",
+      "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 3,
       "role": "solution",
       "status": "pending",
-      "run_id": null
+      "run_id": null,
+      "iterations": []
     },
     {
-      "run_key": "screen::implicit-conventions-v1::mode-3-assured::t1",
-      "arm": "mode-3-assured",
-      "trial": 1,
+      "run_key": "screen::implicit-conventions-v1::vanilla::t2",
+      "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 2,
       "role": "solution",
       "status": "pending",
-      "run_id": null
+      "run_id": null,
+      "iterations": []
     },
     {
-      "run_key": "screen::implicit-conventions-v1::full::t1",
-      "arm": "full",
-      "trial": 1,
+      "run_key": "screen::implicit-conventions-v1::standard-loop::t3",
+      "arm": "standard-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "max_iterations": 3,
+      "trial": 3,
       "role": "solution",
       "status": "pending",
-      "run_id": null
+      "run_id": null,
+      "iterations": []
     },
     {
       "run_key": "screen::implicit-conventions-v1::vanilla::t1",
       "arm": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "max_iterations": 1,
       "trial": 1,
       "role": "solution",
       "status": "pending",
-      "run_id": null
-    }
-  ],
-  "independent_verifier_runs": [
+      "run_id": null,
+      "iterations": []
+    },
     {
-      "run_key": "screen::implicit-conventions-v1::full-verifier::t1",
-      "arm": "full",
-      "trial": 1,
-      "role": "independent-verifier",
-      "depends_on": "screen::implicit-conventions-v1::full::t1",
+      "run_key": "screen::implicit-conventions-v1::standard::t2",
+      "arm": "standard",
+      "context_arm": "standard",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 2,
+      "role": "solution",
       "status": "pending",
-      "run_id": null
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::implicit-conventions-v1::standard-loop::t1",
+      "arm": "standard-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "max_iterations": 3,
+      "trial": 1,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::implicit-conventions-v1::standard::t1",
+      "arm": "standard",
+      "context_arm": "standard",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 1,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::implicit-conventions-v1::standard-loop::t2",
+      "arm": "standard-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "max_iterations": 3,
+      "trial": 2,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::implicit-conventions-v1::vanilla-loop::t2",
+      "arm": "vanilla-loop",
+      "context_arm": "vanilla",
+      "loop": true,
+      "max_iterations": 3,
+      "trial": 2,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::implicit-conventions-v1::standard::t3",
+      "arm": "standard",
+      "context_arm": "standard",
+      "loop": false,
+      "max_iterations": 1,
+      "trial": 3,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
+    },
+    {
+      "run_key": "screen::implicit-conventions-v1::vanilla-loop::t3",
+      "arm": "vanilla-loop",
+      "context_arm": "vanilla",
+      "loop": true,
+      "max_iterations": 3,
+      "trial": 3,
+      "role": "solution",
+      "status": "pending",
+      "run_id": null,
+      "iterations": []
     }
   ],
+  "independent_verifier_runs": [],
   "loop": {
-    "max_total_provider_calls": 6,
-    "max_calls_per_invocation": 6,
+    "max_total_provider_calls": 24,
+    "max_calls_per_invocation": 24,
     "max_replacements": 0,
     "max_turns_per_call": 18,
     "max_wall_minutes_per_call": 25,
@@ -126,23 +239,31 @@
   "harness_snapshot": [
     {
       "path": "implementation/modes.json",
-      "sha256": "2C212A11D31A44FB554193D3A29B08B011A17F5E0382B1A4F1D732ACADD69DF3"
+      "sha256": "43E7C10118FEA30F2C75B44BCAA36B9E9A773E9805A5A58A371A083A4DB6C5DE"
     },
     {
       "path": "implementation/router-catalog.json",
-      "sha256": "EF42AE9630F2011E955C8286C58D50E4238083EC6E9CC68BBC404FACB83DA661"
+      "sha256": "1EA8C87F0F05E4D0E340960A4B31E0C5C2775F2B0E31EA9133B576D024662B0E"
     },
     {
       "path": "implementation/adaptive_router.py",
-      "sha256": "A39D9436E5BF03E4EE176C39D822F2296ACDE71474B4B35246E7DE189DAB3141"
+      "sha256": "F62D08135099230A281318389695C4CCDD136B7BE25DE1DD9479826DCE4E47EB"
     },
     {
       "path": "implementation/objective_compiler.py",
-      "sha256": "DB1CF73A9B8FC82117945230888B74B1FF4DB8643E80EFAF78CCF3FCB32E9A56"
+      "sha256": "CABCDDBC07B53CB56A8F4C16B49B4E22D6927B60E804342F25E4997B027EB115"
     },
     {
       "path": "implementation/pre_submit_gate.py",
-      "sha256": "D472B5A469F298C6B8ED84506504327CA56DB5964989B2F6163B495E9AB580DD"
+      "sha256": "DC4282687F16C62A123558F3B41DDC5877C1A4794BEC963FF418BEDCA63472ED"
+    },
+    {
+      "path": "implementation/harness_checks.py",
+      "sha256": "C85216F7FD67CA8D5177840B0EEDC605A4A14B6ECBBA79CF0BBB2F71450A98AA"
+    },
+    {
+      "path": "implementation/verification_loop.py",
+      "sha256": "5DF05000905F79A5F67B17F39B6D48896FF4BD124CBAECBD1498CA7F5C8FD75D"
     },
     {
       "path": "implementation/eval_validity.py",
@@ -150,12 +271,12 @@
     },
     {
       "path": "implementation/fixture_admission.py",
-      "sha256": "43D5D29EB755378C57991F6C4FC46383FA98F66D86F988D008FA9B762684846F"
+      "sha256": "3538329E67DD9FA0AE2C39906D927D2588621F01764A1BA3303E447E2945C31A"
     }
   ],
   "approval": {
     "approved_at": null,
     "approved_by": null,
-    "scope": "exactly 6 provider calls: five solutions plus one Full verifier"
+    "scope": "at most 24 provider calls: 4 arms x 3 trial(s); 2 loop arm(s) reserve 3 iteration calls per trial and may use fewer"
   }
 }

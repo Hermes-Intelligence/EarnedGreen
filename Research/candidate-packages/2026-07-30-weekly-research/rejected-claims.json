@@ -1,0 +1,88 @@
+[
+  {
+    "id": "evals-judging-21",
+    "bucket": "evals-judging",
+    "statement": "CodeScaleBench's frozen published analysis suite is named csb-v1-mixed371 and contains 371 tasks (151 SDLC + 220 organizational); the Sourcegraph launch blog rounds this to '370 tasks (150 SDLC + 220 Org)', while the repo working tree is in flux (repo ops notes cite ~550 task.toml files and roughly 274 canonical/active tasks with schema gaps), so 371 should be treated as the citable snapshot.",
+    "applicability": "CodeScaleBench (sourcegraph/CodeScaleBench), benchmarks/suites/csb-v1-mixed371, as of 2026-07-30",
+    "version_sensitive": true,
+    "candidate_guidance": "When citing CodeScaleBench size, use csb-v1-mixed371 = 371 (151+220) as the frozen figure and avoid the bare '370' from the blog; flag that the live repo is a moving 'living benchmark', so pin a commit if reproducing.",
+    "sources": [
+      {
+        "title": "CodeScaleBench (Sourcegraph blog)",
+        "url": "https://sourcegraph.com/blog/codescalebench-testing-coding-agents-on-large-codebases-and-multi-repo-software-engineering-tasks",
+        "tier": 3,
+        "accessed_at": "2026-07-30"
+      },
+      {
+        "title": "sourcegraph/CodeScaleBench (GitHub repo)",
+        "url": "https://github.com/sourcegraph/CodeScaleBench",
+        "tier": 3,
+        "accessed_at": "2026-07-30"
+      }
+    ],
+    "verdict": "unsupported",
+    "confidence": "medium",
+    "reason": "Content checks out (GitHub README corroborates csb-v1-mixed371 = 371 = 151 SDLC + 220 org; blog rounds to 370 = 150+220), but this is a version_sensitive claim backed ONLY by tier-3 first-party sources (vendor blog + an in-flux 'living benchmark' repo). Per the version_sensitive rule a tier-1/2 primary is required. The '~550 task.toml files' sub-figure was not confirmed by the repo fetch. Pin a commit; no durable primary supports 371 as citable.",
+    "expires_at": "2026-08-29"
+  },
+  {
+    "id": "evals-judging-22",
+    "bucket": "evals-judging",
+    "statement": "CodeScaleBench uses two verifier types: SDLC tasks are scored by a patch-based SWE-bench-style verifier against a per-task ground_truth.json, while Org (cross-repo) tasks are scored by an artifact verifier that compares an agent-produced answer.json to a curator solution, layered under an oracle-check fallback framework.",
+    "applicability": "CodeScaleBench (sourcegraph/CodeScaleBench) SDLC and Org splits, as of 2026-07-30",
+    "version_sensitive": true,
+    "candidate_guidance": "Note as a design pattern for multi-repo eval: execution/patch verification for code-change tasks, artifact/answer comparison for retrieval-and-reasoning tasks; useful contrast to pure LLM-as-judge scoring.",
+    "sources": [
+      {
+        "title": "CodeScaleBench (Sourcegraph blog)",
+        "url": "https://sourcegraph.com/blog/codescalebench-testing-coding-agents-on-large-codebases-and-multi-repo-software-engineering-tasks",
+        "tier": 3,
+        "accessed_at": "2026-07-30"
+      }
+    ],
+    "verdict": "unsupported",
+    "confidence": "medium",
+    "reason": "The Sourcegraph blog does describe SDLC = patch-based SWE-bench-style verifier against ground_truth.json and Org = 'artifact' verifier comparing answer.json to a curator solution with an oracle-check fallback, so the content is corroborated. But it is a version_sensitive claim with only a single tier-3 vendor-blog source; the version_sensitive rule requires a tier-1/2 primary, which is absent.",
+    "expires_at": "2026-08-29"
+  },
+  {
+    "id": "evals-judging-23",
+    "bucket": "evals-judging",
+    "statement": "CodeScaleBench public results were reported for only one harness+model combination, Claude Code with Haiku 4.5; five further harnesses (Codex, Cursor, Gemini, Copilot, OpenHands) are described as supported but were not reported, so the published retrieval/cost deltas are single-harness and not shown to generalize.",
+    "applicability": "CodeScaleBench launch report, Claude Code + Haiku 4.5, as of 2026-07-30",
+    "version_sensitive": true,
+    "candidate_guidance": "Treat any CodeScaleBench delta as Claude-Code-with-Haiku-4.5-specific; do not generalize the retrieval lift to other agents until multi-harness numbers are published. (Resolves prior open question #4.)",
+    "sources": [
+      {
+        "title": "CodeScaleBench (Sourcegraph blog)",
+        "url": "https://sourcegraph.com/blog/codescalebench-testing-coding-agents-on-large-codebases-and-multi-repo-software-engineering-tasks",
+        "tier": 3,
+        "accessed_at": "2026-07-30"
+      }
+    ],
+    "verdict": "unsupported",
+    "confidence": "medium",
+    "reason": "The blog does confirm results were reported only for Claude Code + Haiku 4.5 and that six harnesses (Claude Code, Codex, Cursor, Gemini, Copilot, OpenHands) are supported/planned, so the single-harness scope is corroborated. But this version_sensitive claim rests on only one tier-3 vendor-blog source; the required tier-1/2 primary is absent.",
+    "expires_at": "2026-08-29"
+  },
+  {
+    "id": "evals-judging-24",
+    "bucket": "evals-judging",
+    "statement": "In CodeScaleBench's single reported harness (Claude Code + Haiku 4.5), adding Sourcegraph MCP code-navigation raised measured retrieval from File recall 0.127->0.277, Precision@5 0.140->0.478, and F1@5 0.099->0.262, with the largest gain on Org tasks (P@5 0.007->0.471), while cutting per-task cost ~30% ($0.73->$0.51).",
+    "applicability": "CodeScaleBench, Claude Code + Haiku 4.5 with vs without Sourcegraph MCP, as of 2026-07-30",
+    "version_sensitive": true,
+    "candidate_guidance": "Cite as vendor-run, single-harness evidence that codebase-navigation tooling improves retrieval and lowers cost; caveat it is Sourcegraph measuring its own MCP on one agent, not an independent cross-harness result.",
+    "sources": [
+      {
+        "title": "CodeScaleBench (Sourcegraph blog)",
+        "url": "https://sourcegraph.com/blog/codescalebench-testing-coding-agents-on-large-codebases-and-multi-repo-software-engineering-tasks",
+        "tier": 3,
+        "accessed_at": "2026-07-30"
+      }
+    ],
+    "verdict": "unsupported",
+    "confidence": "medium",
+    "reason": "The blog confirms the exact deltas (File recall 0.127->0.277, Precision@5 0.140->0.478, F1@5 0.099->0.262, Org P@5 0.007->0.471, cost $0.73->$0.51), so the numbers are corroborated. However these are version_sensitive vendor-run measurements from a single tier-3 source (Sourcegraph measuring its own MCP); the version_sensitive rule requires a tier-1/2 primary, which does not exist for these figures.",
+    "expires_at": "2026-08-29"
+  }
+]

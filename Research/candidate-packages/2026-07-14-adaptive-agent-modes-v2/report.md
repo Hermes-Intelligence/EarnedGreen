@@ -1,12 +1,18 @@
-# Adaptive Agent Modes v2 - Candidate Report
+# Adaptive Agent Modes — Candidate Report
 
-Status: capability activation remains 14/14 PASS. The second boundary campaign invalidated its own fixture contract; the fixture has since been versioned to `adaptive-contract-evolution-v2`, a Fixture Admission Gate and canary spend rule now guard the whole spend path, and all twelve zero-provider Candidate gates PASS again. Two completed six-call screens are preserved as invalid evidence. No replacement calls, Stable change or promotion are authorized; this is not Stable guidance.
+**Final status (2026-07-16): the question is answered.** Prompt scaffolding does not buy correctness; an independently executed verification loop does. On a shadow-replay of a real shipped fix, the lean loop scored **100, 100, 100** against an unscaffolded control's **77, 77, 77**. Schema 4 is promoted (Stable 0.3.0); schema 4.1 (lean loop) is measured and awaiting promotion. Twenty-eight provider calls total across nine campaigns; the full measurement narrative is in [`verification-loop-results.md`](promotion/payload/Setup/benchmarking/verification-loop-results.md) (promotes to `Setup/benchmarking/`).
+
+This report is chronological. It preserves what we believed at each stage, including the parts we later disproved, because the disproof is the finding.
 
 ## Executive result
 
-The previous Vanilla-versus-Full sentinel did not show that agentic guidance was useless. Two shared failures came from invalid evaluation contracts: whitespace-only input was hidden behind the phrase "non-empty", and semantically correct documentation was rejected by a literal substring. The only unaffected pair scored 100/100 and was a ceiling. The correct response was to freeze the conclusion, repair evaluation validity and make components independently measurable.
+Three claims, each measured:
 
-Candidate v2 implements five runtime modes. Runtime Vanilla is advisory/read-only; coding benchmarks instead use an unscaffolded task-only `vanilla-control`. Selection uses three dimensions: consequence is the only path to Full, while breadth and continuity cap at Mode 3. Planning a critical action is distinct from executing it. The policy chooses the lowest mode covering the evidenced dimensions and escalates on scope growth, ambiguity, repeated verification failure, critical action or session boundary. Numeric ceilings remain hypotheses pending benchmark calibration.
+1. **The five-level prompt ladder was overhead.** Six fixtures, 17 calls: the unscaffolded arm matched or beat every scaffolded arm, which cost 4–10.7× the tokens. Two independent fixture designers targeting demonstrated weaknesses could not build a fair task where scaffolding won. Our own corpus predicted this in writing ("strip scaffolding as models improve"), and nothing routed that finding into the design — which became a second finding.
+2. **The findings had been implemented as forms, not mechanisms.** "Deterministic repo-wide symbol verification" became an agent-filled impact map. "A separate evaluator" became a verifier wired to nothing. "Engineer the loop, not the prompt" became prompts. A control satisfied by the agent's own say-so cannot catch what the agent never enumerated — proven by a defect (`paren-wrap`) that lived in the data, not the task text, and that every arm missed.
+3. **Rebuilt as forcing functions, the environment reaches the human ceiling.** A harness-authored, digest-frozen check suite (acceptance, behavioural differential, symbol sweep, property, verifier findings) executed by the harness, with failures — and their guidance — handed back until green. 77 → 100, three trials, zero variance.
+
+The historical sections below (five modes, impact maps, ceilings) describe superseded designs and are kept as the record of how the answer was reached.
 
 ## What changed
 
@@ -248,6 +254,47 @@ Untested and deliberately not chased: workspaces exceeding the context window (t
 ## Promotion prepared (release 0.2.0)
 
 The owner approved promotion under the repositioned framing, and the promotion is now PREPARED (not executed): `promotion/manifest.json` is rebuilt (status `awaiting-approval`, 252 files, fresh stable-manifest hash) over a fully additive payload — the classic router (`tools/route.ps1` default path + `Router/catalog/modules.json`) is byte-for-byte behavior-preserved and the adaptive layer lands beside it as `tools/route.ps1 -Adaptive` → `tools/adaptive/` (Python), `Runtime/adaptive-modes.json`, `Router/catalog/adaptive-modules.json`, knowledge modules in `Core/knowledge-modules/`, claims/findings under `Research/`, docs in `Setup/`, boundary fixtures in `Evals/adaptive-fixtures/` (deliberately NOT in the stable fixture catalog), and the `/weekly-hygiene` command content staged at `Claude/commands/` (the live `.claude/commands/` is a forbidden promotion target). The dry-run preview (`tools/promote-candidate.ps1`, no `-Approve`) reaches exit 3, and a full post-promotion simulation in a temp repo copy kept knowledge-routing 12/12, fixture-discrimination 19/19, PowerShell/JSON parse clean, and both routing paths working. Caveat for the approval run: `release-gate.ps1 -Mode full` at `-Approve` time is EXPECTED to fail `objective-complete` (open objective requirements unrelated to this increment); the owner performs the approval with the recorded operator skip — no gate is weakened. Fixture repairs for two stable catalog fixtures were deliberately left OUT of the payload (the repaired grader delegates to the stable grader path and would recurse if promoted onto it); they need their own candidate.
+
+## The real-task verdict and the schema-4 rework (2026-07-16)
+
+The medi-ny shadow-replay — the real NYRx parser rework from HermesAirflow history, graded against the fix that actually shipped — replicated the null on real work: best score 89, achieved by bare vanilla at 350k tokens; `full` scored the same 89 for 3.75M (10.7x). The one score-splitting dimension turned out to be stochastic, not mode-driven: the same bare arm scored 73 on one run and 89 on the next. That killed single-trial verdicts permanently.
+
+The audit that followed compared every research finding against its implementation and found five implemented as forms instead of mechanisms (F-009 loop, F-011 separate evaluator, F-012 end-to-end verification, F-013 symbol verification, F-015 adversarial debate). The claims->rules map — built earlier in this candidate — independently flagged 11 of 42 rules as having no research backing, including every disputed mode threshold. Both instruments pointed the same way.
+
+**Schema 4** rebuilt the environment around forcing functions:
+
+- `harness_checks.py` — a harness-authored, digest-frozen suite: acceptance, behavioural differential against a pre-change snapshot, deterministic repo-wide symbol sweep, property checks over real data, verifier-finding checks. Agents may add checks, never weaken or remove them; scripts are sha-pinned.
+- `verification_loop.py` — run the suite, hand structured failures back, iterate; hard termination on green, iteration budget, or identical-failure no-progress.
+- The completion gate became capability-driven and now **re-runs the entire suite itself**; the impact-map and adversarial-verification forms were deleted.
+- Independent-verifier findings became machine-readable and are **ingested into the suite as blocking checks** — closing the inert-verdict hole where a verifier reported `complete-quality-failure` and the run scored 89 regardless.
+- The five-level ladder collapsed to three modes (lite / standard / critical). Consequence alone selects a mode; clarity and continuity attach capabilities inside it; breadth became telemetry. Numeric ceilings, all `unsupported` in the claims map, were deleted.
+- Benchmark protocol: verdicts require >=3 trials per arm; every loop iteration is a counted call.
+
+Promoted as **Stable 0.3.0** after the clean loop campaign validated the promoted mechanisms live.
+
+## The loop measured, and the lean-loop result (2026-07-16)
+
+**Campaign 20260716-120701** (3 arms x 3 trials, clean conditions): bare vanilla 77/62 with wild variance; `vanilla-loop` 89 when it converged and 77 when the iteration cap cut it off — a dose-response; the heavyweight `standard` scaffold 88+-0 with a gate that **honestly refused to certify all three trials**, because its agents spent their turn budget on evidence paperwork and ran out of turns mid-fix. The loop lifted the bare agent 12-15 points at half the scaffold's cost. Nobody reached 100.
+
+The diagnosis was an asymmetry: the scaffold had knowledge (it read the conventions and fixed `paren-wrap`) but no cheap iteration; the loop had cheap iteration but not the knowledge. **Schema 4.1** merged the winners and cut the loser:
+
+- **harness-generated evidence** — since the harness re-executes every check, the harness writes the evidence. Agent-side transcription of evidence rows, verification runs and completion claims: deleted. The agent keeps only what needs judgment (ambiguity resolutions, consumer-inspection notes). Fail-closed guard: a suite with nothing executable re-requires recorded verification commands.
+- **guided feedback** — a *failing* check carries its convention excerpt and fix direction into the feedback; a passing check carries nothing. Just-in-time retrieval (F-016) applied to verification.
+- **iteration ceiling 3** — the cap of 2 had cut a run off before convergence.
+
+**Campaign 20260716-143155** (14/21 approved calls, 3 trials per arm):
+
+| Arm | Scores | Total tokens/trial | Iterations |
+|---|---|---|---|
+| `vanilla` | 77, 77, 77 | 272-316k | - |
+| `vanilla-loop` (guided) | 89*, **100, 100** | 647k-1.21M | 2, 2, 2 |
+| `standard-loop` (lean scaffold + guided loop) | **100, 100, 100** | 1.54-2.68M | 2, 2, 1 |
+
+*Invalidated by the protected-files tripwire.*
+
+100 is the reference: the behaviour of the fix a human engineer shipped. Guided feedback alone took the bare agent there, fixing both residual defects at once — the `Cymbalta` bleed row and `fentanyl patch` preservation — which the unguided loop and the heavyweight scaffold had each missed separately. The `<=2x cost` hypothesis failed honestly: the loop-only path reached the ceiling at 2-4x, the lean scaffold path at 5-9x. The economics that matter held: iterations are spent only when a check is red, i.e. exactly when the bare agent would have shipped the defect.
+
+Three incidents are recorded in the results report and worth repeating here: we **invalidated our own 11-call campaign** rather than report a contaminated flatline (checks had been visible to every arm, including the control); a **stale-bytecode hole** let a red check run green on a same-second `.pyc` and was found by a probe, not by review; and a **kill switch cleared too early** collided two runners, which produced a global runner lock and honest accounting for adapter refusals that never reached the provider.
 
 ## Sources used
 

@@ -1,0 +1,40 @@
+﻿{
+    "schema_version":  1,
+    "candidate_only":  true,
+    "due":  true,
+    "current_generated_at":  "2026-07-19T21:30:00+02:00",
+    "current_expires_at":  "2026-07-26T21:30:00+02:00",
+    "providers":  [
+                      {
+                          "id":  "anthropic-claude-code",
+                          "discovery":  {
+                                            "method":  "official-models-api-and-docs",
+                                            "refresh_days":  7
+                                        },
+                          "official_sources":  [
+                                                   "https://platform.claude.com/docs/en/about-claude/models/overview",
+                                                   "https://code.claude.com/docs/en/model-config",
+                                                   "https://platform.claude.com/docs/en/build-with-claude/effort"
+                                               ]
+                      },
+                      {
+                          "id":  "openai-codex",
+                          "discovery":  {
+                                            "method":  "official-model-catalog-and-runtime-availability",
+                                            "refresh_days":  7
+                                        },
+                          "official_sources":  [
+                                                   "https://learn.chatgpt.com/docs/models",
+                                                   "https://learn.chatgpt.com/docs/config-file/config-reference"
+                                               ]
+                      }
+                  ],
+    "required_checks":  [
+                            "query current availability",
+                            "verify official documentation",
+                            "check CLI/API version gates",
+                            "run routing tests",
+                            "run outcome A/B before promotion"
+                        ],
+    "forbidden_action":  "Do not modify Models/providers.json or stable rules from research; emit a candidate patch."
+}

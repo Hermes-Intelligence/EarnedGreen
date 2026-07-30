@@ -1,0 +1,29 @@
+{
+ "schema_version": 1,
+ "observed_at": "2026-07-19",
+ "companion_of": "decisive-campaign-predictions.json (registered before any call)",
+ "campaigns": {"canary": "20260719-175629 (era3-canary.json, 1 call)", "main": "20260719-180841 (era3-main.json, 11 calls)"},
+ "spend": "12 of 13 approved calls (oracle-loop t3 went green at iteration 2, saving 1); every call inside the two approval records",
+ "results": {
+  "vanilla-configured": {"trials": [50, 33, 17], "mean": 33.3, "all_valid": true,
+   "note": "every trial ends with preserved-behaviour green; greens beyond the envelope only charts families (t1: charts-lines+charts-table, t2: charts-table, t3: nothing)"},
+  "oracle-loop": {"trials": [100, 83, 83], "mean": 88.7, "all_valid": true,
+   "iterations": {"t3": "red -> GREEN at i2", "t2": "3 iterations, distinct failure fingerprints each time (progress), budget ended at 83", "t1": "reached 83, then two identical fingerprints (no-progress stop)"},
+   "note": "block-citations green in 3/3 trials, citation-hygiene in 2/3 — the universally-neglected families move ONLY under the loop"},
+  "bare-vanilla-canary": {"score": 33, "valid": true}
+ },
+ "predictions_settled": {
+  "P-D1": "CONFIRMED — canary 33, inside the registered 17-50 band, >=2 distinct dimensions reported, brake not triggered. (Instrument note: gen-4 gives bare vanilla 33 where gen-3 gave 14 — partial real work now measured, as designed.)",
+  "P-D2": "CONFIRMED — THE VERDICT PREDICTION: oracle-loop mean 88.7 vs vanilla-configured mean 33.3; gap 55.3 pts >> the 16-pt same-arm variance band. Distributions do not even overlap: worst oracle-loop trial (83) beats best configured trial (50) by 33.",
+  "P-D3": "CONFIRMED — the loop USES its iterations: t3 converged red->green at iteration 2; t2 produced three distinct failure fingerprints (monotone progress, budget-capped at 83); t1 progressed to 83 then stalled. Not one-shot saturation, not gen-3's universal stall.",
+  "P-D4": "FALSIFIED IN ITS SECOND HALF, as pre-registered: vanilla-configured did NOT break any preservation guard at claimed-done (3/3 trials envelope-green), so silent_defect_rate on this task is 0.0 for BOTH arms and the envelope advantage is NOT demonstrated here — that axis stands on the medi-ny measurement (0.0 vs 0.25) alone. The loop side held (all trials end guard-green).",
+  "P-D5": "CONFIRMED — honest-zero families move only under forcing: block-citations green in 3/3 oracle-loop trials and 0/3 configured trials; citation-hygiene green in 2/3 oracle-loop and 0/3 configured (and 0/4 in every previous era measurement)."
+ },
+ "verdict_by_precommitted_rule": "P-D2 holds -> on this hard, wide, underspecified task the FULL ENVIRONMENT (verification loop + gen-4 diff-derived relational suite) is SIGNIFICANTLY better than well-configured vanilla: +55 pts mean, non-overlapping distributions, 3/3 valid trials per arm. First positive environment-vs-configured-vanilla verdict in the programme that survives its own pre-registered falsification conditions.",
+ "registered_caveats_that_still_apply": [
+  "replay paradigm: the loop's predicates derive from the era's own history; deployable wherever history/derivation provides a before/after (oracle_cli derive), NOT on from-scratch work — the everywhere-deployable layer remains guards",
+  "one task family (same module/repo as prior era measurements); the instrument's family policy was validated on the probe's four solutions; generalization beyond this family is not claimed",
+  "cost: oracle-loop ~2.6-3.0M tokens/trial vs configured ~0.9-1.3M (~2.5x) — the gap buys the forcing",
+  "envelope axis not differentiated on this task (P-D4)"
+ ]
+}

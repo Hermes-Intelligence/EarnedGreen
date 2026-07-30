@@ -32,6 +32,19 @@ BOUNDARY_FIXTURE_CLARITY = "implicit-conventions-v1"
 # 100 under fair semantic grading on single-pass-sized codebases. It is now
 # the genuinely unpaid fixture exercising the canary rule.
 BOUNDARY_FIXTURE_SCALE = "implicit-conventions-scale-v1"
+# The medi-ny fixture is the FIRST history-grounded, proprietary fixture: the real
+# NYRx PDL parser rework from HermesAirflow git history (commits 9835c408..a7ed0fd1),
+# graded deterministically offline (pdfplumber, zero provider calls). Its workspace
+# is materialized from a local Hermes git ref at grade time; nothing proprietary is
+# committed. It is a genuinely unpaid fixture exercising the canary rule.
+BOUNDARY_FIXTURE_MEDI_NY = "medi-ny-parser-rework-v1"
+# Task family #2, and the FIRST non-Python fixture: the real edition-rendering
+# rework from VextrumFrontend git history (778c755^..225e1ef). It exists to test
+# the LANGUAGE-AGNOSTIC claim that ships in Stable 0.5.0 and has never been
+# checked outside Python. Materialized from a local Vextrum git ref at grade
+# time; nothing proprietary is committed. Zero npm deps (the jspdf recording stub
+# is the fixture's own), zero provider calls.
+BOUNDARY_FIXTURE_VEXTRUM = "vextrum-edition-rework-v1"
 
 
 def run(name: str, command: list[str]) -> dict:
@@ -67,6 +80,56 @@ def main() -> None:
             campaign_path = evidence / "zero-provider-campaign-lifecycle-probe.json"
     checks = [
         run("candidate-unit-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_candidate.py", "-v"]),
+        # The verification loop is the schema-4 quality mechanism (harness-frozen
+        # independent checks iterated to green): its engine, tamper resistance
+        # and termination rules are gated here.
+        run("verification-loop-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_verification_loop.py", "-v"]),
+        # Earned green: a check is admitted only if it demonstrably discriminates
+        # on the pre-change baseline (vacuity gate), and a green result is
+        # certified only if every substantive hunk is necessary for some check
+        # (necessity probe). Plus stack detection, so a fresh clone works.
+        run("earned-green-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_earned_green.py", "-v"]),
+        # The e2e kind boots a real app, drives it, and tears it down -- the answer
+        # to unit tests that pass while the product is broken. Deliberately not
+        # coupled to Playwright: `command` is whatever drives the app, which is
+        # why this is testable with no browser toolchain installed.
+        run("e2e-check-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_e2e_check.py", "-v"]),
+        # Check authoring + adversarial review: the subagent that writes the
+        # suite is trusted for nothing (vacuity gate decides), and an adversary
+        # only "wins" on a mechanically demonstrated divergence, never a claim.
+        run("check-authoring-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_check_authoring.py", "-v"]),
+        # Arm validity: does the arm under test actually CONTAIN the mechanism
+        # under test? Pins the defect that halted a campaign at 4 of 28 approved
+        # calls -- the loop arm's suite was [public-tests] and could not fail on
+        # anything the task is graded on. The fixture was validated, the metric
+        # was validated, the ARM was not.
+        run("arm-validity-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_arm_validity.py", "-v"]),
+        run("author-role-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_author_role.py", "-v"]),
+        # notes_bank is the institutional learning loop: lessons from observed
+        # errors, routed forward, with EARNED persistence (measured transfer or
+        # retirement). Built after P1 falsification showed agent errors repeat.
+        run("notes-bank-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_notes_bank.py", "-v"]),
+        # tiered-loop package: escalation policy (forced triggers + budgeted
+        # support), oracle bootstrap (self-hardening suite for work with no
+        # answer key), support council (invariants-as-predicates, prose
+        # rejected). Every-environment-case battery, responder-injected.
+        run("tiered-package-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_tiered_package.py", "-v"]),
+        # diff_oracle derives predicates MECHANICALLY from the behaviour diff of
+        # git history — the first mechanism here that measurably discriminated
+        # where three generations of mind-derived predicates failed (9/9
+        # defective solutions red, both valid implementations green, 0 calls).
+        run("diff-oracle-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_diff_oracle.py", "-v"]),
+        # Layer 2 of the oracle stack (relations + constructive mutants) and the
+        # typed verdict (coverage manifest): verification for code with NO
+        # history, and the end of green claiming dimensions nobody checked.
+        run("relation-manifest-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_relation_and_manifest.py", "-v"]),
+        # The portability proof behind 0.6.0: a FOREIGN repo, a few-line capture,
+        # and the whole cloned-user path (derive -> pins -> evaluate, guards).
+        run("oracle-cli-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_oracle_cli.py", "-v"]),
+        run("commit-miner-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_commit_miner.py", "-v"]),
+        # silent_defect_rate is the headline metric of the check-admission claim:
+        # a defect counts as SILENT only when the arm's own evidence said done.
+        run("silent-defect-rate-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_silent_defect_rate.py", "-v"]),
         run("fixture-admission-tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_fixture_admission.py", "-v"]),
         # Spec-first planning layer: clarity classification, spec validation
         # fail-closed cases, ledger-freeze anti-scope-shrink, acceptance re-execution.
@@ -114,6 +177,18 @@ def main() -> None:
         # awaiting explicit approval).
         run("fixture-admission-gate-scale", [sys.executable, "fixture_admission.py", "--fixture", str(HERE / "mode-boundary-fixture-scale"), "--output", str(evidence / f"fixture-admission-{BOUNDARY_FIXTURE_SCALE}.json")]),
         run("ablation-campaign-scale-canary", [sys.executable, "new_ablation_campaign.py", "--fixture", BOUNDARY_FIXTURE_SCALE, "--output", str(evidence / "zero-provider-campaign-scale-canary-probe.json")]),
+        # The medi-ny fixture: regenerate its admission record (class-aware
+        # convention anchors + proprietary/hermes-local-copy materialization),
+        # then prove a one-call canary campaign is constructible (still zero
+        # provider calls, awaiting explicit approval).
+        run("fixture-admission-gate-medi-ny", [sys.executable, "fixture_admission.py", "--fixture", str(HERE / "mode-boundary-fixture-medi-ny"), "--output", str(evidence / f"fixture-admission-{BOUNDARY_FIXTURE_MEDI_NY}.json")]),
+        run("ablation-campaign-medi-ny-canary", [sys.executable, "new_ablation_campaign.py", "--fixture", BOUNDARY_FIXTURE_MEDI_NY, "--output", str(evidence / "zero-provider-campaign-medi-ny-canary-probe.json")]),
+        run("fixture-admission-gate-vextrum", [sys.executable, "fixture_admission.py", "--fixture", str(HERE / "mode-boundary-fixture-vextrum-edition-v1"), "--output", str(evidence / f"fixture-admission-{BOUNDARY_FIXTURE_VEXTRUM}.json")]),
+        # silent_defect_rate: how often an arm said "done" while the held-out
+        # oracle saw failures. Recomputed from the REAL decisive campaign on every
+        # build, so the headline claim stays tied to evidence on disk rather than
+        # to a number someone typed into a document once.
+        run("silent-defect-rate", [sys.executable, "silent_defect_rate.py", "--campaign", str(PACKAGE_EVIDENCE / "loop-campaign-medi-ny-v4-lean.json"), "--output", str(evidence / "silent-defect-rate-loop-campaign-medi-ny-v4-lean.json")]),
         run("campaign-safety", [sys.executable, "campaign_safety_test.py"]),
         run("capability-activation", [sys.executable, "capability_activation_audit.py", "--output", str(evidence / "capability-activation-audit.json")]),
         run("mode-boundary-fixture", [sys.executable, "mode_boundary_fixture_validity.py", "--output", str(evidence / "mode-boundary-fixture-validity.json")]),

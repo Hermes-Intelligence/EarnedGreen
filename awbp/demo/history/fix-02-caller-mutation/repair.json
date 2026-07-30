@@ -1,0 +1,8 @@
+{
+  "commit": "e4f5a6b",
+  "message": "fix(ingest): stop normalising the caller's rows in place",
+  "body": "normalize_records trimmed strings on the dicts it was handed. The retry path re-read the same list and saw already-normalised rows, so a failed batch replayed differently from the way it first ran. Nothing in the return value showed it.",
+  "probe": [
+    {"id": "u-1", "email": "  A@X.IO  ", "city": "  Gdansk  "}
+  ]
+}

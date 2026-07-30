@@ -21,12 +21,16 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+import author_role
 from ablation_preflight import gate_fixture
 from fixture_admission import local_fixture_dir, scan_paid_history
 
 HERE = Path(__file__).resolve().parent
-ARMS = ["vanilla", "mode-1-lean", "mode-2-routed", "mode-3-assured", "full"]
 CHEAPEST_ARM = "vanilla"  # rank 0 in ablation-design.json
+
+
+def design() -> dict:
+    return json.loads((HERE / "ablation-design.json").read_text(encoding="utf-8-sig"))
 
 
 def repo_root() -> Path:
@@ -52,8 +56,7 @@ def declared_checks(fixture: str) -> list[str] | None:
 
 
 def canary_policy() -> dict:
-    design = json.loads((HERE / "ablation-design.json").read_text(encoding="utf-8-sig"))
-    return design["canary_policy"]
+    return design()["canary_policy"]
 
 
 def validate_canary_record(record_path: Path, fixture: str) -> tuple[dict | None, str | None]:
@@ -98,8 +101,21 @@ def main() -> None:
                         help="run-record.json of a completed canary; required to construct the main stage for a fixture without prior valid paid history")
     parser.add_argument("--runs-dir", type=Path,
                         help="override the paid-history scan directory (lifecycle tests only; default Evals/runs)")
+    parser.add_argument("--trials", type=int, default=None,
+                        help="trials per arm for a main stage (default: the design's min_trials_per_arm_for_verdict; fewer marks the campaign exploratory-no-verdict)")
+    parser.add_argument("--arms", default=None,
+                        help="comma-separated subset of design arm ids for a main stage (budget-constrained campaigns); unknown ids are rejected")
+    parser.add_argument("--max-iterations", type=int, default=None,
+                        help="override the design's loop iteration ceiling per trial (only downward; budget-constrained campaigns)")
+    parser.add_argument("--derived-suites", type=Path,
+                        help="JSON {arm: {layer, pins, corpus?}}: these loop arms take a mechanically "
+                             "derived frozen suite instead of authoring one - no author calls reserved")
     args = parser.parse_args()
     repo = repo_root()
+    plan = design()
+    arms_def = plan["arms"]
+    trial_policy = plan["trial_policy"]
+    loop_policy = plan["loop_arm_policy"]
 
     admission = gate_fixture(args.fixture)
     if not admission["admitted"]:
@@ -116,36 +132,98 @@ def main() -> None:
     settings_path = args.provider_settings or repo / "Evals/local/provider-settings.json"
     settings = json.loads(settings_path.read_text(encoding="utf-8-sig"))
     provider = next(row for row in settings["providers"] if row["id"] == args.provider)
-    pinned = [HERE / "modes.json", HERE / "router-catalog.json", HERE / "adaptive_router.py", HERE / "objective_compiler.py", HERE / "pre_submit_gate.py", HERE / "eval_validity.py", HERE / "fixture_admission.py"]
+    pinned = [HERE / "modes.json", HERE / "router-catalog.json", HERE / "adaptive_router.py", HERE / "objective_compiler.py", HERE / "pre_submit_gate.py", HERE / "harness_checks.py", HERE / "verification_loop.py", HERE / "eval_validity.py", HERE / "fixture_admission.py"]
     campaign_id = datetime.now().strftime("%Y%m%d-%H%M%S") + "-adaptive-mode-ablation"
 
+    max_iterations = int(loop_policy["max_iterations_per_trial"])
+    if args.max_iterations:
+        if args.max_iterations > max_iterations or args.max_iterations < 1:
+            raise SystemExit(f"--max-iterations may only lower the design ceiling ({max_iterations})")
+        max_iterations = args.max_iterations
+        loop_policy = dict(loop_policy, max_iterations_per_trial=max_iterations,
+                           override_note="ceiling lowered for budget; only downward overrides are permitted")
+    min_trials = int(trial_policy["min_trials_per_arm_for_verdict"])
     if canary_required and canary_evidence is None:
         stage = "canary"
-        arms = [CHEAPEST_ARM]
-        verifier_runs = []
-        total_calls = 1
+        trials = 1
+        stage_arms = [row for row in arms_def if row["id"] == CHEAPEST_ARM]
         scope = "exactly one canary call on the cheapest arm; every further arm needs a separate approval after the canary run-record is validated"
-    elif canary_required:
-        stage = "main-after-canary"
-        arms = [arm for arm in ARMS if arm != CHEAPEST_ARM]
-        verifier_runs = [{"run_key":f"screen::{args.fixture}::full-verifier::t1","arm":"full","trial":1,"role":"independent-verifier","depends_on":f"screen::{args.fixture}::full::t1","status":"pending","run_id":None}]
-        total_calls = len(arms) + 1
-        scope = f"exactly {total_calls} provider calls: {len(arms)} remaining solutions plus one Full verifier, after a validated canary"
     else:
-        stage = "main"
-        arms = list(ARMS)
-        verifier_runs = [{"run_key":f"screen::{args.fixture}::full-verifier::t1","arm":"full","trial":1,"role":"independent-verifier","depends_on":f"screen::{args.fixture}::full::t1","status":"pending","run_id":None}]
-        total_calls = len(arms) + 1
-        scope = f"exactly {total_calls} provider calls: five solutions plus one Full verifier"
+        # The canary validates the fixture; it is NOT a trial. Main stages run
+        # every design arm for the configured trials.
+        stage = "main-after-canary" if canary_required else "main"
+        trials = args.trials if args.trials else min_trials
+        if trials < 1:
+            raise SystemExit("--trials must be >= 1")
+        stage_arms = list(arms_def)
+        if args.arms:
+            wanted = [arm.strip() for arm in args.arms.split(",") if arm.strip()]
+            known = {row["id"] for row in arms_def}
+            unknown = sorted(set(wanted) - known)
+            if unknown:
+                raise SystemExit(f"unknown arm ids: {unknown}; design arms are {sorted(known)}")
+            stage_arms = [row for row in arms_def if row["id"] in wanted]
+        scope = None
 
-    runs = [{"run_key":f"screen::{args.fixture}::{arm}::t1","arm":arm,"trial":1,"role":"solution","status":"pending","run_id":None} for arm in arms]
+    # Does the loop have to author its own checks? Decided here, at zero calls,
+    # because the answer changes how many calls the campaign must RESERVE, and a
+    # ceiling that does not cover the authoring round would strand a trial
+    # halfway through with its suite unbuilt.
+    authoring = author_role.authoring_policy(args.fixture)
+    derived_suites: dict = {}
+    if args.derived_suites:
+        derived_suites = json.loads(args.derived_suites.read_text(encoding="utf-8-sig"))
+        known_arms = {row["id"] for row in arms_def}
+        unknown = sorted(set(derived_suites) - known_arms)
+        if unknown:
+            raise SystemExit(f"--derived-suites names unknown arms: {unknown}")
+        for arm_id, spec in derived_suites.items():
+            pins = repo / spec["pins"]
+            if not pins.is_file():
+                raise SystemExit(f"derived suite for {arm_id!r}: pins file not found: {pins}")
+
+    def arm_iteration_ceiling(row: dict) -> int:
+        return max_iterations if row.get("loop") else 1
+
+    def arm_call_ceiling(row: dict) -> int:
+        # A derived-suite arm never authors: its predicates already exist on disk.
+        authors = row.get("loop") and row["id"] not in derived_suites
+        author_calls = authoring["max_calls_per_trial"] if authors else 0
+        return arm_iteration_ceiling(row) + author_calls
+
+    total_calls = trials * sum(arm_call_ceiling(row) for row in stage_arms)
+    verdict_eligible = stage == "canary" or trials >= min_trials
+    if scope is None:
+        loop_arm_count = sum(1 for row in stage_arms if row.get("loop"))
+        authoring_note = (f" and {authoring['max_calls_per_trial']} check-authoring call per trial"
+                          if authoring["enabled"] else "")
+        scope = (f"at most {total_calls} provider calls: {len(stage_arms)} arms x {trials} trial(s); "
+                 f"{loop_arm_count} loop arm(s) reserve {max_iterations} iteration calls per trial"
+                 f"{authoring_note} and may use fewer")
+
+    runs = []
+    for trial in range(1, trials + 1):
+        for row in stage_arms:
+            runs.append({
+                "run_key": f"screen::{args.fixture}::{row['id']}::t{trial}",
+                "arm": row["id"],
+                "context_arm": row.get("context_arm", row["id"]),
+                "loop": bool(row.get("loop")),
+                "max_iterations": arm_iteration_ceiling(row),
+                "trial": trial,
+                "role": "solution",
+                "status": "pending",
+                "run_id": None,
+                "iterations": [],
+            })
+    verifier_runs: list[dict] = []
     random.Random(campaign_id).shuffle(runs)
 
     # Per-fixture loop overrides (scale fixtures raise the per-call turn/wall
     # budget so a low score measures prioritization, not truncation). Only the
     # two per-call budgets are overridable; call counts and the kill switch are
     # never fixture-controlled.
-    loop = {"max_total_provider_calls":total_calls,"max_calls_per_invocation":total_calls,"max_replacements":0,"max_turns_per_call":18,"max_wall_minutes_per_call":25,"kill_switch":"Evals/local/STOP","automatic_followup":False}
+    loop = {"max_total_provider_calls":total_calls,"max_calls_per_invocation":total_calls,"max_replacements":0,"max_turns_per_call":18,"max_wall_minutes_per_call":25,"kill_switch":"Evals/local/STOP","automatic_followup":False,"authoring":authoring,"derived_suites":derived_suites}
     _, local_contract = local_fixture_dir(args.fixture)
     overrides = (local_contract or {}).get("campaign_loop_overrides") or {}
     applied_overrides = {}
@@ -156,12 +234,16 @@ def main() -> None:
     if applied_overrides and overrides.get("reason"):
         applied_overrides["reason"] = overrides["reason"]
     result = {
-        "schema_version":3,
+        "schema_version":4,
         "campaign_id":campaign_id,
         "status":"awaiting-explicit-approval",
         "stage":stage,
         "provider_calls":0,
         "fixture":args.fixture,
+        "trials":trials,
+        "trial_policy":trial_policy,
+        "loop_arm_policy":loop_policy,
+        "verdict_eligible":verdict_eligible,
         "fixture_admission":admission,
         "paid_history":{"valid_paid_runs":history["valid_paid_runs"],"matching_runs":len(history["matching_runs"]),"runs_dir_overridden":args.runs_dir is not None},
         "canary_policy":canary_policy(),

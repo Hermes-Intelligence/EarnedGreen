@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "fixture": "hermes-etl-skip-v1",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-hermes-etl-skip-v1",
+  "generated_at": "2026-07-19T12:00:28.439339+00:00",
+  "fixture_fingerprint": {
+    "file_count": 14,
+    "newest_mtime": 1784462416.2875073,
+    "sha256": "9736DCD518A1062619C67CEB5D9014C2A2AFA61AA7F749C430CAD26BC4F341EA"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": "identical to the reference on all five decision_points; the variant varies only choices the ticket leaves free (exception message wording, ordering of the reported failed-file list)",
+        "after_pinning": [],
+        "structural": [
+          "RuntimeError message wording differs from the shipped fix",
+          "failed files reported sorted rather than in processing order"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": true,
+      "detail": "fixture declares no serialized_output_dimensions; format-adversary is opt-in and not applicable here",
+      "serialized_output_dimensions": []
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "before-module",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 20,
+          "expected_band": [
+            10,
+            30
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 5,
+          "declared_dimensions": 5,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 5,
+          "declared_dimensions": 5,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 5,
+          "declared_dimensions": 5,
+          "dimension_diff": [],
+          "score": 0,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "triggered": false,
+        "trigger_terms": [],
+        "miss_behavior_sentence": null,
+        "decision_points_declared": 5,
+        "unpinned_decision_points": [],
+        "passed": true,
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 116,
+    "matching_runs": [],
+    "valid_paid_runs": 0
+  }
+}

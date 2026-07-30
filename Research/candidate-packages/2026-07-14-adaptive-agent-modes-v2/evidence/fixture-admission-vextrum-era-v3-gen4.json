@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "fixture": "vextrum-era-v3-gen4",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-vextrum-era-v3-gen4",
+  "generated_at": "2026-07-19T15:55:18.820399+00:00",
+  "fixture_fingerprint": {
+    "file_count": 13,
+    "newest_mtime": 1784476496.4290416,
+    "sha256": "8B0D4680102C7943A59B79C399BD621E68C2937D48EF4EB93F9D45C0CC290D71"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": "identical to the reference on every anchored convention; the variant varies only the separator glyph, which the conventions deliberately do not specify",
+        "after_pinning": [],
+        "structural": [
+          "citation runs separated with a middot instead of a comma"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": true,
+      "detail": "fixture declares no serialized_output_dimensions; format-adversary is opt-in and not applicable here",
+      "serialized_output_dimensions": []
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "before-module",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 17,
+          "expected_band": [
+            5,
+            25
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 6,
+          "declared_dimensions": 6,
+          "dimension_diff": [],
+          "score": 17,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 6,
+          "declared_dimensions": 6,
+          "dimension_diff": [],
+          "score": 17,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 6,
+          "declared_dimensions": 6,
+          "dimension_diff": [],
+          "score": 17,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "fixture_class": "underspecified-by-design",
+        "anchored_checks": [
+          "block-citations",
+          "charts-lines",
+          "charts-table",
+          "citation-hygiene",
+          "ordering",
+          "preserved-behaviour"
+        ],
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 125,
+    "matching_runs": [],
+    "valid_paid_runs": 0
+  }
+}

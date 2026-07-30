@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "decided_at": "2026-07-17",
+  "decision": "RAISE max_turns_per_call from 30 to 60 for EVERY arm, and DISCARD all three runs made under the old budget. They ran under a different, binding condition and cannot be pooled with runs made under a new one.",
+
+  "evidence_that_forced_it": {
+    "vanilla-t3": {"turns": 30, "terminal_reason": "completed", "cost_usd": 2.22,
+                   "note": "finished at EXACTLY the cap — the budget was binding, not comfortable"},
+    "standard-loop-t2": {"turns": 34, "terminal_reason": "completed", "cost_usd": 1.81},
+    "standard-loop-t1": {"turns": 31, "terminal_reason": "max_turns", "cost_usd": 2.40,
+                         "note": "hit the cap and died"},
+    "conclusion": "30 turns is BINDING for both arms. A campaign run at this budget measures 'who fits in 30 turns', not 'whose work is better'."
+  },
+
+  "why_this_is_not_goalpost-moving": "The fixture contract's OWN stated rationale, written before any spend, is: 'a raised turn/wall budget keeps the measured axis \"does the environment find the documented conventions\" rather than \"who ran out of clock reading the module\"'. The observed turn usage proves the budget is binding, so the pre-existing design intent is violated at 30. The change is mandated by the original intent and is arm-neutral: it raises the ceiling identically for the bare control, the configured control and the loop.",
+
+  "disclosure_i_will_not_hide": "I had already seen two scores (vanilla 92, standard-loop 92) before making this call. I cannot un-see them. Two things make me confident this is still honest, and the reader should judge both: (1) the scores are IDENTICAL between the arms, so a higher ceiling has no visible direction to favour; (2) the justification rests on turn counts and terminal_reason, which are infrastructure facts independent of any score. If the owner disagrees, the alternative is legitimate: keep 30 and report turn exhaustion as a real cost of the loop arm.",
+
+  "chosen_value": {
+    "max_turns_per_call": 60,
+    "rationale": "~2x the observed usage (30-34 turns), so turns stop binding rather than binding slightly less. A ceiling that is merely raised to 35 would still be measuring the clock.",
+    "max_wall_minutes_per_call": 40,
+    "wall_unchanged_because": "the failing run burned 30 turns in ~10 minutes: turns bind well before wall time, so the wall budget is not the constraint."
+  },
+
+  "cost_implication_stated_up_front": "Observed ~$1.80-2.40 per run at ~30 turns. At a 60-turn ceiling a run that actually uses the headroom could roughly double. 9 solution runs plus loop iterations and authoring calls is the exposure; the approved ceiling of 28 calls is unchanged and is what bounds it.",
+
+  "runs_discarded": [
+    "20260717-150650318-vextrum-edition-rework-v1-vanilla-t3",
+    "20260717-151832982-vextrum-edition-rework-v1-standard-loop-t2",
+    "20260717-152635752-vextrum-edition-rework-v1-standard-loop-t1"
+  ],
+  "why_discarded": "Trials must run under identical conditions. Pooling a 30-turn trial with a 60-turn trial would silently mix two experiments and the difference would be attributed to the arm. The 4 calls they cost are spent and reported as spent; they are not deleted, only excluded from any comparison.",
+
+  "what_they_are_still_evidence_of": "That the 0.4.0 loop, given a suite of [symbol-sweep, public-tests] on a repo whose tests do not encode its conventions, green-lights work carrying a real defect (gate PASS + completion_allowed on a run the held-out oracle scored 92 with citation-run-separated broken). That observation does not depend on the turn budget.",
+
+  "standing_rule_added": "Decide infrastructure budgets from a dry run or a canary BEFORE the main stage, and never change them mid-campaign. If a budget turns out to be binding after results exist, the only honest options are: re-run every trial under the new budget, or keep the old budget and report exhaustion as a result. Never pool."
+}

@@ -17,7 +17,7 @@ $sourceRoot = Split-Path -Parent $PSScriptRoot
 # ---------------------------------------------------------------------------
 # Adaptive path (additive, promoted from candidate 2026-07-14-adaptive-agent-
 # modes-v2). The classic keyword router below is untouched and remains the
-# default; -Adaptive shells to tools/adaptive/prepare_or_route.py and returns
+# default; -Adaptive shells to awbp/prepare_or_route.py and returns
 # its JSON. The mode ladder is a COST ladder plus governance controls (human
 # gate on critical consequence, durable checkpoints, spec-freeze); it is NOT a
 # correctness-lift claim - see Setup/adaptive-modes.md.
@@ -35,7 +35,7 @@ if ($Adaptive) {
         $prefix = @('-3')
     }
     $repoPath = (Resolve-Path -LiteralPath $Repo).Path
-    $pyArgs = @((Join-Path $sourceRoot 'tools/adaptive/prepare_or_route.py'), '--workspace', $repoPath)
+    $pyArgs = @((Join-Path $sourceRoot 'awbp/prepare_or_route.py'), '--workspace', $repoPath)
     if ($TaskFile) { $pyArgs += @('--task-file', $TaskFile) } else { $pyArgs += @('--task', $Task) }
     foreach ($path in $ChangedPath) { $pyArgs += @('--changed-path', $path) }
     if ($ForceMode) { $pyArgs += @('--force-mode', $ForceMode) }

@@ -1,45 +1,102 @@
 {
-  "schema_version":2,
-  "status":"candidate-zero-provider-boundary-fixture-ready",
-  "objective":"Learn the cheapest adaptive mode that preserves production quality, and attribute lift or overhead to adjacent capability layers.",
-  "arms":[
-    {"id":"vanilla","rank":0,"isolates":"provider plus task/repository only"},
-    {"id":"mode-1-lean","rank":1,"isolates":"minimal core, focused verification and compact ledger"},
-    {"id":"mode-2-routed","rank":2,"isolates":"precision routing, full objective ledger and pre-submit gate"},
-    {"id":"mode-3-assured","rank":3,"isolates":"impact map, adversarial verification, telemetry and checkpoint"},
-    {"id":"full","rank":4,"isolates":"independent verifier, bounded loop and human approval boundaries"}
-  ],
-  "experiments":[
+  "schema_version": 3,
+  "status": "candidate-loop-experiment-ready",
+  "objective": "Measure whether an INDEPENDENT verification loop (harness-executed checks fed back as structured failures) buys correctness or faster convergence - for a scaffolded agent and for a bare agent given the same feedback. Prompt-scaffolding ablations are settled: 6 fixtures / 17 calls showed no correctness lift and 4-10.7x token cost (see modes.json measurement_basis).",
+  "arms": [
     {
-      "id":"scaffolding-ablation",
-      "fixture":"adaptive-contract-evolution-v2",
-      "model_policy":"same provider, resolved model and effort across all five arms",
-      "purpose":"isolate environment effects from model effects on a contract-evolution task whose deterministic capability controls separate Mode 1/2/3 at 50/78/100",
-      "stage_1":{"solution_calls":5,"independent_verifier_calls":1,"total_provider_calls":6,"fixtures":1,"trials":1,"arms":5,"stop":"stop if all adjacent quality deltas are <=3 and no critical outcome differs"},
-      "stage_2":{"provider_calls_max":12,"fixtures_max":2,"trials":1,"arms":5,"independent_verifier_calls_per_full_run":1,"entry":"only a task family with a stage-1 signal or documented mode-selection risk; separate approval"}
+      "id": "vanilla",
+      "context_arm": "vanilla",
+      "loop": false,
+      "isolates": "provider plus task/repository only (control)"
     },
     {
-      "id":"adaptive-policy-eval",
-      "model_policy":"each mode selects provider-independent capability profiles, resolved through the current expiring provider catalog",
-      "purpose":"measure the production policy including model choice, latency and token use",
-      "entry":"scaffolding ablation identifies useful layers and provider catalog is fresh",
-      "calls":"separate campaign and approval; never follows automatically"
+      "id": "vanilla-configured",
+      "context_arm": "vanilla-configured",
+      "loop": false,
+      "isolates": "what a competent engineer sets up WITHOUT this environment: repo instructions (AGENTS.md/CLAUDE.md) pointing at the house conventions plus an explicit run-the-tests-before-done rule. It gets the KNOWLEDGE and the iterate-to-green instruction; it does NOT get harness-EXECUTED frozen checks or a gate that re-runs them itself. This is the arm that decides whether the environment is worth anything: if the loop cannot beat it, the value was 'someone wrote good checks', not our machinery, and we say so."
+    },
+    {
+      "id": "vanilla-loop",
+      "context_arm": "vanilla",
+      "loop": true,
+      "isolates": "the loop itself: bare agent + the same independent check feedback, no scaffold"
+    },
+    {
+      "id": "standard",
+      "context_arm": "standard",
+      "loop": false,
+      "isolates": "schema-4 standard scaffold (ledger, router, gate, frozen check suite) run single-pass"
+    },
+    {
+      "id": "standard-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "isolates": "scaffold plus iteration: does the scaffold converge faster than bare given identical feedback"
+    },
+    {
+      "id": "relation-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "isolates": "the DEPLOYABLE mechanical suite: guards derived from the BEFORE-state alone (pinned streams of the surface the ticket says must not change). Available at task time in any real repo; protects against regressions without a mind writing predicates; CANNOT force the new behaviour, by construction - and the measurement says so out loud."
+    },
+    {
+      "id": "oracle-loop",
+      "context_arm": "standard",
+      "loop": true,
+      "isolates": "the machinery CEILING: predicates derived from the target diff (the fix's own observable behaviour). NOT deployable - at task time the fix does not exist - so this arm never claims real-world value; it measures whether the loop machinery delivers when predicates are perfect. If even this arm fails to force 100, the bottleneck is the loop, not the predicates."
     }
   ],
-  "canary_policy":{
-    "applies_when":"the fixture has no prior paid run whose Evals/runs run-record.json shows outcome_valid=true",
-    "first_stage":{"calls":1,"arm":"cheapest (rank 0: vanilla)","approval":"separate explicit approval for exactly one call"},
-    "main_stage_requires":{
-      "separate_approval":true,
-      "canary_outcome_valid":true,
-      "min_distinct_hidden_dimensions":2,
-      "all_declared_dimensions_reported":true,
-      "note":"floor/ceiling collapse (a single reported dimension) blocks the remaining arms"
-    },
-    "admission_gate":"every campaign additionally requires a fresh Fixture Admission Gate record (candidate fixtures) or fresh eval-validity PASS (contracted fixtures)"
+  "trial_policy": {
+    "min_trials_per_arm_for_verdict": 3,
+    "single_trial_status": "exploratory-no-verdict",
+    "rationale": "~16pt same-arm run-to-run variance measured on medi-ny-parser-rework-v1 (vanilla scored 73 and 89 across runs); a single trial cannot detect a mode-sized effect and must never be reported as a verdict"
   },
-  "quality_rule":"Prefer the lowest mode within 3 points of the best score that has no additional critical failure and stays within task-specific risk floors.",
-  "promotion_rule":"A mode boundary changes only after replicated evidence on at least two task families. Screening never promotes Stable.",
-  "cost_controls":["zero-provider validity gate first","one clean workspace per call","count the Full verifier as a separate provider call","no automatic replacement","separate approval per stage","subscription USD reported as unavailable when the CLI does not expose it"],
-  "next_paid_stage_authorized":false
+  "loop_arm_policy": {
+    "max_iterations_per_trial": 3,
+    "feedback": "structured failures from the harness-run check suite, returned verbatim and identically to scaffolded and bare loop arms",
+    "no_progress_rule": "an iteration whose failure fingerprint equals the previous one ends the trial early (no-progress)",
+    "call_accounting": "every iteration is a provider call and counts toward campaign ceilings; planned ceilings reserve max_iterations_per_trial per loop-arm trial",
+    "primary_metrics": [
+      "iterations_to_green",
+      "silent_errors_en_route (regressions caught by checks the agent never self-reported)",
+      "final score",
+      "tokens"
+    ]
+  },
+  "experiments": [
+    {
+      "id": "verification-loop-lift",
+      "fixture_families": "history-grounded first (medi-ny-parser-rework-v1), synthetic for replication",
+      "model_policy": "same provider, resolved model and effort across all arms and iterations",
+      "purpose": "falsifiable pair of predictions: (a) if the bare loop arm converges as fast as the scaffolded loop arm, the loop is the whole lift and scaffolding stays cost/governance-only; (b) if neither loop arm beats single-pass, the loop is a guardrail (regression catcher), not an accelerator",
+      "verdict_rule": "verdicts require min_trials_per_arm_for_verdict; report per-arm score distributions, never single numbers"
+    }
+  ],
+  "canary_policy": {
+    "applies_when": "the fixture has no prior paid run whose Evals/runs run-record.json shows outcome_valid=true",
+    "first_stage": {
+      "calls": 1,
+      "arm": "cheapest (vanilla)",
+      "approval": "separate explicit approval for exactly one call"
+    },
+    "main_stage_requires": {
+      "separate_approval": true,
+      "canary_outcome_valid": true,
+      "min_distinct_hidden_dimensions": 2,
+      "all_declared_dimensions_reported": true,
+      "note": "floor/ceiling collapse (a single reported dimension) blocks the remaining arms; the canary validates the fixture and is NOT counted as a trial"
+    },
+    "admission_gate": "every campaign additionally requires a fresh Fixture Admission Gate record (candidate fixtures) or fresh eval-validity PASS (contracted fixtures)"
+  },
+  "quality_rule": "Prefer the cheapest arm whose score distribution is not worse than the best arm's by more than 3 points median with no additional critical failure.",
+  "promotion_rule": "A policy boundary changes only after replicated evidence on at least two task families at min_trials_per_arm_for_verdict. Screening never promotes Stable.",
+  "cost_controls": [
+    "zero-provider validity gate first",
+    "one clean workspace per call",
+    "every loop iteration counted as a provider call",
+    "no automatic replacement",
+    "separate approval per stage",
+    "subscription USD reported as unavailable when the CLI does not expose it"
+  ],
+  "next_paid_stage_authorized": false
 }

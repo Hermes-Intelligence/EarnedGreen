@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "stage": "canary",
+  "calls_spent": 1,
+  "of_approved": 28,
+  "observed_at": "2026-07-17",
+  "note": "APPEND-ONLY. step7-predictions.json is NOT edited: rewriting a prediction after seeing the result is goalpost-moving, and it would look like a success.",
+
+  "canary_run": {
+    "arm": "vanilla",
+    "trial": 1,
+    "run_id": "20260717-145520610-vextrum-edition-rework-v1-vanilla-t1",
+    "model": "claude-opus-4-8",
+    "effort": "medium",
+    "score": 92,
+    "public_tests_passed": true,
+    "outcome_valid": true,
+    "protected_files_changed": [],
+    "tokens": 1454653,
+    "failing_oracle_dimensions": ["citation-run-separated"],
+    "claimed_done": true,
+    "silent_defect_rate": 0.125
+  },
+
+  "canary_verdict": "CLEAN — proceed. The canary's job was to prove the fixture and adapter work end-to-end against a real provider call. They do: the workspace materialized the before-state module from the local git ref, the agent worked, the public test ran, the held-out oracle graded 8 dimensions, and the run is outcome_valid with no protected file touched. Nothing is broken, so the invalidation rule ('stop if the canary reveals the fixture or adapter is broken') does not fire.",
+
+  "prediction_miss": {
+    "which": "expected_values_stated_up_front.vanilla",
+    "predicted_score": "25-70",
+    "actual_score": 92,
+    "predicted_silent_defect_rate": "0.15-0.40",
+    "actual_silent_defect_rate": 0.125,
+    "verdict": "MISSED, on both axes. Recorded because it was written down before the spend, which is the entire point of writing it down.",
+    "what_it_means": "The bare control nearly aces this task unaided — the same pattern the first six fixtures produced ('the model class aces in-context tasks without help'). The SCORE axis therefore has ~8 points of headroom and is close to saturated.",
+    "why_the_campaign_still_has_power": "The primary metric is silent_defect_rate, not score, and it is NOT saturated: bare vanilla claimed done with 1 of 8 documented behaviours broken. The decisive comparison (P1: standard-loop vs vanilla-configured) is still live and still falsifiable in both directions — if vanilla-configured also reaches 0.0, P1 is falsified and check admission is theatre.",
+    "power_risk_stated_honestly": "With 8 dimensions, silent_defect_rate moves in steps of 0.125 per dimension per trial (0.042 on a 3-trial mean). Against the ~16pt same-arm variance measured on this model class, a small true effect may not separate from noise at 3 trials/arm. If the arms come back within one dimension of each other, the honest report is 'no separable difference at this power', NOT a win for either side."
+  }
+}

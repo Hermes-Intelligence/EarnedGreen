@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "fixture": "vextrum-dataflow-era-v1",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-vextrum-dataflow-era-v1",
+  "generated_at": "2026-07-19T20:04:35.044380+00:00",
+  "fixture_fingerprint": {
+    "file_count": 12,
+    "newest_mtime": 1784491463.5781918,
+    "sha256": "043AC32C902022EAC57B1152D8D09EDA2F934D15312D65D6EF2B8864A69EEE3D"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": "identical to the reference on every anchored convention; the variant varies only the SQL write pattern used to persist the watermark, which the conventions deliberately do not specify",
+        "after_pinning": [],
+        "structural": [
+          "watermark persisted via UPDATE-then-INSERT instead of a single upsert statement"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": true,
+      "detail": "fixture declares no serialized_output_dimensions; format-adversary is opt-in and not applicable here",
+      "serialized_output_dimensions": []
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "before-module",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 14,
+          "expected_band": [
+            5,
+            30
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "fixture_class": "underspecified-by-design",
+        "anchored_checks": [
+          "e2e-chain",
+          "execution-robustness",
+          "incremental-materialization",
+          "params-contract",
+          "preserved-behaviour",
+          "resume-reuse",
+          "uds-routing"
+        ],
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 137,
+    "matching_runs": [],
+    "valid_paid_runs": 0
+  }
+}

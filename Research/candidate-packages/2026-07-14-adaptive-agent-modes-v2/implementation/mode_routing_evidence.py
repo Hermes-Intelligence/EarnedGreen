@@ -24,6 +24,7 @@ def main() -> None:
             failures.append(f"mode {result['mode']} != {case['expected_mode']}")
         failures += [f"missing module {item}" for item in sorted(set(case["required"]) - selected)]
         failures += [f"forbidden module {item}" for item in sorted(set(case["forbidden"]) & selected)]
+        failures += [f"missing capability {item}" for item in sorted(set(case.get("expected_capabilities", [])) - set(result["capabilities"]))]
         rows.append({"id": case["id"], "verdict": "PASS" if not failures else "FAIL", "mode": result["mode"], "selected_modules": sorted(selected), "failures": failures})
     result = {"schema_version": 2, "verdict": "PASS" if all(row["verdict"] == "PASS" for row in rows) else "FAIL", "provider_calls": 0, "cases": rows}
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

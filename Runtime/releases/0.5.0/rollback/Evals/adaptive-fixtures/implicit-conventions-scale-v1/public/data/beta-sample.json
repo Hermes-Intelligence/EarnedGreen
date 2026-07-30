@@ -1,0 +1,150 @@
+{
+  "status": "ok",
+  "batch": "2026-07-01-am",
+  "records": [
+    {
+      "sym": "AAX",
+      "act": "halt",
+      "text": "Circuit breaker triggered",
+      "pub_date": "2026-06-12",
+      "eff_date": "2026-06-12",
+      "restated": false,
+      "ref": "BET-55200"
+    },
+    {
+      "sym": "DRV",
+      "act": "circuit_breaker",
+      "text": "TRADING NOTICE: halt pending disclosure",
+      "pub_date": "2026-06-13",
+      "eff_date": "2026-06-13",
+      "restated": false,
+      "ref": "BET-55201"
+    },
+    {
+      "sym": "HXM",
+      "act": "listing",
+      "text": "New line admitted",
+      "pub_date": "2026-06-14",
+      "eff_date": "2026-06-14",
+      "restated": false,
+      "ref": "BET-55202"
+    },
+    {
+      "sym": "LMB",
+      "act": "resume",
+      "text": "Resumption after review",
+      "pub_date": "2026-06-15",
+      "eff_date": "2026-06-15",
+      "restated": false,
+      "ref": "BET-55203"
+    },
+    {
+      "sym": "PLT",
+      "act": "halt",
+      "text": "Circuit breaker triggered",
+      "pub_date": "2026-06-16",
+      "eff_date": "2026-06-16",
+      "restated": false,
+      "ref": "BET-55204"
+    },
+    {
+      "sym": "STM",
+      "act": "circuit_breaker",
+      "text": "TRADING NOTICE: halt pending disclosure",
+      "pub_date": "2026-06-17",
+      "eff_date": "2026-06-17",
+      "restated": false,
+      "ref": "BET-55205"
+    },
+    {
+      "sym": "WRD",
+      "act": "listing",
+      "text": "New line admitted",
+      "pub_date": "2026-06-18",
+      "eff_date": "2026-06-18",
+      "restated": true,
+      "ref": "BET-55206"
+    },
+    {
+      "sym": "BRNT",
+      "act": "resume",
+      "text": "Resumption after review",
+      "pub_date": "2026-06-19",
+      "eff_date": "2026-06-19",
+      "restated": false,
+      "ref": "BET-55207"
+    },
+    {
+      "sym": "FSTL",
+      "act": "halt",
+      "text": "Circuit breaker triggered",
+      "pub_date": "2026-06-20",
+      "eff_date": "2026-06-20",
+      "restated": false,
+      "ref": "BET-55208"
+    },
+    {
+      "sym": "JLT",
+      "act": "circuit_breaker",
+      "text": "TRADING NOTICE: halt pending disclosure",
+      "pub_date": "2026-06-21",
+      "eff_date": "2026-06-21",
+      "restated": false,
+      "ref": "BET-55209"
+    },
+    {
+      "sym": "MRD",
+      "act": "listing",
+      "text": "New line admitted",
+      "pub_date": "2026-06-22",
+      "eff_date": "2026-06-22",
+      "restated": false,
+      "ref": "BET-55210"
+    },
+    {
+      "sym": "QRN",
+      "act": "resume",
+      "text": "Resumption after review",
+      "pub_date": "2026-06-23",
+      "eff_date": "2026-06-23",
+      "restated": false,
+      "ref": "BET-55211"
+    },
+    {
+      "sym": "TRW",
+      "act": "halt",
+      "text": "Circuit breaker triggered",
+      "pub_date": "2026-06-24",
+      "eff_date": "2026-06-24",
+      "restated": false,
+      "ref": "BET-55212"
+    },
+    {
+      "sym": "ZRC",
+      "act": "circuit_breaker",
+      "text": "TRADING NOTICE: halt pending disclosure",
+      "pub_date": "2026-06-25",
+      "eff_date": "2026-06-25",
+      "restated": true,
+      "ref": "BET-55213"
+    },
+    {
+      "sym": "CLDN",
+      "act": "listing",
+      "text": "New line admitted",
+      "pub_date": "2026-06-26",
+      "eff_date": "2026-06-26",
+      "restated": false,
+      "ref": "BET-55214"
+    },
+    {
+      "sym": "GRNW",
+      "act": "resume",
+      "text": "Resumption after review",
+      "pub_date": "2026-06-27",
+      "eff_date": "2026-06-27",
+      "restated": false,
+      "ref": "BET-55215"
+    }
+  ]
+}

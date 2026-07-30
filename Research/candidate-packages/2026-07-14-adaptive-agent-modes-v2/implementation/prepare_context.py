@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
-"""Compile the smallest mode-specific agent context and executable completion gate."""
+"""Compile the smallest mode-specific agent context and executable completion gate.
+
+Schema 4: artifacts are CAPABILITY-driven, not rank-driven. The router decides
+the mode (lite / standard / critical) and the conditional capabilities; this
+module materializes exactly the artifacts those capabilities need:
+
+  objective-ledger / compact-requirement-ledger   the requirement ledger
+  pre-submit-gate                                 gate script + enforcement.json
+  verification-loop                               baseline snapshot + frozen
+                                                  check suite + loop tooling
+  spec-synthesis                                  spec scaffold + freeze tooling
+  durable-checkpoints / session-handoff-state     checkpoint + handoff artifacts
+  independent-verifier / human-approval-boundaries  critical-mode evidence slots
+"""
 from __future__ import annotations
 
 import argparse
@@ -10,6 +23,7 @@ import sys
 from pathlib import Path
 
 from adaptive_router import route
+from harness_checks import harness_freeze_sha256, snapshot_baseline
 from objective_compiler import compact_ledger, compile_ledger
 from spec_synthesis import compile_spec, render_spec_md
 
@@ -42,87 +56,171 @@ def source_path(relative: str) -> Path:
     return REPO / relative
 
 
-def prepare(task_path: Path, workspace: Path, output: Path, changed_paths: list[str], forced_mode: str | None = None) -> dict:
+def compile_check_suite(workspace: Path, spec_first: bool, include_symbol_sweep: bool = True,
+                        harness_dir: Path | None = None, script_home: Path | None = None) -> dict:
+    """Author the independent check suite the verification loop and gate run.
+
+    Harness-authored entries are frozen (digest over checks + budgets). The
+    symbol sweep is always present in the AGENT-side suite; the public test
+    suite becomes an acceptance check when a tests directory exists;
+    workspace-declared checks (harness-checks.json at the workspace root,
+    owner/fixture-authored) are imported verbatim so fixtures and real repos
+    can add differential and property checks over their own data.
+
+    include_symbol_sweep=False builds the arm-neutral BEHAVIORAL suite the
+    campaign runner feeds back to loop arms: the sweep needs the scaffold's
+    evidence ledger to record inspections, which a bare arm does not have, so
+    it stays a gate control rather than loop feedback.
+    """
+    checks: list[dict] = []
+    if include_symbol_sweep:
+        checks.append({"id": "symbol-sweep", "kind": "symbol-sweep", "authored_by": "harness"})
+    # The test command comes from `awbp init`'s detection when it exists: this is
+    # what makes the loop work on a repository the harness has never seen.
+    # Hardcoding `unittest` here silently discovered ZERO tests on a pytest repo
+    # and produced an always-green acceptance check. Only fall back to the
+    # unittest layout when detection has not run.
+    project_path = workspace / ".agentic" / "project.json"
+    detected = None
+    if project_path.is_file():
+        project = json.loads(project_path.read_text(encoding="utf-8-sig"))
+        run = (project.get("test") or {}).get("baseline_run") or {}
+        # A command that cannot run today (missing runner) or is already red must
+        # not become an acceptance check.
+        if (project.get("test") or {}).get("command") and run.get("green") is True:
+            detected = project["test"]["command"]
+    if detected:
+        checks.append({"id": "public-tests", "kind": "acceptance", "authored_by": "harness", "command": list(detected)})
+    elif (workspace / "tests").is_dir():
+        checks.append({
+            "id": "public-tests",
+            "kind": "acceptance",
+            "authored_by": "harness",
+            "command": ["python3", "-m", "unittest", "discover", "-s", "tests"],
+        })
+    # Two declaration sources: a real repo declares its own checks at the
+    # workspace root; a benchmark fixture declares them OUTSIDE the public
+    # workspace (harness_dir) so the unscaffolded control stays bare. Scripts
+    # are materialized into script_home and pinned by sha256 so an agent
+    # rewriting a check script fails closed at re-run time.
+    declarations: list[tuple[Path, Path | None]] = []
+    workspace_declared = workspace / "harness-checks.json"
+    if workspace_declared.is_file():
+        declarations.append((workspace_declared, workspace))
+    if harness_dir is not None and (Path(harness_dir) / "harness-checks.json").is_file():
+        declarations.append((Path(harness_dir) / "harness-checks.json", Path(harness_dir)))
+    if script_home is None:
+        script_home = workspace / ".agentic" / "harness-checks"
+    script_home = Path(script_home)
+    for declared, home in declarations:
+        for row in json.loads(declared.read_text(encoding="utf-8-sig")).get("checks", []):
+            row = dict(row)
+            row["authored_by"] = "harness"
+            script_name = row.pop("script", None)
+            if script_name:
+                source = (home / "checks" / script_name) if home is not None else None
+                if source is None or not source.is_file():
+                    raise RuntimeError(f"declared check script not found: {script_name}")
+                script_home.mkdir(parents=True, exist_ok=True)
+                target = script_home / script_name
+                shutil.copyfile(source, target)
+                try:
+                    command_path = target.resolve().relative_to(workspace.resolve()).as_posix()
+                except ValueError:
+                    command_path = str(target.resolve())
+                row["command"] = ["python3", command_path]
+                row["files"] = [{"path": command_path, "sha256": digest(target)}]
+            checks.append(row)
+    if spec_first:
+        # Spec acceptance tests are agent-authored during spec synthesis and
+        # re-executed by the gate's spec-first controls; the suite carries a
+        # pointer check so the loop fails until the spec is validated+frozen.
+        checks.append({
+            "id": "spec-frozen",
+            "kind": "acceptance",
+            "authored_by": "harness",
+            "command": ["python3", "-c",
+                        "import pathlib,sys; sys.exit(0 if pathlib.Path('.agentic/spec-freeze.json').is_file() else 1)"],
+        })
+    suite = {"schema_version": 1, "config": {"max_iterations": 5, "no_progress_limit": 2}, "checks": checks}
+    suite["harness_freeze_sha256"] = harness_freeze_sha256(suite)
+    return suite
+
+
+def prepare(task_path: Path, workspace: Path, output: Path, changed_paths: list[str], forced_mode: str | None = None,
+            harness_dir: Path | None = None) -> dict:
     task = task_path.read_text(encoding="utf-8-sig")
     ledger = compile_ledger(task, str(task_path))
     decision = route(task, changed_paths, forced_mode)
-    if not forced_mode:
+    if not forced_mode and decision["mode"] == "lite" and not decision["analysis"].get("advisory"):
+        # Compiled scope beyond the trivial boundary escalates lite to standard
+        # before any mutation. This is the only scope-based escalation left.
         modes_path = HERE / "modes.json"
         if not modes_path.exists():
             modes_path = REPO / "Runtime/adaptive-modes.json"
-        mode_policy = json.loads(modes_path.read_text(encoding="utf-8-sig"))["modes"]
-        current_rank = decision["mode_rank"]
-        # Compiled scope (requirement/file counts) is the breadth axis: it may raise
-        # the mode but never past the breadth escalation ceiling (mode-3-assured).
-        # Only consequence signals, handled inside the router, can select full.
-        ceiling_rank = max((m["rank"] for m in mode_policy if m.get("breadth_escalation_ceiling")), default=3)
-        needed_rank = next(
-            mode["rank"] for mode in mode_policy
-            if mode["rank"] >= current_rank
-            and len(ledger["requirements"]) <= mode["selection"]["max_requirement_count"]
-            and len(changed_paths) <= mode["selection"]["max_changed_files"]
-        )
-        needed_rank = min(needed_rank, max(current_rank, ceiling_rank))
-        needed = next(mode["id"] for mode in mode_policy if mode["rank"] == needed_rank)
-        if needed != decision["mode"]:
-            decision = route(task, changed_paths, minimum_mode=needed)
+        policy = json.loads(modes_path.read_text(encoding="utf-8-sig"))
+        boundary = next(m for m in policy["modes"] if m["id"] == "lite").get("trivial_boundary", {})
+        if (len(ledger["requirements"]) > boundary.get("max_requirements", 4)
+                or len(changed_paths) > boundary.get("max_changed_files", 2)):
+            decision = route(task, changed_paths, minimum_mode="standard")
     output.mkdir(parents=True, exist_ok=True)
     dump(output / "mode-decision.json", decision)
-    # Decision-time research surfacing: when the task is a design/benchmark/
-    # architecture decision, the Context Pack carries the topic-matched findings
-    # explicitly so the agent reads the research that bears on the decision.
     findings_section = decision.get("relevant_findings") or {}
     if findings_section.get("findings"):
         dump(output / "relevant-findings.json", findings_section)
-    if decision["mode"] == "vanilla":
-        (output / "agent_prompt_appendix.txt").write_text("Read-only/trivial mode selected. Do not mutate files.\n", encoding="utf-8")
-        return {"mode": "vanilla", "context_characters": 0, "requirements": 0, "modules": []}
+    if decision["analysis"].get("advisory") and not forced_mode:
+        (output / "agent_prompt_appendix.txt").write_text(
+            "Advisory read-only mode selected. Do not mutate files; answer with sources.\n", encoding="utf-8")
+        return {"mode": decision["mode"], "advisory": True, "context_characters": 0, "requirements": 0, "modules": []}
 
-    mode_rank = decision["mode_rank"]
-    agent_ledger = compact_ledger(ledger) if decision["mode"] == "mode-1-lean" else ledger
+    capabilities = set(decision["capabilities"])
+    loop_enabled = "verification-loop" in capabilities
+    lean = "harness-evidence" in capabilities
+    spec_first = "spec-synthesis" in capabilities
+    continuity = "durable-checkpoints" in capabilities or "session-handoff-state" in capabilities
+
+    agent_ledger = compact_ledger(ledger) if "compact-requirement-ledger" in capabilities else ledger
     dump(output / "objective-ledger.json", agent_ledger)
     shutil.copyfile(REPO / "Core/runtime.md", output / "core.md")
-    evidence = {
-        "schema_version": 2,
-        "mode": decision["mode"],
-        "capabilities": decision["capabilities"],
-        "requirements": [{"requirement_id": row["id"], "status": "pending", "reason": None, "evidence": []} for row in ledger["requirements"]],
-        "ambiguity_resolutions": [],
-        "verification_runs": [],
-        "adversarial_verification": {"status": "not-required", "threat_model": [], "verification_runs": []},
-        "scope_approval": {"status": "not-required", "approved_by": None, "scope": None},
-        "independent_verification": {"status": "not-required", "verifier_profile": None, "evidence": []},
-        "completion_claim": {"status": "in_progress", "summary": None}
-    }
-    dump(output / "evidence.json", evidence)
-
-    axes = decision.get("analysis", {}).get("axes", decision.get("axes", {}))
-    continuity_required = axes.get("continuity") == "multi-session"
-    breadth_wide = axes.get("breadth") == "wide"
-    checkpoint_required = mode_rank >= 3 and (continuity_required or breadth_wide)
-    if mode_rank >= 3:
-        dump(output / "impact-map.json", {
-            "schema_version": 1,
+    if lean:
+        # LEAN evidence (4.1): verification evidence is generated by the gate
+        # from its own suite re-run. The agent owns only what genuinely needs
+        # judgment: ambiguity resolutions and consumer-inspection notes.
+        evidence = {
+            "schema_version": 4,
+            "evidence_model": "harness-generated",
             "mode": decision["mode"],
-            "sections": {
-                key: {"status": "pending", "evidence": [], "reason": None}
-                for key in ("definitions", "consumers", "tests", "compatibility", "documentation", "observability")
-            },
-        })
-        evidence["adversarial_verification"] = {"status": "pending", "threat_model": [], "verification_runs": []}
+            "capabilities": decision["capabilities"],
+            "ambiguity_resolutions": [],
+            "consumer_inspections": [],
+            "scope_approval": {"status": "not-required", "approved_by": None, "scope": None},
+            "independent_verification": {"status": "not-required", "verifier_profile": None, "evidence": []},
+        }
+    else:
+        evidence = {
+            "schema_version": 3,
+            "mode": decision["mode"],
+            "capabilities": decision["capabilities"],
+            "requirements": [{"requirement_id": row["id"], "status": "pending", "reason": None, "evidence": []} for row in ledger["requirements"]],
+            "ambiguity_resolutions": [],
+            "verification_runs": [],
+            "consumer_inspections": [],
+            "scope_approval": {"status": "not-required", "approved_by": None, "scope": None},
+            "independent_verification": {"status": "not-required", "verifier_profile": None, "evidence": []},
+            "completion_claim": {"status": "in_progress", "summary": None}
+        }
+
+    if continuity:
         dump(output / "checkpoint.json", {
-            "schema_version": 1, "required": checkpoint_required,
-            "status": "pending" if checkpoint_required else "not-required",
+            "schema_version": 1, "required": True, "status": "pending",
             "objective_id": ledger["task_sha256"], "completed_requirements": [],
             "evidence_refs": [], "decisions": [], "blockers": [], "next_action": None,
         })
         dump(output / "session-handoff.json", {
-            "schema_version": 1, "required": checkpoint_required,
-            "status": "pending" if checkpoint_required else "not-required",
+            "schema_version": 1, "required": True, "status": "pending",
             "resume_from": None, "verified_state": [], "pending_requirements": [row["id"] for row in ledger["requirements"]],
             "next_action": None, "forbidden_assumptions": [],
         })
-        dump(output / "evidence.json", evidence)
 
     protected = []
     test_files = (
@@ -150,11 +248,22 @@ def prepare(task_path: Path, workspace: Path, output: Path, changed_paths: list[
     if context_characters > decision["context_budget"]["max_characters"]:
         raise RuntimeError("Compiled context exceeds the selected mode budget")
     shutil.copyfile(HERE / "pre_submit_gate.py", output / "pre_submit_gate.py")
+    # The gate renders the coverage manifest (typed verdict); without this copy
+    # the scaffold-side gate degrades to "unavailable" instead of the manifest.
+    shutil.copyfile(HERE / "coverage_manifest.py", output / "coverage_manifest.py")
 
-    # Spec-first planning phase for underspecified tasks (clarity axis): drop the
-    # spec scaffold plus the tooling the agent and the gate need to validate and
-    # freeze it. The frozen ledger is the anti-scope-shrink completion boundary.
-    spec_first = "spec-synthesis" in decision["capabilities"]
+    suite = None
+    if loop_enabled:
+        # The forcing functions: snapshot the pre-change workspace, freeze the
+        # independent check suite, and ship the loop tooling beside the gate.
+        record = snapshot_baseline(workspace, output / "baseline-workspace")
+        dump(output / "baseline-record.json", record)
+        suite = compile_check_suite(workspace, spec_first, harness_dir=harness_dir,
+                                    script_home=output / "harness-checks")
+        dump(output / "check-suite.json", suite)
+        shutil.copyfile(HERE / "harness_checks.py", output / "harness_checks.py")
+        shutil.copyfile(HERE / "verification_loop.py", output / "verification_loop.py")
+
     if spec_first:
         spec = compile_spec(task, str(task_path))
         dump(output / "spec.json", spec)
@@ -176,10 +285,17 @@ def prepare(task_path: Path, workspace: Path, output: Path, changed_paths: list[
         "python3 .agentic/pre_submit_gate.py --ledger .agentic/objective-ledger.json --evidence .agentic/evidence.json --workspace . --baseline .agentic/baseline.json --output .agentic/pre-submit-result.json\n",
         encoding="utf-8",
     )
-    completion_requires = ["objective ledger fully evidenced", "material ambiguities resolved", "verification commands pass", "protected inputs unchanged", "pre-submit-result verdict PASS"]
-    if mode_rank >= 3:
-        completion_requires += ["impact map complete", "adversarial verification passes"]
-    if checkpoint_required:
+    if lean:
+        completion_requires = ["material ambiguities resolved", "protected inputs unchanged", "pre-submit-result verdict PASS",
+                               "verification evidence is HARNESS-GENERATED from the gate's own suite re-run; do not transcribe evidence rows"]
+    else:
+        completion_requires = ["objective ledger fully evidenced", "material ambiguities resolved", "verification commands pass", "protected inputs unchanged", "pre-submit-result verdict PASS"]
+    if loop_enabled:
+        completion_requires += [
+            "verification loop green: the gate re-runs the frozen independent check suite itself",
+            "check suite integrity intact: harness-authored checks and budgets unmodified",
+        ]
+    if continuity:
         completion_requires += ["durable checkpoint ready", "session handoff ready"]
     if spec_first:
         completion_requires += [
@@ -188,28 +304,34 @@ def prepare(task_path: Path, workspace: Path, output: Path, changed_paths: list[
             "every spec acceptance test re-executed by the gate and passing",
         ]
     enforcement = {
-        "schema_version": 2,
+        "schema_version": 3,
         "mode": decision["mode"],
         "hard_gate": True,
         "completion_commands": {"windows": "powershell -ExecutionPolicy Bypass -File .agentic/run-pre-submit.ps1", "posix": "bash .agentic/run-pre-submit.sh"},
         "completion_requires": completion_requires,
         "host_hidden_grader_is_not_agent_completion_evidence": True,
-        "independent_verifier_required": decision["mode"] == "full",
+        "check_suite_freeze_sha256": suite["harness_freeze_sha256"] if suite else None,
+        "independent_verifier_required": "independent-verifier" in capabilities,
         "human_gate": decision["model_routing"]["human_gate"]
     }
-    if decision["mode"] == "full":
+    if "human-approval-boundaries" in capabilities:
         evidence["scope_approval"] = {"status": "pending", "approved_by": None, "scope": None}
+    if "independent-verifier" in capabilities:
         evidence["independent_verification"] = {
             "status": "pending",
             "verifier_profile": decision["model_routing"]["verifier_profile"],
             "evidence": []
         }
-        dump(output / "evidence.json", evidence)
+    dump(output / "evidence.json", evidence)
     dump(output / "enforcement.json", enforcement)
-    dump(output / "context-manifest.json", {"schema_version": 3, "mode": decision["mode"], "core": "core.md", "ledger_profile": agent_ledger.get("ledger_profile", "full"), "modules": copied, "context_characters": context_characters, "context_budget": decision["context_budget"], "requirement_count": len(ledger["requirements"]), "checkpoint_required": checkpoint_required, "spec_first": spec_first})
+    dump(output / "context-manifest.json", {"schema_version": 4, "mode": decision["mode"], "core": "core.md", "ledger_profile": agent_ledger.get("ledger_profile", "full"), "modules": copied, "context_characters": context_characters, "context_budget": decision["context_budget"], "requirement_count": len(ledger["requirements"]), "loop_enabled": loop_enabled, "checkpoint_required": continuity, "spec_first": spec_first})
     prompt = (
         f"Adaptive mode: {decision['mode']}. Read .agentic/core.md, then only the selected files under .agentic/modules. "
-        "Before editing, review .agentic/objective-ledger.json and resolve material ambiguities. "
+        + ("The requirement ledger (.agentic/objective-ledger.json) is CONTEXT: read it, resolve material ambiguities in "
+           ".agentic/evidence.json ambiguity_resolutions, then just do the work. Do NOT transcribe evidence rows - "
+           "verification evidence is generated by the harness from its own check re-runs. "
+           if lean else
+           "Before editing, review .agentic/objective-ledger.json and resolve material ambiguities. ")
         + ("SPEC-FIRST CONTRACT: this task is underspecified; its real requirements live in the codebase's implicit conventions. "
            "Before ANY mutation: explore the workspace critically, anticipate failure modes, and fill .agentic/spec.json "
            "(surface inventory derived from the code, convention inventory with file evidence, decision points pinned by evidence "
@@ -220,10 +342,15 @@ def prepare(task_path: Path, workspace: Path, output: Path, changed_paths: list[
            "acceptance test passes when the gate re-executes it. Silently narrowing scope fails the gate; scope may only shrink "
            "through an owner_scope_changes entry recording explicit human approval. Additions are always allowed. "
            if spec_first else "")
-        + "During work, update .agentic/evidence.json with reproducible evidence for every requirement. "
-        "Before claiming completion, run the platform command in .agentic/enforcement.json; a FAIL blocks completion. "
-        + ("Complete .agentic/impact-map.json and record an adversarial threat model plus re-executable challenge runs in .agentic/evidence.json. " if mode_rank >= 3 else "")
-        + ("Before a session boundary, make .agentic/checkpoint.json and .agentic/session-handoff.json ready and evidence-backed. " if checkpoint_required else "")
+        + ("" if lean else "During work, update .agentic/evidence.json with reproducible evidence for every requirement. ")
+        + ("VERIFICATION LOOP: your work is checked by an independent, frozen check suite, not by your claims. After implementing, run "
+           "`python .agentic/verification_loop.py step --suite .agentic/check-suite.json --workspace .` and read .agentic/loop-feedback.json. "
+           "Exit 0: proceed to the gate. Exit 1: fix the listed failures at their cause and step again. Exit 2: stop and escalate with the failures. "
+           "Never weaken, remove or reconfigure checks (the suite is digest-frozen; the gate re-runs it independently). "
+           "A consumer file flagged by the symbol sweep must be either updated or recorded in evidence.json consumer_inspections with a note after you actually read it. "
+           if loop_enabled else "")
+        + ("Before a session boundary, make .agentic/checkpoint.json and .agentic/session-handoff.json ready and evidence-backed. " if continuity else "")
+        + "Before claiming completion, run the platform command in .agentic/enforcement.json; a FAIL blocks completion. "
         + "The host hidden grader is evaluation evidence after the run, never a substitute for the pre-submit gate.\n"
     )
     (output / "agent_prompt_appendix.txt").write_text(prompt, encoding="utf-8")
@@ -240,7 +367,7 @@ def main() -> None:
     parser.add_argument("--workspace", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--changed-path", action="append", default=[])
-    parser.add_argument("--force-mode", choices=["vanilla","mode-1-lean","mode-2-routed","mode-3-assured","full"])
+    parser.add_argument("--force-mode", choices=["lite", "standard", "critical"])
     args = parser.parse_args()
     workspace = args.workspace.resolve()
     task_path = args.task_file if args.task_file.is_absolute() else workspace / args.task_file

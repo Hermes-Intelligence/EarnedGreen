@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "built_at": "2026-07-17",
+  "point": "P1 — wire check_authoring + check_admission into the loop arm so the suite is authored by a clean-context subagent and admitted by the vacuity gate",
+  "why": "The campaign was halted at 4 of 28 approved calls because the loop arm's frozen suite was [symbol-sweep, public-tests], holding nothing that could cover the conventions the task is graded on. compile_check_suite can only compile checks that already exist, so it produced a real suite for medi-ny (which SHIPS hand-written harness-checks.json — the very no-go this programme removes) and an empty shell for vextrum. The loop arm was vanilla plus a symbol sweep. check_authoring existed but was never wired into a campaign.",
+
+  "what_was_built": {
+    "author_role.py": "the AUTHOR role: prepare a clean-context author run whose workspace is the pre-change baseline; collect_proposal reunites the author's declared JSON with the check files it wrote; author_into admits every proposed check against the PRISTINE baseline and merges only the behavioural admitted ones; install_checks writes them byte-for-byte so the pinned sha matches. HARD STOP: AuthoringShortfall when nothing behavioural survives admission — the trial does not run rather than run without the mechanism.",
+    "run_ablation_campaign.author_host_suite": "spends up to one counted provider call per trial on the author, admits, merges into host-check-suite.json, installs the scripts into the solution workspace. On AuthoringShortfall the run is marked arm-invalid-no-admitted-checks and the campaign stops — a number about vanilla-plus-nothing is never recorded as the loop's.",
+    "new_ablation_campaign.authoring_policy": "one truth read by both the constructor (reserve the call) and the runner (spend it). Trigger is 'does this repo declare its own checks' (which any repo knows about itself), NOT 'does it discriminate' (which needs the after-state, i.e. oracle knowledge a real repo lacks). Loop-arm ceiling now = iterations + 1 authoring call per trial.",
+    "project_detect.check_command": "execute ONE check script on this stack — NOT test_command + [script], which would run the repo's own suite alongside the check and make the check's verdict depend on it. Keyed on the script's language; an unknown Python runner is REFUSED (UnrunnableCheck), never guessed, because `python3 <pytest file>` defines a test and exits 0 without running it.",
+    "arm_validity": "an authoring arm now returns verdict 'authored-at-run-time' and SAYS OUT LOUD that this does not prove discrimination here — the proof moves to check_admission (same baseline, same rule, per check) and the runner's hard stop. It no longer probes a compiled shell that would falsely read 'vacuous'.",
+    "ablation_preflight": "was validating the CONTEXT arms (vanilla/lite/standard/critical — none ends in -loop), so arm_validity inspected nothing and PASSed vacuously: our own vacuity rule, broken by our own gate. Now validates the DESIGN arms and FAILs closed if no loop arm was inspected."
+  },
+
+  "defects_caught_while_building_this": [
+    "runnable() built the check command as test_command + [script]: for vextrum that is `node --test tests/public.test.js checks/x.mjs`, running the public suite alongside the check so the check's verdict depends on it. Fixed at source with project_detect.check_command.",
+    "the DETECTED test fixture in test_check_authoring.py had no `runner` key, which the new check_command reads — so the fixture and the code would have AGREED on `python3 <pytest file>`: a command that runs nothing and exits 0. The same both-sides-of-the-contract-are-mine trap that shipped once already. Pinned every consumed key against the producer.",
+    "the campaign safety test asserted a 4-arm design and a 24-call ceiling; the design has been 5 arms since vanilla-configured was added, so the test was already stale before this change surfaced it. Corrected to 5 arms + the reserved authoring call (33)."
+  ],
+
+  "zero_call_verification": {
+    "unit_tests": "199/199 pass (test_author_role 11 incl. the AuthoringShortfall hard stop and the 'author's own edits never reach admission' guard; test_check_authoring 46; test_arm_validity 6)",
+    "campaign_safety_test": "PASS — ceiling now reserves 1 authoring call per loop-arm trial (main 33, exploratory 11), authoring block present",
+    "candidate_gate": "run_candidate_evals PASS 36/36, zero provider calls; author-role-tests and arm-validity-tests registered and green; vextrum admission gate green",
+    "arm_validity_on_vextrum": "loop arms (vanilla-loop, standard-loop) -> authored-at-run-time (PASS); the compiled [public-tests] shell probed directly is still 'vacuous' and green-on-before — the defect that halted the campaign still fails closed at that level",
+    "arm_validity_on_medi_ny": "standard-loop -> discriminates (unchanged): the non-authoring path, which ships real checks, is untouched",
+    "fresh_campaign_ceiling": "new_ablation_campaign for vextrum with arms vanilla,vanilla-configured,standard-loop -> 18 planned calls = vanilla(3) + vanilla-configured(3) + standard-loop((3 iterations + 1 author) x 3 = 12); turn budget 60; scope text names the authoring call"
+  },
+
+  "spend_status": {
+    "approved_total": 28,
+    "spent_so_far": 4,
+    "remaining": 24,
+    "fresh_rerun_needs": 18,
+    "not_yet_spent": true,
+    "authoring_never_run_live": "the authoring mechanism is tested only with recorded responders. It has NEVER run end-to-end with a live model writing checks for the vextrum renderer. The very first authoring call is itself a canary for the mechanism — recommend bounding the first invocation (--max-calls) to get one loop arm through author + one iteration + grade, INSPECT that the authored suite actually reddens the historical bug and greens the fix, THEN release the rest. Same canary-first discipline the fixture already uses, applied to the new mechanism.",
+    "turn_budget": "60, decided before the restart (evidence/step7-max-turns-decision.json); the fresh campaign carries it"
+  }
+}

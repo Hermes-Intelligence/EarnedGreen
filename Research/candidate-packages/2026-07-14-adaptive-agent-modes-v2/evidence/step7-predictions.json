@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-07-17",
+  "recorded_before_any_provider_call": true,
+  "campaign": "step7-vextrum-edition-rework-v1",
+  "approved_calls": 28,
+  "approved_by": "owner (chat 2026-07-17): 'zatwierdzam dokładnie 28'",
+  "why_this_file_exists": "Predictions are recorded BEFORE the spend so the result cannot be reinterpreted to fit whatever comes back. Two campaigns in this programme already died on unvalidated fixtures; a third dying on a moved goalpost would be worse, because it would look like a success.",
+
+  "design": {
+    "fixture": "vextrum-edition-rework-v1",
+    "why": "First NON-PYTHON fixture. The mechanism (hunk-revert necessity probe, vacuity gate, divergence witness) claims to be LANGUAGE-AGNOSTIC because it works on the diff rather than an AST. That claim ships in Stable 0.5.0 and has never been tested outside Python.",
+    "arms": [
+      {"id": "vanilla", "isolates": "the provider plus the task. The bare control."},
+      {"id": "vanilla-configured", "isolates": "what a competent engineer sets up WITHOUT this environment: AGENTS.md/CLAUDE.md pointing at CONVENTIONS.md + an explicit run-the-tests-before-done rule. Knowledge and an iterate-to-green instruction, but NO harness-executed frozen checks and NO gate. THE ARM THAT MATTERS."},
+      {"id": "standard-loop", "isolates": "the full mechanism: frozen independent checks the agent cannot edit, executed by the harness, plus a gate that re-runs them itself."}
+    ],
+    "trials_per_arm": 3,
+    "trials_rationale": "~16pt same-arm variance was measured on this model class; fewer than 3 trials cannot separate a real effect from noise.",
+    "call_budget": {"canary": 1, "main": 27, "total": 28}
+  },
+
+  "primary_metric": "silent_defect_rate — the share of held-out-oracle dimensions failing while the arm's OWN evidence said done. Score says how good the work was; this says how often the environment would have said 'done' when it wasn't.",
+
+  "predictions": [
+    {
+      "id": "P1-primary",
+      "claim": "standard-loop's mean silent_defect_rate is LOWER than vanilla-configured's.",
+      "falsifies_if": "standard-loop >= vanilla-configured.",
+      "consequence_if_false": "CHECK ADMISSION IS THEATRE AND WE SAY SO, in exactly those words, in the report and in the Stable docs. The honest conclusion would be that the value is 'someone wrote good checks', not our machinery — and 0.5.0's earned-green claim gets rewritten, not spun."
+    },
+    {
+      "id": "P2",
+      "claim": "vanilla-configured beats bare vanilla on score.",
+      "falsifies_if": "vanilla-configured <= vanilla.",
+      "consequence_if_false": "The 'well-configured vanilla' arm is a strawman — the AGENTS.md is not doing what a real repo's instructions do — and P1 is void whichever way it lands. Fix the arm, re-run, do not report."
+    },
+    {
+      "id": "P3-language-agnosticism",
+      "claim": "The necessity probe and the vacuity gate operate on this JS repo with no Python-specific failure: hunks split at definition boundaries, reverts compile-check, and no dimension reports 'inconclusive' for structural reasons.",
+      "falsifies_if": "Either mechanism errors, no-ops, or returns inconclusive on JS.",
+      "consequence_if_false": "The language-agnostic claim in Stable 0.5.0's Setup/earned-green.md is FALSE and must be narrowed to Python immediately. This is a documentation correctness issue, not a benchmark result: it lands regardless of scores."
+    },
+    {
+      "id": "P4-cost",
+      "claim": "standard-loop costs more tokens than vanilla-configured.",
+      "falsifies_if": "it does not.",
+      "consequence_if_false": "Nothing bad — but report it, because it would be surprising and the cost ladder is one of the repo's stated products."
+    }
+  ],
+
+  "expected_values_stated_up_front": {
+    "note": "Written down so 'that's roughly what we expected' cannot be claimed retroactively for any outcome.",
+    "vanilla": {"score": "25-70", "silent_defect_rate": "0.15-0.40"},
+    "vanilla-configured": {"score": "60-100", "silent_defect_rate": "0.05-0.25"},
+    "standard-loop": {"score": "85-100", "silent_defect_rate": "0.00-0.10"}
+  },
+
+  "invalidation_rules": [
+    "Any arm whose held-out oracle reports no dimensions is UNDEFINED, never 0.0, and is excluded from the mean and reported separately.",
+    "A run that touches a protected file (task.md, tests/) is graded-invalid and does not count toward the ceiling as a result, only as spend.",
+    "If the canary reveals the fixture or adapter is broken, the campaign STOPS and the remaining 27 calls are not spent.",
+    "The ceiling is 28 calls. It is not a target: if the answer is clear earlier, stop."
+  ],
+
+  "honest_caveats_to_publish_with_any_result": [
+    "This task is TEXT NORMALIZATION — the same SHAPE as medi-ny. It varies three axes (repo, language, test runner) but not the kind of thinking required. It is a language-agnosticism test and a PARTIAL replication, not an independent second task family.",
+    "One fixture, one model class, 3 trials/arm. A single decisive fixture is evidence, not proof.",
+    "The prior 100/100/100 and the retroactive silent_defect_rate (loop 0.0 vs vanilla 0.25) were measured on medi-ny v1, the LEAKED fixture: the deltas stand (all arms saw the leak equally), the absolutes were inflated. This campaign runs on a fixture with no known leak."
+  ]
+}

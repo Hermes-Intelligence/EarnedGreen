@@ -21,6 +21,7 @@ def main() -> None:
     probe_path = args.output.parent / "capability-activation-probe.json"
     probe = subprocess.run([sys.executable, str(HERE / "capability_activation_probe.py"), "--output", str(probe_path)], cwd=HERE, text=True, capture_output=True, encoding="utf-8", errors="replace", timeout=120)
     declared = {cap for mode in modes["modes"] for cap in mode.get("capabilities", [])}
+    declared |= {row["id"] for row in modes.get("conditional_capabilities", [])}
     rows = {row["id"]: row for row in contract["capabilities"]}
     failures = []
     unknown = sorted(declared - set(rows))

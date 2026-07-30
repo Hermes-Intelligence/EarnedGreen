@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "release": "0.3.0",
+  "status": "stable-minimal",
+  "promoted_at": "2026-07-12T18:00:00+02:00",
+  "promoted_by": "user-directed-rebuild",
+  "core": "Core/runtime.md",
+  "objective": "Objectives/active/OBJ-20260712-agentic-work-best-practices.json",
+  "router_catalog": "Router/catalog/modules.json",
+  "adaptive_modes": "Runtime/adaptive-modes.json",
+  "adaptive_router_catalog": "Router/catalog/adaptive-modules.json",
+  "adaptive_tools": "tools/adaptive",
+  "adaptive_entry_point": "tools/route.ps1 -Adaptive",
+  "platform_adapters": {
+    "claude": "Claude/BOOTSTRAP.md",
+    "codex": "Codex/BOOTSTRAP.md"
+  },
+  "candidate_rules_are_authoritative": false,
+  "notes": "Only the minimal Core is stable. Release 0.3.0 replaces the five-level prompt-scaffolding ladder with the schema-4 verification-loop architecture: three modes (lite / standard / critical) that exist for COST and GOVERNANCE only, and a verification loop whose harness-authored, digest-frozen independent checks (acceptance, behavioral differential vs a pre-change baseline, repo-wide symbol sweep, property checks over data, verifier findings) are re-run by the completion gate itself - agent self-attestation never completes a task. Grounding: 6 fixtures / 17 paid calls (incl. the real medi-ny shadow-replay) measured NO correctness lift from prompt scaffolding at 4-10.7x token cost; the corpus finding 'engineer the loop, not the prompt' (F-2026-07-12-009) is now implemented as a mechanism instead of context. The impact-map and adversarial-verification forms are removed. Benchmark verdicts now require >=3 trials/arm (measured ~16pt same-arm variance). The classic router (Router/catalog/modules.json + tools/route.ps1 default path) is unchanged; the adaptive layer stays additive and opt-in via tools/route.ps1 -Adaptive. Runtime/releases/0.3.0/promotion-record.json will be the authoritative promotion timestamp and approver."
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-07-20-weekly-research",
+  "status": "pending",
+  "provider_spend_required": false,
+  "rationale": "This candidate proposes source-registry changes and documentation corrections only. It proposes no change to Runtime/stable behaviour, Router modules or adaptive tooling, so no provider-backed arm comparison is required to accept it. The required_eval_arms field is retained for schema compatibility and is not exercised by this candidate.",
+  "required_eval_arms": [
+    "vanilla",
+    "core",
+    "core-router",
+    "core-router-enforcement"
+  ],
+  "cases": [
+    {
+      "id": "EV-01",
+      "name": "Patch applies and is reversible",
+      "kind": "static",
+      "blocking": true,
+      "method": "Dry-run source-registry.patch.json against Research/sources/registry.json; confirm every add/update/retire id resolves and a rollback manifest restores the pre-patch file byte-for-byte.",
+      "pass_criteria": "All entries apply; rollback reproduces the original registry.json hash."
+    },
+    {
+      "id": "EV-02",
+      "name": "No stable document cites a retired URL",
+      "kind": "static",
+      "blocking": true,
+      "method": "Grep Runtime/stable/, Core/, Claude/, Codex/, Shared/, Setup/ and both BOOTSTRAP files for each retired URL.",
+      "pass_criteria": "Zero references, or every reference is updated to the replacement URL in the same promotion diff."
+    },
+    {
+      "id": "EV-03",
+      "name": "Dead agent-loop link is repaired",
+      "kind": "static",
+      "blocking": true,
+      "method": "code.claude.com/docs/en/agent-loop returns 404 and moved to /docs/en/agent-sdk/agent-loop. Verify no repo artifact still points at the 404 path.",
+      "pass_criteria": "All occurrences updated; link check returns 200."
+    },
+    {
+      "id": "EV-04",
+      "name": "Corrected claims reconciled against existing contract text",
+      "kind": "review",
+      "blocking": true,
+      "method": "For each of the 31 'corrected' claims, diff its corrected_statement against the corresponding assertion in Claude/OPERATING_CONTRACT.md and Codex/OPERATING_CONTRACT.md; list contradictions.",
+      "pass_criteria": "Every contradiction is either fixed in the promotion diff or explicitly deferred with a reason."
+    },
+    {
+      "id": "EV-05",
+      "name": "Version-sensitive sample re-verification",
+      "kind": "review",
+      "blocking": true,
+      "method": "Randomly sample 15 of the 242 accepted version_sensitive claims and independently re-open the cited tier-1 source at promotion time.",
+      "pass_criteria": ">=14/15 still supported. Any failure blocks promotion of that bucket pending full recheck."
+    },
+    {
+      "id": "EV-06",
+      "name": "Rejected claims stay out of guidance",
+      "kind": "static",
+      "blocking": true,
+      "method": "Confirm none of the 4 unsupported claim ids appear in proposed-changes.md or any promoted text.",
+      "pass_criteria": "Zero occurrences."
+    },
+    {
+      "id": "EV-07",
+      "name": "Report source integrity",
+      "kind": "static",
+      "blocking": false,
+      "method": "Verify every source in the report's Sources appendix appears in claims.json or the patch, and that the rendered PDF exposes clickable URI annotations.",
+      "pass_criteria": "No orphan sources; PDF URI annotation count > 0."
+    }
+  ]
+}

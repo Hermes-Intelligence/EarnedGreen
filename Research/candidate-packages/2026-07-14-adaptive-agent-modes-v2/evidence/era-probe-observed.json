@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-19",
+  "campaigns": "era-canary (1 call) + era-probe (4 calls); spend 5 of the approved 8, 3 unspent",
+  "predictions": "evidence/era-campaign-predictions.json",
+
+  "as_graded": "canary vanilla 14; probe: vanilla-configured 14, relation-loop 14 (loop green at i1 — its guards can't see the change, as declared), oracle-loop 14 (no-progress after 2 iterations). All four arms flat at the before-state score.",
+
+  "what_the_stream_diff_shows": {
+    "method": "standing rule applied: diff the data, not the statistic — captured every final workspace's emission streams and compared per predicate against before and the expectation",
+    "movement": "agents were NOT inert: on 10 of 11 discriminating predicates, all or most arms produced streams that DIFFER from before (real behavioural work). canary and configured built real vector charts; oracle-loop built charts whose kindset is a SUPERSET of the reference's (extra rect — a legend/frame element) and passed the only predicate any arm passed (vis-multiline::kindset).",
+    "the_artifact": "kindset uses set EQUALITY, so a superset fails; textseq expects the reference's exact text emissions, so any alternative wording/layout of the same content fails. With ONE altformat variant (separator-only) as the over-constraint filter, the derived expectations pin the reference lineage across the board."
+  },
+
+  "the_finding_that_matters": "A MEASURED VALIDITY BOUNDARY OF THE MECHANICAL-ORACLE METHOD. Diff-derived exact-projection predicates were a perfect oracle on a NARROW behavioural change (vextrum-v1: 9/9 defective red, both valid greens — the valid-solution space was small). On a WIDE, underspecified era rework, the same machinery pins the single reference implementation and rejects materially-correct alternatives: instrument validity is INVERSELY related to exactly the task difficulty it was built to measure. The valid-variant filter is only as strong as its pool, and at era scale a near-identical altformat variant is not a pool. This was flagged as a limitation twice (list-parens on v1, contract interpretation here) and has now been measured with real spend.",
+
+  "predictions_settled": {
+    "P-R1_headroom": "CONFIRMED as registered (no arm hit 100; bare vanilla 14) — but the honest reading splits the cause: genuine task difficulty AND grader over-constraint both push scores down; this probe cannot separate their contributions.",
+    "P-R2_oracle_forcing": "NOT CONFIRMED as graded (14 = 14). The loop DID force real movement (only arm passing any predicate; superset chart), and its no-progress termination was partly the instrument's inability to reward progress: feedback said the same predicates kept failing even as the module genuinely changed.",
+    "P-R3_guards": "CONFIRMED trivially (relation-loop green, no preserved-behaviour failures anywhere).",
+    "P-R4_brake": "not triggered (canary 14)."
+  },
+
+  "what_this_settles_for_the_programme": [
+    "The oracle stack's honest domain map is now measured end to end: (a) regression-scale protection — mechanical, deployable, measured (medi-ny sdr 0.0 vs 0.25; relation pins green on 11/11 implementations); (b) NARROW behavioural changes — diff-derived predicates are near-perfect oracles (vextrum-v1); (c) WIDE underspecified reworks — no mechanical oracle from a single reference is valid; grading needs either a diverse valid-variant pool (which real history rarely provides for one era) or human/spec-level acceptance. The coverage manifest's job is to NAME which regime each dimension is in.",
+    "Era-scale difficulty DOES break one-shot competence (every arm far from reference behaviour on six families) — the difficulty axis is real; what is missing is a valid instrument for scoring partial credit on wide tasks.",
+    "The four agent solutions themselves are the raw material the variant pool lacked: a future zero-call step can study them to design abstraction levels that separate before-from-compliant without pinning the reference (but any such re-scoring of THESE runs is exploratory instrument analysis, never a result — re-grading old runs with a new grader to claim an outcome would be goalpost-moving)."
+  ],
+
+  "spend_summary_session": "step7 21/28 + notes-test 1/2 + etl 4/16 + era 5/8; every call approved, counted, and reported; 3 unspent on this approval."
+}

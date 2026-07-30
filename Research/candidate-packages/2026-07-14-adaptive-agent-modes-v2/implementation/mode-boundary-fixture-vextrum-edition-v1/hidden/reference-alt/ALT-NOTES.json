@@ -1,0 +1,9 @@
+{
+  "variant": "after-altformat",
+  "what_differs": "The same deduped, capped-at-3 citation run is separated with a middot (' · ') instead of a comma (', ').",
+  "why_it_is_still_correct": "CONVENTIONS.md requires that 'Citations in a run are visually separated, not run together'. It does not mandate a comma. A middot satisfies the documented behaviour exactly.",
+  "what_it_proves": "That the hidden grader is format-agnostic rather than merely tolerant: it asserts SEPARATION, not one implementation's chosen delimiter. If reference-alt fails, the grader is pinning the shipped implementation's style and would punish a correct solution for choosing differently.",
+  "pre_reconciliation_result": { "interpretations": [] },
+  "interpretation_differences_after_pinning": [],
+  "structural_differences": ["citation run separator: ', ' -> ' · '"]
+}

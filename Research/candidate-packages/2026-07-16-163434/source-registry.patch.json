@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-07-16-163434",
+  "status": "awaiting-eval",
+  "target": "Research/sources/registry.json",
+  "note": "Proposal only. Research never edits the stable registry. Every URL below was fetched on 2026-07-16.",
+  "update": [
+    {
+      "id": "openai-codex-changelog",
+      "field": "url",
+      "from": "https://developers.openai.com/codex/changelog",
+      "to": "https://learn.chatgpt.com/docs/changelog",
+      "reason": "developers.openai.com/codex/* now returns 308 Permanent Redirect to learn.chatgpt.com/docs/* and the paths were restructured. The redirect works today, but path-level drift means deep links will rot.",
+      "verified": "2026-07-16"
+    },
+    {
+      "id": "openai-codex-docs",
+      "field": "next_check",
+      "from": "2026-07-19",
+      "to": "2026-07-23",
+      "reason": "Rechecked early during this run; content confirmed current. Aligns the source recheck with the proposed catalog window.",
+      "verified": "2026-07-16"
+    }
+  ],
+  "add": [
+    {
+      "id": "anthropic-effort-parameter",
+      "title": "Claude effort parameter",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+      "type": "official-docs",
+      "tier": 1,
+      "status": "active",
+      "topics": [
+        "anthropic",
+        "models",
+        "effort",
+        "configuration"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-07-23",
+      "notes": "Authoritative closed set of effort levels (low|medium|high|xhigh|max) and the affirmative list of supporting models. Gates the model catalog's effort metadata. Documents that `ultracode` is NOT an API effort level."
+    },
+    {
+      "id": "cursor-reward-hacking",
+      "title": "Reward hacking is swamping model intelligence gains (Cursor)",
+      "url": "https://cursor.com/blog/reward-hacking-coding-benchmarks",
+      "type": "vendor-engineering-report",
+      "tier": 1,
+      "status": "active",
+      "topics": [
+        "benchmarks",
+        "reward-hacking",
+        "evaluation-validity",
+        "retrieval-contamination"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-08-16",
+      "notes": "Measured: 63% of Opus successes on SWE-bench Pro retrieved the fix rather than derived it; isolation controls cost 14 points. Prompted the local audit that found our own build_sample.py provenance leak. Load-bearing for every future benchmark claim."
+    },
+    {
+      "id": "harness-evolution-evaluation",
+      "title": "Rethinking the Evaluation of Harness Evolution for Agents",
+      "url": "https://arxiv.org/abs/2607.12227",
+      "type": "primary-paper",
+      "tier": 2,
+      "status": "active",
+      "topics": [
+        "benchmarks",
+        "harness",
+        "evaluation-methodology"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-10-16",
+      "notes": "Submitted 2026-07-14. Demands matched-budget search baselines and held-out task families for any harness claim. We answered the matched-budget half from existing data (best-of-3 vanilla = 77 at 883k vs guided loop = 100 at 647k); the held-out task family remains outstanding."
+    },
+    {
+      "id": "compact-constraint-encoding",
+      "title": "Compact Constraint Encoding for LLM Code Generation",
+      "url": "https://arxiv.org/abs/2604.07192",
+      "type": "primary-paper",
+      "tier": 2,
+      "status": "active",
+      "topics": [
+        "scaffolding",
+        "prompt-engineering",
+        "token-economics"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-10-16",
+      "notes": "The closest independent replication of our scaffolding null: 11 models, 830+ invocations, no significant compliance difference, ~71% token reduction. Cite wherever the null is stated."
+    },
+    {
+      "id": "repair-loop-iterations",
+      "title": "Is Three the Magic Number? An Empirical Evaluation of LLM-Based Repair Loops",
+      "url": "https://arxiv.org/abs/2607.05197",
+      "type": "primary-paper",
+      "tier": 2,
+      "status": "active",
+      "topics": [
+        "repair-loops",
+        "iteration-budget",
+        "reproducibility"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-10-16",
+      "notes": "Externally grounds our iteration ceiling of 3 and our declared-budget rule. 'Orchestration and feedback design matter more than the model.'"
+    },
+    {
+      "id": "specbench-reward-hacking",
+      "title": "SpecBench: Measuring Reward Hacking in Long-Horizon Coding Agents",
+      "url": "https://arxiv.org/abs/2605.21384",
+      "type": "primary-paper",
+      "tier": 2,
+      "status": "active",
+      "topics": [
+        "reward-hacking",
+        "held-out-suites",
+        "evaluation-validity"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-10-16",
+      "notes": "Visible/held-out gap grows 28 points per 10x code size. Our 100/100/100 saturates a visible suite; our defence is the held-out grader plus a hardcoding probe, not suite design."
+    },
+    {
+      "id": "pbt-bench",
+      "title": "PBT-Bench: Benchmarking AI Agents on Property-Based Testing",
+      "url": "https://arxiv.org/abs/2605.15229",
+      "type": "primary-paper",
+      "tier": 2,
+      "status": "active",
+      "topics": [
+        "property-testing",
+        "scaffolding",
+        "capability-dependence"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-10-16",
+      "notes": "Agent-derived property checks miss 17-58% of seeded bugs even at best - our property checks are a partial net, not a safety net. Also shows scaffolding gains are capability-dependent and can go negative at the frontier."
+    },
+    {
+      "id": "verification-horizon",
+      "title": "The Verification Horizon: No Silver Bullet for Coding Agent Rewards",
+      "url": "https://arxiv.org/abs/2606.26300",
+      "type": "primary-paper",
+      "tier": 2,
+      "status": "active",
+      "topics": [
+        "verification",
+        "reward-design",
+        "co-evolution"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-10-16",
+      "notes": "Argues fixed verifiers decay as capability grows. Names the scope boundary of our digest-frozen suite."
+    },
+    {
+      "id": "code-execution-cost-effectiveness",
+      "title": "To Run or Not to Run: Analyzing the Cost-Effectiveness of Code Execution in LLM-Based Program Repair",
+      "url": "https://arxiv.org/abs/2606.26978",
+      "type": "primary-paper",
+      "tier": 2,
+      "status": "active",
+      "topics": [
+        "verification",
+        "execution",
+        "cost"
+      ],
+      "last_checked": "2026-07-16",
+      "next_check": "2026-10-16",
+      "notes": "ISSTA 2026. Prohibiting agent-side execution costs 1.25pp (n.s.) while saving 56-62% tokens; agents run 8.8 test runs/task with concentrated benefit. Supports the harness deciding when to verify."
+    }
+  ],
+  "no_change": {
+    "reason": "Rechecked or confirmed current on 2026-07-16",
+    "ids": [
+      "openai-codex-docs (url already learn.chatgpt.com)",
+      "openai-codex-blog (not a Codex-path redirect; unchanged)"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "note": "Scenario corpus for the mechanical grader. `family` groups scenarios into reported dimensions; a file whose content is 'BAD' makes the scripted transform raise ValueError. Families map 1:1 to the ticket's numbered requirements; the guards family pins requirement 1 (default unchanged).",
+  "scenarios": [
+    {"id": "default-allgood", "family": "default-unchanged",
+     "files": ["a.json", "b.json", "c.json"],
+     "contents": {"a.json": "alpha", "b.json": "beta", "c.json": "gamma"}, "kwargs": {}},
+    {"id": "default-badfile", "family": "default-unchanged",
+     "files": ["g1.json", "bad.json", "g2.json"],
+     "contents": {"g1.json": "one", "bad.json": "BAD", "g2.json": "two"}, "kwargs": {}},
+    {"id": "default-noarchive", "family": "default-unchanged",
+     "files": ["a.json"], "contents": {"a.json": "alpha"}, "kwargs": {"no_archive": true}},
+    {"id": "default-match", "family": "default-unchanged",
+     "files": ["x_report.json", "y_other.json"],
+     "contents": {"x_report.json": "rep", "y_other.json": "oth"},
+     "kwargs": {"match_phrase": "report"}},
+
+    {"id": "skip-continue", "family": "continue-after-failure",
+     "files": ["g1.json", "bad.json", "g2.json"],
+     "contents": {"g1.json": "one", "bad.json": "BAD", "g2.json": "two"},
+     "kwargs": {"skip_on_error": true}},
+    {"id": "skip-multi-bad", "family": "continue-after-failure",
+     "files": ["bad1.json", "g.json", "bad2.json"],
+     "contents": {"bad1.json": "BAD", "g.json": "mid", "bad2.json": "BAD"},
+     "kwargs": {"skip_on_error": true}},
+
+    {"id": "skip-archive-bad", "family": "bad-file-archived",
+     "files": ["bad.json", "g.json"], "contents": {"bad.json": "BAD", "g.json": "ok"},
+     "kwargs": {"skip_on_error": true}},
+    {"id": "skip-noarchive-bad", "family": "bad-file-archived",
+     "files": ["bad.json"], "contents": {"bad.json": "BAD"},
+     "kwargs": {"skip_on_error": true, "no_archive": true}},
+
+    {"id": "skip-upload-skip", "family": "upload-not-called-for-bad",
+     "files": ["bad.json", "g.json"], "contents": {"bad.json": "BAD", "g.json": "fine"},
+     "kwargs": {"skip_on_error": true}},
+
+    {"id": "skip-endfail", "family": "fails-at-end",
+     "files": ["g.json", "bad.json"], "contents": {"g.json": "good", "bad.json": "BAD"},
+     "kwargs": {"skip_on_error": true}},
+    {"id": "skip-allgood-ok", "family": "fails-at-end",
+     "files": ["p.json", "q.json"], "contents": {"p.json": "pp", "q.json": "qq"},
+     "kwargs": {"skip_on_error": true}}
+  ]
+}

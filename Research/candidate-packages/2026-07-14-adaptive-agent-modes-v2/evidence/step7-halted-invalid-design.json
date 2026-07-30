@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "halted_at": "2026-07-17",
+  "calls_spent": 4,
+  "of_approved": 28,
+  "breakdown": {"canary": 1, "main_stage": 3},
+  "verdict": "HALTED — INVALID DESIGN. The campaign could not test its own hypothesis. Stopped at 4 of 28 rather than spending 12 more calls on a result that would have meant nothing.",
+
+  "what_went_wrong": {
+    "finding": "The `standard-loop` arm's frozen check suite contained exactly two checks: `symbol-sweep` and `public-tests`. Nothing in it can cover the house conventions the task is graded on.",
+    "why": "`compile_check_suite` builds a suite from (a) the repo's own tests and (b) a fixture's `harness/harness-checks.json`. medi-ny HAS that file — with HAND-WRITTEN checks, which is precisely the 'absolute no-go' this whole programme set out to remove. The vextrum fixture deliberately has no such file, and its public test deliberately asserts nothing about the conventions (a public test that encoded them would hand the agent the answer). **`check_authoring` — the subagent that AUTHORS the suite, and the actual subject of P1 — is not wired into the campaign at all.**",
+    "consequence": "The loop arm was, in effect, vanilla plus a symbol sweep. P1 ('standard-loop's silent_defect_rate is below vanilla-configured's') would almost certainly have been FALSIFIED — but for an uninteresting reason: the loop had no checks, not because check admission is theatre. That result would have been reported as a null and would have been WRONG about why.",
+    "how_it_surfaced": "standard-loop t2 scored 92 with its gate PASS and completion_allowed=true, while the held-out oracle saw `citation-run-separated` broken — an outright silent defect produced by our own arm. Chasing that led to the suite."
+  },
+
+  "runs_completed_before_halt": [
+    {"arm": "vanilla", "trial": 3, "run_id": "20260717-150650318-vextrum-edition-rework-v1-vanilla-t3",
+     "score": 92, "failing": ["citation-run-separated"], "claimed_done": true, "silent_defect_rate": 0.125,
+     "frozen_checks": null},
+    {"arm": "standard-loop", "trial": 2, "run_id": "20260717-151832982-vextrum-edition-rework-v1-standard-loop-t2",
+     "score": 92, "failing": ["citation-run-separated"], "claimed_done": true, "silent_defect_rate": 0.125,
+     "frozen_checks": ["symbol-sweep", "public-tests"],
+     "note": "the gate passed on work with a real defect, because no check it held could see that defect"},
+    {"arm": "standard-loop", "trial": 1, "run_id": "20260717-152635752-vextrum-edition-rework-v1-standard-loop-t1",
+     "status": "provider-failed", "terminal_reason": "max_turns", "turns": 30, "tokens": 1932627,
+     "cost_usd": 2.4,
+     "note": "hit the 30-turn ceiling. NOT the reason for the halt, and NOT to be fixed by quietly raising the budget mid-campaign: trials must run under identical conditions."}
+  ],
+
+  "what_these_runs_are_still_worth": "They are valid observations of the arms as configured, and they are damning in a useful way: with a suite of ['symbol-sweep', 'public-tests'], our gate green-lit work carrying a real defect. That is a true measurement of what the 0.4.0 loop does on a repo whose tests do not encode its conventions — which is most repos. It is NOT a measurement of check admission.",
+
+  "the_real_lesson": "The fixture was validated (admission 7/7) and the metric was validated (10 tests, real-run contract test), but THE ARM WAS NOT. I checked that the fixture discriminates and that the grader discriminates, and never checked that the arm under test actually contained the mechanism under test. A dry run inspecting the loop arm's frozen suite would have caught this at zero calls — the same way `awbp task` on a fresh repo caught the hardcoded-runner defect. Validate the ARM, not just the fixture.",
+
+  "prediction_status": {
+    "P1": "NOT TESTED. Do not report it as a null. The arm lacked the mechanism.",
+    "P2": "NOT TESTED — vanilla-configured never ran.",
+    "P3_language_agnosticism": "PARTIALLY OBSERVED and POSITIVE so far: the fixture, the harness and the gate all operated on a JS repo with no Python-specific failure. Not yet a claim: the necessity probe and vacuity gate were not exercised, because there were no authored checks to admit.",
+    "P4_cost": "NOT TESTED."
+  },
+
+  "what_must_happen_before_any_further_spend": [
+    "Wire `check_authoring` + `check_admission` into the loop arm: the suite must be AUTHORED by a clean-context subagent and ADMITTED by the vacuity gate, per Setup/earned-green.md. That is the mechanism P1 is about. ~1 extra call per trial.",
+    "Add a ZERO-CALL arm validation to the dry run: assert the loop arm's frozen suite contains at least one check with a requirement_ref covering the conventions. An arm whose suite cannot fail on the task is an arm that measures nothing — the same vacuity rule we apply to the agent, applied to ourselves.",
+    "Re-sizing: authoring adds ~1 call/trial, so 3 arms x 3 trials + authoring ≈ 12-18 calls. 24 of the 28 approved remain.",
+    "Decide the max_turns question honestly BEFORE restarting, not after seeing scores: 30 turns bound one loop trial. Either raise it for every arm equally and re-run all trials, or keep it and report turn exhaustion as a real cost of the loop. Do not change it mid-campaign."
+  ],
+
+  "spend_discipline_note": "4 calls bought a real answer: the campaign was mis-designed and we know exactly how. The alternative — 16 calls and a confident, wrong null — is what this rule exists to prevent."
+}

@@ -1,0 +1,361 @@
+{
+ "schema_version": 1,
+ "rails": "exploratory; new experiment on old material; no scores; no re-grading",
+ "admitted": 27,
+ "rejected_by_variant": 0,
+ "driver_errors": [],
+ "guard_input_predicates": [],
+ "per_predicate": {
+  "block-cites::count-link-became-zero": {
+   "relation": "count-direction",
+   "family": "block-citations",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "block-cites::count-text-decreased": {
+   "relation": "count-direction",
+   "family": "block-citations",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "block-many::count-link-became-zero": {
+   "relation": "count-direction",
+   "family": "block-citations",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "block-many::count-text-decreased": {
+   "relation": "count-direction",
+   "family": "block-citations",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "cite-run::count-line-decreased": {
+   "relation": "count-direction",
+   "family": "citation-hygiene",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "cite-run::count-link-decreased": {
+   "relation": "count-direction",
+   "family": "citation-hygiene",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "cite-run::count-stroke-decreased": {
+   "relation": "count-direction",
+   "family": "citation-hygiene",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "mixed::count-link-became-zero": {
+   "relation": "count-direction",
+   "family": "ordering",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "mixed::count-text-decreased": {
+   "relation": "count-direction",
+   "family": "ordering",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "sources::count-line-increased": {
+   "relation": "count-direction",
+   "family": "guard-or-unmapped",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "sources::count-stroke-increased": {
+   "relation": "count-direction",
+   "family": "guard-or-unmapped",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "RED",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "vis-multiline::kinds-gained": {
+   "relation": "kinds-superset",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "vis-multiline::count-circle-became-nonzero": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "vis-multiline::count-fill-became-nonzero": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "RED"
+   }
+  },
+  "vis-multiline::count-line-increased": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  },
+  "vis-multiline::count-rect-became-nonzero": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "RED"
+   }
+  },
+  "vis-multiline::count-stroke-increased": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  },
+  "vis-multiline::count-text-increased": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "RED",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  },
+  "vis-table::count-line-increased": {
+   "relation": "count-direction",
+   "family": "charts-table",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  },
+  "vis-table::count-stroke-increased": {
+   "relation": "count-direction",
+   "family": "charts-table",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  },
+  "vis-table::count-text-increased": {
+   "relation": "count-direction",
+   "family": "charts-table",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  },
+  "vis-trend::kinds-gained": {
+   "relation": "kinds-superset",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "vis-trend::count-circle-became-nonzero": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "RED",
+    "relation-loop": "RED"
+   }
+  },
+  "vis-trend::count-fill-became-nonzero": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "RED",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "RED"
+   }
+  },
+  "vis-trend::count-line-increased": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  },
+  "vis-trend::count-stroke-increased": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "GREEN",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  },
+  "vis-trend::count-text-increased": {
+   "relation": "count-direction",
+   "family": "charts-lines",
+   "verdicts": {
+    "before": "RED",
+    "after": "GREEN",
+    "altformat": "GREEN",
+    "vanilla": "GREEN",
+    "oracle-loop": "RED",
+    "vanilla-configured": "GREEN",
+    "relation-loop": "GREEN"
+   }
+  }
+ }
+}

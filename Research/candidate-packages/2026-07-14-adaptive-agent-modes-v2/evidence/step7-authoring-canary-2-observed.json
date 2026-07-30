@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-17",
+  "campaign": "20260717-175101-adaptive-mode-ablation (Evals/experiments/step7-authoring-canary-2.json)",
+  "purpose": "After fixing the helper-collection bug the first authoring canary found, confirm the FULL runner path completes live with a fresh author, before releasing the remaining ceiling.",
+  "approved_and_spent": "2 of 2 (author + 1 iteration)",
+  "final_status": "complete",
+
+  "mechanism_validation": {
+    "verdict": "SUCCESS — the full path ran live end-to-end with the fix",
+    "path": "author (1 call, exit 0) -> collect whole checks/ subtree -> admit -> merge -> install into solution workspace -> 1 loop iteration -> green -> grade",
+    "author_wrote": 8,
+    "authored_checks": ["citations-dedup", "citations-cap-three", "citations-separated",
+                        "ordered-list-markers", "long-prose-split", "url-not-broken",
+                        "win1252-safe", "prose-preserved"],
+    "note": "a fresh author, given the improved brief, covered all 8 conventions and put its shared harness under checks/ (harness.mjs) exactly as the fix now requires. The helper-collection fix generalised beyond the first author.",
+    "loop_outcome": "green on iteration 1",
+    "run_dir": "Evals/runs/20260717-175109779-vextrum-edition-rework-v1-standard-loop-t1"
+  },
+
+  "substantive_early_signal": {
+    "headline": "The loop went SILENTLY GREEN on the hard dimension. Its own authored suite passed on iteration 1, but the held-out oracle scored 92, FAILING citation-run-separated. That is a silent defect: the loop's evidence said done while a graded behaviour was broken.",
+    "why": "The author authored a check for the right convention (citations-separated) but grounded it in a WEAKER observable than the oracle. The author's check asserts LAYOUT geometry (adjacent citation link x-positions do not overlap: links[i].x > prevEnd). The oracle's citation-run-separated asserts the emitted TEXT carries a separator between citations. Geometry depends on the jspdf stub's text-width approximation (splitTextToSize is identity, widths are approximate), so a solution can satisfy the geometry while the rendered text still glues the citations. The author, given only CONVENTIONS.md and the module, chose an observable strictly weaker than the held-out oracle.",
+    "iteration_budget_is_not_the_limit": "max_iterations was 1 here, but that is not why it stopped short: the authored suite went GREEN on iteration 1, so even with the main run's 3 iterations the loop would stop at the first green. The limiting factor is the AUTHORED CHECK'S STRENGTH, not the iteration budget. More iterations cannot force a fix for a defect the suite cannot see.",
+    "consistency": "92 with citation-run-separated failing is the SAME score and SAME failing dimension the halted campaign's runs produced (vanilla t3 = 92, standard-loop t2 = 92). citation-run-separated is consistently the hard dimension.",
+    "bearing_on_P1": "P1 (recorded before spend in step7-predictions.json): if the loop's silent_defect_rate is not below vanilla-configured's, check admission is theatre and we say so. This canary is a single trial (n=1, NOT a verdict), but it is a sobering early data point: on the hard dimension the loop's authored check was too weak to catch what the oracle catches, so the loop silently green-lit a real defect. If this replicates across the main run, P1's own falsification condition could trigger -- not because the plumbing is broken, but because a clean-context author writes checks weaker than the held-out oracle on the hard dimension. That is itself a publishable finding about the ceiling of self-authored checks."
+  },
+
+  "spend_status": {
+    "approved_total": 28,
+    "spent_running_total": 7,
+    "breakdown": "4 halted invalid-design + 1 first-canary author + 2 this canary",
+    "remaining": 21,
+    "main_run_needs": "~16-18 (5 arms x 3 trials + loop iterations + 1 authoring call per loop-arm trial)",
+    "decision_for_owner": "The mechanism is fully validated live. The main run will quantify silent_defect_rate across arms and settle P1. But the canary already shows the loop can go silently green on citation-run-separated because the authored check is weaker than the oracle -- so the main run may well FALSIFY P1. Proceeding is still worthwhile (a measured null with a diagnosed cause is a real result), but the owner should choose it knowing the early signal points that way, not toward a win."
+  }
+}

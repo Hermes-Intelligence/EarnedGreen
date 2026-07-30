@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "purpose": "The institutional notes bank. Every note is an error CLASS observed in real agent work here, routed forward to the next agent at the moment it is relevant. Persistence is EARNED: provisional notes must pass a measured transfer test or be retired. Notes must never encode any task's answer — in a benchmark context that is contamination, and in any context it is a crutch that dies with the task.",
+  "notes": [
+    {
+      "id": "ground-assertions-in-emitted-content",
+      "error_class": "weak-observable",
+      "audience": [
+        "check-author"
+      ],
+      "applies_when": {
+        "tags": [
+          "rendering",
+          "documents",
+          "pdf",
+          "ui",
+          "reports",
+          "frontend"
+        ]
+      },
+      "lesson": "When checking software that renders or presents content, authors here repeatedly grounded assertions in LAYOUT GEOMETRY (element positions, widths, coordinates) instead of in the EMITTED CONTENT (the text/data the code decided to output). Geometry in a test environment is produced by stubs and approximations, so a geometry assertion can pass while the emitted content is still wrong — the check looks strict and verifies nothing.",
+      "how_to_apply": "For every check you write, ask: does my assertion read what the code DECIDED TO EMIT (strings, records, calls), or where something LANDED? Assert on emitted content. Use position/geometry only when position itself is the documented requirement — and say so in the check's comment.",
+      "provenance": {
+        "observed_in": [
+          "20260717-175109779-vextrum-edition-rework-v1-standard-loop-t1 (canary-2: citations-separated check asserted link x-positions; oracle asserts emitted text; loop went silently green at oracle 92)",
+          "20260717-192926159-vextrum-edition-rework-v1-standard-loop-t3 (same class: authored check passed while the text-level oracle failed)"
+        ],
+        "observed_at": "2026-07-17",
+        "evidence": "evidence/step7-P1-verdict.json (three_failure_modes_observed)"
+      },
+      "verification": {
+        "status": "retired",
+        "records": [
+          {
+            "transferred": false,
+            "evidence": "notes-transfer-test 2026-07-19: P-N1 failed as pre-registered — no authored check RED on a prior 92-solution and GREEN on the reference. The author DID absorb the style (whole harness grounded in emitted text, zero geometry; all 8 convention areas covered) but the separation predicate was still weaker than the oracle (asserts non-gluing, not separator presence). Style transferred; strength did not. Per the registered protocol both notes retire. Evidence: evidence/notes-transfer-test-observed.json",
+            "recorded_at": "2026-07-18T23:15:59.305715+00:00"
+          }
+        ],
+        "planned_test": "re-run the authoring canary with this note routed into the brief, against the measured 0-of-3 baseline on the dimension this class kept missing",
+        "retired_reason": "measured non-transfer: the lesson did not change behaviour"
+      },
+      "retire_when": "a measured transfer test shows authors given this note still ground checks in geometry (non-transfer), OR the harness gains real rendering (no stubs), making geometry a faithful observable."
+    },
+    {
+      "id": "one-check-per-documented-convention",
+      "error_class": "missing-coverage",
+      "audience": [
+        "check-author"
+      ],
+      "applies_when": {
+        "tags": []
+      },
+      "lesson": "Authors here wrote good checks for SOME documented conventions and simply omitted others — and nothing in their process noticed the omission. The suite then looked rigorous while a documented, graded behaviour had no check at all: the loop it fed forced fixes only for what it could see, and shipped a defect on the dimension nobody covered.",
+      "how_to_apply": "Before writing any check: enumerate every rule in the repository's conventions/requirements documents as an explicit list. Map each check you write to exactly one rule. When you finish, print the rules that have NO check and either write one or state explicitly, in your reply, that the dimension is uncovered and why. An uncovered dimension you named is a known gap; an uncovered dimension you never listed is a silent defect waiting.",
+      "provenance": {
+        "observed_in": [
+          "20260717-185649280-vextrum-edition-rework-v1-standard-loop-t1-author1 (main t1: authored 7 checks, none covering one documented convention; final solution failed the oracle exactly there)"
+        ],
+        "observed_at": "2026-07-17",
+        "evidence": "evidence/step7-P1-verdict.json (three_failure_modes_observed)"
+      },
+      "verification": {
+        "status": "retired",
+        "records": [
+          {
+            "transferred": false,
+            "evidence": "notes-transfer-test 2026-07-19: P-N1 failed as pre-registered — no authored check RED on a prior 92-solution and GREEN on the reference. The author DID absorb the style (whole harness grounded in emitted text, zero geometry; all 8 convention areas covered) but the separation predicate was still weaker than the oracle (asserts non-gluing, not separator presence). Style transferred; strength did not. Per the registered protocol both notes retire. Evidence: evidence/notes-transfer-test-observed.json",
+            "recorded_at": "2026-07-18T23:15:59.305715+00:00"
+          }
+        ],
+        "planned_test": "same transfer canary: does the author's reply now contain an explicit convention-to-check mapping with no unexplained gaps?",
+        "retired_reason": "measured non-transfer: the lesson did not change behaviour"
+      },
+      "retire_when": "a measured transfer test shows authors given this note still leave documented conventions uncovered without declaring it, OR briefs gain a compiled requirement ledger that enforces the mapping mechanically (which would supersede the note)."
+    },
+    {
+      "id": "predicate-from-the-conventions-words",
+      "error_class": "weak-predicate",
+      "audience": [
+        "check-author"
+      ],
+      "applies_when": {
+        "tags": []
+      },
+      "lesson": "Authors here translated a documented rule into a WEAKER predicate: asserting a consequence of the rule (e.g. 'items are not glued into one token') instead of the rule's own requirement (e.g. 'a separator stands between adjacent items'). The weaker predicate passes on work that still violates the documented rule, so the suite goes green over a real defect.",
+      "how_to_apply": "Derive each assertion from the convention's own words. If the rule requires X to hold, assert the PRESENCE of X — not the absence of some other failure you imagine instead. Then re-read the convention sentence and ask: would this assertion fail on EVERY output that violates the sentence? If you can imagine a violating output that passes, the predicate is too weak.",
+      "provenance": {
+        "observed_in": [
+          "20260719-010027377-vextrum-edition-rework-v1-standard-loop-t1-author1 (citation_separated asserted non-gluing while the documented rule requires visual separation; check GREEN on a solution the held-out oracle fails)"
+        ],
+        "observed_at": "2026-07-19",
+        "evidence": "evidence/notes-transfer-test-observed.json"
+      },
+      "verification": {
+        "status": "provisional",
+        "records": [],
+        "planned_test": "a future transfer canary (separate spend approval) against the same 0-strong-predicate baseline"
+      },
+      "retire_when": "a measured transfer test shows authors given this note still write weaker-than-rule predicates, OR predicates start being derived mechanically from history/diffs, superseding hand-derivation."
+    },
+    {
+      "id": "test-inputs-from-documented-examples",
+      "error_class": "out-of-domain-inputs",
+      "audience": [
+        "check-author"
+      ],
+      "applies_when": {
+        "tags": []
+      },
+      "lesson": "Authors here invented input variants (e.g. a citation-label format of their own design) that sit OUTSIDE the domain the documented feature handles. Their red-before checks then stay red on the CORRECT implementation too — a loop fed by them chases a target the real fix never hit, and the suite rejects the very behaviour it was meant to pin.",
+      "how_to_apply": "Draw test inputs from the repository's own documented examples and sample data. If you must invent a variant, first find the sentence in the documentation that promises behaviour for it; if no such sentence exists, your check tests your invention, not the repository's rules — drop it or mark it green-before as a plain regression guard.",
+      "provenance": {
+        "observed_in": [
+          "20260719-010027377-vextrum-edition-rework-v1-standard-loop-t1-author1 (3 of 9 authored checks RED on the shipped reference: invented label format outside the documented citation form)"
+        ],
+        "observed_at": "2026-07-19",
+        "evidence": "evidence/notes-transfer-test-observed.json"
+      },
+      "verification": {
+        "status": "provisional",
+        "records": [],
+        "planned_test": "same future transfer canary: zero authored checks red on the shipped reference"
+      },
+      "retire_when": "a measured transfer test shows non-transfer, OR admission gains a mechanical over-constraint probe (an after-state to test against), which would catch the class without the note."
+    }
+  ]
+}

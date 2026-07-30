@@ -1,0 +1,11 @@
+{
+  "purpose": "Second valid interpretation of the underspecified rework, proving the hidden grader scores on drug-name SEMANTICS, not on one implementation's serialization.",
+  "materialized_from": "after_ref (shipped parser) + a non-proprietary output wrapper",
+  "interpretation_differences_after_pinning": [
+    "row order reversed (a solution may emit rows in any order; the grader is set-based)",
+    "status encoded with a hyphen ('non-preferred') instead of an underscore ('non_preferred')",
+    "drug_name whitespace re-normalized (collapsed internal spaces)"
+  ],
+  "structural_differences": "parse_pdl output is post-processed by an appended wrapper; the cleaned drug NAMES (the graded contract) are byte-identical to the primary reference, only order/status-format/whitespace differ",
+  "why_still_100": "every graded dimension asserts drug-name content semantically and normalizes status and whitespace, so an order/format variant that preserves the bare names scores the full reference score"
+}

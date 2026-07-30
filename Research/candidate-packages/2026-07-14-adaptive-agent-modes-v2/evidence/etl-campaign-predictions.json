@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "registered_at": "2026-07-19",
+  "registered_before_any_spend_on_this_fixture": true,
+  "fixture": "hermes-etl-skip-v1 (admitted 7/7; first truly independent second task family; first fully mechanical held-out grader)",
+  "design": "3 arms x 3 trials, max_iterations 2, 60 turns/call. vanilla-configured (control) | relation-loop (DEPLOYABLE: before-derived guard pins; cannot force new behaviour by construction) | oracle-loop (CEILING: target-diff predicates; not deployable — measures whether the loop delivers when predicates are perfect).",
+  "arm_validity_dry_run": "through the campaign's exact pathway (kind derived + run_suite): oracle-pins RED on before / GREEN on after (change-forcing arm discriminates); guard-pins GREEN on both (valid regression guard). Zero calls.",
+  "planned_calls": {"canary": 1, "main_ceiling": 15, "total_ask": 16,
+                     "breakdown": "vanilla-configured 3x1 + relation-loop 3x(<=2) + oracle-loop 3x(<=2); loops may use fewer"},
+
+  "predictions": {
+    "P-E1_score_landscape": "vanilla-configured lands high but IMPERFECT on the 5-dimension mechanical grader: 60-80 mean (the ticket has 5 explicit requirements; frontier models implement most; the subtle interactions — no_archive x failed files, raise-at-END ordering, default untouched — are where partial solutions land). If it lands 100/100/100, the fixture is saturated like vextrum and we say so.",
+    "P-E2_oracle_ceiling": "oracle-loop reaches 100 on ALL trials within 2 iterations. If even perfect predicates cannot force 100, the bottleneck is the LOOP MACHINERY, not predicate strength — a finding that would redirect the whole programme.",
+    "P-E3_deployable_arm": "relation-loop does NOT beat vanilla-configured on score (its pins cannot see the new behaviour, by construction). Its measurable value, if any, is regression protection: zero default-unchanged failures across its trials.",
+    "P-E4_the_decisive_comparison": "oracle-loop mean score strictly above vanilla-configured mean, with silent_defect_rate 0.0 for oracle-loop (its gate cannot go green over a defect the predicates see). THIS is 'do mechanical oracles do what authored ones could not': authored-loop on vextrum showed 0/3 coverage of the hard dimension and sdr equal to controls; oracle-loop carries perfect predicates by construction, so any gap vs 100 is machinery, and any win vs vanilla-configured is the first measured correctness lift of the whole programme."
+  },
+
+  "falsification_conditions": {
+    "if_P-E2_fails": "the loop machinery cannot exploit even perfect predicates: published as the programme's ceiling result; no further predicate work matters until the loop is fixed.",
+    "if_all_arms_saturate": "second saturated fixture: the task class is too easy for frontier models; the honest conclusion extends the null and the score axis must move to harder tasks (multi-file, cross-module), not more machinery.",
+    "if_oracle_wins_but_relation_ties": "expected and honest: the deployable value of derived oracles TODAY is regression protection; forcing NEW behaviour mechanically requires the diff, which deployment does not have. The product implication (mint baselines now, oracle the future) stands on its own."
+  },
+
+  "honesty_notes": [
+    "oracle-loop is explicitly a CEILING arm: at task time in deployment the fix does not exist, so its predicates are unobtainable. It never claims deployable value.",
+    "the mechanical grader's 5 family dimensions move the score in steps of 20; a 1-family gap is 20 points.",
+    "feedback to loop arms names failing scenario ids (e.g. skip-endfail::seq) — dimension names the specified ticket already states; no expected values leak.",
+    "trials must complete whole: the runner is invoked with the full approved ceiling in one invocation (the truncation lesson from step7 is a standing rule)."
+  ]
+}

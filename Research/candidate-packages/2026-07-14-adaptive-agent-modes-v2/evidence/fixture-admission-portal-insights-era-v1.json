@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "fixture": "portal-insights-era-v1",
+  "fixture_dir": "C:\\Users\\kaczm\\OneDrive\\Pulpit\\GithubRepos\\AgenticWorkBestPractices\\Research\\candidate-packages\\2026-07-14-adaptive-agent-modes-v2\\implementation\\mode-boundary-fixture-portal-insights-era-v1",
+  "generated_at": "2026-07-20T11:32:23.119262+00:00",
+  "fixture_fingerprint": {
+    "file_count": 20,
+    "newest_mtime": 1784547108.9773169,
+    "sha256": "AF09B9928768FFE006C573C21E00DC72A8CB645484E0F7EB6FC8BC7AA4FCE5CA"
+  },
+  "provider_calls": 0,
+  "checks": [
+    {
+      "id": "reference-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100
+    },
+    {
+      "id": "reference-alt-pass",
+      "passed": true,
+      "detail": "",
+      "score": 100,
+      "alt_interpretation_differences": {
+        "pre_reconciliation": "identical to the reference on every anchored convention; the variant varies only the SQL spelling of the same canonical order, which the conventions deliberately do not specify",
+        "after_pinning": [],
+        "structural": [
+          "bucket ordering expressed via array_position instead of CASE in get_run_buckets"
+        ]
+      }
+    },
+    {
+      "id": "format-adversary",
+      "passed": true,
+      "skipped": true,
+      "detail": "fixture declares no serialized_output_dimensions; format-adversary is opt-in and not applicable here",
+      "serialized_output_dimensions": []
+    },
+    {
+      "id": "negative-control",
+      "passed": true,
+      "detail": "",
+      "controls": [
+        {
+          "control": "before-module",
+          "public_pass": true,
+          "hidden_rejected": true,
+          "score": 14,
+          "expected_band": [
+            5,
+            40
+          ],
+          "band_pass": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "grader-isolation",
+      "passed": true,
+      "detail": "",
+      "battery": [
+        {
+          "hostile": "import-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "first-call-bomb",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        },
+        {
+          "hostile": "wrong-types",
+          "grader_emitted_json": true,
+          "reported_dimensions": 7,
+          "declared_dimensions": 7,
+          "dimension_diff": [],
+          "score": 14,
+          "scored_below_reference": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "id": "platform-lint",
+      "passed": true,
+      "detail": "",
+      "hits": [],
+      "exempted": []
+    },
+    {
+      "id": "interpretation-coverage",
+      "passed": true,
+      "detail": "",
+      "coverage": {
+        "fixture_class": "underspecified-by-design",
+        "anchored_checks": [
+          "bucket-aggregations",
+          "buckets-canonical",
+          "coverage-tolerance",
+          "empty-vs-404",
+          "matrix-enrichment",
+          "preserved-behaviour",
+          "serialization-safety"
+        ],
+        "issues": []
+      }
+    }
+  ],
+  "verdict": "PASS",
+  "paid_history": {
+    "runs_scanned": 163,
+    "matching_runs": [],
+    "valid_paid_runs": 0
+  }
+}

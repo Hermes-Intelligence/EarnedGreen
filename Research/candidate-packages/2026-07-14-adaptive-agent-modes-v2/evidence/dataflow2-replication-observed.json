@@ -1,0 +1,34 @@
+{
+ "schema_version": 1,
+ "observed_at": "2026-07-20",
+ "companion_of": "dataflow2-replication-predictions.json",
+ "campaigns": {"canary": "20260720-002011 (1 call, bare vanilla 14 — in P-V1 band, stream-diffed clean of instrument walls at the time)", "main": "20260720-004? (11 calls)"},
+ "spend": "13 of 13 approved; total family-2 spend across both instrument generations: 26 calls",
+ "as_graded": {
+  "all_six_trials": 43,
+  "green_everywhere": ["execution-robustness", "preserved-behaviour", "resume-reuse"],
+  "loop_outcomes": ["no-progress x2", "iteration-budget x1"]
+ },
+ "defects_located_by_stream_diff_layer_2_and_3": [
+  "L2a: INSERT..RETURNING returned no rows from the stub — implementations counting REAL inserts (better than the reference, which counts conflicted attempts) read 0 forever (ret-materialize-n0 across every arm)",
+  "L2b: cursor.rowcount did not exist",
+  "L2c: the watermark filter fired only on the reference's literal '>= %s' — a strictly-better '>' implementation got the whole table back (records-dup x2 on reruns)",
+  "L3: value-bearing kinds pinned a reference QUIRK: on the >= boundary rerun the reference reports n1 having added zero rows, violating CONVENTIONS' own 'actually added'; correct implementations reporting 0 were red. Fixed by the rerun-inputs policy: ret-materialize-*/records-dup kinds dropped there, semantic anti-reprocessing pins (records-new counts) kept"
+ ],
+ "instrument_final_state": "v2.3: RETURNING rows + rowcount with psycopg2 semantics + operator-agnostic watermark comparison at the correct param position + rerun quirk policy; re-derived (81 discriminating + 3 guards), re-admitted PASS before=14/after=100/alt=100",
+ "exploratory_regrade_of_spent_workspaces_under_final_instrument": {
+  "rails": "EXPLORATORY ONLY — a new instrument on old runs is never a verdict; fresh runs under the frozen final instrument are the sanctioned path",
+  "bare-canary": 57,
+  "vanilla-configured": [100, 43, 43],
+  "oracle-loop": [100, 100, 100],
+  "reading": "the family-1 pattern reappears: the full environment produced a convention-complete solution in 3 of 3 trials; configured vanilla in 1 of 3 (same-arm variance in action); and this despite the loop having been fed partially-defective pins during those runs. Means 100.0 vs 62.0 (gap 38 > 16-pt band) but distributions overlap at the top — the environment's measurable edge here is CONSISTENCY."
+ },
+ "predictions_settled": {
+  "P-V1": "CONFIRMED (canary 14, in band, no wall found at canary time — the RETURNING wall only manifests in solutions that count inserts via RETURNING, which the canary did not)",
+  "P-V2": "as-graded FALSIFIED (flat 43) with defects LOCATED in streams per the rule's own exception clause — the campaign again measured the instrument; replication remains UNMEASURED as a verdict; the exploratory signal under the final instrument points the family-1 way",
+  "P-V3": "loop stalled on the defective pins (no-progress at the wall) — not settleable against a broken forcing signal",
+  "P-V4/P-V5": "P-V5 held (all guards green everywhere); P-V4 texture partially visible only exploratorily"
+ },
+ "programme_finding_third_iteration": "On API-rich STATEFUL surfaces (DB traffic) the single-reference capture keeps pinning incidental choices layer after layer (aliases/schema -> returning/rowcount/operators -> value-quirks), and each admission trio is blind to the next layer because reference and variants share those choices. The era/JS fixture never hit this because its observable surface (the emitted document) IS the semantic surface. Instrument-building lesson: prefer semantic output surfaces; where the surface is an implementation protocol, expect several validity iterations and budget canaries accordingly.",
+ "next": "fresh 13-call campaign under the FROZEN final instrument = the verdict path; requires a new owner approval"
+}

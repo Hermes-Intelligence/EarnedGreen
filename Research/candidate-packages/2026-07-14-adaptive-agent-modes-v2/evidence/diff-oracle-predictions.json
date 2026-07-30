@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "registered_at": "2026-07-19",
+  "registered_before_any_contact_with_solutions": true,
+  "provider_calls": 0,
+
+  "hypothesis": "Predicates derived MECHANICALLY from the behaviour diff (before/after git states run on the same inputs, compared under generic projections) discriminate where three generations of mind-derived predicates failed. Every intervention that failed (iteration, admission, notes) asked a mind to derive a predicate from prose; each came out weaker than the rule, in a different way (geometry, non-gluing, invented domains). The only oracle that ever discriminated was derived from the diff — by hand. This pipeline automates that derivation and tests it on the exact material minds failed on.",
+
+  "method_constraints_registered_up_front": {
+    "no_hidden_knowledge": "The pipeline uses ONLY: (a) the public workspace surface (buildEditionDoc + the recording stub's global, both visible in tests/public.test.js), (b) the git history variants (before / after / after-altformat), (c) a deterministic generic-markdown input corpus built from the module's public input shape (content_json.summary/blocks) and generic markdown primitives (links, link runs with repetition, list markers, unicode, long prose, URLs). The hidden grader, its input file and its dimension list are NOT read by the pipeline.",
+    "over-constraint_filter_is_mechanical": "A candidate predicate is admitted only if it is RED on before, GREEN on after, AND GREEN on the altformat variant (the committed valid-but-different solution). History gives us what task-time admission can never have: a second valid implementation to kill format-pinning predicates mechanically.",
+    "corpus_honesty": "Choosing markdown primitives IS domain knowledge of 'agent prose'; it is NOT answer knowledge (no primitive encodes a convention). The corpus generator is seeded and committed; anyone can inspect what knowledge it embeds."
+  },
+
+  "predictions": {
+    "D-1": "The derivation admits at least one predicate (red-before, green-after, green-altformat) from the generic corpus.",
+    "D-2_primary": "At least one admitted predicate is RED on ALL NINE 92-scoring solution workspaces from the step7 main run (every one of which the held-out oracle fails ONLY on citation-run-separated) while staying GREEN on the reference and the altformat variant. This is the exact discrimination three generations of authored suites (0/3 authors, 1 canary, 9 admitted-or-refused suites) never achieved.",
+    "D-2_secondary": "If not all nine: RED on >=7 of 9 counts as partial support and the misses must be diffed individually (diff the data, not a statistic).",
+    "D-3_interpretability": "Inspection of the surviving predicate(s) shows they concern the run-separation behaviour (the projection that discriminates involves adjacency/joined-text of the emitted stream), not an unrelated accident."
+  },
+
+  "falsification": "If no admitted predicate reddens the solutions, the generic projection library is too weak to capture the behaviour class, and we publish that as a measured limitation of mechanical derivation at this abstraction level — including which projections were tried. No goalpost moves after contact with the solutions.",
+
+  "measurement_material": {
+    "defective_solutions": "the nine final workspaces of campaign 20260717-182519 (3 vanilla, 3 vanilla-configured, 3 standard-loop), each scored 92 with citation-run-separated failing",
+    "valid_states": "shipped reference (after) and after-altformat, materialized from the local git refs by the existing Gate machinery"
+  }
+}

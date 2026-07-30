@@ -1,0 +1,41 @@
+{
+  "_note": "The graded INPUT. Shape verified against the real module at both git refs: buildEditionDoc reads edition.content_json.blocks[] (prose field, verified: b.prose at line 502, NOT b.body) (fallback .sections[]), .summary, .sources[], .coverage_gaps[]; prose runs through proseBlock -> parseRuns -> (after) collapseCitations/chunkLong. Every field below exercises a dimension the real rework changed. This file is HIDDEN: it is the oracle's input, never the agent's.",
+  "title": "Weekly Intelligence Edition",
+  "output_kind": "report",
+  "generated_at": "2026-07-01T09:00:00Z",
+  "content_json": {
+    "summary": "Adoption rose across the northern corridor this quarter. [1](https://example.com/a) [1](https://example.com/a) [2](https://example.com/b) [3](https://example.com/c) [4](https://example.com/d) The operator confirmed the rollout schedule and, separately, the regulator opened a consultation that closes in November. Deployment density in the eastern cluster remains materially below the national mean, a gap that has persisted for three consecutive reporting periods and that the operator has not publicly addressed despite repeated questions from the trade press, which suggests either a supply constraint or a deliberate sequencing decision that has not yet been disclosed to the market. See https://example.com/methodology.notes for the derivation.",
+    "blocks": [
+      {
+        "order": 1,
+        "title": "Coverage",
+        "prose": "The programme covers three regions.\n(1) North: complete.\n(2) East: partial.\n(3) South: not started.\nStatus is reported monthly. [7](https://example.com/g) [7](https://example.com/g)"
+      },
+      {
+        "order": 2,
+        "title": "Enumerations",
+        "prose": "Findings are graded as follows: 1. confirmed 2. probable 3. speculative. Each grade carries a different evidentiary bar."
+      },
+      {
+        "order": 3,
+        "title": "Encoding",
+        "prose": "Éléments préférés — naïve façade “quoted” and an em–dash. Costs rose 5 % year on year."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Operator filing",
+        "url": "https://example.com/a",
+        "published": "2026-06-01"
+      },
+      {
+        "title": "Regulator notice",
+        "url": "https://example.com/b",
+        "published": "2026-06-15"
+      }
+    ],
+    "coverage_gaps": [
+      "Eastern cluster density unexplained"
+    ]
+  }
+}

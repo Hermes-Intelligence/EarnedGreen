@@ -13,7 +13,7 @@ promoted here for durability. They are deliberately NOT registered in
   `serialized_output_dimensions` / `process_ground_truth`) is richer than the
   catalog contract and is graded by the ADAPTIVE harness instead.
 - Grading and admission run through the candidate tooling (or its promoted
-  copies): `tools/adaptive/fixture_admission.py --fixture <dir>` validates a
+  copies): `awbp/fixture_admission.py --fixture <dir>` validates a
   fixture fail-closed before any paid run; campaign tooling remains
   candidate-side until promoted separately.
 

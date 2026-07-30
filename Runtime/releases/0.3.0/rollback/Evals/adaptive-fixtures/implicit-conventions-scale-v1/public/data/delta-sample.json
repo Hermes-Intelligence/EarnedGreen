@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "status": "success",
+    "as_at": "2026-07-01T05:30:00Z"
+  },
+  "data": {
+    "notices": [
+      {
+        "code": "XND",
+        "action": "suspension",
+        "summary": "Suspension pending disclosure",
+        "date_public": "2026-06-10",
+        "date_effect": "2026-06-12",
+        "docket": "DEL-90300"
+      },
+      {
+        "code": "WTR",
+        "action": "reinstatement",
+        "summary": "Reinstated after review",
+        "date_public": "2026-06-11",
+        "date_effect": "2026-06-13",
+        "docket": "DEL-90301"
+      },
+      {
+        "code": "VBG",
+        "action": "admission",
+        "summary": "OFFICIAL NOTICE: new admission",
+        "date_public": "2026-06-12",
+        "date_effect": "2026-06-14",
+        "docket": "DEL-90302"
+      },
+      {
+        "code": "THT",
+        "action": "revision",
+        "summary": "Docket revised",
+        "date_public": "2026-06-13",
+        "date_effect": "2026-06-15",
+        "docket": "DEL-90303"
+      },
+      {
+        "code": "SNJ",
+        "action": "removal",
+        "summary": "Removal scheduled",
+        "date_public": "2026-06-14",
+        "date_effect": "2026-06-16",
+        "docket": "DEL-90304"
+      },
+      {
+        "code": "RTW",
+        "action": "suspension",
+        "summary": "Suspension pending disclosure",
+        "date_public": "2026-06-15",
+        "date_effect": "2026-06-17",
+        "docket": "DEL-90305"
+      },
+      {
+        "code": "QBL",
+        "action": "reinstatement",
+        "summary": "Reinstated after review",
+        "date_public": "2026-06-16",
+        "date_effect": "2026-06-18",
+        "docket": "DEL-90306"
+      },
+      {
+        "code": "PHZ",
+        "action": "admission",
+        "summary": "OFFICIAL NOTICE: new admission",
+        "date_public": "2026-06-17",
+        "date_effect": "2026-06-19",
+        "docket": "DEL-90307"
+      },
+      {
+        "code": "NNN",
+        "action": "revision",
+        "summary": "Docket revised",
+        "date_public": "2026-06-18",
+        "date_effect": "2026-06-20",
+        "docket": "DEL-90308"
+      },
+      {
+        "code": "MTC",
+        "action": "removal",
+        "summary": "Removal scheduled",
+        "date_public": "2026-06-19",
+        "date_effect": "2026-06-21",
+        "docket": "DEL-90309"
+      },
+      {
+        "code": "LBQ",
+        "action": "suspension",
+        "summary": "Suspension pending disclosure",
+        "date_public": "2026-06-20",
+        "date_effect": "2026-06-22",
+        "docket": "DEL-90310"
+      },
+      {
+        "code": "KHF",
+        "action": "reinstatement",
+        "summary": "Reinstated after review",
+        "date_public": "2026-06-21",
+        "date_effect": "2026-06-23",
+        "docket": "DEL-90311"
+      },
+      {
+        "code": "JNS",
+        "action": "admission",
+        "summary": "OFFICIAL NOTICE: new admission",
+        "date_public": "2026-06-22",
+        "date_effect": "2026-06-24",
+        "docket": "DEL-90312"
+      },
+      {
+        "code": "HTH",
+        "action": "revision",
+        "summary": "Docket revised",
+        "date_public": "2026-06-23",
+        "date_effect": "2026-06-25",
+        "docket": "DEL-90313"
+      }
+    ]
+  }
+}

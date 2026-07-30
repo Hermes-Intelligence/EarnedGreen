@@ -18,5 +18,5 @@ Thumbs.db
 **/*oauth*.json
 **/*session-token*
 
-# PDF render scratch (rendered PDFs in Research Outputs/ and Setup/ ARE tracked)
+# PDF render scratch (rendered PDFs in research-outputs/ and Setup/ ARE tracked)
 .automation/.render/

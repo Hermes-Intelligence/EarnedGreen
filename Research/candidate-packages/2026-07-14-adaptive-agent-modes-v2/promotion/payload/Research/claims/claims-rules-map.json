@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "candidate_claims_ledger": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/claims.json",
-  "generated_at": "2026-07-15",
-  "purpose": "Machine-readable traceability from every material rule (Core runtime items, knowledge modules, policies, modes.json capabilities/thresholds, key benchmark-protocol rules) to the research claim(s) or finding(s) justifying it. Rules with NO supporting research claim are recorded `unsupported` explicitly: that list is itself a deliverable, so claim expiry can flag dependent rules and unsupported rules stay visible instead of pretend-cited.",
+  "generated_at": "2026-07-16",
+  "purpose": "Machine-readable traceability from every material rule (Core runtime items, knowledge modules, policies, modes.json schema-4 modes/capabilities, verification-loop mechanisms, key benchmark-protocol rules) to the research claim(s) or finding(s) justifying it. Rules with NO supporting research claim are recorded `unsupported` explicitly: that list is itself a deliverable, so claim expiry can flag dependent rules and unsupported rules stay visible instead of pretend-cited. Schema-4 rework (2026-07-16): the five dead mode rules (breadth cap, continuity cap, numeric ceilings, impact-map form, adversarial-verification form) were REMOVED with their artifacts; the loop rules implement F-009/F-011/F-012/F-013 as mechanisms instead of prompts.",
   "support_levels": {
     "supported": "at least one harvested research claim directly justifies the rule",
     "partial": "a research claim justifies part of the rule; the rest is a local design decision",
@@ -460,19 +460,19 @@
     {
       "id": "RULE-MODE-LADDER",
       "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Five runtime modes; choose the least expensive mode whose controls cover the evidenced risk.",
+      "rule": "Three runtime modes (lite / standard / critical) chosen for COST and GOVERNANCE only; quality control is the verification loop's independently executed checks, never mode weight.",
       "justified_by": [
         "CLAIM-ADAPTIVE-001",
         "C-REG-AGENTSMD",
         "F-2026-07-12-021"
       ],
       "support": "partial",
-      "notes": "the cost premise is research-backed; the OUTCOME-lift premise is now MEASURED NEGATIVE: across 5 fixtures / 10 calls (2026-07-14..15, gpt-5.6-sol) the unscaffolded arm scored 100 under every fair semantic grader incl. the 57-module scale fixture; scaffolded arms cost 5-8x tokens for identical outcomes. The ladder is justified as a COST ladder + governance controls, not as correctness amplification. Evidence: evidence/main-v4-semantic-regrade.json, Evals/runs canary records, workstreams/adaptive-agent-modes-eval-harness.md"
+      "notes": "schema 4 collapse of the five-level ladder: measured across 6 fixtures / 17 calls (incl. the real medi-ny task), prompt-scaffolded arms never beat the unscaffolded control and cost 4-10.7x tokens. The corpus finding F-2026-07-12-009 ('engineer the loop, not the prompt') had been implemented as prompts; schema 4 implements it as the verification loop. Evidence: evidence/main-v4-semantic-regrade.json, evidence/main-medi-ny-campaign.json, workstreams/adaptive-agent-modes-eval-harness/."
     },
     {
-      "id": "RULE-MODE-CONSEQUENCE-ONLY-FULL",
+      "id": "RULE-MODE-CONSEQUENCE-ONLY-CRITICAL",
       "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Only the consequence axis selects full and the human gate; blast radius, not size.",
+      "rule": "Only the consequence axis selects the critical mode and its human gate; blast radius, not size. Clarity and continuity add conditional capabilities inside the selected mode and never change it.",
       "justified_by": [
         "F-2026-07-12-021"
       ],
@@ -480,44 +480,17 @@
       "notes": "plan-approval-for-risky-work is research-backed; restricting the gate to the consequence axis alone is a local design decision"
     },
     {
-      "id": "RULE-MODE-BREADTH-CAP",
-      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Breadth-only escalation caps at mode-3-assured; width never buys a human gate.",
-      "justified_by": [],
-      "support": "unsupported",
-      "local_evidence": "local design decision; no research claim distinguishes change-width from blast radius"
-    },
-    {
-      "id": "RULE-MODE-CONTINUITY-CAP",
-      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Multi-session work floors at mode-3 durable checkpoints and handoff; continuity never selects full.",
-      "justified_by": [
-        "F-2026-07-12-010",
-        "F-2026-07-12-017"
-      ],
-      "support": "partial",
-      "notes": "checkpoint/handoff mechanics are research-backed; the cap-at-mode-3 boundary is local"
-    },
-    {
       "id": "RULE-MODE-CLARITY-SPEC-SYNTHESIS",
       "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Underspecified mutating tasks floor at mode-2 and receive the spec-synthesis capability (frozen ledger, anti-scope-shrink).",
+      "rule": "Underspecified mutating tasks receive the spec-synthesis capability inside their selected mode: validated spec, frozen requirement ledger (anti-scope-shrink GUARDRAIL), acceptance tests wired into the verification loop's check suite. The quality-lift claim for spec-first prompting is dropped (measured: clarity fixture, vanilla scored 100).",
       "justified_by": [],
       "support": "unsupported",
-      "local_evidence": "Hermes DC WIRE / NY Medicaid iteration tax, 22-defect postmortem, clarity fixture (implicit-conventions-v1); grounded in local production evidence only"
-    },
-    {
-      "id": "RULE-MODE-NUMERIC-CEILINGS",
-      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Per-mode max_requirement_count / max_changed_files selection ceilings.",
-      "justified_by": [],
-      "support": "unsupported",
-      "local_evidence": "self-declared in modes.json threshold_status as 'hypothesis-pending-benchmark: uncalibrated priors'; the per-mode eval arms exist to calibrate them"
+      "local_evidence": "Hermes DC WIRE / NY Medicaid iteration tax, 22-defect postmortem, clarity fixture (implicit-conventions-v1); retained as a guardrail against silent scope narrowing, not as correctness amplification"
     },
     {
       "id": "RULE-MODE-ESCALATION-TRIGGERS",
       "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Escalate on consequence discovery, scope growth, unresolved ambiguity, repeated verification failure, session boundary.",
+      "rule": "Escalate on critical-consequence discovery, lite scope growth, unresolved ambiguity, and verification-loop termination (iteration-budget / no-progress -> stop and escalate to the owner, never weaken checks).",
       "justified_by": [
         "F-2026-07-12-009"
       ],
@@ -546,30 +519,12 @@
     {
       "id": "RULE-MODE-CAP-INDEPENDENT-VERIFIER",
       "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Full mode requires an independent verifier with a separate profile.",
+      "rule": "Critical mode requires an independent verifier with a separate profile whose machine-readable blocking findings are INGESTED into the check suite and block completion until resolved with re-executable proof (inert-verdict fix).",
       "justified_by": [
         "F-2026-07-12-011"
       ],
-      "support": "supported"
-    },
-    {
-      "id": "RULE-MODE-CAP-IMPACT-MAP",
-      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Mode-3+ requires a complete impact map (definitions, consumers, tests, compatibility, documentation, observability).",
-      "justified_by": [
-        "F-2026-07-12-013"
-      ],
-      "support": "supported"
-    },
-    {
-      "id": "RULE-MODE-CAP-ADVERSARIAL-VERIFICATION",
-      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
-      "rule": "Mode-3+ requires an adversarial threat model and re-executable challenge runs.",
-      "justified_by": [
-        "F-2026-07-12-011",
-        "F-2026-07-12-015"
-      ],
-      "support": "supported"
+      "support": "supported",
+      "notes": "F-2026-07-12-011 implemented as a mechanism: on medi-ny the old free-form verifier reported complete-quality-failure with zero effect on the outcome"
     },
     {
       "id": "RULE-ROUTER-PRECISION",
@@ -643,6 +598,89 @@
       ],
       "support": "partial",
       "notes": "honest cost accounting follows from the cost finding; the exact counting rule is local"
+    },
+    {
+      "id": "RULE-LOOP-ENGINE",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/verification_loop.py",
+      "rule": "Every non-trivial mutating task runs a verification loop: the independent check suite is re-run each iteration, failures return to the agent as structured feedback, and termination is hard (green / iteration budget / no-progress).",
+      "justified_by": [
+        "F-2026-07-12-009",
+        "F-2026-07-12-011"
+      ],
+      "support": "supported"
+    },
+    {
+      "id": "RULE-LOOP-INDEPENDENT-CHECKS",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/harness_checks.py",
+      "rule": "Completion requires a harness-authored, digest-frozen check suite that the gate RE-RUNS itself; agent-recorded claims and a green loop report the agent wrote are never completion evidence. Agents may add checks, never remove or weaken them.",
+      "justified_by": [
+        "F-2026-07-12-011",
+        "F-2026-07-12-012"
+      ],
+      "support": "supported"
+    },
+    {
+      "id": "RULE-LOOP-SYMBOL-SWEEP",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/harness_checks.py",
+      "rule": "A deterministic repo-wide reference sweep runs over every symbol defined in changed files; a referencing file the agent neither changed nor recorded as inspected (with a real note) blocks completion. Replaces the self-filled impact-map form.",
+      "justified_by": [
+        "F-2026-07-12-013"
+      ],
+      "support": "supported"
+    },
+    {
+      "id": "RULE-LOOP-DIFFERENTIAL",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/harness_checks.py",
+      "rule": "Behavioral differential: the same command runs on the pre-change baseline snapshot and the current workspace; any output difference not covered by declared expected changes blocks completion; a missing baseline fails closed.",
+      "justified_by": [],
+      "support": "unsupported",
+      "local_evidence": "medi-ny main stage: the therapeutic_class regression was stochastic (same arm scored 73 and 89 across runs) and no prompt capability caught it; a mechanical before/after output diff catches it deterministically. No external research claim harvested for this specific mechanism."
+    },
+    {
+      "id": "RULE-VERIFIER-FINDINGS-INGEST",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/finalize_full_verification.py",
+      "rule": "Independent-verifier findings are machine-readable objects ingested into the solution's check suite as blocking checks; prose never resolves a finding, only a harness-re-executed proving command or an explicit owner waiver.",
+      "justified_by": [
+        "F-2026-07-12-011"
+      ],
+      "support": "supported"
+    },
+    {
+      "id": "RULE-BENCH-MULTI-TRIAL",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/ablation-design.json",
+      "rule": "Benchmark verdicts require at least min_trials_per_arm_for_verdict (3) trials per arm; single-trial campaigns are constructible but marked exploratory-no-verdict and must never be reported as verdicts.",
+      "justified_by": [],
+      "support": "unsupported",
+      "local_evidence": "~16pt same-arm run-to-run variance measured on medi-ny-parser-rework-v1 (vanilla 73 vs 89): a single trial cannot detect a mode-sized effect; no external research claim harvested"
+    },
+    {
+      "id": "RULE-MODE-TRIVIAL-BOUNDARY",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/modes.json",
+      "rule": "One numeric boundary remains: lite covers mutating work up to 4 compiled requirements / 2 changed files; beyond it, escalate to standard before mutation.",
+      "justified_by": [],
+      "support": "unsupported",
+      "local_evidence": "heuristic prior, the honest successor of the removed per-mode numeric ceilings (which the benchmarks showed predicted nothing); kept only to separate trivial from ordinary work"
+    },
+    {
+      "id": "RULE-LEAN-HARNESS-EVIDENCE",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/pre_submit_gate.py",
+      "rule": "Lean evidence (4.1): verification evidence is GENERATED by the gate from its own re-run of the frozen check suite; agents never transcribe evidence rows. A suite with no executable check falls back to requiring recorded verification commands (fail-closed).",
+      "justified_by": [
+        "C-REG-AGENTSMD",
+        "F-2026-07-12-021"
+      ],
+      "support": "partial",
+      "notes": "scaffolding-cost findings motivate the removal; the specific mechanism is local, measured on campaign 20260716-120147: the heavyweight scaffold spent its turn budget on evidence choreography and ran out mid-fix (88 with a failing gate), while iteration+feedback reached 89 at half the tokens"
+    },
+    {
+      "id": "RULE-LOOP-GUIDED-FEEDBACK",
+      "artifact": "Research/candidate-packages/2026-07-14-adaptive-agent-modes-v2/implementation/harness_checks.py",
+      "rule": "Knowledge attaches to FAILURES, not prompts: a failing check carries its harness-authored guidance (conventions excerpt, fix direction) into the loop feedback; passing checks carry nothing.",
+      "justified_by": [
+        "F-2026-07-12-016"
+      ],
+      "support": "supported",
+      "notes": "just-in-time retrieval applied to the verification loop: context is paid for only when a check is red"
     }
   ]
 }

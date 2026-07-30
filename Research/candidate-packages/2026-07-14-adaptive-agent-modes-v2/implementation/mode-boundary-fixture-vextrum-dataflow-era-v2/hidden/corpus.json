@@ -1,0 +1,139 @@
+{
+ "schema_version": 1,
+ "note": "Deterministic pipeline-state scenarios. DOMAIN knowledge only (tables and shapes the code already reads), never ANSWER knowledge: no scenario names a convention or a fix. Timestamps are fixed ISO strings.",
+ "scenarios": [
+  {
+   "id": "mat-first",
+   "criteria": [{"id": "sc-1", "source_types": null, "topic_tags": null, "keyword_patterns": null, "min_authority_level": null, "geo_filter": null}],
+   "uds_events": [
+    {"id": "e-1", "title": "Alpha ruling", "event_timestamp": "2026-06-01T08:00:00Z", "summary": "s1", "description": "d1", "event_natural_id": "n1", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-01T09:00:00Z"},
+    {"id": "e-2", "title": "Beta tender", "event_timestamp": "2026-06-02T08:00:00Z", "summary": "s2", "description": "d2", "event_natural_id": "n2", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-02T09:00:00Z"},
+    {"id": "e-3", "title": "Gamma notice", "event_timestamp": "2026-06-03T08:00:00Z", "summary": "s3", "description": "d3", "event_natural_id": "n3", "data_source_type": "NEWS", "data_source_name": "wire", "authority_level": "MEDIUM", "topic_tags": ["ports"], "as_of_hermes_intelligence": "2026-06-03T09:00:00Z"}
+   ],
+   "actions": ["materialize"]
+  },
+  {
+   "id": "mat-second",
+   "criteria": [{"id": "sc-1", "source_types": null, "topic_tags": null, "keyword_patterns": null, "min_authority_level": null, "geo_filter": null}],
+   "uds_events": [
+    {"id": "e-1", "title": "Alpha ruling", "event_timestamp": "2026-06-01T08:00:00Z", "summary": "s1", "description": "d1", "event_natural_id": "n1", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-01T09:00:00Z"},
+    {"id": "e-2", "title": "Beta tender", "event_timestamp": "2026-06-02T08:00:00Z", "summary": "s2", "description": "d2", "event_natural_id": "n2", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-02T09:00:00Z"}
+   ],
+   "actions": ["materialize", "materialize"]
+  },
+  {
+   "id": "mat-filters",
+   "criteria": [{"id": "sc-2", "source_types": ["GOVT"], "topic_tags": ["energy"], "keyword_patterns": null, "min_authority_level": "HIGH", "geo_filter": null}],
+   "uds_events": [
+    {"id": "e-1", "title": "Alpha ruling", "event_timestamp": "2026-06-01T08:00:00Z", "summary": "s1", "description": "d1", "event_natural_id": "n1", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-01T09:00:00Z"},
+    {"id": "e-4", "title": "Delta memo", "event_timestamp": "2026-06-04T08:00:00Z", "summary": "s4", "description": "d4", "event_natural_id": "n4", "data_source_type": "NEWS", "data_source_name": "wire", "authority_level": "LOW", "topic_tags": ["misc"], "as_of_hermes_intelligence": "2026-06-04T09:00:00Z"}
+   ],
+   "actions": ["materialize"]
+  },
+  {
+   "id": "mat-dedup",
+   "criteria": [{"id": "sc-1", "source_types": null, "topic_tags": null, "keyword_patterns": null, "min_authority_level": null, "geo_filter": null}],
+   "event_records": [{"id": "r-pre", "workspace_id": "ws-1", "uds_event_id": "e-1", "title": "Alpha ruling", "materialized_at": "2026-06-20T10:00:00Z"}],
+   "uds_events": [
+    {"id": "e-1", "title": "Alpha ruling", "event_timestamp": "2026-06-01T08:00:00Z", "summary": "s1", "description": "d1", "event_natural_id": "n1", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-01T09:00:00Z"},
+    {"id": "e-5", "title": "Epsilon filing", "event_timestamp": "2026-06-05T08:00:00Z", "summary": "s5", "description": "d5", "event_natural_id": "n5", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-05T09:00:00Z"}
+   ],
+   "actions": ["materialize"]
+  },
+  {
+   "id": "mat-incremental",
+   "watermark": "2026-06-03T00:00:00Z",
+   "criteria": [{"id": "sc-1", "source_types": null, "topic_tags": null, "keyword_patterns": null, "min_authority_level": null, "geo_filter": null}],
+   "event_records": [{"id": "r-old", "workspace_id": "ws-1", "uds_event_id": "e-1", "title": "Alpha ruling", "materialized_at": "2026-06-02T10:00:00Z"}],
+   "uds_events": [
+    {"id": "e-1", "title": "Alpha ruling", "event_timestamp": "2026-06-01T08:00:00Z", "summary": "s1", "description": "d1", "event_natural_id": "n1", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-01T09:00:00Z"},
+    {"id": "e-6", "title": "Zeta decree", "event_timestamp": "2026-06-06T08:00:00Z", "summary": "s6", "description": "d6", "event_natural_id": "n6", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-06T09:00:00Z"}
+   ],
+   "actions": ["materialize"]
+  },
+  {
+   "id": "exec-resume",
+   "config": {"id": "cfg-1", "version": 2, "is_active": true, "created_at": "2026-06-10T00:00:00Z"},
+   "components": [
+    {"id": "c-enrich", "config_id": "cfg-1", "component_type": "enrich", "component_version": "v0", "parameters": {}},
+    {"id": "c-publish", "config_id": "cfg-1", "component_type": "publish", "component_version": "v0", "parameters": {}}
+   ],
+   "edges": [{"from_component_id": "c-enrich", "to_component_id": "c-publish", "config_id": "cfg-1"}],
+   "event_records": [
+    {"id": "r1", "workspace_id": "ws-1", "uds_event_id": "e-1", "title": "Alpha ruling", "materialized_at": "2026-06-20T10:00:00Z"},
+    {"id": "r2", "workspace_id": "ws-1", "uds_event_id": "e-2", "title": "Beta tender", "materialized_at": "2026-06-21T10:00:00Z"}
+   ],
+   "steps": [{"event_record_id": "r1", "component_id": "c-enrich", "workspace_config_hash": "@current", "status": "SUCCEEDED", "output_data": "{\"e\": \"alpha ruling\"}"}],
+   "actions": ["plan", "execute"]
+  },
+  {
+   "id": "exec-stale-hash",
+   "config": {"id": "cfg-1", "version": 2, "is_active": true, "created_at": "2026-06-10T00:00:00Z"},
+   "components": [
+    {"id": "c-enrich", "config_id": "cfg-1", "component_type": "enrich", "component_version": "v0", "parameters": {}},
+    {"id": "c-publish", "config_id": "cfg-1", "component_type": "publish", "component_version": "v0", "parameters": {}}
+   ],
+   "edges": [{"from_component_id": "c-enrich", "to_component_id": "c-publish", "config_id": "cfg-1"}],
+   "event_records": [
+    {"id": "r1", "workspace_id": "ws-1", "uds_event_id": "e-1", "title": "Alpha ruling", "materialized_at": "2026-06-20T10:00:00Z"}
+   ],
+   "steps": [{"event_record_id": "r1", "component_id": "c-enrich", "workspace_config_hash": "@stale", "status": "SUCCEEDED", "output_data": "{\"e\": \"alpha ruling\"}"}],
+   "actions": ["plan", "execute"]
+  },
+  {
+   "id": "exec-fail",
+   "config": {"id": "cfg-1", "version": 2, "is_active": true, "created_at": "2026-06-10T00:00:00Z"},
+   "components": [
+    {"id": "c-enrich", "config_id": "cfg-1", "component_type": "enrich", "component_version": "v0", "parameters": {}},
+    {"id": "c-volatile", "config_id": "cfg-1", "component_type": "volatile", "component_version": "v0", "parameters": {}}
+   ],
+   "edges": [{"from_component_id": "c-enrich", "to_component_id": "c-volatile", "config_id": "cfg-1"}],
+   "event_records": [
+    {"id": "r1", "workspace_id": "ws-1", "uds_event_id": "e-1", "title": "Alpha ruling", "materialized_at": "2026-06-20T10:00:00Z"},
+    {"id": "r2", "workspace_id": "ws-1", "uds_event_id": "e-2", "title": "poison payload", "materialized_at": "2026-06-21T10:00:00Z"}
+   ],
+   "actions": ["plan", "execute"]
+  },
+  {
+   "id": "exec-skip",
+   "config": {"id": "cfg-1", "version": 2, "is_active": true, "created_at": "2026-06-10T00:00:00Z"},
+   "components": [
+    {"id": "c-filter", "config_id": "cfg-1", "component_type": "filterer", "component_version": "v0", "parameters": {}},
+    {"id": "c-publish", "config_id": "cfg-1", "component_type": "publish", "component_version": "v0", "parameters": {}}
+   ],
+   "edges": [{"from_component_id": "c-filter", "to_component_id": "c-publish", "config_id": "cfg-1"}],
+   "event_records": [
+    {"id": "r1", "workspace_id": "ws-1", "uds_event_id": "e-1", "title": "irrelevant memo", "materialized_at": "2026-06-20T10:00:00Z"}
+   ],
+   "actions": ["plan", "execute"]
+  },
+  {
+   "id": "e2e-chain",
+   "criteria": [{"id": "sc-1", "source_types": null, "topic_tags": null, "keyword_patterns": null, "min_authority_level": null, "geo_filter": null}],
+   "uds_events": [
+    {"id": "e-1", "title": "Alpha ruling", "event_timestamp": "2026-06-01T08:00:00Z", "summary": "s1", "description": "d1", "event_natural_id": "n1", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-01T09:00:00Z"},
+    {"id": "e-2", "title": "Beta tender", "event_timestamp": "2026-06-02T08:00:00Z", "summary": "s2", "description": "d2", "event_natural_id": "n2", "data_source_type": "GOVT", "data_source_name": "gazette", "authority_level": "HIGH", "topic_tags": ["energy"], "as_of_hermes_intelligence": "2026-06-02T09:00:00Z"}
+   ],
+   "config": {"id": "cfg-1", "version": 2, "is_active": true, "created_at": "2026-06-10T00:00:00Z"},
+   "components": [
+    {"id": "c-enrich", "config_id": "cfg-1", "component_type": "enrich", "component_version": "v0", "parameters": {}},
+    {"id": "c-publish", "config_id": "cfg-1", "component_type": "publish", "component_version": "v0", "parameters": {}}
+   ],
+   "edges": [{"from_component_id": "c-enrich", "to_component_id": "c-publish", "config_id": "cfg-1"}],
+   "actions": ["materialize", "plan", "execute"]
+  },
+  {
+   "id": "g-no-criteria",
+   "actions": ["materialize"]
+  },
+  {
+   "id": "g-plan-noconfig",
+   "actions": ["plan"]
+  },
+  {
+   "id": "g-plan-nocomponents",
+   "config": {"id": "cfg-1", "version": 2, "is_active": true, "created_at": "2026-06-10T00:00:00Z"},
+   "actions": ["plan"]
+  }
+ ]
+}

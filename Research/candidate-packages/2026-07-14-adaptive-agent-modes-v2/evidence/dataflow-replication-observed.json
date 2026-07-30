@@ -1,0 +1,31 @@
+{
+ "schema_version": 1,
+ "observed_at": "2026-07-20",
+ "companion_of": "dataflow-replication-predictions.json (registered before any call)",
+ "campaigns": {"canary": "20260719-220527 (1 call)", "main": "20260719-221101 (12 calls)"},
+ "spend": "13 of 13 approved calls; every call inside the two approval records",
+ "as_graded": {
+  "bare-vanilla-canary": 43,
+  "vanilla-configured": [43, 43, 43],
+  "oracle-loop": [43, 43, 43],
+  "uniformity": "every implementation scored EXACTLY 43 with the IDENTICAL green-family map (execution-robustness, preserved-behaviour, resume-reuse); loop trials burned full iteration budgets (no-progress / iteration-budget)"
+ },
+ "the_stream_diff_that_explains_it": {
+  "finding": "INSTRUMENT DEFECT, located precisely: agents' materializers progressed through params fix, watermark read and UDS routing (streams show vex-q-watermark + uds-q-events — none of which before had) and then died with KeyError reading the stub's rows. The stub ignores each query's SELECT column list and serves a fixed row shape copied from the REFERENCE'S aliases; the inspected solution wrote `e.id AS uds_event_id` (a different-but-valid alias) and read ev['uds_event_id'] -> KeyError. It also chose its own watermark-table schema — legitimate, since the era's DDL is not in the workspace — which the stub cannot know.",
+  "classification": "the over-constraint class RESURFACED ONE LAYER DOWN: gen-4 relational predicates no longer pin rendering/format choices, but the CAPTURE SURFACE pinned the reference's invisible alias and schema choices. Reference and altformat share those choices, so the admission trio (before/after/alt) was structurally unable to catch it.",
+  "what_the_valid_part_measured": "executor behaviours graded through the valid part of the instrument: config-aware resume-reuse and execution robustness went GREEN for every arm — including BARE VANILLA, which one-shot the executor reuse on this family (a real datum: that sub-behaviour is inside one-shot competence)."
+ },
+ "predictions_settled": {
+  "P-R1": "CONFIRMED — canary 43, inside the registered 14-60 band, multiple dimensions reported, brake correctly not triggered.",
+  "P-R2": "FALSIFIED AS-GRADED (gap 0), but the pre-registered falsification interpretation does NOT apply cleanly: the loop arm's pins were unwinnable in practice for the materializer families (KeyError wall in the harness's row shape), so the campaign measured the INSTRUMENT, not the environment. THE REPLICATION QUESTION REMAINS UNMEASURED — 0.6.2's claim is hereby scoped to the first family until a valid second-family instrument exists.",
+  "P-R3": "the 'all stall' falsification branch fired — attributed to the unwinnable wall, not to forcing failure: fingerprints stalled exactly at the harness-imposed KeyError.",
+  "P-R4": "partially informative despite the defect: vanilla-configured (and even bare vanilla) greened resume-reuse unforced — the prediction's model of which families are hard was wrong for the executor side.",
+  "P-R5": "CONFIRMED — every trial in every arm ended preserved-behaviour GREEN."
+ },
+ "lessons_mechanical": [
+  "a recording stub's row shape is part of the instrument: it must PROJECT canonical rows onto each query's requested aliases, never serve reference-shaped rows",
+  "schema invented by the fix (the watermark table) must be either discoverable in the workspace (SCHEMA.md/DDL) or the stub must accept any schema choice — otherwise the fixture grades an invisible convention",
+  "the valid-variant pool must include an ALIAS-VARYING variant: the altformat varied a write pattern but shared every alias with the reference, so alias-pinning predicates and surfaces survived the filter"
+ ],
+ "proposed_next": "fixture v2 at zero calls (alias projection in the stub + SCHEMA.md documenting the available tables incl. materialization_watermark + an alias-varying second valid variant), re-admission, then a fresh 13-call campaign under a NEW owner approval. No re-grading of these runs as results."
+}
