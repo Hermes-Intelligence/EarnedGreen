@@ -290,6 +290,27 @@ This is why the highest-value mechanism in this repository is not the loop and
 not the router. It is `calibration_gate`: **refusing to grade until the
 instrument has proved it can tell known-good from known-hollow.**
 
+### External corroboration — CodeScaleBench (2026-07-30)
+
+Sourcegraph's [CodeScaleBench](https://github.com/sourcegraph/CodeScaleBench)
+reached the same principle independently: every task verifier must clear
+deterministic calibration gates before release — an empty answer must score at
+the floor, the canonical answer must score high. That is `fixture_admission` +
+`calibration_gate` arrived at by another team, which is worth recording.
+
+Two honest corrections, because the convergence is narrower than a first read
+suggests. Their *implemented* release gate is **two** checks (empty `== 0`,
+gold `> 0`), not the three-gate "Null/Golden/Adversarial triad" a secondary
+summary reported; the adversarial keyword-dump gate is not implemented in the
+repo. And their gate is the same layer as our **internal** `fixture_admission`
+(validating a benchmark oracle), not the dev-facing `check_admission`. The one
+asymmetry — CodeScaleBench enforces an *absolute* null floor, we only assert
+"below reference" — applies solely to scored oracles. The dev-facing path uses
+**binary** checks, where `check_admission`'s red-before-green-after rule (a
+check that passes on the pre-change baseline is rejected as `VACUOUS`) already
+**is** the null floor. So the dev path is structurally immune and needs no
+change: convergent validation, not a to-do.
+
 ---
 
 ## What is measured, what is wired, what is neither

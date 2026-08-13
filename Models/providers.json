@@ -1,7 +1,8 @@
 ﻿{
     "schema_version":  1,
-    "generated_at":  "2026-07-19T21:30:00+02:00",
-    "expires_at":  "2026-07-26T21:30:00+02:00",
+    "generated_at":  "2026-07-30T14:00:00+02:00",
+    "expires_at":  "2026-08-06T14:00:00+02:00",
+    "refresh_provenance":  "Refreshed 2026-07-30. Anthropic facts (opus->Opus 5, CLI v2.1.219 gate, Opus 4.8 legacy, Opus 4.1 retirement) re-verified LIVE against platform.claude.com/docs and code.claude.com/docs. OpenAI selectors carried from the 2026-07-30 weekly-research tier-1 fetch (developers.openai.com); catalog is selector-based, so model ids are deliberately non-authoritative.",
     "policy":  {
                    "volatile_data_only":  true,
                    "recommendation_only":  true,
@@ -28,7 +29,7 @@
                                                 "xhigh",
                                                 "max"
                                             ],
-                          "effort_notes":  "Verified 2026-07-16: `high` is the documented default on current frontier models and equals omitting the parameter. `ultracode` is not an API effort level.",
+                          "effort_notes":  "Re-verified 2026-07-30 (platform.claude.com/docs/en/build-with-claude/effort): the API effort parameter accepts exactly low|medium|high|xhigh|max with `high` the default (setting `high` equals omitting it). `ultracode` is NOT an API effort level - it is a Claude Code SESSION setting that sends `xhigh` AND has Claude orchestrate dynamic workflows (needs Claude Code v2.1.203+ for `--effort ultracode`). `xhigh` is available on Fable 5 / Mythos 5 / Opus 5 / Opus 4.8 / Opus 4.7 / Sonnet 5; Opus 4.6 and Sonnet 4.6 support `max` but not `xhigh`. Haiku 4.5 does not support the effort parameter.",
                           "selectors":  [
                                             {
                                                 "id":  "haiku",
@@ -84,7 +85,7 @@
                                                                            },
                                                                            {
                                                                                "kind":  "alias-resolution",
-                                                                               "requirement":  "alias resolves to Sonnet 5 on the Anthropic API but to Sonnet 4.5 on Bedrock/Google Vertex",
+                                                                               "requirement":  "`sonnet` resolves to Sonnet 5 on the Anthropic API, Sonnet 4.6 on Claude Platform on AWS, and Sonnet 4.5 on Amazon Bedrock / Google Cloud / Microsoft Foundry (re-verified 2026-07-30)",
                                                                                "source":  "https://code.claude.com/docs/en/model-config"
                                                                            }
                                                                        ]
@@ -119,12 +120,12 @@
                                                 "availability_gates":  [
                                                                            {
                                                                                "kind":  "cli-version",
-                                                                               "requirement":  "Claude Code \u003e= v2.1.154 for Opus 4.8",
+                                                                               "requirement":  "Claude Code \u003e= v2.1.219 for the `opus` alias to resolve to Opus 5 (re-verified 2026-07-30); before v2.1.219 the alias resolved to Opus 4.8 from v2.1.154",
                                                                                "source":  "https://code.claude.com/docs/en/model-config"
                                                                            },
                                                                            {
                                                                                "kind":  "alias-resolution",
-                                                                               "requirement":  "alias resolves to Opus 4.8 on the Anthropic API but to Opus 4.6 on Foundry",
+                                                                               "requirement":  "`opus` resolves to Opus 5 on the Anthropic API, Claude Platform on AWS, Amazon Bedrock and Google Cloud; to Opus 4.6 on Microsoft Foundry (re-verified 2026-07-30). Opus 4.8 (claude-opus-4-8) is now a LEGACY model; the prior 'opus to Opus 4.8' fact is stale",
                                                                                "source":  "https://code.claude.com/docs/en/model-config"
                                                                            },
                                                                            {
@@ -191,7 +192,7 @@
                                                 "high",
                                                 "xhigh"
                                             ],
-                          "effort_notes":  "Verified 2026-07-16 from the config reference; `xhigh` is documented as model-dependent and the CLI default is medium. CONTRADICTION: docs/models shows an interactive selector with additional Max/Ultra entries that the config reference does not list. Only the config-file enum is encoded here; re-check next week.",
+                          "effort_notes":  "Re-checked 2026-07-30 (carried from weekly-research tier-1). The Codex config.toml `model_reasoning_effort` enum is minimal|low|medium|high|xhigh (xhigh model-dependent, Responses API only); this config enum is the authoritative one encoded here. The ChatGPT/Codex UI surface additionally exposes Max and Ultra (Ultra parallelises via subagents), and the API models page shows reasoning levels up to `max` - deliberately NOT encoded, since the selectors are capability-based, not id/enum-authoritative.",
                           "selectors":  [
                                             {
                                                 "id":  "current-fast",
@@ -218,7 +219,7 @@
                                                                                   ],
                                                                        "default":  "medium"
                                                                    },
-                                                "resolution_note":  "cost-sensitive tier, currently gpt-5.6-luna (verified 2026-07-16); the ID is deliberately NOT authoritative here - the selector is."
+                                                "resolution_note":  "cost-sensitive tier, currently gpt-5.6-luna (carried from 2026-07-30 weekly-research, tier-1 developers.openai.com); the ID is deliberately NOT authoritative here - the selector is."
                                             },
                                             {
                                                 "id":  "current-balanced",
@@ -246,7 +247,7 @@
                                                                                   ],
                                                                        "default":  "medium"
                                                                    },
-                                                "resolution_note":  "balanced tier, currently gpt-5.6-terra (verified 2026-07-16)."
+                                                "resolution_note":  "balanced tier, currently gpt-5.6-terra (carried from 2026-07-30 weekly-research, tier-1 developers.openai.com)."
                                             },
                                             {
                                                 "id":  "current-frontier-coding",
@@ -276,7 +277,7 @@
                                                                                   ],
                                                                        "default":  "medium"
                                                                    },
-                                                "resolution_note":  "frontier tier, currently gpt-5.6-sol (verified 2026-07-16)."
+                                                "resolution_note":  "frontier tier, currently gpt-5.6-sol (carried from 2026-07-30 weekly-research, tier-1 developers.openai.com)."
                                             },
                                             {
                                                 "id":  "current-frontier-creative",
@@ -302,7 +303,7 @@
                                                                    },
                                                 "aliases_of":  "current-frontier-coding",
                                                 "distinctness":  "unverified",
-                                                "resolution_note":  "OpenAI publishes no creative-tier model (verified 2026-07-16): this selector currently resolves to the same frontier model as current-frontier-coding. Kept for provider coverage of the creative-design profile, explicitly marked non-distinct. Owner decision: keep-as-alias or remove."
+                                                "resolution_note":  "OpenAI publishes no creative-tier model (re-checked 2026-07-30): this selector currently resolves to the same frontier model as current-frontier-coding. Kept for provider coverage of the creative-design profile, explicitly marked non-distinct. Owner decision: keep-as-alias or remove."
                                             }
                                         ]
                       }
