@@ -67,6 +67,16 @@
       "path_patterns": ["*workstream*", "*progress*", "*handoff*"]
     },
     {
+      "id": "workstream-logging",
+      "title": "Workstream logging for substantive feature/product work",
+      "path": "Core/policies/workstream-logging.md",
+      "always": false,
+      "priority": 78,
+      "risk": "low",
+      "keywords": ["workstream", "feature", "product", "process", "log", "journal", "artifacts", "multi-repo", "resume", "session"],
+      "path_patterns": ["*workstreams*"]
+    },
+    {
       "id": "database-migration",
       "title": "Database migration safety",
       "path": "Core/knowledge-modules/database-migration.md",

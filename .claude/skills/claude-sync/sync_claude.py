@@ -483,6 +483,13 @@ def _project_root_of(path: Path):
     i = parts.index("projects")
     return Path(*parts[:i + 2]) if i + 1 < len(parts) else None
 
+def _is_config_tooling(path: Path):
+    """skills / agents / commands under ~/.claude — tooling that must never be silently downgraded."""
+    parts = path.parts
+    if ".claude" not in parts: return False
+    i = parts.index(".claude")
+    return i + 1 < len(parts) and parts[i + 1] in ("skills", "agents", "commands")
+
 # =============================================================================================
 def _target_for(arc, manifest, ws_dest):
     if arc.startswith("home/"):
@@ -555,8 +562,16 @@ def cmd_unpack(args):
         cmd_pack(argparse.Namespace(out=str(backup), workstreams=[w["abs"] for w in manifest.get("workstreams", [])], sessions=True, days=None, full_workstreams=False, max_ws_mb=3.0))
 
         # apply (remap contents, merge MEMORY.md)
-        applied, restored_projects = 0, set()
+        applied, restored_projects, downgraded = 0, set(), 0
         for arc, tgt in plan:
+            # never let a bundle DOWNGRADE local tooling: skip skills/agents/commands whose local
+            # copy is newer than the bundle's (protects the running claude-sync engine + edited config).
+            if not args.force_config and _is_config_tooling(tgt) and tgt.exists():
+                try:
+                    zt = datetime(*zf.getinfo(arc).date_time).timestamp()
+                    if tgt.stat().st_mtime > zt + 2:
+                        downgraded += 1; continue
+                except Exception: pass
             tgt.parent.mkdir(parents=True, exist_ok=True)
             do_rewrite = bool(remaps) and tgt.suffix.lower() in REWRITE_EXT
             is_mem_index = tgt.name == "MEMORY.md" and "memory" in tgt.parts and tgt.exists()
@@ -576,7 +591,8 @@ def cmd_unpack(args):
             applied += 1
             pr = _project_root_of(tgt)
             if pr: restored_projects.add(pr)
-        log(f"restored {applied} files. Backup of your previous state: {backup}")
+        log(f"restored {applied} files." + (f" kept {downgraded} newer local skill/config file(s) (--force-config to overwrite)." if downgraded else "")
+            + f" Backup of your previous state: {backup}")
 
         # register with the desktop app so conversations actually show up
         if args.register_desktop:
@@ -612,6 +628,7 @@ def main():
     u.add_argument("--remap", action="append", default=[], help='force a path remap, e.g. --remap "C:\\old\\path=C:\\new\\path" (repeatable)')
     u.add_argument("--no-remap", dest="auto_remap", action="store_false", help="disable automatic path remapping to this machine")
     u.add_argument("--no-register-desktop", dest="register_desktop", action="store_false", help="do not create Claude desktop-app registry entries")
+    u.add_argument("--force-config", action="store_true", help="overwrite local skills/agents/commands even if the local copy is newer (default: keep newer local tooling)")
     u.set_defaults(auto_remap=True, register_desktop=True)
     r = sub.add_parser("register", help="(re)link conversations in ~/.claude/projects into the Claude desktop app")
     r.add_argument("--project", default=None, help="only this project cwd (absolute path)"); r.add_argument("--dry-run", action="store_true")
